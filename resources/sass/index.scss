@@ -1,0 +1,30 @@
+@use "fonts/roboto-slab.scss";
+
+.blackBorders{
+    border: solid black 1px;
+}
+
+.fullHeight{
+    height:100vh;
+}
+
+.sizeOfLogoWithText{
+    width:60%;
+}
+
+.deepSignBackground{
+    background-image: url("../assets/login-main-img-2.png");
+}
+
+.textBlock{
+    position: absolute;
+    padding:20px;
+    background-color: white;
+    color:black;
+    opacity: 0.9;
+}
+@media only screen and (max-width: 768px){
+    .textBlock{
+        position:relative;
+    }
+}

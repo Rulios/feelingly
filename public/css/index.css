@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
+.roboto-slab-font {
+  font-family: "Roboto Slab", serif;
+}
+
+.blackBorders {
+  border: solid black 1px;
+}
+
+.fullHeight {
+  height: 100vh;
+}
+
+.sizeOfLogoWithText {
+  width: 60%;
+}
+
+.deepSignBackground {
+  background-image: url("../assets/login-main-img-2.png");
+}
+
+.textBlock {
+  position: absolute;
+  padding: 20px;
+  background-color: white;
+  color: black;
+  opacity: 0.9;
+}
+
+@media only screen and (max-width: 768px) {
+  .textBlock {
+    position: relative;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

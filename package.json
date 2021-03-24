@@ -1,0 +1,46 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "watch": "parcel watch ./resources/js/*",
+    "build": "parcel build ./resources/js/*",
+    "compileCSS": "sass resources/sass:public/css --watch",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "devDependencies": {
+    "axios": "^0.21.1",
+    "cross-env": "^7.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.22.0",
+    "eslint-plugin-react": "^7.22.0",
+    "laravel-mix": "^5.0.1",
+    "lodash": "^4.17.19",
+    "parcel": "^2.0.0-beta.2",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.15.2",
+    "sass-loader": "^8.0.0",
+    "typescript": "^4.2.3"
+  },
+  "targets": {
+    "app": {
+      "distDir": "./public/build"
+    }
+  },
+  "name": "feelingly",
+  "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\"></a></p>",
+  "version": "1.0.0",
+  "directories": {
+    "test": "tests"
+  },
+  "author": "Robert Lu Zheng",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
