@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
+.roboto-slab-font {
+  font-family: "Roboto Slab", serif;
+}
+
+.reversedDeepSignBackground {
+  background-image: url("../assets/signup-main-img.png");
+}
+
+.white {
+  background-color: white;
+  border-radius: 20px;
+}
+
+/*# sourceMappingURL=signup.css.map */
