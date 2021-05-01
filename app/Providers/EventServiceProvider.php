@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+/*
+    This Notification is custom built. 
+*/
+use App\Notifications\SendEmailVerificationNotification;
+
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 

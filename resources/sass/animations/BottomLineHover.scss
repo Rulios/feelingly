@@ -1,0 +1,11 @@
+.BottomLineHoverAnimation::after{
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width .3s;
+}
+.BottomLineHoverAnimation:hover::after {
+    width: 100%;
+}

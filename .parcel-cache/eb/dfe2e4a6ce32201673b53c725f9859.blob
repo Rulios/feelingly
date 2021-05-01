@@ -1,0 +1,4 @@
+var _bootstrap = require("bootstrap");
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+var _bootstrapDefault = _parcelHelpers.interopDefault(_bootstrap);
+console.log(_bootstrapDefault.default);

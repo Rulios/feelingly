@@ -4,23 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Providers\RouteServiceProvider;
+
 use App\Models\User;
 use App\Rules\ProjectDateFormat;
+use App\Rules\EnablesURLEncoding;
+
 use Illuminate\Support\Facades\Hash;
 use Stevebauman\Location\Facades\Location;
+
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     //
 
 
-    public function create(Request $request){   
+    public function store(Request $request){   
 
         $user = new User;
 
-        $validatedData = $request->validate([
+        $request->validate([
             "email" => "required|unique:users|email",
-            "alias" => "required|unique:users|between:1,30",
+            "alias" => ["required", "unique:users", "between:3,30", new EnablesURLEncoding] ,
+            /* "alias" => "required|unique:users|between:1,30", */
             "name" => "required|between:1,30",
             "password" => "required|min:6",
             "repeat_password" => "required|same:password",
@@ -35,13 +43,18 @@ class UserController extends Controller
         $user->date_of_birth = $request->date_of_birth;
         
         if ($position = Location::get()) {
-            $user->country = $request->countryCode;
+            $user->country = $position->countryCode;
         }
 
-        
-        $user->save();
 
-        session()->flash('signupSuccess', true);
-        return view('signup');
+        Auth::login($user);
+
+
+        //$user->sendEmailVerificationNotification();
+
+        event(new Registered($user));
+
+        //return redirect(RouteServiceProvider::DASHBOARD);
+        return redirect("/dashboard");
     }
 }

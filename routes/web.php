@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,12 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get("signup", function(){
-    return view("signup");
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::post("/signup",[ UserController::class, "create"]);
+
+
+require __DIR__.'/auth.php';
+
+require __DIR__.'/features/profile.php';

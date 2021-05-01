@@ -22,10 +22,11 @@ class CreateUsersTable extends Migration
             $table->text("password");
             $table->date("date_of_birth");
             $table->string("description", 1000)->nullable();
-            $table->timestampTz("email_verified_at")->nullable();
+            $table->timestamptz("email_verified_at")->nullable();
             $table->string("country", 10)->nullable();
             $table->string("remember_token", 100)->nullable();
-            $table->timestamps();
+            $table->timestamptz('created_at');
+            $table->timestamptz('updated_at');
         });
     }
 

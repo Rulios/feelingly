@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        {{-- <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="{{ URL::asset('bootstrap/css/bootstrap.min.css')}}"> --}}
 
         @extends("partials.headers")
 
@@ -27,18 +24,26 @@
                 <h1 class="mt-5 roboto-slab-font text-center">Log in</h1>
 
                 <form action="/login" method="POST" class="m-5 roboto-slab-font">
+
+                    @csrf
+
                     <div class="mb-2">
                         <label for="email" class="form-label">Email:</label>
-                    <input type="email"class="form-control" id="email" placeholder="Your email" aria-describedby="emailHelp">
+                        <input type="email"class="form-control" id="email" name="email" placeholder="Your email" aria-describedby="emailHelp">
+                        @error("email")
+                            <div class="alert alert-danger">
+                                {{$message}}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="mb-2">
                         <label for="password" class="form-label mt-2">Password:</label>
-                    <input type="password" class="form-control" id="password" placeholder="Your password" >
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Your password" >
                     </div>
                     
                     <div class="mb-3">
-                        <a href="/signup">Don't have a account yet? Sign up</a>
+                        <a href="/register">Don't have a account yet? Sign up</a>
                     </div>
                     
                     <div class="">
