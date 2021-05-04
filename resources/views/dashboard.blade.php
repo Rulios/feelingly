@@ -3,7 +3,7 @@
 <head>
 
 
-    <script src="{{ URL::asset("build/dashboard.js")}}"></script>
+    <script defer src="{{ URL::asset("build/dashboard.js")}}"></script>
 
     @extends("partials.headers")
 

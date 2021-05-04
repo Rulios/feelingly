@@ -8,3 +8,10 @@ import bootstrap from "bootstrap";
  * 
  */
  console.log(bootstrap);
+
+ let profileImageUploadForm:any = document.getElementById("profile_image_form");
+ let profileImageSelector:any = document.getElementById("profile_image_selector");
+
+ profileImageSelector.onchange = function():void{
+      profileImageUploadForm.submit();
+ };

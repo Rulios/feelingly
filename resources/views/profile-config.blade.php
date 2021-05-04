@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-    <script src="{{ URL::asset("build/profile-config.js")}}"></script>
+    <script defer src="{{ URL::asset("build/profile-config.js")}}"></script>
 
     @extends("partials.headers")
 
@@ -32,10 +32,7 @@
                     <div class="col-lg-12">
                        
                         <div class="col-lg-12" class="image">
-                            <img src="{{URL::asset("assets/avatar.svg")}}"
-                                 alt="{{$alias}}" width="100" height="100" class="rounded-circle border p-1 mx-auto d-block" >
-
-                                
+                            <x-profile-pic :alias="$alias" addClasses="d-block" width="100" height="100"/>
                         </div>
 
                         
@@ -61,7 +58,7 @@
                                 </div>
                                 <div class="modal-body text-center ">
                                     
-                                    <form action="{{route("profile.image.update")}}" method="POST" class="row p-3 fadeGreyWhenHover">
+                                    <form action="{{route("profile.image.update")}}" id="profile_image_form" method="POST" class="row p-3 fadeGreyWhenHover" enctype="multipart/form-data">
                                         @csrf
 
                                         <label for="profile_image_selector" class="mb-2 text-primary">Select new profile image:</label>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-    <script src="{{ URL::asset("build/profile.js")}}"></script>
+    <script defer src="{{ URL::asset("build/profile.js")}}"></script>
 
     @extends("partials.headers")
 

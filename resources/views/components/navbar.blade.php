@@ -27,7 +27,7 @@
 
                         <li class="nav-item mx-3">
                             <a href="/profile/{{$alias}}" class="text-decoration-none ">
-                                <img src="{{URL::asset("assets/avatar.svg")}}" alt="" width="50" height="50" class="rounded-circle border p-1">
+                                <x-profile-pic :alias="$alias" addClasses="" width="50" height="50"/>
                                 <span class="mx-1 align-middle">
                                     Profile
                                 </span>

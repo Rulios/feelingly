@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\ProfileController;
+
 /**
  * Profile Routes
  * 
@@ -60,25 +62,13 @@ Route::get("/profile/{alias}/config", function($alias){
 
 })->name("profile.config")->middleware("auth");
 
-Route::post("/profile/profile_image/update", function(){
-    try{
+Route::post("/profile/profile_image/update", [ProfileController::class, "imageUpdate"])
+    ->name("profile.image.update")
+    ->middleware("auth");
 
-        
-
-    }catch(Throwable $e){
-        echo $e;
-    }
-})->name("profile.image.update")->middleware("auth");
-
-Route::post("/profile/profile_image/delete", function(){
-    try{
-
-        
-
-    }catch(Throwable $e){
-        echo $e;
-    }
-})->name("profile.image.delete")->middleware("auth");
+Route::post("/profile/profile_image/delete", [ProfileController::class, "imageDelete"])
+    ->name("profile.image.delete")
+    ->middleware("auth");
 
 
 
