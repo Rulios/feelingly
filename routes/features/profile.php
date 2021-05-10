@@ -43,7 +43,8 @@ Route::get("/profile/{alias}", function($alias){
 })->name("profile");
 
 
-Route::get("/profile/{alias}/config", function($alias){
+
+Route::get("/profile/account/config", function(){
 
     try{
 
@@ -70,9 +71,13 @@ Route::post("/profile/profile_image/delete", [ProfileController::class, "imageDe
     ->name("profile.image.delete")
     ->middleware("auth");
 
+Route::post("/profile/account/update", [ProfileController::class, "updateProfileBasic"])
+    ->name("profile.update.basic")
+    ->middleware("auth");
 
-
-
+Route::put("/profile/account/change_password", [ProfileController::class, "changePassword"])
+    ->name("profile.change.password")
+    ->middleware("auth");
 
 
 

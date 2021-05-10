@@ -28,10 +28,9 @@ class UserController extends Controller
         $request->validate([
             "email" => "required|unique:users|email",
             "alias" => ["required", "unique:users", "between:3,30", new EnablesURLEncoding] ,
-            /* "alias" => "required|unique:users|between:1,30", */
             "name" => "required|between:1,30",
-            "password" => "required|min:6",
-            "repeat_password" => "required|same:password",
+            "password" => ["required", "confirmed", Password::min(8)],
+            "password_confirmation" => "required|same:password",
             "date_of_birth" => ["required", "before:today", "date", new ProjectDateFormat]
         ]);
 

@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use App\Traits\UploadTrait;
+
+use App\Rules\EnablesURLEncoding;
+use Illuminate\Validation\Rules\Password;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 //FOLDER path
 define("FOLDER", "/uploads/profile_images/");
@@ -20,15 +25,65 @@ class ProfileController extends Controller
     //
     use UploadTrait;
 
-    private function deleteFileImage($user){
-        if($user->profile_image){
-            $paths = explode("/", $user->profile_image);
-            $fileName = $paths[count($paths)-1]; //get the filename
+    public function updateProfileBasic(Request $request){
 
-            $this->deleteOne(FOLDER, "public", $fileName);
+        try{
+
+            $user = Auth::user();
+
+            if($request->alias != $user->alias){
+                $request->validate([
+                    "alias" => ["required", "unique:users", "between:3,30", new EnablesURLEncoding]
+                ]);
+            }
+
+            $request->validate([
+                "name" => "required|between:1,30",
+                "description" => "between:0,1000"
+            ]);
+
+            $user->alias = $request->alias;
+            $user->name = $request->name;
+            $user->description = $request->description;
+
+            $user->save();
+
+
+            return redirect()->back()->with(['success_status' => "¡Profile updated!"]);
+
+        }catch(Throwable $e){
+            echo $e;        
         }
     }
 
+    public function changePassword(Request $request){
+        try{
+            $user = Auth::user();
+
+            $request->validate([
+                "actual_password" => "required",
+                "password" => ["required", "confirmed",Password::min(8)],
+                "password_confirmation" => "required|same:password",
+            ]);
+
+            if(Hash::check($request->actual_password, $user->password)){
+                $user->password = Hash::make($request->password);
+
+                $user->save();
+
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect('/')->with("success_status", "Password changed!");
+            }else{
+                return redirect()->back()->with(["failure_status" => "Oops, there has been an error updating your password"]);
+            }
+
+        }catch(Throwable $e){
+            echo $e;
+        }
+    }
+    
     public function imageUpdate(Request $request){
        
         try{
@@ -59,7 +114,7 @@ class ProfileController extends Controller
 
             $user->save();
 
-            return redirect()->back()->with(['status' => "Looking sharp in your new profile picture!"]);
+            return redirect()->back()->with(['success_status' => "Looking sharp in your new profile picture!"]);
 
         }catch(Throwable $e){
             echo $e;
@@ -78,11 +133,21 @@ class ProfileController extends Controller
             $user->profile_image = null;
             $user->save();
 
-            return redirect()->back()->with(['status' => "Profile picture deleted!"]);
+            return redirect()->back()->with(['success_status' => "Profile picture deleted!"]);
 
         }catch(Throwable $e){
             echo $e;
         }
     }
+
+    private function deleteFileImage($user){
+        if($user->profile_image){
+            $paths = explode("/", $user->profile_image);
+            $fileName = $paths[count($paths)-1]; //get the filename
+
+            $this->deleteOne(FOLDER, "public", $fileName);
+        }
+    }
+
 
 }

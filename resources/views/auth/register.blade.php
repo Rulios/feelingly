@@ -98,7 +98,7 @@
     
                     <div class="form-group">
                       <label for="password">Password</label>
-                      <input type="password" class="form-control" id="password" name="password" minlength="6" placeholder="Must be at least 6 characters">
+                      <input type="password" class="form-control" id="password" name="password" minlength="8" placeholder="Must be at least 8 characters">
                       @error("password")
                             <div class="alert alert-danger">
                                 {{$message}}
@@ -107,9 +107,9 @@
                     </div>
     
                     <div class="form-group">
-                        <label for="repeat_password">Repeat password</label>
-                        <input type="password" class="form-control" id="repeat_password" name="repeat_password" placeholder="Repeat your password">
-                        @error("repeat_password")
+                        <label for="password_confirmation">Repeat password</label>
+                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Repeat your password">
+                        @error("password_confirmation")
                             <div class="alert alert-danger">
                                 {{$message}}
                             </div>

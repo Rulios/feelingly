@@ -18,8 +18,7 @@
     <div class="text-center">
         <div class="row mt-5">
             <div class="col-lg-12" class="image">
-                <img src="{{URL::asset("assets/avatar.svg")}}"
-                     alt="{{$alias}}" width="100" height="100" class="rounded-circle border p-1 mx-auto d-block" >
+            <x-profile-pic :alias="$alias" addClasses="d-block" width="100" height="100"/>
             </div>
         </div>
 
@@ -39,7 +38,7 @@
 
         <div class="row mt-2">
             <div class="col-lg-12">
-                <a href="/profile/{{$alias}}/config" class="btn btn-primary">
+                <a href="{{route("profile.config")}}" class="btn btn-primary">
                     Config profile
                 </a>
             </div>

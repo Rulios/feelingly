@@ -28,7 +28,7 @@ class EnablesURLEncoding implements Rule
         //
 
 
-        if(preg_match("/^[a-z0-9_][a-z0-9_.]*/gm", $value) == 1){
+        if(preg_match("/^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+(?<![_.])$/", $value)){
             return true;
         }else{
             return false;
@@ -42,6 +42,7 @@ class EnablesURLEncoding implements Rule
      */
     public function message()
     {
-        return "Provide your alias with the accepted characters a-z, 0-9, dot(.), underline(_).";
+        return "Provide your alias with the accepted characters a-z, 0-9, dot(.), underline(_). 
+        Note that dot(.) and underline(_) can be successively repeated and can't be at the extremes.";
     }
 }

@@ -24,6 +24,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
+/* Route::get("/profile/profile-config", function(){
+    echo "ADWDa";
+})->name("profile.config"); */
 
 require __DIR__.'/auth.php';
 

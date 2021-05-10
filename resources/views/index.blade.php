@@ -23,9 +23,24 @@
 
                 <h1 class="mt-5 roboto-slab-font text-center">Log in</h1>
 
+                
+
+                
+
                 <form action="/login" method="POST" class="m-5 roboto-slab-font">
 
                     @csrf
+                    
+                    @if(session()->has("success_status"))
+                        <div class="row mt-2">
+                            <div class="col-lg-12 text-center">
+                                <div class="alert alert-success">
+                                    {{session()->get("success_status")}}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    
 
                     <div class="mb-2">
                         <label for="email" class="form-label">Email:</label>
