@@ -6,6 +6,8 @@ namespace App\Providers;
     This Notification is custom built. 
 */
 use App\Notifications\SendEmailVerificationNotification;
+use App\Events\EmailChanged;
+use App\Listeners\SendNewEmailVerificationNotification;
 
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +24,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        EmailChanged::class => [
+            SendNewEmailVerificationNotification::class
+        ]
+
+        
     ];
 
     /**

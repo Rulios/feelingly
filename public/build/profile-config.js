@@ -1052,6 +1052,9 @@ var _bootstrapDefault = _parcelHelpers.interopDefault(_bootstrap);
 *
 */
 console.log(_bootstrapDefault.default);
+/*
+Profile image upload interactions
+*/
 let profileImageUploadForm = document.getElementById("profile_image_form");
 let profileImageSelector = document.getElementById("profile_image_selector");
 profileImageSelector.onchange = function () {

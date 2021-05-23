@@ -14,6 +14,7 @@ use App\Traits\UploadTrait;
 use App\Rules\EnablesURLEncoding;
 use Illuminate\Validation\Rules\Password;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Events\EmailChanged;
 
 //FOLDER path
 define("FOLDER", "/uploads/profile_images/");
@@ -76,11 +77,45 @@ class ProfileController extends Controller
                 $request->session()->regenerateToken();
                 return redirect('/')->with("success_status", "Password changed!");
             }else{
-                return redirect()->back()->with(["failure_status" => "Oops, there has been an error updating your password"]);
+                return redirect()->back()->with(["actual_password" => "Password doesn't match credentials"]);
+            }
+            
+        }catch(Throwable $e){
+            return redirect()->back()->with(["failure_status" => "Oops, there has been an error updating your password"]);
+            echo $e;
+        }
+    }
+
+    public function changeEmail(Request $request){
+        try{
+            $user = Auth::user();   
+
+            $request->validate([
+                "password" => "required",
+                "new_email" => "required|unique:users,email|email"
+            ]);
+
+            if(Hash::check($request->password, $user->password)){
+                
+                $user->email = $request->new_email;
+                $user->email_verified_at = null;
+                $user->save();
+                event(new EmailChanged($user)); 
+
+
+                Auth::guard('web')->logout();
+
+                $request->session()->invalidate();
+
+                $request->session()->regenerateToken();
+
+                return redirect('/')->with("success_status", "Email changed! Please login and verify your email address");
+            }else{
+                return redirect()->back()->with(["password" => "Password doesn't match credentials"]);
             }
 
         }catch(Throwable $e){
-            echo $e;
+            return redirect()->back()->with(["failure_status" => "Oops, there has been an error updating your password"]);
         }
     }
     

@@ -17,16 +17,11 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name("index");
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
-
-/* Route::get("/profile/profile-config", function(){
-    echo "ADWDa";
-})->name("profile.config"); */
 
 require __DIR__.'/auth.php';
 

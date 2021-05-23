@@ -13,7 +13,7 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 
 
 class User extends Authenticatable 
-implements MustVerifyEmail
+implements MustVerifyEmail, CanResetPassword
 {
     use HasFactory;
     use Notifiable;

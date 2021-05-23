@@ -53,7 +53,9 @@ Route::get("/profile/account/config", function(){
         return view("profile-config", [
             "alias" => $user->alias,
             "name" => $user->name,
-            "description" => $user->description
+            "description" => $user->description,
+            "email" =>$user->email,
+            "email_verified_at" => $user->email_verified_at
         ]);
 
     }catch(Throwable $e){
@@ -79,7 +81,9 @@ Route::put("/profile/account/change_password", [ProfileController::class, "chang
     ->name("profile.change.password")
     ->middleware("auth");
 
-
+Route::put("/profile/account/change_email", [ProfileController::class, "changeEmail"])
+    ->name("profile.change.email")
+    ->middleware("auth");
 
 
 ?>

@@ -25,8 +25,6 @@
 
                 
 
-                
-
                 <form action="/login" method="POST" class="m-5 roboto-slab-font">
 
                     @csrf
@@ -44,7 +42,7 @@
 
                     <div class="mb-2">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="email"class="form-control" id="email" name="email" placeholder="Your email" aria-describedby="emailHelp">
+                        <input type="email"class="form-control" id="email" name="email" placeholder="Your email" aria-describedby="emailHelp" autofocus>
                         @error("email")
                             <div class="alert alert-danger">
                                 {{$message}}
@@ -55,6 +53,10 @@
                     <div class="mb-2">
                         <label for="password" class="form-label mt-2">Password:</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Your password" >
+                    </div>
+
+                    <div class="mb-3">
+                        <a href="{{route("password.request")}}" class="text-secondary">Forgot password?</a>
                     </div>
                     
                     <div class="mb-3">
