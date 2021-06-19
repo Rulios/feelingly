@@ -18,4 +18,12 @@ implements MustVerifyEmail, CanResetPassword
     use HasFactory;
     use Notifiable;
     
+    public function diaries(){
+        return $this->hasMany(Diary::class);
+    }
+
+    public function memories(){
+        return $this->hasMany(Memory::class);
+    }
+
 }

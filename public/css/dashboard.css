@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
+:export {
+  primaryColor: #00baff;
+  secondaryColor: #7cacff;
+}
+
 .roboto-slab-font {
-  font-family: "Roboto Slab", serif;
+  font-family: "Roboto Slab", serif !important;
 }
 
 .BottomLineHoverAnimation::after {
@@ -31,6 +36,22 @@
 
 .fadeGreyWhenHover:hover {
   background-color: #E2E8E1;
+}
+
+.fixedRight {
+  position: fixed !important;
+  right: 0;
+  bottom: 0;
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px and upper
+*/
+@media (min-width: 1025px) {
+  .fixedRight {
+    right: 10%;
+  }
 }
 
 /*# sourceMappingURL=dashboard.css.map */

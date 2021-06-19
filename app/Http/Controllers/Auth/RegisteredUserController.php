@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Hash;
 use App\Rules\ProjectDateFormat;
 use App\Rules\EnablesURLEncoding;
 
+use App\Traits\RegisterSecondChoresTrait;
+
 use Stevebauman\Location\Facades\Location;
 
 class RegisteredUserController extends Controller
 {
+    use RegisterSecondChoresTrait;
+
+
     /**
      * Display the registration view.
      *
@@ -56,8 +61,6 @@ class RegisteredUserController extends Controller
             $user->password = Hash::make($request->password);
             $user->date_of_birth = $request->date_of_birth;
 
-            
-            
             if ($position = Location::get()) {
                 $user->country = $position->countryCode;
             }
@@ -65,6 +68,9 @@ class RegisteredUserController extends Controller
             $user->save();
             event(new Registered($user));
             Auth::login($user);
+
+            $this->createFirstDiary();
+
             return redirect(RouteServiceProvider::DASHBOARD);
             
         }catch(Exception $err){

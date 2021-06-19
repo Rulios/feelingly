@@ -29,7 +29,7 @@ class ProfilePic extends Component
         $this->height = $height ?? "50";
 
         //select default profile pic if user hasn't set one yet
-        $user = Auth::user();
+        $user = User::where("alias", $alias)->first();
         if($user->profile_image){
             $this->profile_image = $user->profile_image;
         }else{

@@ -61,12 +61,12 @@
 
                     <div class="row">
                         <div class="col-lg-12 d-flex justify-content-center mt-3">
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#generalActionsProfileImageModal">
                                 Change profile pic
                             </button>
                             
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <!-- Modal for general actions-->
+                            <div class="modal fade" id="generalActionsProfileImageModal" tabindex="-1" role="dialog" aria-labelledby="generalActionsProfileImageModal" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -103,6 +103,33 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Modal for cropping the profile image--> {{--TO DO}}
+                            {{-- <div class="modal fade" id="cropImageModal" tabindex="-1" role="dialog" aria-labelledby="cropImageModal" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Resize your selected image</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-center " id="cropImageModalContainer">
+                                            
+
+                                        s
+                                            <div class="row">
+                                                <button class="col p-3 noDecorationButton fadeGreyWhenHover" data-dismiss="modal" aria-label="Return">
+                                                    Return
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
+                           
+
                         </div>
                     </div>
                     
