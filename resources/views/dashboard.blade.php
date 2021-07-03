@@ -17,5 +17,8 @@
 
     <div id="root"></div>
 
+    <x-hidden-values/>
+
+
 </body>
 </html>

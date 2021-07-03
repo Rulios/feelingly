@@ -2,22 +2,25 @@ import React, {FC, useState, useEffect, memo} from "react";
 import Diary from "../types/Diary";
 import axios from "axios";
 
-export default function useDiaries(): Diary[]{
+
+/* type fetchedOptions = {
+    [key:string]: any
+} */
+
+export default function useDiaries(alias:string): [Diary[], (newDiaries: any)=>void]{
+
+    const [diaries, setDiaries] = useState([]);
 
     useEffect(() =>{
-
-        try{
-
-            const fetchDiaries = async () => {
-                return await axios.get("/diaries");
-            };
-
-        }catch(error){
-
-        }
-
+        axios.get(`/profile/${alias}/diaries`)
+        .then(({data}) => {
+            setDiaries(data);
+        })
+        .catch(err =>{
+            console.log(err);
+        });
 
     }, []);
 
-    return [];
+    return [diaries, setDiaries];
 }

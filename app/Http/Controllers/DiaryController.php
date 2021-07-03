@@ -22,21 +22,18 @@ class DiaryController extends Controller
      */
 
     public function getDiaries(Request $request, $alias){
-
-        
         
         try{
             
             $isRequestingOwn = $alias == Auth::user()->alias;
 
-            $userID = User::where("alias", $alias)->id;
+            $userID = User::where("alias", $alias)->first()->id;
 
             if($isRequestingOwn){
-                $diaries = Diary::where("user_id", $userID);
+                $diaries = Diary::where("FK_diaries_users", $userID)->get();
             }else{
-                $diaries = Diary::where("user_id", $userID)->where("visibility", "public");
+                $diaries = Diary::where("FK_diaries_users", $userID)->where("visibility", "public")->get();
             }
-
             return $diaries;
 
         }catch(Exception $err){

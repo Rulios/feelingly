@@ -13,6 +13,7 @@
 </head>
 <body class="container roboto-slab-font">
 
+
     <x-navbar />    
 
     <div class="text-center">
@@ -72,7 +73,6 @@
             </div>
         </div>
 
-
         {{-- To be rendered in React --}}
 
         <div id="sectionSelector">
@@ -91,15 +91,9 @@
             </div>
         </div>
 
-        
-
-        
-
     </div>
 
-    
-
-    
+    <x-hidden-values :t-user-alias="$t_user_alias"/>
 
 </body>
 </html>

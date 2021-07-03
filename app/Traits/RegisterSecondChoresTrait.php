@@ -18,13 +18,11 @@ trait RegisterSecondChoresTrait
      * This diary will be the starter to store all the memories
      */
 
-    public function createFirstDiary(){
-        $userID = Auth::user()->id;
-
+    public function createFirstDiary($userID){
 
         $diary = new Diary;
         $diary->name = "My memories";
-        $diary->author = $userID;
+        $diary->FK_diaries_users = $userID;
         $diary->visibility = "public";
         $diary->save();
 

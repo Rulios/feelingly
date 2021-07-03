@@ -66,10 +66,11 @@ class RegisteredUserController extends Controller
             }
     
             $user->save();
+            $this->createFirstDiary($user->id);
+            
             event(new Registered($user));
             Auth::login($user);
-
-            $this->createFirstDiary();
+            
 
             return redirect(RouteServiceProvider::DASHBOARD);
             

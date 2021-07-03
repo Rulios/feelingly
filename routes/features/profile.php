@@ -33,7 +33,8 @@ Route::get("/profile/{alias}", function($alias){
             "name" => $user->name,
             "description" => $user->description,
             "isOwnProfile" => $isOwnProfile,
-            "numberOfMemoriesWritten" => 0
+            "numberOfMemoriesWritten" => 0,
+            "t_user_alias" => $user->alias //sets hidden alias on current profile page
         ]);
 
     }catch(Throwable $e){
