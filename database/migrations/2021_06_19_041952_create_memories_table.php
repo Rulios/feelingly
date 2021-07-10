@@ -15,10 +15,10 @@ class CreateMemoriesTable extends Migration
     {
         Schema::create('memories', function (Blueprint $table) {
             $table->id();
-            $table->integer("FK_memories_users");
-            $table->integer("FK_memories_diaries");
-            $table->foreign("FK_memories_users")->references("id")->on("users")->onDelete("cascade");
-            $table->foreign("FK_memories_diaries")->references("id")->on("diaries");
+            $table->integer("user_id");
+            $table->integer("diary_id");
+            $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
+            $table->foreign("diary_id")->references("id")->on("diaries");
             
             $table->text("title");
             $table->text("content");

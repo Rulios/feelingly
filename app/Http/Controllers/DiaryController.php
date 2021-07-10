@@ -30,9 +30,9 @@ class DiaryController extends Controller
             $userID = User::where("alias", $alias)->first()->id;
 
             if($isRequestingOwn){
-                $diaries = Diary::where("FK_diaries_users", $userID)->get();
+                $diaries = Diary::where("user_id", $userID)->get();
             }else{
-                $diaries = Diary::where("FK_diaries_users", $userID)->where("visibility", "public")->get();
+                $diaries = Diary::where("user_id", $userID)->where("visibility", "public")->get();
             }
             return $diaries;
 

@@ -9,5 +9,7 @@ class Memory extends Model
 {
     use HasFactory;
 
-
+    public function user(){
+        $this->belongsTo(User::class);
+    }
 }

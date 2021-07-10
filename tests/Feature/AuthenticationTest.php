@@ -5,15 +5,21 @@ namespace Tests\Feature;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
+    use DatabaseMigrations;
+
+    /**
+     * Login page is the main page. So instead of /login is /
+     */
 
     public function test_login_screen_can_be_rendered()
-    {
-        $response = $this->get('/login');
+    {   
+        $response = $this->get('/');
 
         $response->assertStatus(200);
     }
@@ -28,7 +34,7 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        $response->assertRedirect(RouteServiceProvider::DASHBOARD);
     }
 
     public function test_users_can_not_authenticate_with_invalid_password()

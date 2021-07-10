@@ -15,8 +15,8 @@ class CreateDiariesTable extends Migration
     {
         Schema::create('diaries', function (Blueprint $table) {
             $table->id();
-            $table->integer("FK_diaries_users");
-            $table->foreign("FK_diaries_users")->references("id")->on("users");
+            $table->foreignId("user_id")->constrained("users")
+                ->onUpdate("cascade")->onDelete("cascade");
             
             $table->string("name", 50);
             $table->string("visibility", 10);

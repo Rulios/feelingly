@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('index');
 })->name("index");
 
+Route::get("/test", function(){
+    return User::find(1)->diaries[0];
+});
+
 Route::get('/dashboard', function (Request $request) {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

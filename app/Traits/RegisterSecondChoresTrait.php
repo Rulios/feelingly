@@ -22,7 +22,7 @@ trait RegisterSecondChoresTrait
 
         $diary = new Diary;
         $diary->name = "My memories";
-        $diary->FK_diaries_users = $userID;
+        $diary->user_id = $userID;
         $diary->visibility = "public";
         $diary->save();
 
