@@ -17,8 +17,8 @@ class CreateMemoriesTable extends Migration
             $table->id();
             $table->integer("user_id");
             $table->integer("diary_id");
-            $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
-            $table->foreign("diary_id")->references("id")->on("diaries");
+            $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
+            $table->foreign("diary_id")->references("id")->on("diaries")->onDelete("cascade")->onUpdate("cascade");
             
             $table->text("title");
             $table->text("content");

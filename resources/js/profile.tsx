@@ -1,5 +1,9 @@
 import $ from "jquery";
 import bootstrap from "bootstrap";
+import useMemories from "./hooks/useMemories";
+import ProfileButtonNavigation from "./components/ProfileButtonNavigation";
+import React from "react";
+import ReactDOM from "react-dom";
 
 /**
  * This line performs a bug fixer. I don't know why, but it seems
@@ -8,3 +12,40 @@ import bootstrap from "bootstrap";
  * 
  */
  console.log(bootstrap);
+
+ window.onload = function(){
+
+    ReactDOM.render(
+        <App/>,
+        document.getElementById("root")
+    );
+
+ };
+
+
+ function App(){
+
+    //TO DO: LIFT THE STATE FROM PROFILEBUTTONNAVIGATION TO HANDLE IT HERE
+
+    return (
+        <div>
+            <div className="row mt-5">
+            <ProfileButtonNavigation/>
+            </div>
+
+            <div>
+                
+            </div>
+        </div>
+    );
+
+ }
+
+ function WrittenMemoriesFeed(){
+     return (
+        <div>
+
+        </div>
+     );
+ }
+

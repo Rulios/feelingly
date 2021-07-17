@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Memory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class MemoryFactory extends Factory

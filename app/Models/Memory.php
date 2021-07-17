@@ -12,4 +12,7 @@ class Memory extends Model
     public function user(){
         $this->belongsTo(User::class);
     }
+
+    protected $dates = ['created_at', 'updated_at'];
+
 }

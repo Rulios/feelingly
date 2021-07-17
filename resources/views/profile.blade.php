@@ -75,7 +75,11 @@
 
         {{-- To be rendered in React --}}
 
-        <div id="sectionSelector">
+        <div id="root">
+
+        </div>
+
+        {{-- <div id="sectionSelector">
             <div class="row mt-3 ">
                 <div class="col-lg-6">
                     <button type="button" class="buttonSelector activeSection">
@@ -89,7 +93,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 

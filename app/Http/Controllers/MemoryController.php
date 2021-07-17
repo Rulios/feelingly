@@ -52,4 +52,24 @@ class MemoryController extends Controller
         }
     }
 
+    public function getMemories(Request $request, $alias){
+        try{
+            
+            $isRequestingOwn = $alias == Auth::user()->alias;
+
+            $userID = User::where("alias", $alias)->first()->id;
+
+            if($isRequestingOwn){
+                $memories = Memory::where("user_id", $userID)->get();
+            }else{
+                $memories = Memory::where("user_id", $userID)->where("visibility", "public")->get();
+            }
+            
+            return $memories;
+
+        }catch(Exception $err){
+            abort(404);
+        }
+    }
+
 }

@@ -24,7 +24,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            "alias" => strtolower(str_replace(" ", "", $this->faker->name)),
+            "alias" => strtolower(str_replace(" ", "", $this->faker->text(25))),
             'email' => $this->faker->unique()->safeEmail,
             "date_of_birth" => $this->faker->dateTimeThisDecade("now"),
             "country" => $this->faker->countryCode,

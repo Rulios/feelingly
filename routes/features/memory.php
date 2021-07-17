@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Controllers\DiaryController;
 use App\Http\Controllers\MemoryController;
 /**
  * Diary Routes
@@ -19,9 +18,11 @@ use App\Http\Controllers\MemoryController;
  * Submits a new memory
  */
 
- Route::post("/memories/new", [MemoryController::class, "addNewMemory"])
+Route::post("/memories/new", [MemoryController::class, "addNewMemory"])
     ->middleware("auth");
 
+
+Route::get("/profile/{alias}/memories", [MemoryController::class, "getMemories"]);
 
 
 ?>
