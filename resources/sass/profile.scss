@@ -3,6 +3,7 @@
 @use "animations/BottomLineHover.scss";
 @use "./images/images.scss";
 @use "buttons/utils.scss";
+@use "text/formats.scss";
 
 
 .description{
@@ -43,4 +44,21 @@
   background-color: transparent;
   border: 1px solid black;
   border-radius: 5px;
+}
+.box{
+  max-width: auto;
+  transition: 0.5s;
+}
+
+.box:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.611), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.box .visibilityFont{
+  font-size: 0.75em;
+}
+
+.box .date{
+  float:right;
+  color: grey;
 }

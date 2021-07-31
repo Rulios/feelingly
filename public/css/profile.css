@@ -38,6 +38,19 @@
   background-color: #E2E8E1;
 }
 
+:export {
+  primaryColor: #00baff;
+  secondaryColor: #7cacff;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
 .description {
   text-align: justify;
 }
@@ -75,6 +88,24 @@
   background-color: transparent;
   border: 1px solid black;
   border-radius: 5px;
+}
+
+.box {
+  max-width: auto;
+  transition: 0.5s;
+}
+
+.box:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.611), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.box .visibilityFont {
+  font-size: 0.75em;
+}
+
+.box .date {
+  float: right;
+  color: grey;
 }
 
 /*# sourceMappingURL=profile.css.map */

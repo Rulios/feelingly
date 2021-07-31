@@ -17,7 +17,6 @@ import {SELF_USER_ALIAS} from "./utils/SESSION_STORAGE_NAMES";
 import axios from "axios";
 import useDiaries from "./hooks/useDiaries";
 import useSessionStorage from "./hooks/useSessionStorage";
-import Diary from "./types/Diary";
 
 /**
  * This line performs a bug fixer. I don't know why, but it seems

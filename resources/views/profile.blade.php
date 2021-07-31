@@ -73,27 +73,10 @@
             </div>
         </div>
 
-        {{-- To be rendered in React --}}
 
-        <div id="root">
+    </div>
 
-        </div>
-
-        {{-- <div id="sectionSelector">
-            <div class="row mt-3 ">
-                <div class="col-lg-6">
-                    <button type="button" class="buttonSelector activeSection">
-                        📝Written memories
-                    </button>
-                </div>
-    
-                <div class="col-lg-6">
-                    <button type="button" class="buttonSelector">
-                        📔Diaries
-                    </button>
-                </div>
-            </div>
-        </div> --}}
+    <div id="root">
 
     </div>
 

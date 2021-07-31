@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Rules\ValidVisibilityType;
 
-
 class MemoryController extends Controller
 {
     //
+
 
     public function addNewMemory(Request $request){
 

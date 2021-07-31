@@ -20,8 +20,8 @@ class CreateDiariesTable extends Migration
             
             $table->string("name", 50);
             $table->string("visibility", 10);
-            $table->timestamptz('created_at');
-            $table->timestamptz('updated_at');
+            
+            $table->timestamps();
         });
     }
 

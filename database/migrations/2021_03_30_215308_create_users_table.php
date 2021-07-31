@@ -24,10 +24,10 @@ class CreateUsersTable extends Migration
             $table->string("description", 1000)->nullable();
             $table->string("profile_image")->nullable();
             $table->string("country", 10)->nullable();
-            $table->timestamptz("email_verified_at")->nullable();
+            $table->timestamp("email_verified_at")->nullable();
             $table->string("remember_token", 100)->nullable();
-            $table->timestamptz('created_at');
-            $table->timestamptz('updated_at');
+            
+            $table->timestamps();
         });
     }
 

@@ -23,8 +23,9 @@ class CreateMemoriesTable extends Migration
             $table->text("title");
             $table->text("content");
             $table->string("visibility", 10);
-            $table->timestamptz('created_at');
-            $table->timestamptz('updated_at');
+            /* $table->timestamp('created_at');
+            $table->timestamp('updated_at'); */
+            $table->timestamps();
         });
     }
 

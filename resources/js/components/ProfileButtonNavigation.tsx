@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -9,9 +9,19 @@ const useStyles = makeStyles({
     },
 });
 
-export default function ProfileButtonNavigation(){
+interface Props{
+  defaultValue?: number;
+  newValue(value: number): void;
+};
+
+export default function ProfileButtonNavigation({defaultValue, newValue}: Props){
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(defaultValue ?? 0);
+
+    useEffect(() => {
+      newValue(value);
+    }, [value]);
+
 
     return (
         <BottomNavigation
