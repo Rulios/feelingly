@@ -4,10 +4,14 @@ import useMemories from "./hooks/useMemories";
 import useAlias from "./hooks/useAlias";
 import useDiaries from "./hooks/useDiaries";
 import ProfileButtonNavigation from "./components/ProfileButtonNavigation";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef, memo} from "react";
 import ReactDOM from "react-dom";
 import ProfileMemoryBox from "./components/ProfileMemoryBox";
-
+import { keyBy } from "lodash";
+import Diary from "./types/Diary";
+import stripHTML from "./utils/stripHTML";
+import MemoryModal from "./components/MemoryModal";
+import { Memory } from "@material-ui/icons";
 
 /**
  * This line performs a bug fixer. I don't know why, but it seems
@@ -73,28 +77,84 @@ type WrittenMemoriesFeedProps = {
     targetAlias: string;
 }
 
- function WrittenMemoriesFeed({selfAlias, targetAlias}: WrittenMemoriesFeedProps){
+function toggleBodyOverflow(){
+   /*  if(document.body.classList.contains("overflow-hidden")){
+        document.body.classList.remove("overflow-hidden");
+        document.body.classList.add("overflow-auto");
+    }else{
+        document.body.classList.add("overflow-hidden");
+        document.body.classList.remove("overflow-auto");
+
+    } */
+    document.body.classList.toggle("overflow-hidden");
+}
+
+function WrittenMemoriesFeed({selfAlias, targetAlias}: WrittenMemoriesFeedProps){
     
-    const [memories] = useMemories(targetAlias);
-    const [diaries] = useDiaries(targetAlias);
+    const [statusMemories, memories, errorMemories] = useMemories(targetAlias);
+    const [statusDiaries, diaries, errorDiaries] = useDiaries(targetAlias);
+    const [diariesName, setDiariesName] = useState(keyBy(diaries, "id"));
+    const [selectedMemoryIndex, setSelectedMemoryIndex] = useState(-1);
+    const [modalOpen, setModalOpen] = useState(false);
+
+    useEffect(() => {
+        setDiariesName(keyBy(diaries, "id"));
+    }, [diaries]);
+
+    /**
+     * Gets the memory position and updates the state.
+     * The memory position refers to its parent array. 
+     * So it can be shown at the modal. 
+     * 
+     * Also it sets the modal to be open
+     * @param memoryPosition 
+     */
+
+    const handleClickMemory = (memoryPosition: number) => {
+            setSelectedMemoryIndex(memoryPosition);
+            setModalOpen(true);
+            toggleBodyOverflow();
+    }
+
+    /**
+     * Sets the modal open state to false to close it
+     */
+    const handleCloseMemory = () => {
+        setModalOpen(false);
+        toggleBodyOverflow();
+    };
+
 
      return (
-        <div className="row pt-5">
-            {memories.map(({id, title, content, visibility, created_at, diary_id}) => {
-                return (
-                    <ProfileMemoryBox
-                        key={`Diary${diary_id}-Memory${id}`}
-                        id={id}
-                        title={title}
-                        content={content}
-                        visibility={visibility}
-                        created_at={created_at}
-                        diaryName={"Hola"}
-                        onClick={() => console.log("clickes")}
-                    />
-                )
-            })}
+        <div>
+            <div className="row pt-5">
+                {memories?.map(({id, title, content, visibility, created_at, diary_id}, index) => {
+                    return (
+                        <ProfileMemoryBox
+                            key={`Diary${diary_id}-Memory${id}`}
+                            id={id}
+                            title={title}
+                            content={stripHTML(content)}
+                            visibility={visibility}
+                            created_at={created_at}
+                            diaryName={diariesName[id]?.name || ""}
+                            onClick={() => handleClickMemory(index)}
+                        />
+                    )
+                })}
+            </div>
+
+            
+
+            <MemoryModal
+                    memory={memories ? memories[selectedMemoryIndex] : null}
+                    shouldOpen={modalOpen}
+                    handleClose={handleCloseMemory}
+            />
         </div>
+        
+
+     
      );
  }
 

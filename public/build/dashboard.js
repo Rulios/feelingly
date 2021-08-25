@@ -886,13 +886,12 @@ var _button = require("@material-ui/core/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _send = require("@material-ui/icons/Send");
 var _sendDefault = parcelHelpers.interopDefault(_send);
-var _sessionStorageNames = require("./utils/SESSION_STORAGE_NAMES");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _useDiaries = require("./hooks/useDiaries");
 var _useDiariesDefault = parcelHelpers.interopDefault(_useDiaries);
-var _useSessionStorage = require("./hooks/useSessionStorage");
-var _useSessionStorageDefault = parcelHelpers.interopDefault(_useSessionStorage);
+var _useAlias = require("./hooks/useAlias");
+var _useAliasDefault = parcelHelpers.interopDefault(_useAlias);
 var _s = $RefreshSig$();
 /**
  * This line performs a bug fixer. I don't know why, but it seems
@@ -906,7 +905,6 @@ window.onload = ()=>{
      * sessionStorage, this will help us to build custom requests
      */ let selfAliasDOM = document.getElementById("s_user_alias").value;
     _reactDomDefault.default.render(/*#__PURE__*/ _jsxRuntime.jsx(App, {
-        selfAliasDOM: selfAliasDOM,
         __source: {
             fileName: "resources/js/dashboard.tsx",
             lineNumber: 39
@@ -926,34 +924,30 @@ window.onload = ()=>{
     public: "Public",
     private: "Private"
 };
-function App({ selfAliasDOM  }) {
+function App() {
     _s();
     /**TOGGLER */ const [openWriteSpace, setOpenWriteSpace] = _react.useState(false);
-    const [selfUserAlias, setSelfUserAlias] = _useSessionStorageDefault.default(_sessionStorageNames.SELF_USER_ALIAS);
-    _react.useEffect(()=>{
-        /**
-         * Put self user alias on sessionStorage
-         */ setSelfUserAlias(selfAliasDOM);
-    }, []);
+    const selfUserAlias = _useAliasDefault.default("self");
     const [memory, setMemory] = _react.useState({
         title: "",
         content: "",
         visibility: "public",
-        diaryID: ""
+        diary_id: ""
     });
     /**Get self user alias priority to be the sessionStorage, 
-     * if not, use the DOM tag one passed through props */ const [diaries] = _useDiariesDefault.default(selfUserAlias ?? selfAliasDOM);
+     * if not, use the DOM tag one passed through props */ const [statusDiaries, diaries, errorDiaries] = _useDiariesDefault.default(selfUserAlias);
     _react.useEffect(()=>{
         /**Performs a validation to set default memory's diary id. If memory's diary id is 
          * empty, it should be filled with a default value.
-         */ if (!memory.diaryID) setMemory({
+         */ if (!memory.diary_id && diaries) setMemory({
             ...memory,
-            diaryID: diaries[0]?.id
+            diary_id: diaries[0].id
         });
     }, [
         diaries
     ]);
     const submitMemory = ()=>{
+        console.log(memory);
         _axiosDefault.default.post("/memories/new", {
             ...memory
         }).then(({ data: { status_message  } , status  })=>{
@@ -971,25 +965,24 @@ function App({ selfAliasDOM  }) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "resources/js/dashboard.tsx",
-            lineNumber: 122
+            lineNumber: 116
         },
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsx(_addFloatButtonDefault.default, {
                 _onClick: ()=>{
                     setOpenWriteSpace(!openWriteSpace);
-                    console.log(memory.diaryID);
                 },
                 __source: {
                     fileName: "resources/js/dashboard.tsx",
-                    lineNumber: 123
+                    lineNumber: 117
                 },
                 __self: this
             }),
             /*#__PURE__*/ _jsxRuntime.jsx("div", {
                 __source: {
                     fileName: "resources/js/dashboard.tsx",
-                    lineNumber: 128
+                    lineNumber: 121
                 },
                 __self: this
             }),
@@ -997,14 +990,14 @@ function App({ selfAliasDOM  }) {
                 className: "mt-5",
                 __source: {
                     fileName: "resources/js/dashboard.tsx",
-                    lineNumber: 133
+                    lineNumber: 126
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx("div", {
                         __source: {
                             fileName: "resources/js/dashboard.tsx",
-                            lineNumber: 134
+                            lineNumber: 127
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_inputDefault.default, {
@@ -1019,7 +1012,7 @@ function App({ selfAliasDOM  }) {
                             ,
                             __source: {
                                 fileName: "resources/js/dashboard.tsx",
-                                lineNumber: 135
+                                lineNumber: 128
                             },
                             __self: this
                         })
@@ -1037,7 +1030,7 @@ function App({ selfAliasDOM  }) {
                         },
                         __source: {
                             fileName: "resources/js/dashboard.tsx",
-                            lineNumber: 144
+                            lineNumber: 137
                         },
                         __self: this
                     }),
@@ -1045,7 +1038,7 @@ function App({ selfAliasDOM  }) {
                         className: "mt-2 row p-2",
                         __source: {
                             fileName: "resources/js/dashboard.tsx",
-                            lineNumber: 152
+                            lineNumber: 145
                         },
                         __self: this,
                         children: [
@@ -1053,7 +1046,7 @@ function App({ selfAliasDOM  }) {
                                 className: "col-lg-2",
                                 __source: {
                                     fileName: "resources/js/dashboard.tsx",
-                                    lineNumber: 154
+                                    lineNumber: 147
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_textFieldDefault.default, {
@@ -1072,7 +1065,7 @@ function App({ selfAliasDOM  }) {
                                     ,
                                     __source: {
                                         fileName: "resources/js/dashboard.tsx",
-                                        lineNumber: 155
+                                        lineNumber: 148
                                     },
                                     __self: this,
                                     children: Object.keys(VISIBILITY).map((visibility)=>{
@@ -1080,7 +1073,7 @@ function App({ selfAliasDOM  }) {
                                             value: visibility,
                                             __source: {
                                                 fileName: "resources/js/dashboard.tsx",
-                                                lineNumber: 164
+                                                lineNumber: 157
                                             },
                                             __self: this,
                                             children: VISIBILITY[visibility]
@@ -1092,7 +1085,7 @@ function App({ selfAliasDOM  }) {
                                 className: "col-lg-2",
                                 __source: {
                                     fileName: "resources/js/dashboard.tsx",
-                                    lineNumber: 171
+                                    lineNumber: 164
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_textFieldDefault.default, {
@@ -1103,21 +1096,21 @@ function App({ selfAliasDOM  }) {
                                     SelectProps: {
                                         native: true
                                     },
-                                    value: (memory.diaryID ?? diaries[0].id) ?? "",
+                                    value: (memory.diary_id ?? diaries[0].id) ?? "",
                                     onChange: (e)=>{
                                         /**
                                      * Verifies that the diary id selected is available on diaries[]
                                      */ for(let i = 0; i < diaries.length; i++)if (diaries[i].id == e.target.value) {
                                             setMemory({
                                                 ...memory,
-                                                diaryID: diaries[i].id
+                                                diary_id: diaries[i].id
                                             });
                                             break;
                                         }
                                     },
                                     __source: {
                                         fileName: "resources/js/dashboard.tsx",
-                                        lineNumber: 172
+                                        lineNumber: 165
                                     },
                                     __self: this,
                                     children: diaries && diaries.map(({ id , name  }, i)=>{
@@ -1125,7 +1118,7 @@ function App({ selfAliasDOM  }) {
                                             value: id,
                                             __source: {
                                                 fileName: "resources/js/dashboard.tsx",
-                                                lineNumber: 194
+                                                lineNumber: 187
                                             },
                                             __self: this,
                                             children: name
@@ -1139,7 +1132,7 @@ function App({ selfAliasDOM  }) {
                         className: "mt-3 row",
                         __source: {
                             fileName: "resources/js/dashboard.tsx",
-                            lineNumber: 203
+                            lineNumber: 196
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
@@ -1151,7 +1144,7 @@ function App({ selfAliasDOM  }) {
                             ,
                             __source: {
                                 fileName: "resources/js/dashboard.tsx",
-                                lineNumber: 204
+                                lineNumber: 197
                             },
                             __self: this,
                             children: "Share memory"
@@ -1162,8 +1155,8 @@ function App({ selfAliasDOM  }) {
         ]
     }));
 }
-_s(App, "za2D5LKWQSbQWrWAmLJGEUyiELk=", false, function() {
-    return [_useSessionStorageDefault.default, _useDiariesDefault.default];
+_s(App, "1JiM5X2x9GOmefs3vRPGvc1bWCU=", false, function() {
+    return [_useAliasDefault.default, _useDiariesDefault.default];
 });
 _c = App;
 var _c;
@@ -1174,7 +1167,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","bootstrap":"2G2th","react-dom":"gkWJK","react":"6TuXu","./components/AddFloatButton":"lT9bm","@material-ui/core/Input":"4qnyV","@material-ui/core/TextField":"9U8zv","react-quill":"g38A3","react-quill/dist/quill.snow.css":"1xmJ0","./quill-editor-configs/toolbar":"8ynFp","@material-ui/core/Button":"i2oW6","@material-ui/icons/Send":"ihYjC","./utils/SESSION_STORAGE_NAMES":"eOOny","axios":"iYoWk","./hooks/useDiaries":"g4K51","./hooks/useSessionStorage":"03hAi","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"8xIwr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","bootstrap":"2G2th","react-dom":"gkWJK","react":"6TuXu","./components/AddFloatButton":"lT9bm","@material-ui/core/Input":"4qnyV","@material-ui/core/TextField":"9U8zv","react-quill":"g38A3","react-quill/dist/quill.snow.css":"1xmJ0","./quill-editor-configs/toolbar":"8ynFp","@material-ui/core/Button":"i2oW6","@material-ui/icons/Send":"ihYjC","axios":"iYoWk","./hooks/useDiaries":"g4K51","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","./hooks/useAlias":"buklO"}],"8xIwr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -72846,17 +72839,7 @@ var _default = _createSvgIcon.default(/*#__PURE__*/ React.createElement("path", 
 }), 'Send');
 exports.default = _default;
 
-},{"@babel/runtime/helpers/interopRequireDefault":"eigyQ","@babel/runtime/helpers/interopRequireWildcard":"a2Hsp","react":"6TuXu","./utils/createSvgIcon":"iAWNY"}],"eOOny":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "SELF_USER_ALIAS", ()=>SELF_USER_ALIAS
-);
-parcelHelpers.export(exports, "TARGET_USER_ALIAS", ()=>TARGET_USER_ALIAS
-);
-const SELF_USER_ALIAS = "s_user_alias";
-const TARGET_USER_ALIAS = "t_user_alias";
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"iYoWk":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"eigyQ","@babel/runtime/helpers/interopRequireWildcard":"a2Hsp","react":"6TuXu","./utils/createSvgIcon":"iAWNY"}],"iYoWk":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"3QmO2"}],"3QmO2":[function(require,module,exports) {
@@ -74223,6 +74206,27 @@ module.exports = CancelToken;
 };
 
 },{}],"g4K51":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _useFetch = require("./useFetch");
+var _useFetchDefault = parcelHelpers.interopDefault(_useFetch);
+var _s = $RefreshSig$();
+function useDiaries(alias) {
+    _s();
+    //TO DO, CHANGE THIS SHIT
+    const { status , data , error  } = _useFetchDefault.default(alias ? `/profile/${alias}/diaries` : null);
+    return [
+        status,
+        data,
+        error
+    ];
+}
+exports.default = useDiaries;
+_s(useDiaries, "b31lHLbOl4AzBKldRaOrZrUz6fA=", false, function() {
+    return [_useFetchDefault.default];
+});
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./useFetch":"puCyy"}],"puCyy":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -74235,30 +74239,147 @@ var _react = require("react");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _s = $RefreshSig$();
-function useDiaries(alias) {
+function useFetch(url, options) {
     _s();
-    const [diaries, setDiaries] = _react.useState([]);
+    const cache = _react.useRef({
+    });
+    const cancelRequest = _react.useRef(false);
+    const initialState = {
+        status: 'init',
+        error: undefined,
+        data: undefined
+    };
+    // Keep state logic separated
+    const fetchReducer = (state, action)=>{
+        switch(action.type){
+            case 'request':
+                return {
+                    ...initialState,
+                    status: 'fetching'
+                };
+            case 'success':
+                return {
+                    ...initialState,
+                    status: 'fetched',
+                    data: action.payload
+                };
+            case 'failure':
+                return {
+                    ...initialState,
+                    status: 'error',
+                    error: action.payload
+                };
+            default:
+                return state;
+        }
+    };
+    const [state, dispatch] = _react.useReducer(fetchReducer, initialState);
     _react.useEffect(()=>{
-        _axiosDefault.default.get(`/profile/${alias}/diaries`).then(({ data  })=>{
-            setDiaries(data);
-        }).catch((err)=>{
-            console.log(err);
-        });
-    }, []);
-    return [
-        diaries,
-        setDiaries
-    ];
+        if (!url) return;
+        const fetchData = async ()=>{
+            dispatch({
+                type: 'request'
+            });
+            if (cache.current[url]) dispatch({
+                type: 'success',
+                payload: cache.current[url]
+            });
+            else try {
+                const response = await _axiosDefault.default(url, options);
+                cache.current[url] = response.data;
+                if (cancelRequest.current) return;
+                dispatch({
+                    type: 'success',
+                    payload: response.data
+                });
+            } catch (error) {
+                if (cancelRequest.current) return;
+                dispatch({
+                    type: 'failure',
+                    payload: error.message
+                });
+            }
+        };
+        fetchData();
+        return ()=>{
+            cancelRequest.current = true;
+        };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+        url
+    ]);
+    return state;
 }
-exports.default = useDiaries;
-_s(useDiaries, "pIGmDj0SP28ApKftXVGNfdeOpYg=");
+_s(useFetch, "VsMM40DIV/UGg8qhn/RBHS1FIYY=");
+exports.default = useFetch;
 
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"6TuXu","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"03hAi":[function(require,module,exports) {
+},{"react":"6TuXu","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"buklO":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+var _useSessionStorage = require("./useSessionStorage");
+var _useSessionStorageDefault = parcelHelpers.interopDefault(_useSessionStorage);
+var _sessionStorageNames = require("../utils/SESSION_STORAGE_NAMES");
+var _s = $RefreshSig$();
+function useAlias(aliasType) {
+    _s();
+    const [alias, setAlias] = _react.useState("");
+    _react.useEffect(()=>{
+        let aliasGotByDOM = "";
+        let aliasGotBySessionStorage = "";
+        aliasGotByDOM = getAliasByDOM(aliasType);
+        if (aliasGotByDOM) setAlias(aliasGotByDOM);
+        else {
+            aliasGotBySessionStorage = getAliasBySessionStorage(aliasType);
+            setAlias(aliasGotBySessionStorage);
+        }
+    }, []);
+    return alias;
+}
+exports.default = useAlias;
+_s(useAlias, "ZtsQu+d0aKOSCoVdYb6Iwm3e1Bo=");
+/**TO DOO, FINISH THIS FILE */ function getAliasByDOM(aliasType) {
+    let aliasGotByDOM = "";
+    switch(aliasType){
+        case "self":
+            aliasGotByDOM = document.getElementById(_sessionStorageNames.SELF_USER_ALIAS).value;
+            break;
+        case "target":
+            aliasGotByDOM = document.getElementById(_sessionStorageNames.TARGET_USER_ALIAS).value;
+            break;
+    }
+    return aliasGotByDOM;
+}
+function getAliasBySessionStorage(aliasType) {
+    let aliasBySessionStorage = "";
+    switch(aliasType){
+        case "self":
+            aliasBySessionStorage = _useSessionStorageDefault.default(_sessionStorageNames.SELF_USER_ALIAS)[0];
+            break;
+        case "target":
+            aliasBySessionStorage = _useSessionStorageDefault.default(_sessionStorageNames.TARGET_USER_ALIAS)[0];
+            break;
+    }
+    return aliasBySessionStorage;
+}
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"6TuXu","./useSessionStorage":"03hAi","../utils/SESSION_STORAGE_NAMES":"eOOny","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"03hAi":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -74288,6 +74409,16 @@ _s(useSessionStorage, "cnNOAu0kURYutOVq8TivAAthn1E=");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}]},["2rAXy","ghlMN","3hGib"], "3hGib", "parcelRequire9e19")
+},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"eOOny":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SELF_USER_ALIAS", ()=>SELF_USER_ALIAS
+);
+parcelHelpers.export(exports, "TARGET_USER_ALIAS", ()=>TARGET_USER_ALIAS
+);
+const SELF_USER_ALIAS = "s_user_alias";
+const TARGET_USER_ALIAS = "t_user_alias";
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["2rAXy","ghlMN","3hGib"], "3hGib", "parcelRequire9e19")
 
 //# sourceMappingURL=dashboard.js.map

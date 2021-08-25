@@ -16,7 +16,7 @@ import {SELF_USER_ALIAS} from "./utils/SESSION_STORAGE_NAMES";
 
 import axios from "axios";
 import useDiaries from "./hooks/useDiaries";
-import useSessionStorage from "./hooks/useSessionStorage";
+import useAlias from "./hooks/useAlias";
 
 /**
  * This line performs a bug fixer. I don't know why, but it seems
@@ -36,7 +36,7 @@ window.onload = () =>{
 
 
     ReactDOM.render(
-        <App selfAliasDOM={selfAliasDOM}/>,
+        <App/>,
         document.getElementById("root")
     );
 }
@@ -58,47 +58,41 @@ const VISIBILITY:any = {
     private: "Private"
 };
 
-interface Props{
-    selfAliasDOM: string;
-};
 
 
-function App({selfAliasDOM}: Props): JSX.Element{
+
+function App(): JSX.Element{
     /**TOGGLER */
     const [openWriteSpace, setOpenWriteSpace] = useState(false);
 
-    const [selfUserAlias, setSelfUserAlias] = useSessionStorage(SELF_USER_ALIAS);
+    const selfUserAlias = useAlias("self");
 
-    useEffect(():void =>{
-        /**
-         * Put self user alias on sessionStorage
-         */
-        setSelfUserAlias(selfAliasDOM);
-    }, []);
+
 
     const [memory, setMemory] = useState<Memory>({
         title: "",
         content: "",
         visibility: "public",
-        diaryID: ""
+        diary_id: ""
     } as Memory);
 
     /**Get self user alias priority to be the sessionStorage, 
      * if not, use the DOM tag one passed through props */
-    const [diaries] = useDiaries(selfUserAlias ?? selfAliasDOM);
+    const [statusDiaries, diaries, errorDiaries] = useDiaries(selfUserAlias);
 
     
     useEffect(() => {
         /**Performs a validation to set default memory's diary id. If memory's diary id is 
          * empty, it should be filled with a default value.
          */
-        if(!memory.diaryID){
-            setMemory({...memory, diaryID: diaries[0]?.id});
+        if(!memory.diary_id && diaries){
+            setMemory({...memory, diary_id: diaries![0].id});
         }
     }, [diaries]);
 
 
     const submitMemory = ():void => {
+        console.log(memory);
         axios.post("/memories/new", {...memory})
         .then(({data : {status_message}, status}) => {
 
@@ -122,7 +116,6 @@ function App({selfAliasDOM}: Props): JSX.Element{
         <div>
             <AddFloatButton _onClick={() =>{
                 setOpenWriteSpace(!openWriteSpace)
-                console.log(memory.diaryID);
             } }/>
 
             <div>
@@ -174,15 +167,15 @@ function App({selfAliasDOM}: Props): JSX.Element{
                                 SelectProps={{
                                     native: true,
                                 }}
-                                value={memory.diaryID ?? diaries[0].id ?? ""}
+                                value={memory.diary_id ?? diaries![0].id ?? ""}
                                 onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
                                     /**
                                      * Verifies that the diary id selected is available on diaries[]
                                      */
 
-                                    for(let i = 0; i < diaries.length; i++){
-                                        if(diaries[i].id == e.target.value){
-                                            setMemory({...memory, diaryID: diaries[i].id});
+                                    for(let i = 0; i < diaries!.length; i++){
+                                        if(diaries![i].id == e.target.value){
+                                            setMemory({...memory, diary_id: diaries![i].id});
                                             break;
                                         }
                                     }

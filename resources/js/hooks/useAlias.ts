@@ -10,7 +10,7 @@ import { SELF_USER_ALIAS, TARGET_USER_ALIAS } from "../utils/SESSION_STORAGE_NAM
  *  - Target: refers to the alias of another user that can be targeted. 
  *          Example, when one user visits another user profile's page. The visited user will be the target alias.
  * 
- * How do alias are got?
+ * How do the app gets the alias?
  * 
  * - First it's checked whether it's on a hidden field rendered by backend.
  * - Second, if it's not on the rendered template, it's got by checking the sessionStorage

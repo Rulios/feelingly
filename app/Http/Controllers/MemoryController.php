@@ -17,11 +17,10 @@ class MemoryController extends Controller
 
     public function addNewMemory(Request $request){
 
-
         $request->validate([
             "title" => "required",
             "content" => "required",
-            "diaryID" => "required| exists:diaries,id",
+            "diary_id" => "required| exists:diaries,id",
             "visibility" => ["required", new ValidVisibilityType]
         ]);
 
@@ -32,7 +31,7 @@ class MemoryController extends Controller
             $memory = new Memory();
 
             $memory->user_id = $user->id;
-            $memory->diary_id = $request->diaryID;
+            $memory->diary_id = $request->diary_id;
             $memory->title = $request->title;
             $memory->content = $request->content;
             $memory->visibility = $request->visibility;

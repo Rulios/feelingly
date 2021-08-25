@@ -4,6 +4,8 @@
 @use "./images/images.scss";
 @use "buttons/utils.scss";
 @use "text/formats.scss";
+@use "components/memory-modal.scss";
+
 
 
 .description{
@@ -62,3 +64,4 @@
   float:right;
   color: grey;
 }
+

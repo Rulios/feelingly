@@ -15,14 +15,12 @@ interface UnOmittedProps extends Memory{
 //omits the unnecesary fields
 type Props = Omit <UnOmittedProps, "user_id" | "diary_id" | "updated_at">;
 
-console.log(dayjs().utc().format());
 export default function ProfileMemoryBox({
     id, title, content, visibility, created_at, diaryName, onClick
 }: Props){
-    console.log(created_at);
     return (
-        <div className="col-md-6">
-            <div className="box px-2">
+        <button className="col-md-6 noDecorationButton" onClick={onClick}>
+            <div className="box p-2">
                 <div id="titleAndInformation">
 
                     <div className="date">
@@ -31,7 +29,7 @@ export default function ProfileMemoryBox({
 
                     <br/>
 
-                    <div id="title" className="truncate" >
+                    <div id="title" className="truncate lead" >
                         <b>
                             {title}
                         </b>
@@ -42,7 +40,9 @@ export default function ProfileMemoryBox({
                     </div>
 
                     <div id="diaryName">
-                        {diaryName}
+                        <i>
+                            {`in ${diaryName}`}
+                        </i>
                     </div>
                 </div>
 
@@ -52,6 +52,6 @@ export default function ProfileMemoryBox({
                 </p>
 
             </div>
-        </div>
+        </button>
     );
 }
