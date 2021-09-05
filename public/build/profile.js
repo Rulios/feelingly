@@ -886,6 +886,11 @@ var _stripHTML = require("./utils/stripHTML");
 var _stripHTMLDefault = parcelHelpers.interopDefault(_stripHTML);
 var _memoryModal = require("./components/MemoryModal");
 var _memoryModalDefault = parcelHelpers.interopDefault(_memoryModal);
+var _profileContext = require("./contexts/ProfileContext");
+var _profileContextDefault = parcelHelpers.interopDefault(_profileContext);
+//import {HiddenContextProvider, HiddenContextConsumer} from "./contexts/HiddenContext";
+var _hiddenContext = require("./contexts/HiddenContext");
+var _hiddenContextDefault = parcelHelpers.interopDefault(_hiddenContext);
 var _s = $RefreshSig$(), _s1 = $RefreshSig$();
 /**
  * This line performs a bug fixer. I don't know why, but it seems
@@ -894,110 +899,127 @@ var _s = $RefreshSig$(), _s1 = $RefreshSig$();
  * 
  */ console.log(_bootstrapDefault.default);
 window.onload = function() {
-    let selfAliasDOM = document.getElementById("s_user_alias").value;
-    let targetAliasDOM = document.getElementById("t_user_alias").value;
     _reactDomDefault.default.render(/*#__PURE__*/ _jsxRuntime.jsx(App, {
         __source: {
             fileName: "resources/js/profile.tsx",
-            lineNumber: 31
+            lineNumber: 29
         },
         __self: this
     }), document.getElementById("root"));
 };
-/*  interface AppProps{
-    selfAliasDOM: string;
-    targetAliasDOM: string;
-}; */ function App() {
+function App() {
     _s();
     //TO DO: LIFT THE STATE FROM PROFILEBUTTONNAVIGATION TO HANDLE IT HERE
     const [profileNavigationOption, setProfileNavigationOption] = _react.useState(0);
     const selfAlias = _useAliasDefault.default("self");
     const targetAlias = _useAliasDefault.default("target");
-    return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+    const [statusMemories, memories, errorMemories] = _useMemoriesDefault.default(targetAlias);
+    const [statusDiaries, diaries, errorDiaries] = _useDiariesDefault.default(targetAlias);
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_hiddenContextDefault.default.Provider, {
+        value: {
+            selfAlias: selfAlias,
+            targetAlias: targetAlias
+        },
         __source: {
             fileName: "resources/js/profile.tsx",
-            lineNumber: 52
+            lineNumber: 49
         },
         __self: this,
-        children: [
-            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                className: "row mt-5",
+        children: /*#__PURE__*/ _jsxRuntime.jsx(_profileContextDefault.default.Provider, {
+            value: {
+                memoriesFetch: {
+                    status: statusMemories,
+                    memories: memories,
+                    errorMemories: errorMemories
+                },
+                diariesFetch: {
+                    status: statusDiaries,
+                    diaries: diaries,
+                    errorDiaries: errorDiaries
+                }
+            },
+            __source: {
+                fileName: "resources/js/profile.tsx",
+                lineNumber: 53
+            },
+            __self: this,
+            children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 __source: {
                     fileName: "resources/js/profile.tsx",
-                    lineNumber: 53
+                    lineNumber: 66
                 },
                 __self: this,
                 children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx(_profileButtonNavigationDefault.default, {
-                        defaultValue: profileNavigationOption,
-                        newValue: setProfileNavigationOption,
+                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "row mt-5",
                         __source: {
                             fileName: "resources/js/profile.tsx",
-                            lineNumber: 54
+                            lineNumber: 67
                         },
-                        __self: this
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx(_profileButtonNavigationDefault.default, {
+                                defaultValue: profileNavigationOption,
+                                newValue: setProfileNavigationOption,
+                                __source: {
+                                    fileName: "resources/js/profile.tsx",
+                                    lineNumber: 68
+                                },
+                                __self: this
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx("hr", {
+                                className: "mt-2",
+                                __source: {
+                                    fileName: "resources/js/profile.tsx",
+                                    lineNumber: 69
+                                },
+                                __self: this
+                            })
+                        ]
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsx("hr", {
-                        className: "mt-2",
+                    profileNavigationOption === 0 && (targetAlias !== "" || selfAlias !== "") && /*#__PURE__*/ _jsxRuntime.jsx("div", {
                         __source: {
                             fileName: "resources/js/profile.tsx",
-                            lineNumber: 55
+                            lineNumber: 73
                         },
-                        __self: this
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(WrittenMemoriesFeed, {
+                            __source: {
+                                fileName: "resources/js/profile.tsx",
+                                lineNumber: 74
+                            },
+                            __self: this
+                        })
+                    }),
+                    profileNavigationOption === 1 && /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        __source: {
+                            fileName: "resources/js/profile.tsx",
+                            lineNumber: 79
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(DiariesFeed, {
+                            __source: {
+                                fileName: "resources/js/profile.tsx",
+                                lineNumber: 80
+                            },
+                            __self: this
+                        })
                     })
                 ]
-            }),
-            profileNavigationOption === 0 && (targetAlias !== "" || selfAlias !== "") && /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                __source: {
-                    fileName: "resources/js/profile.tsx",
-                    lineNumber: 59
-                },
-                __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(WrittenMemoriesFeed, {
-                    selfAlias: selfAlias,
-                    targetAlias: targetAlias,
-                    __source: {
-                        fileName: "resources/js/profile.tsx",
-                        lineNumber: 60
-                    },
-                    __self: this
-                })
-            }),
-            profileNavigationOption === 1 && /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                __source: {
-                    fileName: "resources/js/profile.tsx",
-                    lineNumber: 65
-                },
-                __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(DiariesFeed, {
-                    __source: {
-                        fileName: "resources/js/profile.tsx",
-                        lineNumber: 66
-                    },
-                    __self: this
-                })
             })
-        ]
+        })
     }));
 }
-_s(App, "WIuUqQ3Jw/UkkTM+d0VN1pLh8Vk=", false, function() {
-    return [_useAliasDefault.default, _useAliasDefault.default];
+_s(App, "g9j42Ur8oDPzZS7+Ros5D0BapJc=", false, function() {
+    return [_useAliasDefault.default, _useAliasDefault.default, _useMemoriesDefault.default, _useDiariesDefault.default];
 });
 _c = App;
 function toggleBodyOverflow() {
-    /*  if(document.body.classList.contains("overflow-hidden")){
-        document.body.classList.remove("overflow-hidden");
-        document.body.classList.add("overflow-auto");
-    }else{
-        document.body.classList.add("overflow-hidden");
-        document.body.classList.remove("overflow-auto");
-
-    } */ document.body.classList.toggle("overflow-hidden");
+    document.body.classList.toggle("overflow-hidden");
 }
-function WrittenMemoriesFeed({ selfAlias , targetAlias  }) {
+function WrittenMemoriesFeed() {
     _s1();
-    const [statusMemories, memories, errorMemories] = _useMemoriesDefault.default(targetAlias);
-    const [statusDiaries, diaries, errorDiaries] = _useDiariesDefault.default(targetAlias);
+    const { diariesFetch: { diaries  }  } = _react.useContext(_profileContextDefault.default);
     const [diariesName, setDiariesName] = _react.useState(_lodash.keyBy(diaries, "id"));
     const [selectedMemoryIndex, setSelectedMemoryIndex] = _react.useState(-1);
     const [modalOpen, setModalOpen] = _react.useState(false);
@@ -1024,60 +1046,65 @@ function WrittenMemoriesFeed({ selfAlias , targetAlias  }) {
         setModalOpen(false);
         toggleBodyOverflow();
     };
-    return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_profileContextDefault.default.Consumer, {
         __source: {
             fileName: "resources/js/profile.tsx",
-            lineNumber: 129
+            lineNumber: 137
         },
         __self: this,
-        children: [
-            /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                className: "row pt-5",
+        children: ({ memoriesFetch: { memories  }  })=>/*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 __source: {
                     fileName: "resources/js/profile.tsx",
-                    lineNumber: 130
+                    lineNumber: 140
                 },
                 __self: this,
-                children: memories?.map(({ id , title , content , visibility , created_at , diary_id  }, index)=>{
-                    return(/*#__PURE__*/ _jsxRuntime.jsx(_profileMemoryBoxDefault.default, {
-                        id: id,
-                        title: title,
-                        content: _stripHTMLDefault.default(content),
-                        visibility: visibility,
-                        created_at: created_at,
-                        diaryName: diariesName[id]?.name || "",
-                        onClick: ()=>handleClickMemory(index)
-                        ,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        className: "row pt-5",
                         __source: {
                             fileName: "resources/js/profile.tsx",
-                            lineNumber: 133
+                            lineNumber: 141
+                        },
+                        __self: this,
+                        children: memories?.map(({ id , title , content , visibility , created_at , diary_id , diary_name  }, index)=>{
+                            return(/*#__PURE__*/ _jsxRuntime.jsx(_profileMemoryBoxDefault.default, {
+                                id: id,
+                                title: title,
+                                content: _stripHTMLDefault.default(content),
+                                visibility: visibility,
+                                created_at: created_at,
+                                diaryName: diary_name || "",
+                                onClick: ()=>handleClickMemory(index)
+                                ,
+                                __source: {
+                                    fileName: "resources/js/profile.tsx",
+                                    lineNumber: 144
+                                },
+                                __self: this
+                            }, `Diary${diary_id}-Memory${id}`));
+                        })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_memoryModalDefault.default, {
+                        memory: memories ? memories[selectedMemoryIndex] : null,
+                        shouldOpen: modalOpen,
+                        handleClose: handleCloseMemory,
+                        __source: {
+                            fileName: "resources/js/profile.tsx",
+                            lineNumber: 159
                         },
                         __self: this
-                    }, `Diary${diary_id}-Memory${id}`));
-                })
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx(_memoryModalDefault.default, {
-                memory: memories ? memories[selectedMemoryIndex] : null,
-                shouldOpen: modalOpen,
-                handleClose: handleCloseMemory,
-                __source: {
-                    fileName: "resources/js/profile.tsx",
-                    lineNumber: 149
-                },
-                __self: this
+                    })
+                ]
             })
-        ]
     }));
 }
-_s1(WrittenMemoriesFeed, "+q3B4uyhXumz/tf/KdGIMT5ZtbA=", false, function() {
-    return [_useMemoriesDefault.default, _useDiariesDefault.default];
-});
+_s1(WrittenMemoriesFeed, "QtqRxe1IprZp5X7QEQIt5bUBtNs=");
 _c1 = WrittenMemoriesFeed;
 function DiariesFeed() {
     return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
         __source: {
             fileName: "resources/js/profile.tsx",
-            lineNumber: 163
+            lineNumber: 175
         },
         __self: this
     }));
@@ -1093,7 +1120,7 @@ $RefreshReg$(_c2, "DiariesFeed");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","bootstrap":"2G2th","./components/ProfileButtonNavigation":"2bZqs","react":"6TuXu","react-dom":"gkWJK","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","./hooks/useMemories":"kEmiM","./hooks/useAlias":"buklO","./hooks/useDiaries":"g4K51","./components/ProfileMemoryBox":"6KnAF","lodash":"f4H2C","./utils/stripHTML":"f3gec","./components/MemoryModal":"9wvAp"}],"8xIwr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","bootstrap":"2G2th","./components/ProfileButtonNavigation":"2bZqs","react":"6TuXu","react-dom":"gkWJK","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","./hooks/useMemories":"kEmiM","./hooks/useAlias":"buklO","./hooks/useDiaries":"g4K51","./components/ProfileMemoryBox":"6KnAF","lodash":"f4H2C","./utils/stripHTML":"f3gec","./components/MemoryModal":"9wvAp","./contexts/ProfileContext":"6gQdn","./contexts/HiddenContext":"hXphf"}],"8xIwr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -45748,7 +45775,7 @@ var _useFetchDefault = parcelHelpers.interopDefault(_useFetch);
 var _s = $RefreshSig$();
 function useMemories(alias) {
     _s();
-    const { status , data , error  } = _useFetchDefault.default(`/profile/${alias}/memories`);
+    const { status , data , error  } = _useFetchDefault.default(alias ? `/profile/${alias}/memories` : null);
     return [
         status,
         data,
@@ -62262,115 +62289,163 @@ var _closeModalButton = require("./CloseModalButton");
 var _closeModalButtonDefault = parcelHelpers.interopDefault(_closeModalButton);
 var _htmlReactParser = require("html-react-parser");
 var _htmlReactParserDefault = parcelHelpers.interopDefault(_htmlReactParser);
+var _responsiveLogo = require("./ResponsiveLogo");
+var _responsiveLogoDefault = parcelHelpers.interopDefault(_responsiveLogo);
+var _likeButton = require("./LikeButton");
+var _likeButtonDefault = parcelHelpers.interopDefault(_likeButton);
+var _replyButton = require("./ReplyButton");
+var _replyButtonDefault = parcelHelpers.interopDefault(_replyButton);
 function MemoryModal({ memory , shouldOpen , handleClose  }) {
     return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
         className: `${shouldOpen ? "show" : "hide"}`,
         __source: {
             fileName: "resources/js/components/MemoryModal.tsx",
-            lineNumber: 22
+            lineNumber: 25
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx("div", {
             className: "memory-modal ",
             __source: {
                 fileName: "resources/js/components/MemoryModal.tsx",
-                lineNumber: 25
+                lineNumber: 28
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 className: "content p-3",
                 __source: {
                     fileName: "resources/js/components/MemoryModal.tsx",
-                    lineNumber: 27
+                    lineNumber: 30
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                        className: "memory-modal-header",
+                        className: "memory-modal-actions mb-5 mx-3",
                         __source: {
                             fileName: "resources/js/components/MemoryModal.tsx",
-                            lineNumber: 28
+                            lineNumber: 32
                         },
                         __self: this,
                         children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx(_closeModalButtonDefault.default, {
-                                onClick: handleClose,
+                            /*#__PURE__*/ _jsxRuntime.jsx(_likeButtonDefault.default, {
                                 __source: {
                                     fileName: "resources/js/components/MemoryModal.tsx",
-                                    lineNumber: 30
+                                    lineNumber: 33
                                 },
                                 __self: this
                             }),
-                            /*#__PURE__*/ _jsxRuntime.jsx("img", {
-                                src: "/assets/logo-with-text.svg",
-                                className: "logo-with-text-on-modal mb-3 rounded mx-auto d-block img-responsive mt-4",
-                                alt: "Feelingly",
+                            /*#__PURE__*/ _jsxRuntime.jsx(_replyButtonDefault.default, {
                                 __source: {
                                     fileName: "resources/js/components/MemoryModal.tsx",
-                                    lineNumber: 32
+                                    lineNumber: 34
                                 },
                                 __self: this
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx("h4", {
-                                className: "memory-modal-title modal-title",
-                                __source: {
-                                    fileName: "resources/js/components/MemoryModal.tsx",
-                                    lineNumber: 37
-                                },
-                                __self: this,
-                                children: memory?.title
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx("br", {
-                                __source: {
-                                    fileName: "resources/js/components/MemoryModal.tsx",
-                                    lineNumber: 41
-                                },
-                                __self: this
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                                className: "memory-modal-details",
-                                __source: {
-                                    fileName: "resources/js/components/MemoryModal.tsx",
-                                    lineNumber: 43
-                                },
-                                __self: this,
-                                children: [
-                                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                                        className: "",
-                                        __source: {
-                                            fileName: "resources/js/components/MemoryModal.tsx",
-                                            lineNumber: 44
-                                        },
-                                        __self: this,
-                                        children: "written by user real name (@username)"
-                                    }),
-                                    /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                                        className: "",
-                                        __source: {
-                                            fileName: "resources/js/components/MemoryModal.tsx",
-                                            lineNumber: 48
-                                        },
-                                        __self: this,
-                                        children: [
-                                            "in ",
-                                            /*#__PURE__*/ _jsxRuntime.jsx("i", {
-                                                __source: {
-                                                    fileName: "resources/js/components/MemoryModal.tsx",
-                                                    lineNumber: 49
-                                                },
-                                                __self: this,
-                                                children: "Diary's name"
-                                            })
-                                        ]
-                                    })
-                                ]
                             })
                         ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        className: "memory-modal-static-header",
+                        __source: {
+                            fileName: "resources/js/components/MemoryModal.tsx",
+                            lineNumber: 37
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_closeModalButtonDefault.default, {
+                            onClick: handleClose,
+                            __source: {
+                                fileName: "resources/js/components/MemoryModal.tsx",
+                                lineNumber: 38
+                            },
+                            __self: this
+                        })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_responsiveLogoDefault.default, {
+                        __source: {
+                            fileName: "resources/js/components/MemoryModal.tsx",
+                            lineNumber: 41
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        className: "memory-modal-dynamic-header inline",
+                        __source: {
+                            fileName: "resources/js/components/MemoryModal.tsx",
+                            lineNumber: 43
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                            __source: {
+                                fileName: "resources/js/components/MemoryModal.tsx",
+                                lineNumber: 45
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx("h4", {
+                                    className: "memory-modal-title modal-title",
+                                    __source: {
+                                        fileName: "resources/js/components/MemoryModal.tsx",
+                                        lineNumber: 46
+                                    },
+                                    __self: this,
+                                    children: memory?.title
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                                    __source: {
+                                        fileName: "resources/js/components/MemoryModal.tsx",
+                                        lineNumber: 50
+                                    },
+                                    __self: this
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                    className: "memory-modal-details",
+                                    __source: {
+                                        fileName: "resources/js/components/MemoryModal.tsx",
+                                        lineNumber: 52
+                                    },
+                                    __self: this,
+                                    children: [
+                                        /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                            className: "",
+                                            __source: {
+                                                fileName: "resources/js/components/MemoryModal.tsx",
+                                                lineNumber: 53
+                                            },
+                                            __self: this,
+                                            children: [
+                                                "written by ",
+                                                memory?.user_name,
+                                                " (@",
+                                                memory?.user_alias,
+                                                ")"
+                                            ]
+                                        }),
+                                        /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                                            className: "",
+                                            __source: {
+                                                fileName: "resources/js/components/MemoryModal.tsx",
+                                                lineNumber: 57
+                                            },
+                                            __self: this,
+                                            children: [
+                                                "in ",
+                                                /*#__PURE__*/ _jsxRuntime.jsx("i", {
+                                                    __source: {
+                                                        fileName: "resources/js/components/MemoryModal.tsx",
+                                                        lineNumber: 58
+                                                    },
+                                                    __self: this,
+                                                    children: memory?.diary_name
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                })
+                            ]
+                        })
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx("hr", {
                         __source: {
                             fileName: "resources/js/components/MemoryModal.tsx",
-                            lineNumber: 55
+                            lineNumber: 64
                         },
                         __self: this
                     }),
@@ -62378,14 +62453,14 @@ function MemoryModal({ memory , shouldOpen , handleClose  }) {
                         className: "mb-5",
                         __source: {
                             fileName: "resources/js/components/MemoryModal.tsx",
-                            lineNumber: 57
+                            lineNumber: 66
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                            className: "memory-modal-content",
+                            className: "memory-modal-content p-4",
                             __source: {
                                 fileName: "resources/js/components/MemoryModal.tsx",
-                                lineNumber: 58
+                                lineNumber: 67
                             },
                             __self: this,
                             children: _htmlReactParserDefault.default(memory ? memory.content : "")
@@ -62406,7 +62481,7 @@ $RefreshReg$(_c, "MemoryModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","./CloseModalButton":"jvgYN","html-react-parser":"9jxdQ","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"jvgYN":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","./CloseModalButton":"jvgYN","html-react-parser":"9jxdQ","./ResponsiveLogo":"kujBX","./LikeButton":"iX4o1","./ReplyButton":"7e9XZ","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"jvgYN":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -64304,6 +64379,956 @@ exports.isTag = isTag;
 /** Type for <![CDATA[ ... ]]> */ exports.CDATA = ElementType.CDATA;
 /** Type for <!doctype ...> */ exports.Doctype = ElementType.Doctype;
 
-},{}]},["2rAXy","aqOrc","797DU"], "797DU", "parcelRequire9e19")
+},{}],"kujBX":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxRuntime = require("react/jsx-runtime");
+function ResponsiveLogo() {
+    return(/*#__PURE__*/ _jsxRuntime.jsx("img", {
+        src: "/assets/logo-with-text.svg",
+        className: "logo-with-text-on-modal mb-3 rounded mx-auto d-block img-responsive mt-4",
+        alt: "Feelingly",
+        __source: {
+            fileName: "resources/js/components/ResponsiveLogo.tsx",
+            lineNumber: 5
+        },
+        __self: this
+    }));
+}
+exports.default = ResponsiveLogo;
+_c = ResponsiveLogo;
+var _c;
+$RefreshReg$(_c, "ResponsiveLogo");
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"iX4o1":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxRuntime = require("react/jsx-runtime");
+var _favorite = require("@material-ui/icons/Favorite");
+var _favoriteDefault = parcelHelpers.interopDefault(_favorite);
+var _fab = require("@material-ui/core/Fab");
+var _fabDefault = parcelHelpers.interopDefault(_fab);
+var _styles = require("@material-ui/core/styles");
+var _s = $RefreshSig$();
+const useStyles = _styles.makeStyles((theme)=>_styles.createStyles({
+        extendedIcon: {
+            marginRight: theme.spacing(1)
+        },
+        colorRed: {
+            color: "red"
+        }
+    })
+);
+function LikeButton() {
+    _s();
+    const classes = useStyles();
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_fabDefault.default, {
+        variant: "extended",
+        "aria-label": "like",
+        __source: {
+            fileName: "resources/js/components/LikeButton.tsx",
+            lineNumber: 22
+        },
+        __self: this,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_favoriteDefault.default, {
+                className: `${classes.extendedIcon} ${classes.colorRed}`,
+                __source: {
+                    fileName: "resources/js/components/LikeButton.tsx",
+                    lineNumber: 23
+                },
+                __self: this
+            }),
+            " Love it!"
+        ]
+    }));
+}
+exports.default = LikeButton;
+_s(LikeButton, "8g5FPXexvSEOsxdmU7HicukHGqY=", false, function() {
+    return [
+        useStyles
+    ];
+});
+_c = LikeButton;
+var _c;
+$RefreshReg$(_c, "LikeButton");
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","@material-ui/icons/Favorite":"9sUDk","@material-ui/core/Fab":"hgEuA","@material-ui/core/styles":"4ziUd","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"9sUDk":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = void 0;
+var React = _interopRequireWildcard(require("react"));
+var _createSvgIcon = _interopRequireDefault(require("./utils/createSvgIcon"));
+var _default = _createSvgIcon.default(/*#__PURE__*/ React.createElement("path", {
+    d: "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+}), 'Favorite');
+exports.default = _default;
+
+},{"@babel/runtime/helpers/interopRequireDefault":"eigyQ","@babel/runtime/helpers/interopRequireWildcard":"a2Hsp","react":"6TuXu","./utils/createSvgIcon":"iAWNY"}],"eigyQ":[function(require,module,exports) {
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        "default": obj
+    };
+}
+module.exports = _interopRequireDefault;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+},{}],"a2Hsp":[function(require,module,exports) {
+var _typeof = require("@babel/runtime/helpers/typeof")["default"];
+function _getRequireWildcardCache() {
+    if (typeof WeakMap !== "function") return null;
+    var cache = new WeakMap();
+    _getRequireWildcardCache = function _getRequireWildcardCache1() {
+        return cache;
+    };
+    return cache;
+}
+function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) return obj;
+    if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") return {
+        "default": obj
+    };
+    var cache = _getRequireWildcardCache();
+    if (cache && cache.has(obj)) return cache.get(obj);
+    var newObj = {
+    };
+    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+    for(var key in obj)if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+        if (desc && (desc.get || desc.set)) Object.defineProperty(newObj, key, desc);
+        else newObj[key] = obj[key];
+    }
+    newObj["default"] = obj;
+    if (cache) cache.set(obj, newObj);
+    return newObj;
+}
+module.exports = _interopRequireWildcard;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+},{"@babel/runtime/helpers/typeof":"1XGzZ"}],"1XGzZ":[function(require,module,exports) {
+function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        module.exports = _typeof = function _typeof1(obj1) {
+            return typeof obj1;
+        };
+        module.exports["default"] = module.exports, module.exports.__esModule = true;
+    } else {
+        module.exports = _typeof = function _typeof1(obj1) {
+            return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : typeof obj1;
+        };
+        module.exports["default"] = module.exports, module.exports.__esModule = true;
+    }
+    return _typeof(obj);
+}
+module.exports = _typeof;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+},{}],"iAWNY":[function(require,module,exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function get() {
+        return _utils.createSvgIcon;
+    }
+});
+var _utils = require("@material-ui/core/utils");
+
+},{"@material-ui/core/utils":"cJ6jg"}],"cJ6jg":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "capitalize", ()=>_capitalizeDefault.default
+);
+parcelHelpers.export(exports, "createChainedFunction", ()=>_createChainedFunctionDefault.default
+);
+parcelHelpers.export(exports, "createSvgIcon", ()=>_createSvgIconDefault.default
+);
+parcelHelpers.export(exports, "debounce", ()=>_debounceDefault.default
+);
+parcelHelpers.export(exports, "deprecatedPropType", ()=>_deprecatedPropTypeDefault.default
+);
+parcelHelpers.export(exports, "isMuiElement", ()=>_isMuiElementDefault.default
+);
+parcelHelpers.export(exports, "ownerDocument", ()=>_ownerDocumentDefault.default
+);
+parcelHelpers.export(exports, "ownerWindow", ()=>_ownerWindowDefault.default
+);
+parcelHelpers.export(exports, "requirePropFactory", ()=>_requirePropFactoryDefault.default
+);
+parcelHelpers.export(exports, "setRef", ()=>_setRefDefault.default
+);
+parcelHelpers.export(exports, "unsupportedProp", ()=>_unsupportedPropDefault.default
+);
+parcelHelpers.export(exports, "useControlled", ()=>_useControlledDefault.default
+);
+parcelHelpers.export(exports, "useEventCallback", ()=>_useEventCallbackDefault.default
+);
+parcelHelpers.export(exports, "useForkRef", ()=>_useForkRefDefault.default
+) // eslint-disable-next-line camelcase
+;
+parcelHelpers.export(exports, "unstable_useId", ()=>_unstableUseIdDefault.default
+);
+parcelHelpers.export(exports, "useIsFocusVisible", ()=>_useIsFocusVisibleDefault.default
+);
+var _capitalize = require("./capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+var _createChainedFunction = require("./createChainedFunction");
+var _createChainedFunctionDefault = parcelHelpers.interopDefault(_createChainedFunction);
+var _createSvgIcon = require("./createSvgIcon");
+var _createSvgIconDefault = parcelHelpers.interopDefault(_createSvgIcon);
+var _debounce = require("./debounce");
+var _debounceDefault = parcelHelpers.interopDefault(_debounce);
+var _deprecatedPropType = require("./deprecatedPropType");
+var _deprecatedPropTypeDefault = parcelHelpers.interopDefault(_deprecatedPropType);
+var _isMuiElement = require("./isMuiElement");
+var _isMuiElementDefault = parcelHelpers.interopDefault(_isMuiElement);
+var _ownerDocument = require("./ownerDocument");
+var _ownerDocumentDefault = parcelHelpers.interopDefault(_ownerDocument);
+var _ownerWindow = require("./ownerWindow");
+var _ownerWindowDefault = parcelHelpers.interopDefault(_ownerWindow);
+var _requirePropFactory = require("./requirePropFactory");
+var _requirePropFactoryDefault = parcelHelpers.interopDefault(_requirePropFactory);
+var _setRef = require("./setRef");
+var _setRefDefault = parcelHelpers.interopDefault(_setRef);
+var _unsupportedProp = require("./unsupportedProp");
+var _unsupportedPropDefault = parcelHelpers.interopDefault(_unsupportedProp);
+var _useControlled = require("./useControlled");
+var _useControlledDefault = parcelHelpers.interopDefault(_useControlled);
+var _useEventCallback = require("./useEventCallback");
+var _useEventCallbackDefault = parcelHelpers.interopDefault(_useEventCallback);
+var _useForkRef = require("./useForkRef");
+var _useForkRefDefault = parcelHelpers.interopDefault(_useForkRef);
+var _unstableUseId = require("./unstable_useId");
+var _unstableUseIdDefault = parcelHelpers.interopDefault(_unstableUseId);
+var _useIsFocusVisible = require("./useIsFocusVisible");
+var _useIsFocusVisibleDefault = parcelHelpers.interopDefault(_useIsFocusVisible);
+
+},{"./capitalize":"8zjhI","./createChainedFunction":"2lRiS","./createSvgIcon":"fmUVo","./debounce":"jv3Qv","./deprecatedPropType":"einys","./isMuiElement":"98zDe","./ownerDocument":"am2NT","./ownerWindow":"7nXt0","./requirePropFactory":"dEBfz","./setRef":"fxTWD","./unsupportedProp":"kf1l9","./useControlled":"2HNOI","./useEventCallback":"eyR5l","./useForkRef":"aSddO","./unstable_useId":"1FTvf","./useIsFocusVisible":"6onzK","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"8zjhI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("@material-ui/utils");
+function capitalize(string) {
+    if (typeof string !== 'string') throw new Error("Material-UI: capitalize(string) expects a string argument.");
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+exports.default = capitalize;
+
+},{"@material-ui/utils":"jyhfw","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"2lRiS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function createChainedFunction() {
+    for(var _len = arguments.length, funcs = new Array(_len), _key = 0; _key < _len; _key++)funcs[_key] = arguments[_key];
+    return funcs.reduce(function(acc, func) {
+        if (func == null) return acc;
+        if (typeof func !== 'function') console.error('Material-UI: Invalid Argument Type, must only provide functions, undefined, or null.');
+        return function chainedFunction() {
+            for(var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++)args[_key2] = arguments[_key2];
+            acc.apply(this, args);
+            func.apply(this, args);
+        };
+    }, function() {
+    });
+}
+exports.default = createChainedFunction;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"fmUVo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _svgIcon = require("../SvgIcon");
+var _svgIconDefault = parcelHelpers.interopDefault(_svgIcon);
+function createSvgIcon(path, displayName) {
+    var Component = function Component1(props, ref) {
+        return(/*#__PURE__*/ _reactDefault.default.createElement(_svgIconDefault.default, _extendsDefault.default({
+            ref: ref
+        }, props), path));
+    };
+    // Need to set `displayName` on the inner component for React.memo.
+    // React prior to 16.14 ignores `displayName` on the wrapper.
+    Component.displayName = "".concat(displayName, "Icon");
+    Component.muiName = _svgIconDefault.default.muiName;
+    return(/*#__PURE__*/ _reactDefault.default.memo(/*#__PURE__*/ _reactDefault.default.forwardRef(Component)));
+}
+exports.default = createSvgIcon;
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","../SvgIcon":"8S4Ft","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"8S4Ft":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_svgIconDefault.default
+);
+var _svgIcon = require("./SvgIcon");
+var _svgIconDefault = parcelHelpers.interopDefault(_svgIcon);
+
+},{"./SvgIcon":"fKBQX","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"fKBQX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styles", ()=>styles
+);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _withStyles = require("../styles/withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var _capitalize = require("../utils/capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+var styles = function styles1(theme) {
+    return {
+        /* Styles applied to the root element. */ root: {
+            userSelect: 'none',
+            width: '1em',
+            height: '1em',
+            display: 'inline-block',
+            fill: 'currentColor',
+            flexShrink: 0,
+            fontSize: theme.typography.pxToRem(24),
+            transition: theme.transitions.create('fill', {
+                duration: theme.transitions.duration.shorter
+            })
+        },
+        /* Styles applied to the root element if `color="primary"`. */ colorPrimary: {
+            color: theme.palette.primary.main
+        },
+        /* Styles applied to the root element if `color="secondary"`. */ colorSecondary: {
+            color: theme.palette.secondary.main
+        },
+        /* Styles applied to the root element if `color="action"`. */ colorAction: {
+            color: theme.palette.action.active
+        },
+        /* Styles applied to the root element if `color="error"`. */ colorError: {
+            color: theme.palette.error.main
+        },
+        /* Styles applied to the root element if `color="disabled"`. */ colorDisabled: {
+            color: theme.palette.action.disabled
+        },
+        /* Styles applied to the root element if `fontSize="inherit"`. */ fontSizeInherit: {
+            fontSize: 'inherit'
+        },
+        /* Styles applied to the root element if `fontSize="small"`. */ fontSizeSmall: {
+            fontSize: theme.typography.pxToRem(20)
+        },
+        /* Styles applied to the root element if `fontSize="large"`. */ fontSizeLarge: {
+            fontSize: theme.typography.pxToRem(35)
+        }
+    };
+};
+var SvgIcon = /*#__PURE__*/ _react.forwardRef(function SvgIcon1(props, ref) {
+    var children = props.children, classes = props.classes, className = props.className, _props$color = props.color, color = _props$color === void 0 ? 'inherit' : _props$color, _props$component = props.component, Component = _props$component === void 0 ? 'svg' : _props$component, _props$fontSize = props.fontSize, fontSize = _props$fontSize === void 0 ? 'default' : _props$fontSize, htmlColor = props.htmlColor, titleAccess = props.titleAccess, _props$viewBox = props.viewBox, viewBox = _props$viewBox === void 0 ? '0 0 24 24' : _props$viewBox, other = _objectWithoutPropertiesDefault.default(props, [
+        "children",
+        "classes",
+        "className",
+        "color",
+        "component",
+        "fontSize",
+        "htmlColor",
+        "titleAccess",
+        "viewBox"
+    ]);
+    return(/*#__PURE__*/ _react.createElement(Component, _extendsDefault.default({
+        className: _clsxDefault.default(classes.root, className, color !== 'inherit' && classes["color".concat(_capitalizeDefault.default(color))], fontSize !== 'default' && classes["fontSize".concat(_capitalizeDefault.default(fontSize))]),
+        focusable: "false",
+        viewBox: viewBox,
+        color: htmlColor,
+        "aria-hidden": titleAccess ? undefined : true,
+        role: titleAccess ? 'img' : undefined,
+        ref: ref
+    }, other), children, titleAccess ? /*#__PURE__*/ _react.createElement("title", null, titleAccess) : null));
+});
+SvgIcon.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+   * Node passed into the SVG element.
+   */ children: _propTypesDefault.default.node,
+    /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */ classes: _propTypesDefault.default.object,
+    /**
+   * @ignore
+   */ className: _propTypesDefault.default.string,
+    /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   * You can use the `htmlColor` prop to apply a color attribute to the SVG element.
+   */ color: _propTypesDefault.default.oneOf([
+        'action',
+        'disabled',
+        'error',
+        'inherit',
+        'primary',
+        'secondary'
+    ]),
+    /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */ component: _propTypesDefault.default/* @typescript-to-proptypes-ignore */ .elementType,
+    /**
+   * The fontSize applied to the icon. Defaults to 24px, but can be configure to inherit font size.
+   */ fontSize: _propTypesDefault.default.oneOf([
+        'default',
+        'inherit',
+        'large',
+        'small'
+    ]),
+    /**
+   * Applies a color attribute to the SVG element.
+   */ htmlColor: _propTypesDefault.default.string,
+    /**
+   * The shape-rendering attribute. The behavior of the different options is described on the
+   * [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/shape-rendering).
+   * If you are having issues with blurry icons you should investigate this property.
+   */ shapeRendering: _propTypesDefault.default.string,
+    /**
+   * Provides a human-readable title for the element that contains it.
+   * https://www.w3.org/TR/SVG-access/#Equivalent
+   */ titleAccess: _propTypesDefault.default.string,
+    /**
+   * Allows you to redefine what the coordinates without units mean inside an SVG element.
+   * For example, if the SVG element is 500 (width) by 200 (height),
+   * and you pass viewBox="0 0 50 20",
+   * this means that the coordinates inside the SVG will go from the top left corner (0,0)
+   * to bottom right (50,20) and each unit will be worth 10px.
+   */ viewBox: _propTypesDefault.default.string
+};
+SvgIcon.muiName = 'SvgIcon';
+exports.default = _withStylesDefault.default(styles, {
+    name: 'MuiSvgIcon'
+})(SvgIcon);
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../styles/withStyles":"c9Ztg","../utils/capitalize":"8zjhI","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"jv3Qv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function debounce(func) {
+    var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 166;
+    var timeout;
+    function debounced() {
+        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
+        // eslint-disable-next-line consistent-this
+        var that = this;
+        var later = function later1() {
+            func.apply(that, args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    }
+    debounced.clear = function() {
+        clearTimeout(timeout);
+    };
+    return debounced;
+}
+exports.default = debounce;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"einys":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function deprecatedPropType(validator, reason) {
+    return function(props, propName, componentName, location, propFullName) {
+        var componentNameSafe = componentName || '<<anonymous>>';
+        var propFullNameSafe = propFullName || propName;
+        if (typeof props[propName] !== 'undefined') return new Error("The ".concat(location, " `").concat(propFullNameSafe, "` of ") + "`".concat(componentNameSafe, "` is deprecated. ").concat(reason));
+        return null;
+    };
+}
+exports.default = deprecatedPropType;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"98zDe":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+function isMuiElement(element, muiNames) {
+    return(/*#__PURE__*/ _react.isValidElement(element) && muiNames.indexOf(element.type.muiName) !== -1);
+}
+exports.default = isMuiElement;
+
+},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"am2NT":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function ownerDocument(node) {
+    return node && node.ownerDocument || document;
+}
+exports.default = ownerDocument;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"7nXt0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _ownerDocument = require("./ownerDocument");
+var _ownerDocumentDefault = parcelHelpers.interopDefault(_ownerDocument);
+function ownerWindow(node) {
+    var doc = _ownerDocumentDefault.default(node);
+    return doc.defaultView || window;
+}
+exports.default = ownerWindow;
+
+},{"./ownerDocument":"am2NT","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"dEBfz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function requirePropFactory(componentNameInError) {
+    var requireProp = function requireProp1(requiredProp) {
+        return function(props, propName, componentName, location, propFullName) {
+            var propFullNameSafe = propFullName || propName;
+            if (typeof props[propName] !== 'undefined' && !props[requiredProp]) return new Error("The prop `".concat(propFullNameSafe, "` of ") + "`".concat(componentNameInError, "` must be used on `").concat(requiredProp, "`."));
+            return null;
+        };
+    };
+    return requireProp;
+}
+exports.default = requirePropFactory;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"2HNOI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/* eslint-disable react-hooks/rules-of-hooks, react-hooks/exhaustive-deps */ var _react = require("react");
+function useControlled(_ref) {
+    var controlled = _ref.controlled, defaultProp = _ref.default, name = _ref.name, _ref$state = _ref.state, state = _ref$state === void 0 ? 'value' : _ref$state;
+    var _React$useRef = _react.useRef(controlled !== undefined), isControlled = _React$useRef.current;
+    var _React$useState = _react.useState(defaultProp), valueState = _React$useState[0], setValue = _React$useState[1];
+    var value = isControlled ? controlled : valueState;
+    _react.useEffect(function() {
+        if (isControlled !== (controlled !== undefined)) console.error([
+            "Material-UI: A component is changing the ".concat(isControlled ? '' : 'un', "controlled ").concat(state, " state of ").concat(name, " to be ").concat(isControlled ? 'un' : '', "controlled."),
+            'Elements should not switch from uncontrolled to controlled (or vice versa).',
+            "Decide between using a controlled or uncontrolled ".concat(name, " ") + 'element for the lifetime of the component.',
+            "The nature of the state is determined during the first render, it's considered controlled if the value is not `undefined`.",
+            'More info: https://fb.me/react-controlled-components'
+        ].join('\n'));
+    }, [
+        controlled
+    ]);
+    var _React$useRef2 = _react.useRef(defaultProp), defaultValue = _React$useRef2.current;
+    _react.useEffect(function() {
+        if (!isControlled && defaultValue !== defaultProp) console.error([
+            "Material-UI: A component is changing the default ".concat(state, " state of an uncontrolled ").concat(name, " after being initialized. ") + "To suppress this warning opt to use a controlled ".concat(name, ".")
+        ].join('\n'));
+    }, [
+        JSON.stringify(defaultProp)
+    ]);
+    var setValueIfUncontrolled = _react.useCallback(function(newValue) {
+        if (!isControlled) setValue(newValue);
+    }, []);
+    return [
+        value,
+        setValueIfUncontrolled
+    ];
+}
+exports.default = useControlled;
+
+},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"1FTvf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+function useId(idOverride) {
+    var _React$useState = _react.useState(idOverride), defaultId = _React$useState[0], setDefaultId = _React$useState[1];
+    var id = idOverride || defaultId;
+    _react.useEffect(function() {
+        if (defaultId == null) // Fallback to this default id when possible.
+        // Use the random value for client-side rendering only.
+        // We can't use it server-side.
+        setDefaultId("mui-".concat(Math.round(Math.random() * 100000)));
+    }, [
+        defaultId
+    ]);
+    return id;
+}
+exports.default = useId;
+
+},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"hgEuA":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_fabDefault.default
+);
+var _fab = require("./Fab");
+var _fabDefault = parcelHelpers.interopDefault(_fab);
+
+},{"./Fab":"6ZFZb","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"6ZFZb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styles", ()=>styles
+);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _withStyles = require("../styles/withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var _buttonBase = require("../ButtonBase");
+var _buttonBaseDefault = parcelHelpers.interopDefault(_buttonBase);
+var _capitalize = require("../utils/capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+var styles = function styles1(theme) {
+    return {
+        /* Styles applied to the root element. */ root: _extendsDefault.default({
+        }, theme.typography.button, {
+            boxSizing: 'border-box',
+            minHeight: 36,
+            transition: theme.transitions.create([
+                'background-color',
+                'box-shadow',
+                'border'
+            ], {
+                duration: theme.transitions.duration.short
+            }),
+            borderRadius: '50%',
+            padding: 0,
+            minWidth: 0,
+            width: 56,
+            height: 56,
+            boxShadow: theme.shadows[6],
+            '&:active': {
+                boxShadow: theme.shadows[12]
+            },
+            color: theme.palette.getContrastText(theme.palette.grey[300]),
+            backgroundColor: theme.palette.grey[300],
+            '&:hover': {
+                backgroundColor: theme.palette.grey.A100,
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    backgroundColor: theme.palette.grey[300]
+                },
+                '&$disabled': {
+                    backgroundColor: theme.palette.action.disabledBackground
+                },
+                textDecoration: 'none'
+            },
+            '&$focusVisible': {
+                boxShadow: theme.shadows[6]
+            },
+            '&$disabled': {
+                color: theme.palette.action.disabled,
+                boxShadow: theme.shadows[0],
+                backgroundColor: theme.palette.action.disabledBackground
+            }
+        }),
+        /* Styles applied to the span element that wraps the children. */ label: {
+            width: '100%',
+            // assure the correct width for iOS Safari
+            display: 'inherit',
+            alignItems: 'inherit',
+            justifyContent: 'inherit'
+        },
+        /* Styles applied to the root element if `color="primary"`. */ primary: {
+            color: theme.palette.primary.contrastText,
+            backgroundColor: theme.palette.primary.main,
+            '&:hover': {
+                backgroundColor: theme.palette.primary.dark,
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    backgroundColor: theme.palette.primary.main
+                }
+            }
+        },
+        /* Styles applied to the root element if `color="secondary"`. */ secondary: {
+            color: theme.palette.secondary.contrastText,
+            backgroundColor: theme.palette.secondary.main,
+            '&:hover': {
+                backgroundColor: theme.palette.secondary.dark,
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    backgroundColor: theme.palette.secondary.main
+                }
+            }
+        },
+        /* Styles applied to the root element if `variant="extended"`. */ extended: {
+            borderRadius: 24,
+            padding: '0 16px',
+            width: 'auto',
+            minHeight: 'auto',
+            minWidth: 48,
+            height: 48,
+            '&$sizeSmall': {
+                width: 'auto',
+                padding: '0 8px',
+                borderRadius: 17,
+                minWidth: 34,
+                height: 34
+            },
+            '&$sizeMedium': {
+                width: 'auto',
+                padding: '0 16px',
+                borderRadius: 20,
+                minWidth: 40,
+                height: 40
+            }
+        },
+        /* Pseudo-class applied to the ButtonBase root element if the button is keyboard focused. */ focusVisible: {
+        },
+        /* Pseudo-class applied to the root element if `disabled={true}`. */ disabled: {
+        },
+        /* Styles applied to the root element if `color="inherit"`. */ colorInherit: {
+            color: 'inherit'
+        },
+        /* Styles applied to the root element if `size="small"``. */ sizeSmall: {
+            width: 40,
+            height: 40
+        },
+        /* Styles applied to the root element if `size="medium"``. */ sizeMedium: {
+            width: 48,
+            height: 48
+        }
+    };
+};
+var Fab = /*#__PURE__*/ _react.forwardRef(function Fab1(props, ref) {
+    var children = props.children, classes = props.classes, className = props.className, _props$color = props.color, color = _props$color === void 0 ? 'default' : _props$color, _props$component = props.component, component = _props$component === void 0 ? 'button' : _props$component, _props$disabled = props.disabled, disabled = _props$disabled === void 0 ? false : _props$disabled, _props$disableFocusRi = props.disableFocusRipple, disableFocusRipple = _props$disableFocusRi === void 0 ? false : _props$disableFocusRi, focusVisibleClassName = props.focusVisibleClassName, _props$size = props.size, size = _props$size === void 0 ? 'large' : _props$size, _props$variant = props.variant, variant = _props$variant === void 0 ? 'round' : _props$variant, other = _objectWithoutPropertiesDefault.default(props, [
+        "children",
+        "classes",
+        "className",
+        "color",
+        "component",
+        "disabled",
+        "disableFocusRipple",
+        "focusVisibleClassName",
+        "size",
+        "variant"
+    ]);
+    return(/*#__PURE__*/ _react.createElement(_buttonBaseDefault.default, _extendsDefault.default({
+        className: _clsxDefault.default(classes.root, className, variant !== "round" && classes.extended, size !== 'large' && classes["size".concat(_capitalizeDefault.default(size))], disabled && classes.disabled, {
+            'primary': classes.primary,
+            'secondary': classes.secondary,
+            'inherit': classes.colorInherit
+        }[color]),
+        component: component,
+        disabled: disabled,
+        focusRipple: !disableFocusRipple,
+        focusVisibleClassName: _clsxDefault.default(classes.focusVisible, focusVisibleClassName),
+        ref: ref
+    }, other), /*#__PURE__*/ _react.createElement("span", {
+        className: classes.label
+    }, children)));
+});
+Fab.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+   * The content of the button.
+   */ children: _propTypesDefault.default/* @typescript-to-proptypes-ignore */ .node.isRequired,
+    /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */ classes: _propTypesDefault.default.object,
+    /**
+   * @ignore
+   */ className: _propTypesDefault.default.string,
+    /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */ color: _propTypesDefault.default.oneOf([
+        'default',
+        'inherit',
+        'primary',
+        'secondary'
+    ]),
+    /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */ component: _propTypesDefault.default/* @typescript-to-proptypes-ignore */ .elementType,
+    /**
+   * If `true`, the button will be disabled.
+   */ disabled: _propTypesDefault.default.bool,
+    /**
+   * If `true`, the  keyboard focus ripple will be disabled.
+   */ disableFocusRipple: _propTypesDefault.default.bool,
+    /**
+   * If `true`, the ripple effect will be disabled.
+   */ disableRipple: _propTypesDefault.default.bool,
+    /**
+   * @ignore
+   */ focusVisibleClassName: _propTypesDefault.default.string,
+    /**
+   * The URL to link to when the button is clicked.
+   * If defined, an `a` element will be used as the root node.
+   */ href: _propTypesDefault.default.string,
+    /**
+   * The size of the button.
+   * `small` is equivalent to the dense button styling.
+   */ size: _propTypesDefault.default.oneOf([
+        'large',
+        'medium',
+        'small'
+    ]),
+    /**
+   * The variant to use.
+   */ variant: _propTypesDefault.default.oneOf([
+        'extended',
+        'round'
+    ])
+};
+exports.default = _withStylesDefault.default(styles, {
+    name: 'MuiFab'
+})(Fab);
+
+},{"@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../styles/withStyles":"c9Ztg","../ButtonBase":"cH9fJ","../utils/capitalize":"8zjhI","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"7e9XZ":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxRuntime = require("react/jsx-runtime");
+var _borderColor = require("@material-ui/icons/BorderColor");
+var _borderColorDefault = parcelHelpers.interopDefault(_borderColor);
+var _fab = require("@material-ui/core/Fab");
+var _fabDefault = parcelHelpers.interopDefault(_fab);
+var _styles = require("@material-ui/core/styles");
+var _s = $RefreshSig$();
+const useStyles = _styles.makeStyles((theme)=>_styles.createStyles({
+        extendedIcon: {
+            marginRight: theme.spacing(1)
+        }
+    })
+);
+function ReplyButton() {
+    _s();
+    const classes = useStyles();
+    return(/*#__PURE__*/ _jsxRuntime.jsxs(_fabDefault.default, {
+        variant: "extended",
+        "aria-label": "like",
+        __source: {
+            fileName: "resources/js/components/ReplyButton.tsx",
+            lineNumber: 18
+        },
+        __self: this,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx(_borderColorDefault.default, {
+                className: `${classes.extendedIcon} m-3`,
+                __source: {
+                    fileName: "resources/js/components/ReplyButton.tsx",
+                    lineNumber: 19
+                },
+                __self: this
+            }),
+            " Reply"
+        ]
+    }));
+}
+exports.default = ReplyButton;
+_s(ReplyButton, "8g5FPXexvSEOsxdmU7HicukHGqY=", false, function() {
+    return [
+        useStyles
+    ];
+});
+_c = ReplyButton;
+var _c;
+$RefreshReg$(_c, "ReplyButton");
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","@material-ui/icons/BorderColor":"5ejBL","@material-ui/core/Fab":"hgEuA","@material-ui/core/styles":"4ziUd","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"5ejBL":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _createSvgIcon = _interopRequireDefault(require("./utils/createSvgIcon"));
+var _default = _createSvgIcon.default(/*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("path", {
+    d: "M17.75 7L14 3.25l-10 10V17h3.75l10-10zm2.96-2.96c.39-.39.39-1.02 0-1.41L18.37.29a.9959.9959 0 0 0-1.41 0L15 2.25 18.75 6l1.96-1.96z"
+}), /*#__PURE__*/ _react.default.createElement("path", {
+    fillOpacity: ".36",
+    d: "M0 20h24v4H0z"
+})), 'BorderColor');
+exports.default = _default;
+
+},{"@babel/runtime/helpers/interopRequireDefault":"eigyQ","react":"6TuXu","./utils/createSvgIcon":"iAWNY"}],"6gQdn":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+exports.default = /*#__PURE__*/ _react.createContext({
+    memoriesFetch: {
+        status: "",
+        memories: [],
+        errorMemories: ""
+    },
+    diariesFetch: {
+        status: "",
+        diaries: [],
+        errorDiaries: ""
+    }
+});
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"hXphf":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+/**
+ * This context stores data that is usually not rendered, but useful
+ * when rendering and determining things. 
+ */ const HiddenContext = /*#__PURE__*/ _react.createContext({
+    selfAlias: "",
+    targetAlias: ""
+});
+exports.default = HiddenContext;
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}]},["2rAXy","aqOrc","797DU"], "797DU", "parcelRequire9e19")
 
 //# sourceMappingURL=profile.js.map

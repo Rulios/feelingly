@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Diary;
 use App\Models\Memory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use App\Rules\ValidVisibilityType;
 
@@ -51,7 +52,11 @@ class MemoryController extends Controller
         }
     }
 
-    public function getMemories(Request $request, $alias){
+
+    /**
+     * Get the memories triggered when a user enters a profile
+     */
+    public function getProfileMemories(Request $request, $alias){
         try{
             
             $isRequestingOwn = $alias == Auth::user()->alias;
@@ -59,16 +64,43 @@ class MemoryController extends Controller
             $userID = User::where("alias", $alias)->first()->id;
 
             if($isRequestingOwn){
-                $memories = Memory::where("user_id", $userID)->get();
+                /* $memories = Memory::with("userAlias")
+                            ->where("user_id", $userID)->get(); */
+                $memories = $this->queryMemoriesWithJoins()
+                            ->where("memories.user_id", $userID)
+                            ->get();
+
+
             }else{
-                $memories = Memory::where("user_id", $userID)->where("visibility", "public")->get();
+                $memories = $this->queryMemoriesWithJoins()
+                            ->where("memories.user_id", $userID)
+                            ->where("memories.visibility", "public")
+                            ->get();
             }
-            
+
             return $memories;
 
         }catch(Exception $err){
             abort(404);
         }
     }
+
+
+    /**
+     * Returns a build up query defining the joins 
+     * and the select, but without the WHERE clause. 
+     * This is done to increase reusability.
+     */
+    private function queryMemoriesWithJoins(){
+        return DB::table("memories")    
+                ->join("users", "users.id", "=", "memories.user_id")
+                ->join("diaries", "diaries.user_id", "=", "memories.user_id")
+                ->select("memories.*", "users.alias AS user_alias","users.name AS user_name", "diaries.name AS diary_name")
+                ->orderBy("memories.created_at", "DESC");
+                
+    }
+
+
+
 
 }

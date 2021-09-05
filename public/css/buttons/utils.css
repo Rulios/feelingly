@@ -7,4 +7,20 @@
   background-color: #E2E8E1;
 }
 
+.fixedRight {
+  position: fixed !important;
+  right: 0;
+  bottom: 0;
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px and upper
+*/
+@media (min-width: 1025px) {
+  .fixedRight {
+    right: 10%;
+  }
+}
+
 /*# sourceMappingURL=utils.css.map */

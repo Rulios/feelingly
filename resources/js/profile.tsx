@@ -4,14 +4,16 @@ import useMemories from "./hooks/useMemories";
 import useAlias from "./hooks/useAlias";
 import useDiaries from "./hooks/useDiaries";
 import ProfileButtonNavigation from "./components/ProfileButtonNavigation";
-import React, {useEffect, useState, useRef, memo} from "react";
+import React, {useEffect, useState, useRef, useContext} from "react";
 import ReactDOM from "react-dom";
 import ProfileMemoryBox from "./components/ProfileMemoryBox";
 import { keyBy } from "lodash";
 import Diary from "./types/Diary";
 import stripHTML from "./utils/stripHTML";
 import MemoryModal from "./components/MemoryModal";
-import { Memory } from "@material-ui/icons";
+import ProfileContext from "./contexts/ProfileContext";
+//import {HiddenContextProvider, HiddenContextConsumer} from "./contexts/HiddenContext";
+import HiddenContext from "./contexts/HiddenContext";
 
 /**
  * This line performs a bug fixer. I don't know why, but it seems
@@ -23,21 +25,13 @@ import { Memory } from "@material-ui/icons";
 
  window.onload = function(){
 
-
-    let selfAliasDOM:string  = (document.getElementById("s_user_alias") as HTMLInputElement).value;
-    let targetAliasDOM:string = (document.getElementById("t_user_alias") as HTMLInputElement).value;
-
     ReactDOM.render(
-        <App /* selfAliasDOM={selfAliasDOM} targetAliasDOM={targetAliasDOM} *//>,
+        <App/>,
         document.getElementById("root")
     );
 
  };
 
-/*  interface AppProps{
-    selfAliasDOM: string;
-    targetAliasDOM: string;
-}; */
 
  function App(){
 
@@ -48,55 +42,69 @@ import { Memory } from "@material-ui/icons";
     const selfAlias = useAlias("self");
     const targetAlias = useAlias("target");
 
+    const [statusMemories, memories, errorMemories] = useMemories(targetAlias);
+    const [statusDiaries, diaries, errorDiaries] = useDiaries(targetAlias);
+
     return (
-        <div>
-            <div className="row mt-5">
-                <ProfileButtonNavigation defaultValue={profileNavigationOption} newValue={setProfileNavigationOption}/>
-                <hr className="mt-2"/>
-            </div>
-
-            {(profileNavigationOption === 0 && (targetAlias !== "" || selfAlias !== "")) &&
+        <HiddenContext.Provider value={{
+            selfAlias: selfAlias,
+            targetAlias: targetAlias
+        }}>
+            <ProfileContext.Provider value= {{
+                memoriesFetch: {
+                    status: statusMemories,
+                    memories: memories,
+                    errorMemories: errorMemories
+                },
+                diariesFetch:{
+                    status: statusDiaries,
+                    diaries: diaries,
+                    errorDiaries: errorDiaries
+                }
+                
+            }}>
                 <div>
-                    <WrittenMemoriesFeed selfAlias={selfAlias} targetAlias={targetAlias}/>
-                </div>
-            }
+                    <div className="row mt-5">
+                        <ProfileButtonNavigation defaultValue={profileNavigationOption} newValue={setProfileNavigationOption}/>
+                        <hr className="mt-2"/>
+                    </div>
 
-            {(profileNavigationOption === 1) &&
-                <div>
-                    <DiariesFeed/>
-                </div>
-            }
+                    {(profileNavigationOption === 0 && (targetAlias !== "" || selfAlias !== "")) &&
+                        <div>
+                            <WrittenMemoriesFeed />
+                        </div>
+                    }
 
-        </div>
+                    {(profileNavigationOption === 1) &&
+                        <div>
+                            <DiariesFeed/>
+                        </div>
+                    }
+
+                </div>
+            </ProfileContext.Provider>
+        </HiddenContext.Provider>
+        
     );
 
  }
 
-type WrittenMemoriesFeedProps = {
-    selfAlias: string;
-    targetAlias: string;
-}
+
 
 function toggleBodyOverflow(){
-   /*  if(document.body.classList.contains("overflow-hidden")){
-        document.body.classList.remove("overflow-hidden");
-        document.body.classList.add("overflow-auto");
-    }else{
-        document.body.classList.add("overflow-hidden");
-        document.body.classList.remove("overflow-auto");
-
-    } */
     document.body.classList.toggle("overflow-hidden");
 }
 
-function WrittenMemoriesFeed({selfAlias, targetAlias}: WrittenMemoriesFeedProps){
+function WrittenMemoriesFeed(){
     
-    const [statusMemories, memories, errorMemories] = useMemories(targetAlias);
-    const [statusDiaries, diaries, errorDiaries] = useDiaries(targetAlias);
+    const {diariesFetch: {diaries}} = useContext(ProfileContext);
     const [diariesName, setDiariesName] = useState(keyBy(diaries, "id"));
+
     const [selectedMemoryIndex, setSelectedMemoryIndex] = useState(-1);
     const [modalOpen, setModalOpen] = useState(false);
 
+
+    
     useEffect(() => {
         setDiariesName(keyBy(diaries, "id"));
     }, [diaries]);
@@ -126,37 +134,41 @@ function WrittenMemoriesFeed({selfAlias, targetAlias}: WrittenMemoriesFeedProps)
 
 
      return (
-        <div>
-            <div className="row pt-5">
-                {memories?.map(({id, title, content, visibility, created_at, diary_id}, index) => {
-                    return (
-                        <ProfileMemoryBox
-                            key={`Diary${diary_id}-Memory${id}`}
-                            id={id}
-                            title={title}
-                            content={stripHTML(content)}
-                            visibility={visibility}
-                            created_at={created_at}
-                            diaryName={diariesName[id]?.name || ""}
-                            onClick={() => handleClickMemory(index)}
+        <ProfileContext.Consumer>
+            {
+                ({memoriesFetch : {memories}}) => (
+                    <div>
+                        <div className="row pt-5">
+                            {memories?.map(({id, title, content, visibility, created_at, diary_id, diary_name}, index) => {
+                                return (
+                                    <ProfileMemoryBox
+                                        key={`Diary${diary_id}-Memory${id}`}
+                                        id={id}
+                                        title={title}
+                                        content={stripHTML(content)}
+                                        visibility={visibility}
+                                        created_at={created_at}
+                                        diaryName={diary_name || ""}
+                                        onClick={() => handleClickMemory(index)}
+                                    />
+                                )
+                            })}
+                        </div>
+
+                            
+                        <MemoryModal
+                            memory={memories ? memories[selectedMemoryIndex] : null}
+                            shouldOpen={modalOpen}
+                            handleClose={handleCloseMemory}
                         />
-                    )
-                })}
-            </div>
-
+                    </div>
+                )
+            }
             
-
-            <MemoryModal
-                    memory={memories ? memories[selectedMemoryIndex] : null}
-                    shouldOpen={modalOpen}
-                    handleClose={handleCloseMemory}
-            />
-        </div>
-        
-
-     
+        </ProfileContext.Consumer>
      );
  }
+ 
 
  function DiariesFeed(){
      return (

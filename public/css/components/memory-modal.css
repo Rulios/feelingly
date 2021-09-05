@@ -13,6 +13,7 @@
   width: 100%;
   position: fixed;
   overflow-y: auto;
+  overflow-x: hidden;
   top: 5%;
   left: 0;
   bottom: 0;
@@ -20,7 +21,16 @@
   box-shadow: -7px -7px 10px grey;
 }
 
-.memory-modal-header {
+.memory-modal-content img {
+  width: 100%;
+  height: auto;
+}
+
+.memory-modal-static-header {
+  position: sticky;
+}
+
+.memory-modal-dynamic-header {
   display: block;
 }
 
@@ -43,8 +53,18 @@
   max-width: 100%;
 }
 
+.memory-modal-actions {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+
 .hide {
   display: none;
+}
+
+.colorRed {
+  color: red;
 }
 
 /*# sourceMappingURL=memory-modal.css.map */

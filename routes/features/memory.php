@@ -22,7 +22,8 @@ Route::post("/memories/new", [MemoryController::class, "addNewMemory"])
     ->middleware("auth");
 
 
-Route::get("/profile/{alias}/memories", [MemoryController::class, "getMemories"]);
+Route::get("/profile/{alias}/memories", [MemoryController::class, "getProfileMemories"]);
+
 
 
 ?>

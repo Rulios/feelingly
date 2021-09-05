@@ -42,6 +42,21 @@
   background-color: #E2E8E1;
 }
 
+.fixedRight {
+  position: fixed !important;
+  right: 0;
+  bottom: 0;
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px and upper
+*/
+@media (min-width: 1025px) {
+  .fixedRight {
+    right: 10%;
+  }
+}
 :export {
   primaryColor: #00baff;
   secondaryColor: #7cacff;
@@ -70,6 +85,7 @@
   width: 100%;
   position: fixed;
   overflow-y: auto;
+  overflow-x: hidden;
   top: 5%;
   left: 0;
   bottom: 0;
@@ -77,7 +93,16 @@
   box-shadow: -7px -7px 10px grey;
 }
 
-.memory-modal-header {
+.memory-modal-content img {
+  width: 100%;
+  height: auto;
+}
+
+.memory-modal-static-header {
+  position: sticky;
+}
+
+.memory-modal-dynamic-header {
   display: block;
 }
 
@@ -100,8 +125,18 @@
   max-width: 100%;
 }
 
+.memory-modal-actions {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+
 .hide {
   display: none;
+}
+
+.colorRed {
+  color: red;
 }
 
 .description {

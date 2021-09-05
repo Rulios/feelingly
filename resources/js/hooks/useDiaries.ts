@@ -4,8 +4,7 @@ import useFetch from "./useFetch";
 
 
 export default function useDiaries(alias: string): 
-    [status: string, data ?: Diary[], error?: string] | 
-    [null, null, string]{
+    [status: string, data ?: Diary[], error?: string] {
 
         //TO DO, CHANGE THIS SHIT
 
