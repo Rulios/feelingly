@@ -4,7 +4,7 @@ import Memory from "../types/Memory";
 import CloseModalButton from "./CloseModalButton";
 import parseHTML from "html-react-parser";
 import ResponsiveLogo from "./ResponsiveLogo";
-import LikeButton from "./LikeButton";
+import AppreciationButton from "./AppreciationButton";
 import ReplyButton from "./ReplyButton";
 import HiddenContext from "../contexts/HiddenContext";
 
@@ -30,7 +30,7 @@ export default function MemoryModal({
                 <div className="content p-3">
 
                     <div className="memory-modal-actions mb-5 mx-3">
-                        <LikeButton/>
+                        <AppreciationButton memory_id={memory?.id}/>
                         <ReplyButton/>
                     </div>
                 

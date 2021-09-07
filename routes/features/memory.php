@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\MemoryController;
+use App\Http\Controllers\AppreciationController;
 /**
  * Diary Routes
  * 
@@ -24,6 +25,6 @@ Route::post("/memories/new", [MemoryController::class, "addNewMemory"])
 
 Route::get("/profile/{alias}/memories", [MemoryController::class, "getProfileMemories"]);
 
-
+Route::post("/memories/toogle-appreciation", [AppreciationController::class, "toogleAppreciationToMemory"]);;
 
 ?>
