@@ -1084,13 +1084,13 @@ function WrittenMemoriesFeed() {
                             }, `Diary${diary_id}-Memory${id}`));
                         })
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_memoryModalDefault.default, {
+                    modalOpen && /*#__PURE__*/ _jsxRuntime.jsx(_memoryModalDefault.default, {
                         memory: memories ? memories[selectedMemoryIndex] : null,
                         shouldOpen: modalOpen,
                         handleClose: handleCloseMemory,
                         __source: {
                             fileName: "resources/js/profile.tsx",
-                            lineNumber: 159
+                            lineNumber: 160
                         },
                         __self: this
                     })
@@ -1104,7 +1104,7 @@ function DiariesFeed() {
     return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
         __source: {
             fileName: "resources/js/profile.tsx",
-            lineNumber: 175
+            lineNumber: 177
         },
         __self: this
     }));
@@ -62482,7 +62482,7 @@ $RefreshReg$(_c, "MemoryModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","./CloseModalButton":"jvgYN","html-react-parser":"9jxdQ","./ResponsiveLogo":"kujBX","./ReplyButton":"7e9XZ","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","./AppreciationButton":"ZM8Uh"}],"jvgYN":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","./CloseModalButton":"jvgYN","html-react-parser":"9jxdQ","./ResponsiveLogo":"kujBX","./AppreciationButton":"ZM8Uh","./ReplyButton":"7e9XZ","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"jvgYN":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -64412,7 +64412,7 @@ $RefreshReg$(_c, "ResponsiveLogo");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"7e9XZ":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"ZM8Uh":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -64422,11 +64422,14 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxRuntime = require("react/jsx-runtime");
-var _borderColor = require("@material-ui/icons/BorderColor");
-var _borderColorDefault = parcelHelpers.interopDefault(_borderColor);
+var _react = require("react");
+var _favorite = require("@material-ui/icons/Favorite");
+var _favoriteDefault = parcelHelpers.interopDefault(_favorite);
 var _fab = require("@material-ui/core/Fab");
 var _fabDefault = parcelHelpers.interopDefault(_fab);
 var _styles = require("@material-ui/core/styles");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _s = $RefreshSig$();
 const useStyles = _styles.makeStyles((theme)=>_styles.createStyles({
         extendedIcon: {
@@ -64434,69 +64437,147 @@ const useStyles = _styles.makeStyles((theme)=>_styles.createStyles({
         }
     })
 );
-function ReplyButton() {
+function AppreciationButton({ memory_id  }) {
     _s();
     const classes = useStyles();
+    const [appreciation, setAppreciation] = _react.useState(false);
+    _react.useEffect(()=>{
+        fetchAppreciation();
+    }, []);
+    const fetchAppreciation = async ()=>{
+        try {
+            const { data: { appreciation: appreciationResponse  }  } = await _axiosDefault.default.get("/memories/fetch-appreciation", {
+                params: {
+                    memory_id: memory_id
+                }
+            });
+            setAppreciation(appreciationResponse);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const toggleAppreciation = async ()=>{
+        try {
+            const { data: { appreciation: appreciationResponse  }  } = await _axiosDefault.default.put("/memories/toggle-appreciation", {
+                memory_id: memory_id
+            });
+            setAppreciation(appreciationResponse);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_fabDefault.default, {
         variant: "extended",
         "aria-label": "like",
+        onClick: toggleAppreciation,
         __source: {
-            fileName: "resources/js/components/ReplyButton.tsx",
-            lineNumber: 18
+            fileName: "resources/js/components/AppreciationButton.tsx",
+            lineNumber: 68
         },
         __self: this,
         children: [
-            /*#__PURE__*/ _jsxRuntime.jsx(_borderColorDefault.default, {
-                className: `${classes.extendedIcon} m-3`,
+            /*#__PURE__*/ _jsxRuntime.jsx(_favoriteDefault.default, {
+                className: `${classes.extendedIcon}`,
+                style: {
+                    color: appreciation ? "red" : "initial"
+                },
                 __source: {
-                    fileName: "resources/js/components/ReplyButton.tsx",
-                    lineNumber: 19
+                    fileName: "resources/js/components/AppreciationButton.tsx",
+                    lineNumber: 69
                 },
                 __self: this
             }),
-            " Reply"
+            " Love it!"
         ]
     }));
 }
-exports.default = ReplyButton;
-_s(ReplyButton, "8g5FPXexvSEOsxdmU7HicukHGqY=", false, function() {
+exports.default = AppreciationButton;
+_s(AppreciationButton, "70yvd1DmaMTFPbjsfYDMMYjR7IA=", false, function() {
     return [
         useStyles
     ];
 });
-_c = ReplyButton;
+_c = AppreciationButton;
 var _c;
-$RefreshReg$(_c, "ReplyButton");
+$RefreshReg$(_c, "AppreciationButton");
 
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","@material-ui/icons/BorderColor":"5ejBL","@material-ui/core/Fab":"hgEuA","@material-ui/core/styles":"4ziUd","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"5ejBL":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@material-ui/icons/Favorite":"9sUDk","@material-ui/core/Fab":"hgEuA","@material-ui/core/styles":"4ziUd","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"9sUDk":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = void 0;
-var _react = _interopRequireDefault(require("react"));
+var React = _interopRequireWildcard(require("react"));
 var _createSvgIcon = _interopRequireDefault(require("./utils/createSvgIcon"));
-var _default = _createSvgIcon.default(/*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("path", {
-    d: "M17.75 7L14 3.25l-10 10V17h3.75l10-10zm2.96-2.96c.39-.39.39-1.02 0-1.41L18.37.29a.9959.9959 0 0 0-1.41 0L15 2.25 18.75 6l1.96-1.96z"
-}), /*#__PURE__*/ _react.default.createElement("path", {
-    fillOpacity: ".36",
-    d: "M0 20h24v4H0z"
-})), 'BorderColor');
+var _default = _createSvgIcon.default(/*#__PURE__*/ React.createElement("path", {
+    d: "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+}), 'Favorite');
 exports.default = _default;
 
-},{"@babel/runtime/helpers/interopRequireDefault":"eigyQ","react":"6TuXu","./utils/createSvgIcon":"iAWNY"}],"eigyQ":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"eigyQ","@babel/runtime/helpers/interopRequireWildcard":"a2Hsp","react":"6TuXu","./utils/createSvgIcon":"iAWNY"}],"eigyQ":[function(require,module,exports) {
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
         "default": obj
     };
 }
 module.exports = _interopRequireDefault;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+},{}],"a2Hsp":[function(require,module,exports) {
+var _typeof = require("@babel/runtime/helpers/typeof")["default"];
+function _getRequireWildcardCache() {
+    if (typeof WeakMap !== "function") return null;
+    var cache = new WeakMap();
+    _getRequireWildcardCache = function _getRequireWildcardCache1() {
+        return cache;
+    };
+    return cache;
+}
+function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) return obj;
+    if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") return {
+        "default": obj
+    };
+    var cache = _getRequireWildcardCache();
+    if (cache && cache.has(obj)) return cache.get(obj);
+    var newObj = {
+    };
+    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+    for(var key in obj)if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+        if (desc && (desc.get || desc.set)) Object.defineProperty(newObj, key, desc);
+        else newObj[key] = obj[key];
+    }
+    newObj["default"] = obj;
+    if (cache) cache.set(obj, newObj);
+    return newObj;
+}
+module.exports = _interopRequireWildcard;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+},{"@babel/runtime/helpers/typeof":"1XGzZ"}],"1XGzZ":[function(require,module,exports) {
+function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        module.exports = _typeof = function _typeof1(obj1) {
+            return typeof obj1;
+        };
+        module.exports["default"] = module.exports, module.exports.__esModule = true;
+    } else {
+        module.exports = _typeof = function _typeof1(obj1) {
+            return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : typeof obj1;
+        };
+        module.exports["default"] = module.exports, module.exports.__esModule = true;
+    }
+    return _typeof(obj);
+}
+module.exports = _typeof;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 },{}],"iAWNY":[function(require,module,exports) {
@@ -65149,7 +65230,7 @@ exports.default = _withStylesDefault.default(styles, {
     name: 'MuiFab'
 })(Fab);
 
-},{"@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../styles/withStyles":"c9Ztg","../ButtonBase":"cH9fJ","../utils/capitalize":"8zjhI","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"ZM8Uh":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../styles/withStyles":"c9Ztg","../ButtonBase":"cH9fJ","../utils/capitalize":"8zjhI","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"7e9XZ":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -65159,9 +65240,8 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxRuntime = require("react/jsx-runtime");
-var _react = require("react");
-var _favorite = require("@material-ui/icons/Favorite");
-var _favoriteDefault = parcelHelpers.interopDefault(_favorite);
+var _borderColor = require("@material-ui/icons/BorderColor");
+var _borderColorDefault = parcelHelpers.interopDefault(_borderColor);
 var _fab = require("@material-ui/core/Fab");
 var _fabDefault = parcelHelpers.interopDefault(_fab);
 var _styles = require("@material-ui/core/styles");
@@ -65169,123 +65249,66 @@ var _s = $RefreshSig$();
 const useStyles = _styles.makeStyles((theme)=>_styles.createStyles({
         extendedIcon: {
             marginRight: theme.spacing(1)
-        },
-        colorRed: {
-            color: "red"
         }
     })
 );
-function AppreciationButton({ memory_id  }) {
+function ReplyButton() {
     _s();
     const classes = useStyles();
-    const [appreciation, setAppreciation] = _react.useState(false);
-    const toggleAppreciation = ()=>{
-    };
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_fabDefault.default, {
         variant: "extended",
         "aria-label": "like",
-        onClick: toggleAppreciation,
         __source: {
-            fileName: "resources/js/components/AppreciationButton.tsx",
-            lineNumber: 35
+            fileName: "resources/js/components/ReplyButton.tsx",
+            lineNumber: 18
         },
         __self: this,
         children: [
-            /*#__PURE__*/ _jsxRuntime.jsx(_favoriteDefault.default, {
-                className: `${classes.extendedIcon} ${classes.colorRed}`,
-                style: {
-                },
+            /*#__PURE__*/ _jsxRuntime.jsx(_borderColorDefault.default, {
+                className: `${classes.extendedIcon} m-3`,
                 __source: {
-                    fileName: "resources/js/components/AppreciationButton.tsx",
-                    lineNumber: 36
+                    fileName: "resources/js/components/ReplyButton.tsx",
+                    lineNumber: 19
                 },
                 __self: this
             }),
-            " Love it!"
+            " Reply"
         ]
     }));
 }
-exports.default = AppreciationButton;
-_s(AppreciationButton, "MyvQuVfzxV0Iv4b8Z1a6s3gSoWs=", false, function() {
+exports.default = ReplyButton;
+_s(ReplyButton, "8g5FPXexvSEOsxdmU7HicukHGqY=", false, function() {
     return [
         useStyles
     ];
 });
-_c = AppreciationButton;
+_c = ReplyButton;
 var _c;
-$RefreshReg$(_c, "AppreciationButton");
+$RefreshReg$(_c, "ReplyButton");
 
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","@material-ui/icons/Favorite":"9sUDk","@material-ui/core/Fab":"hgEuA","@material-ui/core/styles":"4ziUd","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react":"6TuXu"}],"9sUDk":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","@material-ui/icons/BorderColor":"5ejBL","@material-ui/core/Fab":"hgEuA","@material-ui/core/styles":"4ziUd","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"5ejBL":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = void 0;
-var React = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 var _createSvgIcon = _interopRequireDefault(require("./utils/createSvgIcon"));
-var _default = _createSvgIcon.default(/*#__PURE__*/ React.createElement("path", {
-    d: "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-}), 'Favorite');
+var _default = _createSvgIcon.default(/*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("path", {
+    d: "M17.75 7L14 3.25l-10 10V17h3.75l10-10zm2.96-2.96c.39-.39.39-1.02 0-1.41L18.37.29a.9959.9959 0 0 0-1.41 0L15 2.25 18.75 6l1.96-1.96z"
+}), /*#__PURE__*/ _react.default.createElement("path", {
+    fillOpacity: ".36",
+    d: "M0 20h24v4H0z"
+})), 'BorderColor');
 exports.default = _default;
 
-},{"@babel/runtime/helpers/interopRequireDefault":"eigyQ","@babel/runtime/helpers/interopRequireWildcard":"a2Hsp","react":"6TuXu","./utils/createSvgIcon":"iAWNY"}],"a2Hsp":[function(require,module,exports) {
-var _typeof = require("@babel/runtime/helpers/typeof")["default"];
-function _getRequireWildcardCache() {
-    if (typeof WeakMap !== "function") return null;
-    var cache = new WeakMap();
-    _getRequireWildcardCache = function _getRequireWildcardCache1() {
-        return cache;
-    };
-    return cache;
-}
-function _interopRequireWildcard(obj) {
-    if (obj && obj.__esModule) return obj;
-    if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") return {
-        "default": obj
-    };
-    var cache = _getRequireWildcardCache();
-    if (cache && cache.has(obj)) return cache.get(obj);
-    var newObj = {
-    };
-    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
-    for(var key in obj)if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
-        if (desc && (desc.get || desc.set)) Object.defineProperty(newObj, key, desc);
-        else newObj[key] = obj[key];
-    }
-    newObj["default"] = obj;
-    if (cache) cache.set(obj, newObj);
-    return newObj;
-}
-module.exports = _interopRequireWildcard;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-},{"@babel/runtime/helpers/typeof":"1XGzZ"}],"1XGzZ":[function(require,module,exports) {
-function _typeof(obj) {
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-        module.exports = _typeof = function _typeof1(obj1) {
-            return typeof obj1;
-        };
-        module.exports["default"] = module.exports, module.exports.__esModule = true;
-    } else {
-        module.exports = _typeof = function _typeof1(obj1) {
-            return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : typeof obj1;
-        };
-        module.exports["default"] = module.exports, module.exports.__esModule = true;
-    }
-    return _typeof(obj);
-}
-module.exports = _typeof;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-},{}],"6gQdn":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"eigyQ","react":"6TuXu","./utils/createSvgIcon":"iAWNY"}],"6gQdn":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

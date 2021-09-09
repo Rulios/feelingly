@@ -17,6 +17,8 @@ class CreateAppreciationsTable extends Migration
     {
         Schema::create('appreciations', function (Blueprint $table) {
             $table->id();
+            $table->integer("user_id");
+            $table->integer("memory_id");
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign("memory_id")->references("id")->on("memories")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();

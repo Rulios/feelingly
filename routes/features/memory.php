@@ -25,6 +25,8 @@ Route::post("/memories/new", [MemoryController::class, "addNewMemory"])
 
 Route::get("/profile/{alias}/memories", [MemoryController::class, "getProfileMemories"]);
 
-Route::post("/memories/toogle-appreciation", [AppreciationController::class, "toogleAppreciationToMemory"]);;
+Route::put("/memories/toggle-appreciation", [AppreciationController::class, "toogleAppreciationToMemory"]);;
+
+Route::get("/memories/fetch-appreciation", [AppreciationController::class, "getMemoryAppreciation"]);
 
 ?>

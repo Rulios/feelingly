@@ -155,12 +155,14 @@ function WrittenMemoriesFeed(){
                             })}
                         </div>
 
-                            
-                        <MemoryModal
-                            memory={memories ? memories[selectedMemoryIndex] : null}
-                            shouldOpen={modalOpen}
-                            handleClose={handleCloseMemory}
-                        />
+                        {modalOpen && 
+                        
+                            <MemoryModal
+                                memory={memories ? memories[selectedMemoryIndex] : null}
+                                shouldOpen={modalOpen}
+                                handleClose={handleCloseMemory}
+                            />
+                        }
                     </div>
                 )
             }
