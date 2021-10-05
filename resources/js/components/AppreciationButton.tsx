@@ -10,9 +10,7 @@ type Props = {
  memory_id: string | number | undefined | null;
 };
 
-type Appreciation = {
-  appreciation: boolean;
-};
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

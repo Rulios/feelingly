@@ -88,8 +88,12 @@ class MemoryController extends Controller
 
     /**
      * Returns a build up query defining the joins 
-     * and the select, but without the WHERE clause. 
-     * This is done to increase reusability.
+     * and the select, but without the WHERE clause.
+     * 
+     * This query joins the memories with:
+     *  - Diary's name
+     *  - User's name
+     *  - User's alias
      */
     private function queryMemoriesWithJoins(){
         return DB::table("memories")    

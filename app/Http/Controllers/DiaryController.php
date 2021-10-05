@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class DiaryController extends Controller
 {
@@ -31,9 +32,17 @@ class DiaryController extends Controller
 
             if($isRequestingOwn){
                 $diaries = Diary::where("user_id", $userID)->get();
+
+                $diaries = $this->queryDiariesWithJoins()
+                            ->where("diaries.user_id",$userID)
+                            ->get();
             }else{
-                $diaries = Diary::where("user_id", $userID)->where("visibility", "public")->get();
+                $diaries = $this->queryDiariesWithJoins()
+                            ->where("diaries.user_id",$userID)
+                            ->where("diaries.visibility", "public")
+                            ->get();
             }
+            
             return $diaries;
 
         }catch(Exception $err){
@@ -56,6 +65,7 @@ class DiaryController extends Controller
 
             $request->validate([
                 "name" => "required|between:0,50",
+                "description" => "between: 0, 100",
                 "visibility" => ["required", Rule::in(["private", "public"])]
             ]);
 
@@ -85,6 +95,22 @@ class DiaryController extends Controller
         }catch(Exception $err){
             dd($err);
         }
+    }
+
+    /**
+     * Returns a build up query defining the joins 
+     * and the select, but without the WHERE clause.
+     * 
+     * This query joins the memories with:
+     *  - User's name
+     *  - User's alias
+     */
+    private function queryDiariesWithJoins(){
+        return DB::table("diaries")    
+                ->join("users", "users.id", "=", "diaries.user_id")
+                ->select("diaries.*", "users.alias AS user_alias","users.name AS user_name")
+                ->orderBy("diaries.created_at", "DESC");
+                
     }
 
 }

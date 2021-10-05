@@ -8,7 +8,10 @@
   text-overflow: ellipsis;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+  display: block;
   display: -webkit-box;
+  max-height: 8em;
+  line-height: 1.5rem;
 }
 
 /*# sourceMappingURL=formats.css.map */

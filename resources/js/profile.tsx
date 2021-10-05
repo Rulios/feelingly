@@ -9,11 +9,14 @@ import ReactDOM from "react-dom";
 import ProfileMemoryBox from "./components/ProfileMemoryBox";
 import { keyBy } from "lodash";
 import Diary from "./types/Diary";
-import stripHTML from "./utils/stripHTML";
+import Memory from "./types/Memory";
+
 import MemoryModal from "./components/MemoryModal";
 import ProfileContext from "./contexts/ProfileContext";
-//import {HiddenContextProvider, HiddenContextConsumer} from "./contexts/HiddenContext";
 import HiddenContext from "./contexts/HiddenContext";
+import ProfileDiaryBox from "./components/ProfileDiaryBox";
+import DiaryModal from "./components/DiaryModal";
+import MemoryRenderer from "./components/MemoryRenderer";
 
 /**
  * This line performs a bug fixer. I don't know why, but it seems
@@ -97,73 +100,15 @@ function toggleBodyOverflow(){
 
 function WrittenMemoriesFeed(){
     
-    const {diariesFetch: {diaries}} = useContext(ProfileContext);
-    const [diariesName, setDiariesName] = useState(keyBy(diaries, "id"));
-
-    const [selectedMemoryIndex, setSelectedMemoryIndex] = useState(-1);
-    const [modalOpen, setModalOpen] = useState(false);
-
-
-    
-    useEffect(() => {
-        setDiariesName(keyBy(diaries, "id"));
-    }, [diaries]);
-
-    /**
-     * Gets the memory position and updates the state.
-     * The memory position refers to its parent array. 
-     * So it can be shown at the modal. 
-     * 
-     * Also it sets the modal to be open
-     * @param memoryPosition 
-     */
-
-    const handleClickMemory = (memoryPosition: number) => {
-            setSelectedMemoryIndex(memoryPosition);
-            setModalOpen(true);
-            toggleBodyOverflow();
-    }
-
-    /**
-     * Sets the modal open state to false to close it
-     */
-    const handleCloseMemory = () => {
-        setModalOpen(false);
-        toggleBodyOverflow();
-    };
-
+ 
 
      return (
         <ProfileContext.Consumer>
             {
                 ({memoriesFetch : {memories}}) => (
-                    <div>
-                        <div className="row pt-5">
-                            {memories?.map(({id, title, content, visibility, created_at, diary_id, diary_name}, index) => {
-                                return (
-                                    <ProfileMemoryBox
-                                        key={`Diary${diary_id}-Memory${id}`}
-                                        id={id}
-                                        title={title}
-                                        content={stripHTML(content)}
-                                        visibility={visibility}
-                                        created_at={created_at}
-                                        diaryName={diary_name || ""}
-                                        onClick={() => handleClickMemory(index)}
-                                    />
-                                )
-                            })}
-                        </div>
-
-                        {modalOpen && 
-                        
-                            <MemoryModal
-                                memory={memories ? memories[selectedMemoryIndex] : null}
-                                shouldOpen={modalOpen}
-                                handleClose={handleCloseMemory}
-                            />
-                        }
-                    </div>
+                    <MemoryRenderer
+                        memories={memories}
+                    />
                 )
             }
             
@@ -173,9 +118,56 @@ function WrittenMemoriesFeed(){
  
 
  function DiariesFeed(){
-     return (
-        <div>
 
+    const {diariesFetch: {diaries}, memoriesFetch: {memories}} = useContext(ProfileContext);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedDiaryIndex, setSelectedDiaryIndex] = useState(-1);
+
+    const handleClickDiary = (diaryIndexPosition: number) => {
+        setSelectedDiaryIndex(diaryIndexPosition);
+        setModalOpen(true);
+        toggleBodyOverflow();
+    }
+
+    /**
+     * Sets the modal open state to false to close it
+     */
+     const handleCloseDiaryModal = () => {
+        setModalOpen(false);
+        toggleBodyOverflow();
+    };
+
+    const filterMemoryByDiaryID = (memory: Memory) => {
+        let hasUserSelectedADiary = selectedDiaryIndex !== -1;
+
+        if(diaries && hasUserSelectedADiary){
+            return memory.diary_id === diaries[selectedDiaryIndex].id;
+        }
+    };
+
+    return (
+        <div>
+            {
+                diaries && 
+               
+                diaries.map((diary, index) => {
+                    return (<ProfileDiaryBox
+                        key={`ProfileDiaryBox-${diary?.index}`}
+                        diary={diary}
+                        onClick={() => handleClickDiary(index)}
+                    />);
+                })
+            }
+
+            {modalOpen && 
+                        
+                <DiaryModal
+                    diary={diaries ? diaries[selectedDiaryIndex] : null}
+                    memories={memories?.filter(filterMemoryByDiaryID)}
+                    shouldOpen={modalOpen}
+                    handleClose={handleCloseDiaryModal}
+                />
+            }
         </div>
      );
  }

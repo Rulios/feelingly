@@ -1,27 +1,28 @@
 import React, {useEffect, useState} from "react";
-import Memory from "../types/Memory";
 import VISIBILITY_TYPES from "../utils/VISIBILITY_TYPES";    
 import dayjs from "dayjs";
+import Diary from "../types/Diary";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
-import parseHTML from "html-react-parser";
 
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
+
 type Props = {
-    memory: Memory;
-    onClick(): void;
-}
+    diary: Diary;
+    onClick():void;
+};
 
-
-export default function ProfileMemoryBox({
-    memory: {id, title, content, visibility, created_at, diary_name},
+export default function ProfileDiaryBox({
+    diary : {id, name, visibility, created_at},
     onClick
 }: Props){
+
+
     return (
         <button className="col-md-6 noDecorationButton" onClick={onClick}>
-            <div className="box memory-box p-2">
+            <div className="box p-2">
                 <div id="titleAndInformation">
 
                     <div className="date">
@@ -30,29 +31,24 @@ export default function ProfileMemoryBox({
 
                     <br/>
 
-                    <div id="title" className="truncate lead" >
+                    <div id="name" className="truncate lead" >
                         <b>
-                            {title}
+                            {name}
                         </b>
                     </div>
+
 
                     <div id="visibility" className="visibilityFont">
                         {VISIBILITY_TYPES[visibility]}
                     </div>
 
-                    <div id="diary_name">
-                        <i>
-                            {`in ${diary_name}`}
-                        </i>
+                    <hr/>
+
+                    <div id="description">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                     </div>
+
                 </div>
-
-                <hr/>
-
-                <p id="content" className="truncate">
-                    {parseHTML(content)}
-                </p>
-
             </div>
         </button>
     );
