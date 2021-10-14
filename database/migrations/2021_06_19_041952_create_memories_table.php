@@ -20,9 +20,19 @@ class CreateMemoriesTable extends Migration
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign("diary_id")->references("id")->on("diaries")->onDelete("cascade")->onUpdate("cascade");
             
-            $table->text("title");
-            $table->text("content");
-            $table->string("visibility", 10);
+            $table->text("title")
+                ->comment("Title of the memory");
+
+            $table->text("content")
+                ->comment("Content of the memory");
+            $table->string("visibility", 10)
+                ->comment("Memory's visibility: public | private");
+            $table->string("reply_to")
+                ->comment("If a memory is meant to reply another memory, 
+                    this field will contain the ID of that replied meemory");
+
+
+            $table->foreign("reply_to")->references("id")->on("memories")->onUpdate("cascade");
             $table->timestamps();
         });
     }

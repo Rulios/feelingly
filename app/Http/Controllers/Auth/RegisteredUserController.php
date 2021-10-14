@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 use App\Rules\ProjectDateFormat;
 use App\Rules\EnablesURLEncoding;
@@ -53,6 +54,8 @@ class RegisteredUserController extends Controller
                 "password_confirmation" => "required|same:password",
                 "date_of_birth" => ["required", "before:today", "date", new ProjectDateFormat]
             ]);
+
+            DB::beginTransaction();
     
             $user = new User;
             $user->email = $request->email;
@@ -66,7 +69,9 @@ class RegisteredUserController extends Controller
             }
     
             $user->save();
-            $this->createFirstDiary($user->id);
+            $this->createInitialsDiaries($user->id);
+
+            DB::commit();
             
             event(new Registered($user));
             Auth::login($user);

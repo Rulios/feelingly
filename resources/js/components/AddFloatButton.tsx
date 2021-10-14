@@ -6,20 +6,19 @@ import {primaryColor} from "../../sass/_constants.scss";
 
 console.log(primaryColor);
 
-interface AddFloatButtonProps{
-   _onClick(): void
+type Props = {
+    _onClick: () => void;
 };
 
-
-const AddFloatButton : FC <AddFloatButtonProps> = (props): JSX.Element => {
+export default function AddFloatButton({_onClick}: Props){
     return (
         <div>
-            <Fab color={primaryColor} aria-label="add" className="m-5 fixedRight" onClick={props._onClick}>
+            <Fab color={primaryColor} aria-label="add" className="m-5 fixedRight" onClick={_onClick}>
                 <AddIcon />
             </Fab>
         </div>
     );
-};
+}
 
-export default AddFloatButton;
+
 

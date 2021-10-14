@@ -7,12 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\MemoryController;
 use App\Http\Controllers\AppreciationController;
-/**
- * Diary Routes
- * 
- * Includes all the available routes for doing the operations
- * made by DiaryController
- */
+
 
 
 /**
@@ -21,6 +16,13 @@ use App\Http\Controllers\AppreciationController;
 
 Route::post("/memories/new", [MemoryController::class, "addNewMemory"])
     ->middleware("auth");
+
+
+/**
+ * Submits a reply for a memory
+ */
+Route::post("/memories/reply", [MemoryController::class, "addReplyMemory"])
+    ->middleware("auth");   
 
 
 Route::get("/profile/{alias}/memories", [MemoryController::class, "getProfileMemories"]);

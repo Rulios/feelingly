@@ -52,6 +52,50 @@ class MemoryController extends Controller
         }
     }
 
+    /**
+     * Reply Memory == Comment
+     */
+    public function addReplyMemory(Request $request){
+        $request->validate([
+            "title" => "required",
+            "content" => "required",
+            "reply_to_memory_id" => "required | exists:memories,id",
+            "diary_id" => "required| exists:diaries,id",
+            "visibility" => ["required", new ValidVisibilityType]
+        ]);
+
+        try{
+            
+            $user = Auth::user();
+
+            $memory = new Memory();
+
+            $memory->user_id = $user->id;
+            $memory->diary_id = $request->diary_id;
+            $memory->title = $request->title;
+            $memory->content = $request->content;
+
+            //Set this new reply memory's visibility to be the same visibility
+            //as the replied memory.
+            $memory->visibility = Memory::where("id", $request->reply_to_memory_id)
+                                    ->first()->get()->visibility;   
+                                    
+            $memory->reply_to = $request->reply_to_memory_id;
+
+            
+            $memory->save();
+
+            return response()->json([
+                "status_message" => "Reply saved!",
+                "created" => true
+            ], 200);
+
+        }catch(Throwable $e){
+            return back()->withErrors($e->getMessage())->withInput();
+            dd($e);
+        }
+    }
+
 
     /**
      * Get the memories triggered when a user enters a profile
@@ -64,8 +108,6 @@ class MemoryController extends Controller
             $userID = User::where("alias", $alias)->first()->id;
 
             if($isRequestingOwn){
-                /* $memories = Memory::with("userAlias")
-                            ->where("user_id", $userID)->get(); */
                 $memories = $this->queryMemoriesWithJoins()
                             ->where("memories.user_id", $userID)
                             ->get();
