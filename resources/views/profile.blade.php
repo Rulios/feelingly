@@ -6,6 +6,7 @@
 
     @extends("partials.headers")
 
+    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::asset('css/profile.css')}}">
 
 

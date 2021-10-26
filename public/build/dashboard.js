@@ -871,9 +871,6 @@ var _reactDom = require("react-dom");
 var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
 var _addNewMemoryModal = require("./components/AddNewMemoryModal");
 var _addNewMemoryModalDefault = parcelHelpers.interopDefault(_addNewMemoryModal);
-var _useAlias = require("./hooks/useAlias");
-var _useAliasDefault = parcelHelpers.interopDefault(_useAlias);
-var _s = $RefreshSig$();
 window.onload = ()=>{
     _reactDomDefault.default.render(/*#__PURE__*/ _jsxRuntime.jsx(App, {
         __source: {
@@ -884,19 +881,14 @@ window.onload = ()=>{
     }), document.getElementById("root"));
 };
 function App() {
-    _s();
-    /**TOGGLER */ const selfUserAlias = _useAliasDefault.default("self");
-    return(/*#__PURE__*/ _jsxRuntime.jsx(_addNewMemoryModalDefault.default, {
+    /**TOGGLER */ return(/*#__PURE__*/ _jsxRuntime.jsx(_addNewMemoryModalDefault.default, {
         __source: {
             fileName: "resources/js/dashboard.tsx",
-            lineNumber: 32
+            lineNumber: 30
         },
         __self: this
     }));
 }
-_s(App, "fp85f2CVItC9KrEWFa3j38AX1bw=", false, function() {
-    return [_useAliasDefault.default];
-});
 _c = App;
 var _c;
 $RefreshReg$(_c, "App");
@@ -906,7 +898,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","bootstrap":"2G2th","react-dom":"gkWJK","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","./components/AddNewMemoryModal":"aLfQL","./hooks/useAlias":"buklO"}],"8xIwr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","bootstrap":"2G2th","react-dom":"gkWJK","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","./components/AddNewMemoryModal":"aLfQL"}],"8xIwr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -34881,20 +34873,19 @@ var _jsxRuntime = require("react/jsx-runtime");
 var _writeMemoryModal = require("./WriteMemoryModal");
 var _writeMemoryModalDefault = parcelHelpers.interopDefault(_writeMemoryModal);
 var _react = require("react");
-var _useDiaries = require("../hooks/useDiaries");
-var _useDiariesDefault = parcelHelpers.interopDefault(_useDiaries);
-var _useAlias = require("../hooks/useAlias");
-var _useAliasDefault = parcelHelpers.interopDefault(_useAlias);
+var _addFloatButton = require("./AddFloatButton");
+var _addFloatButtonDefault = parcelHelpers.interopDefault(_addFloatButton);
 var _button = require("@material-ui/core/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _send = require("@material-ui/icons/Send");
 var _sendDefault = parcelHelpers.interopDefault(_send);
+var _closeModalButton = require("./CloseModalButton");
+var _closeModalButtonDefault = parcelHelpers.interopDefault(_closeModalButton);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _s = $RefreshSig$();
 function AddNewMmoryModal() {
     _s();
-    const alias = _useAliasDefault.default("self");
     const [openWriteModal, setOpenWriteModal] = _react.useState(false);
     const [memory, setMemory] = _react.useState({
         title: "",
@@ -34902,18 +34893,6 @@ function AddNewMmoryModal() {
         visibility: "public",
         diary_id: ""
     });
-    /**Get self user alias priority to be the sessionStorage, 
-    * if not, use the DOM tag one passed through props */ const [statusDiaries, diaries, errorDiaries] = _useDiariesDefault.default(alias);
-    _react.useEffect(()=>{
-        /**Performs a validation to set default memory's diary id. If memory's diary id is 
-         * empty, it should be filled with a default value.
-         */ if (!memory.diary_id && diaries) setMemory({
-            ...memory,
-            diary_id: diaries[0].id
-        });
-    }, [
-        diaries
-    ]);
     const submitMemory = ()=>{
         console.log(memory);
         _axiosDefault.default.post("/memories/new", {
@@ -34930,59 +34909,110 @@ function AddNewMmoryModal() {
             alert(err);
         });
     };
-    return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+    return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         className: "mt-5",
         __source: {
             fileName: "resources/js/components/AddNewMemoryModal.tsx",
-            lineNumber: 65
+            lineNumber: 51
         },
         __self: this,
-        children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-            __source: {
-                fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                lineNumber: 71
-            },
-            __self: this,
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_writeMemoryModalDefault.default, {
-                    memory: memory,
-                    setMemory: setMemory,
-                    diaries: diaries,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                __source: {
+                    fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                    lineNumber: 53
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_addFloatButtonDefault.default, {
+                    _onClick: ()=>setOpenWriteModal(!openWriteModal)
+                    ,
                     __source: {
                         fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                        lineNumber: 72
+                        lineNumber: 54
                     },
                     __self: this
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                    className: "mt-3 row",
-                    __source: {
-                        fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                        lineNumber: 78
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                        variant: "contained",
-                        color: "primary",
-                        endIcon: /*#__PURE__*/ _jsxRuntime.jsx(_sendDefault.default, {
-                        }),
-                        onClick: submitMemory,
+                })
+            }),
+            openWriteModal && /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                className: `${openWriteModal ? "show" : "d-none"}`,
+                __source: {
+                    fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                    lineNumber: 59
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        className: "c-modal c-modal-index-3",
                         __source: {
                             fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                            lineNumber: 79
+                            lineNumber: 62
                         },
                         __self: this,
-                        children: "Share memory"
+                        children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                            className: "content p-3",
+                            __source: {
+                                fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                                lineNumber: 64
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                    className: "sticky-top",
+                                    __source: {
+                                        fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                                        lineNumber: 66
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_closeModalButtonDefault.default, {
+                                        onClick: ()=>setOpenWriteModal(false)
+                                        ,
+                                        __source: {
+                                            fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                                            lineNumber: 67
+                                        },
+                                        __self: this
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_writeMemoryModalDefault.default, {
+                                    memory: memory,
+                                    setMemory: setMemory,
+                                    __source: {
+                                        fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                                        lineNumber: 70
+                                    },
+                                    __self: this
+                                })
+                            ]
+                        })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                        className: "mt-3 row",
+                        __source: {
+                            fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                            lineNumber: 80
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                            variant: "contained",
+                            color: "primary",
+                            endIcon: /*#__PURE__*/ _jsxRuntime.jsx(_sendDefault.default, {
+                            }),
+                            onClick: submitMemory,
+                            __source: {
+                                fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                                lineNumber: 81
+                            },
+                            __self: this,
+                            children: "Share memory"
+                        })
                     })
-                })
-            ]
-        })
+                ]
+            })
+        ]
     }));
 }
 exports.default = AddNewMmoryModal;
-_s(AddNewMmoryModal, "uEr54AhtkNT3cj2YpGWMi6SRBgE=", false, function() {
-    return [_useAliasDefault.default, _useDiariesDefault.default];
-});
+_s(AddNewMmoryModal, "GAvtispR5hRUIE7V+xzgQdL9CZw=");
 _c = AddNewMmoryModal;
 var _c;
 $RefreshReg$(_c, "AddNewMmoryModal");
@@ -34992,7 +35022,7 @@ $RefreshReg$(_c, "AddNewMmoryModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","./WriteMemoryModal":"dnHBf","react":"6TuXu","../hooks/useDiaries":"g4K51","../hooks/useAlias":"buklO","@material-ui/core/Button":"i2oW6","@material-ui/icons/Send":"ihYjC","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"dnHBf":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","./WriteMemoryModal":"dnHBf","react":"6TuXu","./AddFloatButton":"lT9bm","@material-ui/core/Button":"i2oW6","@material-ui/icons/Send":"ihYjC","./CloseModalButton":"jvgYN","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"dnHBf":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -35002,49 +35032,72 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
 var _reactQuill = require("react-quill");
 var _reactQuillDefault = parcelHelpers.interopDefault(_reactQuill);
-var _quillSnowCss = require("react-quill/dist/quill.snow.css");
-var _input = require("@material-ui/core/Input");
-var _inputDefault = parcelHelpers.interopDefault(_input);
 var _toolbar = require("../quill-editor-configs/toolbar");
 var _toolbarDefault = parcelHelpers.interopDefault(_toolbar);
 var _textField = require("@material-ui/core/TextField");
 var _textFieldDefault = parcelHelpers.interopDefault(_textField);
+var _useAlias = require("../hooks/useAlias");
+var _useAliasDefault = parcelHelpers.interopDefault(_useAlias);
+var _useDiaries = require("../hooks/useDiaries");
+var _useDiariesDefault = parcelHelpers.interopDefault(_useDiaries);
+var _inputAdornment = require("@material-ui/core/InputAdornment");
+var _inputAdornmentDefault = parcelHelpers.interopDefault(_inputAdornment);
+var _s = $RefreshSig$();
 const VISIBILITY = {
     public: "Public",
     private: "Private"
 };
-function WriteMemoryModal({ memory , setMemory , diaries  }) {
+function WriteMemoryModal({ memory , setMemory , isAReply  }) {
+    _s();
+    const alias = _useAliasDefault.default("self");
+    /**Get self user alias priority to be the sessionStorage, 
+    * if not, use the DOM tag one passed through props */ const [statusDiaries, diaries, errorDiaries] = _useDiariesDefault.default(alias);
+    _react.useEffect(()=>{
+        /**Performs a validation to set default memory's diary id. If memory's diary id is 
+         * empty, it should be filled with a default value.
+         */ if (!memory.diary_id && diaries) setMemory({
+            ...memory,
+            diary_id: diaries[0].id
+        });
+    }, [
+        diaries
+    ]);
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "resources/js/components/WriteMemoryModal.tsx",
-            lineNumber: 36
+            lineNumber: 52
         },
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsx("div", {
                 __source: {
                     fileName: "resources/js/components/WriteMemoryModal.tsx",
-                    lineNumber: 37
+                    lineNumber: 53
                 },
                 __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_inputDefault.default, {
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_textFieldDefault.default, {
                     id: "memoryTitle",
                     placeholder: "This memory's title",
                     className: "mb-3",
                     value: memory.title,
+                    fullWidth: true,
+                    InputProps: {
+                        startAdornment: isAReply ? /*#__PURE__*/ _jsxRuntime.jsx(_inputAdornmentDefault.default, {
+                            position: "start",
+                            children: "Reply |"
+                        }) : null
+                    },
                     onChange: (e)=>setMemory({
                             ...memory,
                             title: e.target.value
                         })
                     ,
-                    style: {
-                        width: "100%"
-                    },
                     __source: {
                         fileName: "resources/js/components/WriteMemoryModal.tsx",
-                        lineNumber: 38
+                        lineNumber: 54
                     },
                     __self: this
                 })
@@ -35062,7 +35115,7 @@ function WriteMemoryModal({ memory , setMemory , diaries  }) {
                 },
                 __source: {
                     fileName: "resources/js/components/WriteMemoryModal.tsx",
-                    lineNumber: 50
+                    lineNumber: 66
                 },
                 __self: this
             }),
@@ -35070,7 +35123,7 @@ function WriteMemoryModal({ memory , setMemory , diaries  }) {
                 className: "mt-2 row p-2",
                 __source: {
                     fileName: "resources/js/components/WriteMemoryModal.tsx",
-                    lineNumber: 58
+                    lineNumber: 75
                 },
                 __self: this,
                 children: [
@@ -35078,7 +35131,7 @@ function WriteMemoryModal({ memory , setMemory , diaries  }) {
                         className: "col-lg-2",
                         __source: {
                             fileName: "resources/js/components/WriteMemoryModal.tsx",
-                            lineNumber: 60
+                            lineNumber: 77
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_textFieldDefault.default, {
@@ -35087,7 +35140,8 @@ function WriteMemoryModal({ memory , setMemory , diaries  }) {
                             id: "memoryVisibility",
                             helperText: "Select the visibility for this memory",
                             SelectProps: {
-                                native: true
+                                native: true,
+                                children: []
                             },
                             value: memory.visibility,
                             onChange: (e)=>setMemory({
@@ -35097,7 +35151,7 @@ function WriteMemoryModal({ memory , setMemory , diaries  }) {
                             ,
                             __source: {
                                 fileName: "resources/js/components/WriteMemoryModal.tsx",
-                                lineNumber: 61
+                                lineNumber: 78
                             },
                             __self: this,
                             children: Object.keys(VISIBILITY).map((visibility)=>{
@@ -35105,7 +35159,7 @@ function WriteMemoryModal({ memory , setMemory , diaries  }) {
                                     value: visibility,
                                     __source: {
                                         fileName: "resources/js/components/WriteMemoryModal.tsx",
-                                        lineNumber: 70
+                                        lineNumber: 88
                                     },
                                     __self: this,
                                     children: VISIBILITY[visibility]
@@ -35117,7 +35171,7 @@ function WriteMemoryModal({ memory , setMemory , diaries  }) {
                         className: "col-lg-2",
                         __source: {
                             fileName: "resources/js/components/WriteMemoryModal.tsx",
-                            lineNumber: 77
+                            lineNumber: 95
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_textFieldDefault.default, {
@@ -35142,7 +35196,7 @@ function WriteMemoryModal({ memory , setMemory , diaries  }) {
                             },
                             __source: {
                                 fileName: "resources/js/components/WriteMemoryModal.tsx",
-                                lineNumber: 78
+                                lineNumber: 96
                             },
                             __self: this,
                             children: diaries && diaries.map(({ id , name  }, i)=>{
@@ -35150,7 +35204,7 @@ function WriteMemoryModal({ memory , setMemory , diaries  }) {
                                     value: id,
                                     __source: {
                                         fileName: "resources/js/components/WriteMemoryModal.tsx",
-                                        lineNumber: 100
+                                        lineNumber: 118
                                     },
                                     __self: this,
                                     children: name
@@ -35164,6 +35218,9 @@ function WriteMemoryModal({ memory , setMemory , diaries  }) {
     }));
 }
 exports.default = WriteMemoryModal;
+_s(WriteMemoryModal, "rx8MlaGXACh24Kw4RWdZBVhKTvo=", false, function() {
+    return [_useAliasDefault.default, _useDiariesDefault.default];
+});
 _c = WriteMemoryModal;
 var _c;
 $RefreshReg$(_c, "WriteMemoryModal");
@@ -35173,7 +35230,7 @@ $RefreshReg$(_c, "WriteMemoryModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react-quill":"g38A3","react-quill/dist/quill.snow.css":"1xmJ0","@material-ui/core/Input":"4qnyV","../quill-editor-configs/toolbar":"8ynFp","@material-ui/core/TextField":"9U8zv","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"g38A3":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-quill":"g38A3","../quill-editor-configs/toolbar":"8ynFp","@material-ui/core/TextField":"9U8zv","../hooks/useAlias":"buklO","../hooks/useDiaries":"g4K51","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","@material-ui/core/InputAdornment":"fiUE1"}],"g38A3":[function(require,module,exports) {
 /*
 React-Quill v1.0.0
 https://github.com/zenoamaro/react-quill
@@ -56180,15 +56237,95 @@ module.exports = require('./cjs/react-dom-server.browser.development.js');
     exports.version = ReactVersion;
 })();
 
-},{"react":"6TuXu","object-assign":"jzTFF"}],"1xmJ0":[function() {},{}],"4qnyV":[function(require,module,exports) {
+},{"react":"6TuXu","object-assign":"jzTFF"}],"8ynFp":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>_inputDefault.default
-);
-var _input = require("./Input");
-var _inputDefault = parcelHelpers.interopDefault(_input);
+exports.default = [
+    [
+        'bold',
+        'italic',
+        'underline',
+        'strike'
+    ],
+    [
+        'blockquote'
+    ],
+    [
+        {
+            'header': 1
+        },
+        {
+            'header': 2
+        }
+    ],
+    [
+        {
+            'list': 'ordered'
+        },
+        {
+            'list': 'bullet'
+        }
+    ],
+    [
+        {
+            'indent': '-1'
+        },
+        {
+            'indent': '+1'
+        }
+    ],
+    [
+        {
+            'direction': 'rtl'
+        }
+    ],
+    [
+        {
+            'size': [
+                'small',
+                false,
+                'large',
+                'huge'
+            ]
+        }
+    ],
+    [
+        {
+            'header': [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                false
+            ]
+        }
+    ],
+    [
+        {
+            'font': []
+        }
+    ],
+    [
+        {
+            'align': []
+        }
+    ],
+    [
+        'clean'
+    ]
+];
 
-},{"./Input":"960WX","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"960WX":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9U8zv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_textFieldDefault.default
+);
+var _textField = require("./TextField");
+var _textFieldDefault = parcelHelpers.interopDefault(_textField);
+
+},{"./TextField":"cRiSt","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"cRiSt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "styles", ()=>styles
@@ -56203,119 +56340,161 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _clsx = require("clsx");
 var _clsxDefault = parcelHelpers.interopDefault(_clsx);
 var _utils = require("@material-ui/utils");
-var _inputBase = require("../InputBase");
-var _inputBaseDefault = parcelHelpers.interopDefault(_inputBase);
+var _input = require("../Input");
+var _inputDefault = parcelHelpers.interopDefault(_input);
+var _filledInput = require("../FilledInput");
+var _filledInputDefault = parcelHelpers.interopDefault(_filledInput);
+var _outlinedInput = require("../OutlinedInput");
+var _outlinedInputDefault = parcelHelpers.interopDefault(_outlinedInput);
+var _inputLabel = require("../InputLabel");
+var _inputLabelDefault = parcelHelpers.interopDefault(_inputLabel);
+var _formControl = require("../FormControl");
+var _formControlDefault = parcelHelpers.interopDefault(_formControl);
+var _formHelperText = require("../FormHelperText");
+var _formHelperTextDefault = parcelHelpers.interopDefault(_formHelperText);
+var _select = require("../Select");
+var _selectDefault = parcelHelpers.interopDefault(_select);
 var _withStyles = require("../styles/withStyles");
 var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
-var styles = function styles1(theme) {
-    var light = theme.palette.type === 'light';
-    var bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)';
-    return {
-        /* Styles applied to the root element. */ root: {
-            position: 'relative'
-        },
-        /* Styles applied to the root element if the component is a descendant of `FormControl`. */ formControl: {
-            'label + &': {
-                marginTop: 16
-            }
-        },
-        /* Styles applied to the root element if the component is focused. */ focused: {
-        },
-        /* Styles applied to the root element if `disabled={true}`. */ disabled: {
-        },
-        /* Styles applied to the root element if color secondary. */ colorSecondary: {
-            '&$underline:after': {
-                borderBottomColor: theme.palette.secondary.main
-            }
-        },
-        /* Styles applied to the root element if `disableUnderline={false}`. */ underline: {
-            '&:after': {
-                borderBottom: "2px solid ".concat(theme.palette.primary.main),
-                left: 0,
-                bottom: 0,
-                // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
-                content: '""',
-                position: 'absolute',
-                right: 0,
-                transform: 'scaleX(0)',
-                transition: theme.transitions.create('transform', {
-                    duration: theme.transitions.duration.shorter,
-                    easing: theme.transitions.easing.easeOut
-                }),
-                pointerEvents: 'none' // Transparent to the hover style.
-            },
-            '&$focused:after': {
-                transform: 'scaleX(1)'
-            },
-            '&$error:after': {
-                borderBottomColor: theme.palette.error.main,
-                transform: 'scaleX(1)' // error is always underlined in red
-            },
-            '&:before': {
-                borderBottom: "1px solid ".concat(bottomLineColor),
-                left: 0,
-                bottom: 0,
-                // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
-                content: '"\\00a0"',
-                position: 'absolute',
-                right: 0,
-                transition: theme.transitions.create('border-bottom-color', {
-                    duration: theme.transitions.duration.shorter
-                }),
-                pointerEvents: 'none' // Transparent to the hover style.
-            },
-            '&:hover:not($disabled):before': {
-                borderBottom: "2px solid ".concat(theme.palette.text.primary),
-                // Reset on touch devices, it doesn't add specificity
-                '@media (hover: none)': {
-                    borderBottom: "1px solid ".concat(bottomLineColor)
-                }
-            },
-            '&$disabled:before': {
-                borderBottomStyle: 'dotted'
-            }
-        },
-        /* Pseudo-class applied to the root element if `error={true}`. */ error: {
-        },
-        /* Styles applied to the `input` element if `margin="dense"`. */ marginDense: {
-        },
-        /* Styles applied to the root element if `multiline={true}`. */ multiline: {
-        },
-        /* Styles applied to the root element if `fullWidth={true}`. */ fullWidth: {
-        },
-        /* Styles applied to the `input` element. */ input: {
-        },
-        /* Styles applied to the `input` element if `margin="dense"`. */ inputMarginDense: {
-        },
-        /* Styles applied to the `input` element if `multiline={true}`. */ inputMultiline: {
-        },
-        /* Styles applied to the `input` element if `type="search"`. */ inputTypeSearch: {
-        }
-    };
+var variantComponent = {
+    standard: _inputDefault.default,
+    filled: _filledInputDefault.default,
+    outlined: _outlinedInputDefault.default
 };
-var Input = /*#__PURE__*/ _react.forwardRef(function Input1(props, ref) {
-    var disableUnderline = props.disableUnderline, classes = props.classes, _props$fullWidth = props.fullWidth, fullWidth = _props$fullWidth === void 0 ? false : _props$fullWidth, _props$inputComponent = props.inputComponent, inputComponent = _props$inputComponent === void 0 ? 'input' : _props$inputComponent, _props$multiline = props.multiline, multiline = _props$multiline === void 0 ? false : _props$multiline, _props$type = props.type, type = _props$type === void 0 ? 'text' : _props$type, other = _objectWithoutPropertiesDefault.default(props, [
-        "disableUnderline",
+var styles = {
+    /* Styles applied to the root element. */ root: {
+    }
+};
+/**
+ * The `TextField` is a convenience wrapper for the most common cases (80%).
+ * It cannot be all things to all people, otherwise the API would grow out of control.
+ *
+ * ## Advanced Configuration
+ *
+ * It's important to understand that the text field is a simple abstraction
+ * on top of the following components:
+ *
+ * - [FormControl](/api/form-control/)
+ * - [InputLabel](/api/input-label/)
+ * - [FilledInput](/api/filled-input/)
+ * - [OutlinedInput](/api/outlined-input/)
+ * - [Input](/api/input/)
+ * - [FormHelperText](/api/form-helper-text/)
+ *
+ * If you wish to alter the props applied to the `input` element, you can do so as follows:
+ *
+ * ```jsx
+ * const inputProps = {
+ *   step: 300,
+ * };
+ *
+ * return <TextField id="time" type="time" inputProps={inputProps} />;
+ * ```
+ *
+ * For advanced cases, please look at the source of TextField by clicking on the
+ * "Edit this page" button above. Consider either:
+ *
+ * - using the upper case props for passing values directly to the components
+ * - using the underlying components directly as shown in the demos
+ */ var TextField = /*#__PURE__*/ _react.forwardRef(function TextField1(props, ref) {
+    var autoComplete = props.autoComplete, _props$autoFocus = props.autoFocus, autoFocus = _props$autoFocus === void 0 ? false : _props$autoFocus, children = props.children, classes = props.classes, className = props.className, _props$color = props.color, color = _props$color === void 0 ? 'primary' : _props$color, defaultValue = props.defaultValue, _props$disabled = props.disabled, disabled = _props$disabled === void 0 ? false : _props$disabled, _props$error = props.error, error = _props$error === void 0 ? false : _props$error, FormHelperTextProps = props.FormHelperTextProps, _props$fullWidth = props.fullWidth, fullWidth = _props$fullWidth === void 0 ? false : _props$fullWidth, helperText = props.helperText, hiddenLabel = props.hiddenLabel, id = props.id, InputLabelProps = props.InputLabelProps, inputProps = props.inputProps, InputProps = props.InputProps, inputRef = props.inputRef, label = props.label, _props$multiline = props.multiline, multiline = _props$multiline === void 0 ? false : _props$multiline, name = props.name, onBlur = props.onBlur, onChange = props.onChange, onFocus = props.onFocus, placeholder = props.placeholder, _props$required = props.required, required = _props$required === void 0 ? false : _props$required, rows = props.rows, rowsMax = props.rowsMax, _props$select = props.select, select = _props$select === void 0 ? false : _props$select, SelectProps = props.SelectProps, type = props.type, value = props.value, _props$variant = props.variant, variant = _props$variant === void 0 ? 'standard' : _props$variant, other = _objectWithoutPropertiesDefault.default(props, [
+        "autoComplete",
+        "autoFocus",
+        "children",
         "classes",
+        "className",
+        "color",
+        "defaultValue",
+        "disabled",
+        "error",
+        "FormHelperTextProps",
         "fullWidth",
-        "inputComponent",
+        "helperText",
+        "hiddenLabel",
+        "id",
+        "InputLabelProps",
+        "inputProps",
+        "InputProps",
+        "inputRef",
+        "label",
         "multiline",
-        "type"
+        "name",
+        "onBlur",
+        "onChange",
+        "onFocus",
+        "placeholder",
+        "required",
+        "rows",
+        "rowsMax",
+        "select",
+        "SelectProps",
+        "type",
+        "value",
+        "variant"
     ]);
-    return(/*#__PURE__*/ _react.createElement(_inputBaseDefault.default, _extendsDefault.default({
-        classes: _extendsDefault.default({
-        }, classes, {
-            root: _clsxDefault.default(classes.root, !disableUnderline && classes.underline),
-            underline: null
-        }),
+    if (select && !children) console.error('Material-UI: `children` must be passed when using the `TextField` component with `select`.');
+    var InputMore = {
+    };
+    if (variant === 'outlined') {
+        if (InputLabelProps && typeof InputLabelProps.shrink !== 'undefined') InputMore.notched = InputLabelProps.shrink;
+        if (label) {
+            var _InputLabelProps$requ;
+            var displayRequired = (_InputLabelProps$requ = InputLabelProps === null || InputLabelProps === void 0 ? void 0 : InputLabelProps.required) !== null && _InputLabelProps$requ !== void 0 ? _InputLabelProps$requ : required;
+            InputMore.label = /*#__PURE__*/ _react.createElement(_react.Fragment, null, label, displayRequired && "\xA0*");
+        }
+    }
+    if (select) {
+        // unset defaults from textbox inputs
+        if (!SelectProps || !SelectProps.native) InputMore.id = undefined;
+        InputMore['aria-describedby'] = undefined;
+    }
+    var helperTextId = helperText && id ? "".concat(id, "-helper-text") : undefined;
+    var inputLabelId = label && id ? "".concat(id, "-label") : undefined;
+    var InputComponent = variantComponent[variant];
+    var InputElement = /*#__PURE__*/ _react.createElement(InputComponent, _extendsDefault.default({
+        "aria-describedby": helperTextId,
+        autoComplete: autoComplete,
+        autoFocus: autoFocus,
+        defaultValue: defaultValue,
         fullWidth: fullWidth,
-        inputComponent: inputComponent,
         multiline: multiline,
+        name: name,
+        rows: rows,
+        rowsMax: rowsMax,
+        type: type,
+        value: value,
+        id: id,
+        inputRef: inputRef,
+        onBlur: onBlur,
+        onChange: onChange,
+        onFocus: onFocus,
+        placeholder: placeholder,
+        inputProps: inputProps
+    }, InputMore, InputProps));
+    return(/*#__PURE__*/ _react.createElement(_formControlDefault.default, _extendsDefault.default({
+        className: _clsxDefault.default(classes.root, className),
+        disabled: disabled,
+        error: error,
+        fullWidth: fullWidth,
+        hiddenLabel: hiddenLabel,
         ref: ref,
-        type: type
-    }, other)));
+        required: required,
+        color: color,
+        variant: variant
+    }, other), label && /*#__PURE__*/ _react.createElement(_inputLabelDefault.default, _extendsDefault.default({
+        htmlFor: id,
+        id: inputLabelId
+    }, InputLabelProps), label), select ? /*#__PURE__*/ _react.createElement(_selectDefault.default, _extendsDefault.default({
+        "aria-describedby": helperTextId,
+        id: id,
+        labelId: inputLabelId,
+        value: value,
+        input: InputElement
+    }, SelectProps), children) : InputElement, helperText && /*#__PURE__*/ _react.createElement(_formHelperTextDefault.default, _extendsDefault.default({
+        id: helperTextId
+    }, FormHelperTextProps), helperText)));
 });
-Input.propTypes = {
+TextField.propTypes = {
     // ----------------------------- Warning --------------------------------
     // | These PropTypes are generated from the TypeScript type definitions |
     // |     To update them edit the d.ts file and run "yarn proptypes"     |
@@ -56329,9 +56508,15 @@ Input.propTypes = {
    * If `true`, the `input` element will be focused during the first mount.
    */ autoFocus: _propTypesDefault.default.bool,
     /**
+   * @ignore
+   */ children: _propTypesDefault.default.node,
+    /**
    * Override or extend the styles applied to the component.
    * See [CSS API](#css) below for more details.
    */ classes: _propTypesDefault.default.object,
+    /**
+   * @ignore
+   */ className: _propTypesDefault.default.string,
     /**
    * The color of the component. It supports those theme colors that make sense for this component.
    */ color: _propTypesDefault.default.oneOf([
@@ -56339,50 +56524,64 @@ Input.propTypes = {
         'secondary'
     ]),
     /**
-   * The default `input` element value. Use when the component is not controlled.
+   * The default value of the `input` element.
    */ defaultValue: _propTypesDefault.default.any,
     /**
    * If `true`, the `input` element will be disabled.
    */ disabled: _propTypesDefault.default.bool,
     /**
-   * If `true`, the input will not have an underline.
-   */ disableUnderline: _propTypesDefault.default.bool,
-    /**
-   * End `InputAdornment` for this component.
-   */ endAdornment: _propTypesDefault.default.node,
-    /**
-   * If `true`, the input will indicate an error. This is normally obtained via context from
-   * FormControl.
+   * If `true`, the label will be displayed in an error state.
    */ error: _propTypesDefault.default.bool,
+    /**
+   * Props applied to the [`FormHelperText`](/api/form-helper-text/) element.
+   */ FormHelperTextProps: _propTypesDefault.default.object,
     /**
    * If `true`, the input will take up the full width of its container.
    */ fullWidth: _propTypesDefault.default.bool,
     /**
+   * The helper text content.
+   */ helperText: _propTypesDefault.default.node,
+    /**
+   * @ignore
+   */ hiddenLabel: _propTypesDefault.default.bool,
+    /**
    * The id of the `input` element.
+   * Use this prop to make `label` and `helperText` accessible for screen readers.
    */ id: _propTypesDefault.default.string,
     /**
-   * The component used for the `input` element.
-   * Either a string to use a HTML element or a component.
-   */ inputComponent: _propTypesDefault.default.elementType,
+   * Props applied to the [`InputLabel`](/api/input-label/) element.
+   */ InputLabelProps: _propTypesDefault.default.object,
     /**
    * [Attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Attributes) applied to the `input` element.
    */ inputProps: _propTypesDefault.default.object,
     /**
+   * Props applied to the Input element.
+   * It will be a [`FilledInput`](/api/filled-input/),
+   * [`OutlinedInput`](/api/outlined-input/) or [`Input`](/api/input/)
+   * component depending on the `variant` prop value.
+   */ InputProps: _propTypesDefault.default.object,
+    /**
    * Pass a ref to the `input` element.
    */ inputRef: _utils.refType,
     /**
-   * If `dense`, will adjust vertical spacing. This is normally obtained via context from
-   * FormControl.
+   * The label content.
+   */ label: _propTypesDefault.default.node,
+    /**
+   * If `dense` or `normal`, will adjust vertical spacing of this and contained components.
    */ margin: _propTypesDefault.default.oneOf([
         'dense',
-        'none'
+        'none',
+        'normal'
     ]),
     /**
-   * If `true`, a textarea element will be rendered.
+   * If `true`, a textarea element will be rendered instead of an input.
    */ multiline: _propTypesDefault.default.bool,
     /**
    * Name attribute of the `input` element.
    */ name: _propTypesDefault.default.string,
+    /**
+   * @ignore
+   */ onBlur: _propTypesDefault.default.func,
     /**
    * Callback fired when the value is changed.
    *
@@ -56390,14 +56589,13 @@ Input.propTypes = {
    * You can pull out the new value by accessing `event.target.value` (string).
    */ onChange: _propTypesDefault.default.func,
     /**
+   * @ignore
+   */ onFocus: _propTypesDefault.default.func,
+    /**
    * The short hint displayed in the input before the user enters a value.
    */ placeholder: _propTypesDefault.default.string,
     /**
-   * It prevents the user from changing the value of the field
-   * (not from interacting with the field).
-   */ readOnly: _propTypesDefault.default.bool,
-    /**
-   * If `true`, the `input` element will be required.
+   * If `true`, the label is displayed as required and the `input` element` will be required.
    */ required: _propTypesDefault.default.bool,
     /**
    * Number of rows to display when multiline option is set to true.
@@ -56412,21 +56610,37 @@ Input.propTypes = {
         _propTypesDefault.default.string
     ]),
     /**
-   * Start `InputAdornment` for this component.
-   */ startAdornment: _propTypesDefault.default.node,
+   * Render a [`Select`](/api/select/) element while passing the Input element to `Select` as `input` parameter.
+   * If this option is set you must pass the options of the select as children.
+   */ select: _propTypesDefault.default.bool,
+    /**
+   * Props applied to the [`Select`](/api/select/) element.
+   */ SelectProps: _propTypesDefault.default.object,
+    /**
+   * The size of the text field.
+   */ size: _propTypesDefault.default.oneOf([
+        'medium',
+        'small'
+    ]),
     /**
    * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    */ type: _propTypesDefault.default.string,
     /**
    * The value of the `input` element, required for a controlled component.
-   */ value: _propTypesDefault.default.any
+   */ value: _propTypesDefault.default.any,
+    /**
+   * The variant to use.
+   */ variant: _propTypesDefault.default.oneOf([
+        'filled',
+        'outlined',
+        'standard'
+    ])
 };
-Input.muiName = 'Input';
 exports.default = _withStylesDefault.default(styles, {
-    name: 'MuiInput'
-})(Input);
+    name: 'MuiTextField'
+})(TextField);
 
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","@material-ui/utils":"jyhfw","../InputBase":"9iS7j","../styles/withStyles":"c9Ztg","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"bKAu6":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","@material-ui/utils":"jyhfw","../Input":"4qnyV","../FilledInput":"dWMSg","../OutlinedInput":"loqtc","../InputLabel":"brKTP","../FormControl":"3dav9","../FormHelperText":"ZTSj3","../Select":"6Fbbu","../styles/withStyles":"c9Ztg","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"bKAu6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function _extends() {
@@ -57005,7 +57219,253 @@ var refType = _propTypesDefault.default.oneOfType([
 ]);
 exports.default = refType;
 
-},{"prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9iS7j":[function(require,module,exports) {
+},{"prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"4qnyV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_inputDefault.default
+);
+var _input = require("./Input");
+var _inputDefault = parcelHelpers.interopDefault(_input);
+
+},{"./Input":"960WX","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"960WX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styles", ()=>styles
+);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _utils = require("@material-ui/utils");
+var _inputBase = require("../InputBase");
+var _inputBaseDefault = parcelHelpers.interopDefault(_inputBase);
+var _withStyles = require("../styles/withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var styles = function styles1(theme) {
+    var light = theme.palette.type === 'light';
+    var bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)';
+    return {
+        /* Styles applied to the root element. */ root: {
+            position: 'relative'
+        },
+        /* Styles applied to the root element if the component is a descendant of `FormControl`. */ formControl: {
+            'label + &': {
+                marginTop: 16
+            }
+        },
+        /* Styles applied to the root element if the component is focused. */ focused: {
+        },
+        /* Styles applied to the root element if `disabled={true}`. */ disabled: {
+        },
+        /* Styles applied to the root element if color secondary. */ colorSecondary: {
+            '&$underline:after': {
+                borderBottomColor: theme.palette.secondary.main
+            }
+        },
+        /* Styles applied to the root element if `disableUnderline={false}`. */ underline: {
+            '&:after': {
+                borderBottom: "2px solid ".concat(theme.palette.primary.main),
+                left: 0,
+                bottom: 0,
+                // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
+                content: '""',
+                position: 'absolute',
+                right: 0,
+                transform: 'scaleX(0)',
+                transition: theme.transitions.create('transform', {
+                    duration: theme.transitions.duration.shorter,
+                    easing: theme.transitions.easing.easeOut
+                }),
+                pointerEvents: 'none' // Transparent to the hover style.
+            },
+            '&$focused:after': {
+                transform: 'scaleX(1)'
+            },
+            '&$error:after': {
+                borderBottomColor: theme.palette.error.main,
+                transform: 'scaleX(1)' // error is always underlined in red
+            },
+            '&:before': {
+                borderBottom: "1px solid ".concat(bottomLineColor),
+                left: 0,
+                bottom: 0,
+                // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
+                content: '"\\00a0"',
+                position: 'absolute',
+                right: 0,
+                transition: theme.transitions.create('border-bottom-color', {
+                    duration: theme.transitions.duration.shorter
+                }),
+                pointerEvents: 'none' // Transparent to the hover style.
+            },
+            '&:hover:not($disabled):before': {
+                borderBottom: "2px solid ".concat(theme.palette.text.primary),
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    borderBottom: "1px solid ".concat(bottomLineColor)
+                }
+            },
+            '&$disabled:before': {
+                borderBottomStyle: 'dotted'
+            }
+        },
+        /* Pseudo-class applied to the root element if `error={true}`. */ error: {
+        },
+        /* Styles applied to the `input` element if `margin="dense"`. */ marginDense: {
+        },
+        /* Styles applied to the root element if `multiline={true}`. */ multiline: {
+        },
+        /* Styles applied to the root element if `fullWidth={true}`. */ fullWidth: {
+        },
+        /* Styles applied to the `input` element. */ input: {
+        },
+        /* Styles applied to the `input` element if `margin="dense"`. */ inputMarginDense: {
+        },
+        /* Styles applied to the `input` element if `multiline={true}`. */ inputMultiline: {
+        },
+        /* Styles applied to the `input` element if `type="search"`. */ inputTypeSearch: {
+        }
+    };
+};
+var Input = /*#__PURE__*/ _react.forwardRef(function Input1(props, ref) {
+    var disableUnderline = props.disableUnderline, classes = props.classes, _props$fullWidth = props.fullWidth, fullWidth = _props$fullWidth === void 0 ? false : _props$fullWidth, _props$inputComponent = props.inputComponent, inputComponent = _props$inputComponent === void 0 ? 'input' : _props$inputComponent, _props$multiline = props.multiline, multiline = _props$multiline === void 0 ? false : _props$multiline, _props$type = props.type, type = _props$type === void 0 ? 'text' : _props$type, other = _objectWithoutPropertiesDefault.default(props, [
+        "disableUnderline",
+        "classes",
+        "fullWidth",
+        "inputComponent",
+        "multiline",
+        "type"
+    ]);
+    return(/*#__PURE__*/ _react.createElement(_inputBaseDefault.default, _extendsDefault.default({
+        classes: _extendsDefault.default({
+        }, classes, {
+            root: _clsxDefault.default(classes.root, !disableUnderline && classes.underline),
+            underline: null
+        }),
+        fullWidth: fullWidth,
+        inputComponent: inputComponent,
+        multiline: multiline,
+        ref: ref,
+        type: type
+    }, other)));
+});
+Input.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+   * This prop helps users to fill forms faster, especially on mobile devices.
+   * The name can be confusing, as it's more like an autofill.
+   * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
+   */ autoComplete: _propTypesDefault.default.string,
+    /**
+   * If `true`, the `input` element will be focused during the first mount.
+   */ autoFocus: _propTypesDefault.default.bool,
+    /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */ classes: _propTypesDefault.default.object,
+    /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */ color: _propTypesDefault.default.oneOf([
+        'primary',
+        'secondary'
+    ]),
+    /**
+   * The default `input` element value. Use when the component is not controlled.
+   */ defaultValue: _propTypesDefault.default.any,
+    /**
+   * If `true`, the `input` element will be disabled.
+   */ disabled: _propTypesDefault.default.bool,
+    /**
+   * If `true`, the input will not have an underline.
+   */ disableUnderline: _propTypesDefault.default.bool,
+    /**
+   * End `InputAdornment` for this component.
+   */ endAdornment: _propTypesDefault.default.node,
+    /**
+   * If `true`, the input will indicate an error. This is normally obtained via context from
+   * FormControl.
+   */ error: _propTypesDefault.default.bool,
+    /**
+   * If `true`, the input will take up the full width of its container.
+   */ fullWidth: _propTypesDefault.default.bool,
+    /**
+   * The id of the `input` element.
+   */ id: _propTypesDefault.default.string,
+    /**
+   * The component used for the `input` element.
+   * Either a string to use a HTML element or a component.
+   */ inputComponent: _propTypesDefault.default.elementType,
+    /**
+   * [Attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Attributes) applied to the `input` element.
+   */ inputProps: _propTypesDefault.default.object,
+    /**
+   * Pass a ref to the `input` element.
+   */ inputRef: _utils.refType,
+    /**
+   * If `dense`, will adjust vertical spacing. This is normally obtained via context from
+   * FormControl.
+   */ margin: _propTypesDefault.default.oneOf([
+        'dense',
+        'none'
+    ]),
+    /**
+   * If `true`, a textarea element will be rendered.
+   */ multiline: _propTypesDefault.default.bool,
+    /**
+   * Name attribute of the `input` element.
+   */ name: _propTypesDefault.default.string,
+    /**
+   * Callback fired when the value is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new value by accessing `event.target.value` (string).
+   */ onChange: _propTypesDefault.default.func,
+    /**
+   * The short hint displayed in the input before the user enters a value.
+   */ placeholder: _propTypesDefault.default.string,
+    /**
+   * It prevents the user from changing the value of the field
+   * (not from interacting with the field).
+   */ readOnly: _propTypesDefault.default.bool,
+    /**
+   * If `true`, the `input` element will be required.
+   */ required: _propTypesDefault.default.bool,
+    /**
+   * Number of rows to display when multiline option is set to true.
+   */ rows: _propTypesDefault.default.oneOfType([
+        _propTypesDefault.default.number,
+        _propTypesDefault.default.string
+    ]),
+    /**
+   * Maximum number of rows to display when multiline option is set to true.
+   */ rowsMax: _propTypesDefault.default.oneOfType([
+        _propTypesDefault.default.number,
+        _propTypesDefault.default.string
+    ]),
+    /**
+   * Start `InputAdornment` for this component.
+   */ startAdornment: _propTypesDefault.default.node,
+    /**
+   * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
+   */ type: _propTypesDefault.default.string,
+    /**
+   * The value of the `input` element, required for a controlled component.
+   */ value: _propTypesDefault.default.any
+};
+Input.muiName = 'Input';
+exports.default = _withStylesDefault.default(styles, {
+    name: 'MuiInput'
+})(Input);
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","@material-ui/utils":"jyhfw","../InputBase":"9iS7j","../styles/withStyles":"c9Ztg","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9iS7j":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>_inputBaseDefault.default
@@ -64132,410 +64592,7 @@ function isAdornedStart(obj) {
     return obj.startAdornment;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"8ynFp":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-exports.default = [
-    [
-        'bold',
-        'italic',
-        'underline',
-        'strike'
-    ],
-    [
-        'blockquote'
-    ],
-    [
-        {
-            'header': 1
-        },
-        {
-            'header': 2
-        }
-    ],
-    [
-        {
-            'list': 'ordered'
-        },
-        {
-            'list': 'bullet'
-        }
-    ],
-    [
-        {
-            'indent': '-1'
-        },
-        {
-            'indent': '+1'
-        }
-    ],
-    [
-        {
-            'direction': 'rtl'
-        }
-    ],
-    [
-        {
-            'size': [
-                'small',
-                false,
-                'large',
-                'huge'
-            ]
-        }
-    ],
-    [
-        {
-            'header': [
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                false
-            ]
-        }
-    ],
-    [
-        {
-            'font': []
-        }
-    ],
-    [
-        {
-            'align': []
-        }
-    ],
-    [
-        'clean'
-    ]
-];
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9U8zv":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>_textFieldDefault.default
-);
-var _textField = require("./TextField");
-var _textFieldDefault = parcelHelpers.interopDefault(_textField);
-
-},{"./TextField":"cRiSt","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"cRiSt":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "styles", ()=>styles
-);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
-var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
-var _react = require("react");
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _clsx = require("clsx");
-var _clsxDefault = parcelHelpers.interopDefault(_clsx);
-var _utils = require("@material-ui/utils");
-var _input = require("../Input");
-var _inputDefault = parcelHelpers.interopDefault(_input);
-var _filledInput = require("../FilledInput");
-var _filledInputDefault = parcelHelpers.interopDefault(_filledInput);
-var _outlinedInput = require("../OutlinedInput");
-var _outlinedInputDefault = parcelHelpers.interopDefault(_outlinedInput);
-var _inputLabel = require("../InputLabel");
-var _inputLabelDefault = parcelHelpers.interopDefault(_inputLabel);
-var _formControl = require("../FormControl");
-var _formControlDefault = parcelHelpers.interopDefault(_formControl);
-var _formHelperText = require("../FormHelperText");
-var _formHelperTextDefault = parcelHelpers.interopDefault(_formHelperText);
-var _select = require("../Select");
-var _selectDefault = parcelHelpers.interopDefault(_select);
-var _withStyles = require("../styles/withStyles");
-var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
-var variantComponent = {
-    standard: _inputDefault.default,
-    filled: _filledInputDefault.default,
-    outlined: _outlinedInputDefault.default
-};
-var styles = {
-    /* Styles applied to the root element. */ root: {
-    }
-};
-/**
- * The `TextField` is a convenience wrapper for the most common cases (80%).
- * It cannot be all things to all people, otherwise the API would grow out of control.
- *
- * ## Advanced Configuration
- *
- * It's important to understand that the text field is a simple abstraction
- * on top of the following components:
- *
- * - [FormControl](/api/form-control/)
- * - [InputLabel](/api/input-label/)
- * - [FilledInput](/api/filled-input/)
- * - [OutlinedInput](/api/outlined-input/)
- * - [Input](/api/input/)
- * - [FormHelperText](/api/form-helper-text/)
- *
- * If you wish to alter the props applied to the `input` element, you can do so as follows:
- *
- * ```jsx
- * const inputProps = {
- *   step: 300,
- * };
- *
- * return <TextField id="time" type="time" inputProps={inputProps} />;
- * ```
- *
- * For advanced cases, please look at the source of TextField by clicking on the
- * "Edit this page" button above. Consider either:
- *
- * - using the upper case props for passing values directly to the components
- * - using the underlying components directly as shown in the demos
- */ var TextField = /*#__PURE__*/ _react.forwardRef(function TextField1(props, ref) {
-    var autoComplete = props.autoComplete, _props$autoFocus = props.autoFocus, autoFocus = _props$autoFocus === void 0 ? false : _props$autoFocus, children = props.children, classes = props.classes, className = props.className, _props$color = props.color, color = _props$color === void 0 ? 'primary' : _props$color, defaultValue = props.defaultValue, _props$disabled = props.disabled, disabled = _props$disabled === void 0 ? false : _props$disabled, _props$error = props.error, error = _props$error === void 0 ? false : _props$error, FormHelperTextProps = props.FormHelperTextProps, _props$fullWidth = props.fullWidth, fullWidth = _props$fullWidth === void 0 ? false : _props$fullWidth, helperText = props.helperText, hiddenLabel = props.hiddenLabel, id = props.id, InputLabelProps = props.InputLabelProps, inputProps = props.inputProps, InputProps = props.InputProps, inputRef = props.inputRef, label = props.label, _props$multiline = props.multiline, multiline = _props$multiline === void 0 ? false : _props$multiline, name = props.name, onBlur = props.onBlur, onChange = props.onChange, onFocus = props.onFocus, placeholder = props.placeholder, _props$required = props.required, required = _props$required === void 0 ? false : _props$required, rows = props.rows, rowsMax = props.rowsMax, _props$select = props.select, select = _props$select === void 0 ? false : _props$select, SelectProps = props.SelectProps, type = props.type, value = props.value, _props$variant = props.variant, variant = _props$variant === void 0 ? 'standard' : _props$variant, other = _objectWithoutPropertiesDefault.default(props, [
-        "autoComplete",
-        "autoFocus",
-        "children",
-        "classes",
-        "className",
-        "color",
-        "defaultValue",
-        "disabled",
-        "error",
-        "FormHelperTextProps",
-        "fullWidth",
-        "helperText",
-        "hiddenLabel",
-        "id",
-        "InputLabelProps",
-        "inputProps",
-        "InputProps",
-        "inputRef",
-        "label",
-        "multiline",
-        "name",
-        "onBlur",
-        "onChange",
-        "onFocus",
-        "placeholder",
-        "required",
-        "rows",
-        "rowsMax",
-        "select",
-        "SelectProps",
-        "type",
-        "value",
-        "variant"
-    ]);
-    if (select && !children) console.error('Material-UI: `children` must be passed when using the `TextField` component with `select`.');
-    var InputMore = {
-    };
-    if (variant === 'outlined') {
-        if (InputLabelProps && typeof InputLabelProps.shrink !== 'undefined') InputMore.notched = InputLabelProps.shrink;
-        if (label) {
-            var _InputLabelProps$requ;
-            var displayRequired = (_InputLabelProps$requ = InputLabelProps === null || InputLabelProps === void 0 ? void 0 : InputLabelProps.required) !== null && _InputLabelProps$requ !== void 0 ? _InputLabelProps$requ : required;
-            InputMore.label = /*#__PURE__*/ _react.createElement(_react.Fragment, null, label, displayRequired && "\xA0*");
-        }
-    }
-    if (select) {
-        // unset defaults from textbox inputs
-        if (!SelectProps || !SelectProps.native) InputMore.id = undefined;
-        InputMore['aria-describedby'] = undefined;
-    }
-    var helperTextId = helperText && id ? "".concat(id, "-helper-text") : undefined;
-    var inputLabelId = label && id ? "".concat(id, "-label") : undefined;
-    var InputComponent = variantComponent[variant];
-    var InputElement = /*#__PURE__*/ _react.createElement(InputComponent, _extendsDefault.default({
-        "aria-describedby": helperTextId,
-        autoComplete: autoComplete,
-        autoFocus: autoFocus,
-        defaultValue: defaultValue,
-        fullWidth: fullWidth,
-        multiline: multiline,
-        name: name,
-        rows: rows,
-        rowsMax: rowsMax,
-        type: type,
-        value: value,
-        id: id,
-        inputRef: inputRef,
-        onBlur: onBlur,
-        onChange: onChange,
-        onFocus: onFocus,
-        placeholder: placeholder,
-        inputProps: inputProps
-    }, InputMore, InputProps));
-    return(/*#__PURE__*/ _react.createElement(_formControlDefault.default, _extendsDefault.default({
-        className: _clsxDefault.default(classes.root, className),
-        disabled: disabled,
-        error: error,
-        fullWidth: fullWidth,
-        hiddenLabel: hiddenLabel,
-        ref: ref,
-        required: required,
-        color: color,
-        variant: variant
-    }, other), label && /*#__PURE__*/ _react.createElement(_inputLabelDefault.default, _extendsDefault.default({
-        htmlFor: id,
-        id: inputLabelId
-    }, InputLabelProps), label), select ? /*#__PURE__*/ _react.createElement(_selectDefault.default, _extendsDefault.default({
-        "aria-describedby": helperTextId,
-        id: id,
-        labelId: inputLabelId,
-        value: value,
-        input: InputElement
-    }, SelectProps), children) : InputElement, helperText && /*#__PURE__*/ _react.createElement(_formHelperTextDefault.default, _extendsDefault.default({
-        id: helperTextId
-    }, FormHelperTextProps), helperText)));
-});
-TextField.propTypes = {
-    // ----------------------------- Warning --------------------------------
-    // | These PropTypes are generated from the TypeScript type definitions |
-    // |     To update them edit the d.ts file and run "yarn proptypes"     |
-    // ----------------------------------------------------------------------
-    /**
-   * This prop helps users to fill forms faster, especially on mobile devices.
-   * The name can be confusing, as it's more like an autofill.
-   * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
-   */ autoComplete: _propTypesDefault.default.string,
-    /**
-   * If `true`, the `input` element will be focused during the first mount.
-   */ autoFocus: _propTypesDefault.default.bool,
-    /**
-   * @ignore
-   */ children: _propTypesDefault.default.node,
-    /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css) below for more details.
-   */ classes: _propTypesDefault.default.object,
-    /**
-   * @ignore
-   */ className: _propTypesDefault.default.string,
-    /**
-   * The color of the component. It supports those theme colors that make sense for this component.
-   */ color: _propTypesDefault.default.oneOf([
-        'primary',
-        'secondary'
-    ]),
-    /**
-   * The default value of the `input` element.
-   */ defaultValue: _propTypesDefault.default.any,
-    /**
-   * If `true`, the `input` element will be disabled.
-   */ disabled: _propTypesDefault.default.bool,
-    /**
-   * If `true`, the label will be displayed in an error state.
-   */ error: _propTypesDefault.default.bool,
-    /**
-   * Props applied to the [`FormHelperText`](/api/form-helper-text/) element.
-   */ FormHelperTextProps: _propTypesDefault.default.object,
-    /**
-   * If `true`, the input will take up the full width of its container.
-   */ fullWidth: _propTypesDefault.default.bool,
-    /**
-   * The helper text content.
-   */ helperText: _propTypesDefault.default.node,
-    /**
-   * @ignore
-   */ hiddenLabel: _propTypesDefault.default.bool,
-    /**
-   * The id of the `input` element.
-   * Use this prop to make `label` and `helperText` accessible for screen readers.
-   */ id: _propTypesDefault.default.string,
-    /**
-   * Props applied to the [`InputLabel`](/api/input-label/) element.
-   */ InputLabelProps: _propTypesDefault.default.object,
-    /**
-   * [Attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Attributes) applied to the `input` element.
-   */ inputProps: _propTypesDefault.default.object,
-    /**
-   * Props applied to the Input element.
-   * It will be a [`FilledInput`](/api/filled-input/),
-   * [`OutlinedInput`](/api/outlined-input/) or [`Input`](/api/input/)
-   * component depending on the `variant` prop value.
-   */ InputProps: _propTypesDefault.default.object,
-    /**
-   * Pass a ref to the `input` element.
-   */ inputRef: _utils.refType,
-    /**
-   * The label content.
-   */ label: _propTypesDefault.default.node,
-    /**
-   * If `dense` or `normal`, will adjust vertical spacing of this and contained components.
-   */ margin: _propTypesDefault.default.oneOf([
-        'dense',
-        'none',
-        'normal'
-    ]),
-    /**
-   * If `true`, a textarea element will be rendered instead of an input.
-   */ multiline: _propTypesDefault.default.bool,
-    /**
-   * Name attribute of the `input` element.
-   */ name: _propTypesDefault.default.string,
-    /**
-   * @ignore
-   */ onBlur: _propTypesDefault.default.func,
-    /**
-   * Callback fired when the value is changed.
-   *
-   * @param {object} event The event source of the callback.
-   * You can pull out the new value by accessing `event.target.value` (string).
-   */ onChange: _propTypesDefault.default.func,
-    /**
-   * @ignore
-   */ onFocus: _propTypesDefault.default.func,
-    /**
-   * The short hint displayed in the input before the user enters a value.
-   */ placeholder: _propTypesDefault.default.string,
-    /**
-   * If `true`, the label is displayed as required and the `input` element` will be required.
-   */ required: _propTypesDefault.default.bool,
-    /**
-   * Number of rows to display when multiline option is set to true.
-   */ rows: _propTypesDefault.default.oneOfType([
-        _propTypesDefault.default.number,
-        _propTypesDefault.default.string
-    ]),
-    /**
-   * Maximum number of rows to display when multiline option is set to true.
-   */ rowsMax: _propTypesDefault.default.oneOfType([
-        _propTypesDefault.default.number,
-        _propTypesDefault.default.string
-    ]),
-    /**
-   * Render a [`Select`](/api/select/) element while passing the Input element to `Select` as `input` parameter.
-   * If this option is set you must pass the options of the select as children.
-   */ select: _propTypesDefault.default.bool,
-    /**
-   * Props applied to the [`Select`](/api/select/) element.
-   */ SelectProps: _propTypesDefault.default.object,
-    /**
-   * The size of the text field.
-   */ size: _propTypesDefault.default.oneOf([
-        'medium',
-        'small'
-    ]),
-    /**
-   * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
-   */ type: _propTypesDefault.default.string,
-    /**
-   * The value of the `input` element, required for a controlled component.
-   */ value: _propTypesDefault.default.any,
-    /**
-   * The variant to use.
-   */ variant: _propTypesDefault.default.oneOf([
-        'filled',
-        'outlined',
-        'standard'
-    ])
-};
-exports.default = _withStylesDefault.default(styles, {
-    name: 'MuiTextField'
-})(TextField);
-
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","@material-ui/utils":"jyhfw","../Input":"4qnyV","../FilledInput":"dWMSg","../OutlinedInput":"loqtc","../InputLabel":"brKTP","../FormControl":"3dav9","../FormHelperText":"ZTSj3","../Select":"6Fbbu","../styles/withStyles":"c9Ztg","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"dWMSg":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"dWMSg":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>_filledInputDefault.default
@@ -71115,7 +71172,108 @@ NativeSelectInput.propTypes = {
 };
 exports.default = NativeSelectInput;
 
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","@material-ui/utils":"jyhfw","../utils/capitalize":"8zjhI","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"g4K51":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","@material-ui/utils":"jyhfw","../utils/capitalize":"8zjhI","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"buklO":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+var _useSessionStorage = require("./useSessionStorage");
+var _useSessionStorageDefault = parcelHelpers.interopDefault(_useSessionStorage);
+var _sessionStorageNames = require("../utils/SESSION_STORAGE_NAMES");
+var _s = $RefreshSig$();
+function useAlias(aliasType) {
+    _s();
+    const [alias, setAlias] = _react.useState("");
+    _react.useEffect(()=>{
+        let aliasGotByDOM = "";
+        let aliasGotBySessionStorage = "";
+        aliasGotByDOM = getAliasByDOM(aliasType);
+        if (aliasGotByDOM) setAlias(aliasGotByDOM);
+        else {
+            aliasGotBySessionStorage = getAliasBySessionStorage(aliasType);
+            setAlias(aliasGotBySessionStorage);
+        }
+    }, []);
+    return alias;
+}
+exports.default = useAlias;
+_s(useAlias, "ZtsQu+d0aKOSCoVdYb6Iwm3e1Bo=");
+/**TO DOO, FINISH THIS FILE */ function getAliasByDOM(aliasType) {
+    let aliasGotByDOM = "";
+    switch(aliasType){
+        case "self":
+            aliasGotByDOM = document.getElementById(_sessionStorageNames.SELF_USER_ALIAS).value;
+            break;
+        case "target":
+            aliasGotByDOM = document.getElementById(_sessionStorageNames.TARGET_USER_ALIAS).value;
+            break;
+    }
+    return aliasGotByDOM;
+}
+function getAliasBySessionStorage(aliasType) {
+    let aliasBySessionStorage = "";
+    switch(aliasType){
+        case "self":
+            aliasBySessionStorage = _useSessionStorageDefault.default(_sessionStorageNames.SELF_USER_ALIAS)[0];
+            break;
+        case "target":
+            aliasBySessionStorage = _useSessionStorageDefault.default(_sessionStorageNames.TARGET_USER_ALIAS)[0];
+            break;
+    }
+    return aliasBySessionStorage;
+}
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"6TuXu","./useSessionStorage":"03hAi","../utils/SESSION_STORAGE_NAMES":"eOOny","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"03hAi":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+var _s = $RefreshSig$();
+function useSessionStorage(key) {
+    _s();
+    const value = _react.useRef(sessionStorage.getItem(key));
+    const setValue = (newValue)=>{
+        sessionStorage.setItem(key, newValue);
+    };
+    return [
+        value.current,
+        setValue
+    ];
+}
+exports.default = useSessionStorage;
+_s(useSessionStorage, "cnNOAu0kURYutOVq8TivAAthn1E=");
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"eOOny":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SELF_USER_ALIAS", ()=>SELF_USER_ALIAS
+);
+parcelHelpers.export(exports, "TARGET_USER_ALIAS", ()=>TARGET_USER_ALIAS
+);
+const SELF_USER_ALIAS = "s_user_alias";
+const TARGET_USER_ALIAS = "t_user_alias";
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"g4K51":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _useFetch = require("./useFetch");
@@ -72594,68 +72752,354 @@ module.exports = CancelToken;
     return typeof payload === 'object' && payload.isAxiosError === true;
 };
 
-},{}],"buklO":[function(require,module,exports) {
-var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-helpers.prelude(module);
-
-try {
+},{}],"fiUE1":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_inputAdornmentDefault.default
+);
+var _inputAdornment = require("./InputAdornment");
+var _inputAdornmentDefault = parcelHelpers.interopDefault(_inputAdornment);
+
+},{"./InputAdornment":"247eN","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"247eN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styles", ()=>styles
+);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
 var _react = require("react");
-var _useSessionStorage = require("./useSessionStorage");
-var _useSessionStorageDefault = parcelHelpers.interopDefault(_useSessionStorage);
-var _sessionStorageNames = require("../utils/SESSION_STORAGE_NAMES");
-var _s = $RefreshSig$();
-function useAlias(aliasType) {
-    _s();
-    const [alias, setAlias] = _react.useState("");
-    _react.useEffect(()=>{
-        let aliasGotByDOM = "";
-        let aliasGotBySessionStorage = "";
-        aliasGotByDOM = getAliasByDOM(aliasType);
-        if (aliasGotByDOM) setAlias(aliasGotByDOM);
-        else {
-            aliasGotBySessionStorage = getAliasBySessionStorage(aliasType);
-            setAlias(aliasGotBySessionStorage);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _typography = require("../Typography");
+var _typographyDefault = parcelHelpers.interopDefault(_typography);
+var _withStyles = require("../styles/withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var _formControlContext = require("../FormControl/FormControlContext");
+var _formControlContextDefault = parcelHelpers.interopDefault(_formControlContext);
+var styles = {
+    /* Styles applied to the root element. */ root: {
+        display: 'flex',
+        height: '0.01em',
+        // Fix IE 11 flexbox alignment. To remove at some point.
+        maxHeight: '2em',
+        alignItems: 'center',
+        whiteSpace: 'nowrap'
+    },
+    /* Styles applied to the root element if `variant="filled"`. */ filled: {
+        '&$positionStart:not($hiddenLabel)': {
+            marginTop: 16
         }
-    }, []);
-    return alias;
-}
-exports.default = useAlias;
-_s(useAlias, "ZtsQu+d0aKOSCoVdYb6Iwm3e1Bo=");
-/**TO DOO, FINISH THIS FILE */ function getAliasByDOM(aliasType) {
-    let aliasGotByDOM = "";
-    switch(aliasType){
-        case "self":
-            aliasGotByDOM = document.getElementById(_sessionStorageNames.SELF_USER_ALIAS).value;
-            break;
-        case "target":
-            aliasGotByDOM = document.getElementById(_sessionStorageNames.TARGET_USER_ALIAS).value;
-            break;
+    },
+    /* Styles applied to the root element if `position="start"`. */ positionStart: {
+        marginRight: 8
+    },
+    /* Styles applied to the root element if `position="end"`. */ positionEnd: {
+        marginLeft: 8
+    },
+    /* Styles applied to the root element if `disablePointerEvents=true`. */ disablePointerEvents: {
+        pointerEvents: 'none'
+    },
+    /* Styles applied if the adornment is used inside <FormControl hiddenLabel />. */ hiddenLabel: {
+    },
+    /* Styles applied if the adornment is used inside <FormControl margin="dense" />. */ marginDense: {
     }
-    return aliasGotByDOM;
-}
-function getAliasBySessionStorage(aliasType) {
-    let aliasBySessionStorage = "";
-    switch(aliasType){
-        case "self":
-            aliasBySessionStorage = _useSessionStorageDefault.default(_sessionStorageNames.SELF_USER_ALIAS)[0];
-            break;
-        case "target":
-            aliasBySessionStorage = _useSessionStorageDefault.default(_sessionStorageNames.TARGET_USER_ALIAS)[0];
-            break;
+};
+var InputAdornment = /*#__PURE__*/ _react.forwardRef(function InputAdornment1(props, ref) {
+    var children = props.children, classes = props.classes, className = props.className, _props$component = props.component, Component = _props$component === void 0 ? 'div' : _props$component, _props$disablePointer = props.disablePointerEvents, disablePointerEvents = _props$disablePointer === void 0 ? false : _props$disablePointer, _props$disableTypogra = props.disableTypography, disableTypography = _props$disableTypogra === void 0 ? false : _props$disableTypogra, position = props.position, variantProp = props.variant, other = _objectWithoutPropertiesDefault.default(props, [
+        "children",
+        "classes",
+        "className",
+        "component",
+        "disablePointerEvents",
+        "disableTypography",
+        "position",
+        "variant"
+    ]);
+    var muiFormControl = _formControlContext.useFormControl() || {
+    };
+    var variant = variantProp;
+    if (variantProp && muiFormControl.variant) {
+        if (variantProp === muiFormControl.variant) console.error("Material-UI: The `InputAdornment` variant infers the variant prop you do not have to provide one.");
     }
-    return aliasBySessionStorage;
-}
+    if (muiFormControl && !variant) variant = muiFormControl.variant;
+    return(/*#__PURE__*/ _react.createElement(_formControlContextDefault.default.Provider, {
+        value: null
+    }, /*#__PURE__*/ _react.createElement(Component, _extendsDefault.default({
+        className: _clsxDefault.default(classes.root, className, disablePointerEvents && classes.disablePointerEvents, muiFormControl.hiddenLabel && classes.hiddenLabel, variant === 'filled' && classes.filled, {
+            'start': classes.positionStart,
+            'end': classes.positionEnd
+        }[position], muiFormControl.margin === 'dense' && classes.marginDense),
+        ref: ref
+    }, other), typeof children === 'string' && !disableTypography ? /*#__PURE__*/ _react.createElement(_typographyDefault.default, {
+        color: "textSecondary"
+    }, children) : children)));
+});
+InputAdornment.propTypes = {
+    /**
+   * The content of the component, normally an `IconButton` or string.
+   */ children: _propTypesDefault.default.node.isRequired,
+    /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */ classes: _propTypesDefault.default.object.isRequired,
+    /**
+   * @ignore
+   */ className: _propTypesDefault.default.string,
+    /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */ component: _propTypesDefault.default/* @typescript-to-proptypes-ignore */ .elementType,
+    /**
+   * Disable pointer events on the root.
+   * This allows for the content of the adornment to focus the input on click.
+   */ disablePointerEvents: _propTypesDefault.default.bool,
+    /**
+   * If children is a string then disable wrapping in a Typography component.
+   */ disableTypography: _propTypesDefault.default.bool,
+    /**
+   * @ignore
+   */ muiFormControl: _propTypesDefault.default.object,
+    /**
+   * The position this adornment should appear relative to the `Input`.
+   */ position: _propTypesDefault.default.oneOf([
+        'start',
+        'end'
+    ]),
+    /**
+   * The variant to use.
+   * Note: If you are using the `TextField` component or the `FormControl` component
+   * you do not have to set this manually.
+   */ variant: _propTypesDefault.default.oneOf([
+        'standard',
+        'outlined',
+        'filled'
+    ])
+};
+exports.default = _withStylesDefault.default(styles, {
+    name: 'MuiInputAdornment'
+})(InputAdornment);
 
-  helpers.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react":"6TuXu","./useSessionStorage":"03hAi","../utils/SESSION_STORAGE_NAMES":"eOOny","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"03hAi":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../Typography":"d1wir","../styles/withStyles":"c9Ztg","../FormControl/FormControlContext":"30bqQ","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"d1wir":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_typographyDefault.default
+);
+var _typography = require("./Typography");
+var _typographyDefault = parcelHelpers.interopDefault(_typography);
+
+},{"./Typography":"hqeRK","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"hqeRK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styles", ()=>styles
+);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _withStyles = require("../styles/withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var _capitalize = require("../utils/capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+var styles = function styles1(theme) {
+    return {
+        /* Styles applied to the root element. */ root: {
+            margin: 0
+        },
+        /* Styles applied to the root element if `variant="body2"`. */ body2: theme.typography.body2,
+        /* Styles applied to the root element if `variant="body1"`. */ body1: theme.typography.body1,
+        /* Styles applied to the root element if `variant="caption"`. */ caption: theme.typography.caption,
+        /* Styles applied to the root element if `variant="button"`. */ button: theme.typography.button,
+        /* Styles applied to the root element if `variant="h1"`. */ h1: theme.typography.h1,
+        /* Styles applied to the root element if `variant="h2"`. */ h2: theme.typography.h2,
+        /* Styles applied to the root element if `variant="h3"`. */ h3: theme.typography.h3,
+        /* Styles applied to the root element if `variant="h4"`. */ h4: theme.typography.h4,
+        /* Styles applied to the root element if `variant="h5"`. */ h5: theme.typography.h5,
+        /* Styles applied to the root element if `variant="h6"`. */ h6: theme.typography.h6,
+        /* Styles applied to the root element if `variant="subtitle1"`. */ subtitle1: theme.typography.subtitle1,
+        /* Styles applied to the root element if `variant="subtitle2"`. */ subtitle2: theme.typography.subtitle2,
+        /* Styles applied to the root element if `variant="overline"`. */ overline: theme.typography.overline,
+        /* Styles applied to the root element if `variant="srOnly"`. Only accessible to screen readers. */ srOnly: {
+            position: 'absolute',
+            height: 1,
+            width: 1,
+            overflow: 'hidden'
+        },
+        /* Styles applied to the root element if `align="left"`. */ alignLeft: {
+            textAlign: 'left'
+        },
+        /* Styles applied to the root element if `align="center"`. */ alignCenter: {
+            textAlign: 'center'
+        },
+        /* Styles applied to the root element if `align="right"`. */ alignRight: {
+            textAlign: 'right'
+        },
+        /* Styles applied to the root element if `align="justify"`. */ alignJustify: {
+            textAlign: 'justify'
+        },
+        /* Styles applied to the root element if `nowrap={true}`. */ noWrap: {
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap'
+        },
+        /* Styles applied to the root element if `gutterBottom={true}`. */ gutterBottom: {
+            marginBottom: '0.35em'
+        },
+        /* Styles applied to the root element if `paragraph={true}`. */ paragraph: {
+            marginBottom: 16
+        },
+        /* Styles applied to the root element if `color="inherit"`. */ colorInherit: {
+            color: 'inherit'
+        },
+        /* Styles applied to the root element if `color="primary"`. */ colorPrimary: {
+            color: theme.palette.primary.main
+        },
+        /* Styles applied to the root element if `color="secondary"`. */ colorSecondary: {
+            color: theme.palette.secondary.main
+        },
+        /* Styles applied to the root element if `color="textPrimary"`. */ colorTextPrimary: {
+            color: theme.palette.text.primary
+        },
+        /* Styles applied to the root element if `color="textSecondary"`. */ colorTextSecondary: {
+            color: theme.palette.text.secondary
+        },
+        /* Styles applied to the root element if `color="error"`. */ colorError: {
+            color: theme.palette.error.main
+        },
+        /* Styles applied to the root element if `display="inline"`. */ displayInline: {
+            display: 'inline'
+        },
+        /* Styles applied to the root element if `display="block"`. */ displayBlock: {
+            display: 'block'
+        }
+    };
+};
+var defaultVariantMapping = {
+    h1: 'h1',
+    h2: 'h2',
+    h3: 'h3',
+    h4: 'h4',
+    h5: 'h5',
+    h6: 'h6',
+    subtitle1: 'h6',
+    subtitle2: 'h6',
+    body1: 'p',
+    body2: 'p'
+};
+var Typography = /*#__PURE__*/ _react.forwardRef(function Typography1(props, ref) {
+    var _props$align = props.align, align = _props$align === void 0 ? 'inherit' : _props$align, classes = props.classes, className = props.className, _props$color = props.color, color = _props$color === void 0 ? 'initial' : _props$color, component = props.component, _props$display = props.display, display = _props$display === void 0 ? 'initial' : _props$display, _props$gutterBottom = props.gutterBottom, gutterBottom = _props$gutterBottom === void 0 ? false : _props$gutterBottom, _props$noWrap = props.noWrap, noWrap = _props$noWrap === void 0 ? false : _props$noWrap, _props$paragraph = props.paragraph, paragraph = _props$paragraph === void 0 ? false : _props$paragraph, _props$variant = props.variant, variant = _props$variant === void 0 ? 'body1' : _props$variant, _props$variantMapping = props.variantMapping, variantMapping = _props$variantMapping === void 0 ? defaultVariantMapping : _props$variantMapping, other = _objectWithoutPropertiesDefault.default(props, [
+        "align",
+        "classes",
+        "className",
+        "color",
+        "component",
+        "display",
+        "gutterBottom",
+        "noWrap",
+        "paragraph",
+        "variant",
+        "variantMapping"
+    ]);
+    var Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
+    return(/*#__PURE__*/ _react.createElement(Component, _extendsDefault.default({
+        className: _clsxDefault.default(classes.root, className, variant !== 'inherit' && classes[variant], color !== 'initial' && classes["color".concat(_capitalizeDefault.default(color))], noWrap && classes.noWrap, gutterBottom && classes.gutterBottom, paragraph && classes.paragraph, align !== 'inherit' && classes["align".concat(_capitalizeDefault.default(align))], display !== 'initial' && classes["display".concat(_capitalizeDefault.default(display))]),
+        ref: ref
+    }, other)));
+});
+Typography.propTypes = {
+    /**
+   * Set the text-align on the component.
+   */ align: _propTypesDefault.default.oneOf([
+        'inherit',
+        'left',
+        'center',
+        'right',
+        'justify'
+    ]),
+    /**
+   * The content of the component.
+   */ children: _propTypesDefault.default.node,
+    /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */ classes: _propTypesDefault.default.object.isRequired,
+    /**
+   * @ignore
+   */ className: _propTypesDefault.default.string,
+    /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */ color: _propTypesDefault.default.oneOf([
+        'initial',
+        'inherit',
+        'primary',
+        'secondary',
+        'textPrimary',
+        'textSecondary',
+        'error'
+    ]),
+    /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   * Overrides the behavior of the `variantMapping` prop.
+   */ component: _propTypesDefault.default/* @typescript-to-proptypes-ignore */ .elementType,
+    /**
+   * Controls the display type
+   */ display: _propTypesDefault.default.oneOf([
+        'initial',
+        'block',
+        'inline'
+    ]),
+    /**
+   * If `true`, the text will have a bottom margin.
+   */ gutterBottom: _propTypesDefault.default.bool,
+    /**
+   * If `true`, the text will not wrap, but instead will truncate with a text overflow ellipsis.
+   *
+   * Note that text overflow can only happen with block or inline-block level elements
+   * (the element needs to have a width in order to overflow).
+   */ noWrap: _propTypesDefault.default.bool,
+    /**
+   * If `true`, the text will have a bottom margin.
+   */ paragraph: _propTypesDefault.default.bool,
+    /**
+   * Applies the theme typography styles.
+   */ variant: _propTypesDefault.default.oneOf([
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'subtitle1',
+        'subtitle2',
+        'body1',
+        'body2',
+        'caption',
+        'button',
+        'overline',
+        'srOnly',
+        'inherit'
+    ]),
+    /**
+   * The component maps the variant prop to a range of different HTML element types.
+   * For instance, subtitle1 to `<h6>`.
+   * If you wish to change that mapping, you can provide your own.
+   * Alternatively, you can use the `component` prop.
+   */ variantMapping: _propTypesDefault.default.object
+};
+exports.default = _withStylesDefault.default(styles, {
+    name: 'MuiTypography'
+})(Typography);
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../styles/withStyles":"c9Ztg","../utils/capitalize":"8zjhI","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"lT9bm":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -72664,46 +73108,59 @@ helpers.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _react = require("react");
-var _s = $RefreshSig$();
-function useSessionStorage(key) {
-    _s();
-    const value = _react.useRef(sessionStorage.getItem(key));
-    const setValue = (newValue)=>{
-        sessionStorage.setItem(key, newValue);
-    };
-    return [
-        value.current,
-        setValue
-    ];
+var _jsxRuntime = require("react/jsx-runtime");
+var _fab = require("@material-ui/core/Fab");
+var _fabDefault = parcelHelpers.interopDefault(_fab);
+var _add = require("@material-ui/icons/Add");
+var _addDefault = parcelHelpers.interopDefault(_add);
+var _constantsScss = require("../../sass/_constants.scss");
+console.log(_constantsScss.primaryColor);
+function AddFloatButton({ _onClick  }) {
+    return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+        __source: {
+            fileName: "resources/js/components/AddFloatButton.tsx",
+            lineNumber: 15
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsx(_fabDefault.default, {
+            color: _constantsScss.primaryColor,
+            "aria-label": "add",
+            className: "m-5 fixedRight",
+            onClick: _onClick,
+            __source: {
+                fileName: "resources/js/components/AddFloatButton.tsx",
+                lineNumber: 16
+            },
+            __self: this,
+            children: /*#__PURE__*/ _jsxRuntime.jsx(_addDefault.default, {
+                __source: {
+                    fileName: "resources/js/components/AddFloatButton.tsx",
+                    lineNumber: 17
+                },
+                __self: this
+            })
+        })
+    }));
 }
-exports.default = useSessionStorage;
-_s(useSessionStorage, "cnNOAu0kURYutOVq8TivAAthn1E=");
+exports.default = AddFloatButton;
+_c = AddFloatButton;
+var _c;
+$RefreshReg$(_c, "AddFloatButton");
 
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"eOOny":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","@material-ui/core/Fab":"hgEuA","@material-ui/icons/Add":"kYHDG","../../sass/_constants.scss":"3dEVD","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"hgEuA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "SELF_USER_ALIAS", ()=>SELF_USER_ALIAS
+parcelHelpers.export(exports, "default", ()=>_fabDefault.default
 );
-parcelHelpers.export(exports, "TARGET_USER_ALIAS", ()=>TARGET_USER_ALIAS
-);
-const SELF_USER_ALIAS = "s_user_alias";
-const TARGET_USER_ALIAS = "t_user_alias";
+var _fab = require("./Fab");
+var _fabDefault = parcelHelpers.interopDefault(_fab);
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"i2oW6":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>_buttonDefault.default
-);
-var _button = require("./Button");
-var _buttonDefault = parcelHelpers.interopDefault(_button);
-
-},{"./Button":"kIuQj","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"kIuQj":[function(require,module,exports) {
+},{"./Fab":"6ZFZb","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"6ZFZb":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "styles", ()=>styles
@@ -72719,7 +73176,6 @@ var _clsx = require("clsx");
 var _clsxDefault = parcelHelpers.interopDefault(_clsx);
 var _withStyles = require("../styles/withStyles");
 var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
-var _colorManipulator = require("../styles/colorManipulator");
 var _buttonBase = require("../ButtonBase");
 var _buttonBaseDefault = parcelHelpers.interopDefault(_buttonBase);
 var _capitalize = require("../utils/capitalize");
@@ -72729,10 +73185,7 @@ var styles = function styles1(theme) {
         /* Styles applied to the root element. */ root: _extendsDefault.default({
         }, theme.typography.button, {
             boxSizing: 'border-box',
-            minWidth: 64,
-            padding: '6px 16px',
-            borderRadius: theme.shape.borderRadius,
-            color: theme.palette.text.primary,
+            minHeight: 36,
             transition: theme.transitions.create([
                 'background-color',
                 'box-shadow',
@@ -72740,114 +73193,45 @@ var styles = function styles1(theme) {
             ], {
                 duration: theme.transitions.duration.short
             }),
-            '&:hover': {
-                textDecoration: 'none',
-                backgroundColor: _colorManipulator.fade(theme.palette.text.primary, theme.palette.action.hoverOpacity),
-                // Reset on touch devices, it doesn't add specificity
-                '@media (hover: none)': {
-                    backgroundColor: 'transparent'
-                },
-                '&$disabled': {
-                    backgroundColor: 'transparent'
-                }
+            borderRadius: '50%',
+            padding: 0,
+            minWidth: 0,
+            width: 56,
+            height: 56,
+            boxShadow: theme.shadows[6],
+            '&:active': {
+                boxShadow: theme.shadows[12]
             },
-            '&$disabled': {
-                color: theme.palette.action.disabled
-            }
-        }),
-        /* Styles applied to the span element that wraps the children. */ label: {
-            width: '100%',
-            // Ensure the correct width for iOS Safari
-            display: 'inherit',
-            alignItems: 'inherit',
-            justifyContent: 'inherit'
-        },
-        /* Styles applied to the root element if `variant="text"`. */ text: {
-            padding: '6px 8px'
-        },
-        /* Styles applied to the root element if `variant="text"` and `color="primary"`. */ textPrimary: {
-            color: theme.palette.primary.main,
-            '&:hover': {
-                backgroundColor: _colorManipulator.fade(theme.palette.primary.main, theme.palette.action.hoverOpacity),
-                // Reset on touch devices, it doesn't add specificity
-                '@media (hover: none)': {
-                    backgroundColor: 'transparent'
-                }
-            }
-        },
-        /* Styles applied to the root element if `variant="text"` and `color="secondary"`. */ textSecondary: {
-            color: theme.palette.secondary.main,
-            '&:hover': {
-                backgroundColor: _colorManipulator.fade(theme.palette.secondary.main, theme.palette.action.hoverOpacity),
-                // Reset on touch devices, it doesn't add specificity
-                '@media (hover: none)': {
-                    backgroundColor: 'transparent'
-                }
-            }
-        },
-        /* Styles applied to the root element if `variant="outlined"`. */ outlined: {
-            padding: '5px 15px',
-            border: "1px solid ".concat(theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)'),
-            '&$disabled': {
-                border: "1px solid ".concat(theme.palette.action.disabledBackground)
-            }
-        },
-        /* Styles applied to the root element if `variant="outlined"` and `color="primary"`. */ outlinedPrimary: {
-            color: theme.palette.primary.main,
-            border: "1px solid ".concat(_colorManipulator.fade(theme.palette.primary.main, 0.5)),
-            '&:hover': {
-                border: "1px solid ".concat(theme.palette.primary.main),
-                backgroundColor: _colorManipulator.fade(theme.palette.primary.main, theme.palette.action.hoverOpacity),
-                // Reset on touch devices, it doesn't add specificity
-                '@media (hover: none)': {
-                    backgroundColor: 'transparent'
-                }
-            }
-        },
-        /* Styles applied to the root element if `variant="outlined"` and `color="secondary"`. */ outlinedSecondary: {
-            color: theme.palette.secondary.main,
-            border: "1px solid ".concat(_colorManipulator.fade(theme.palette.secondary.main, 0.5)),
-            '&:hover': {
-                border: "1px solid ".concat(theme.palette.secondary.main),
-                backgroundColor: _colorManipulator.fade(theme.palette.secondary.main, theme.palette.action.hoverOpacity),
-                // Reset on touch devices, it doesn't add specificity
-                '@media (hover: none)': {
-                    backgroundColor: 'transparent'
-                }
-            },
-            '&$disabled': {
-                border: "1px solid ".concat(theme.palette.action.disabled)
-            }
-        },
-        /* Styles applied to the root element if `variant="contained"`. */ contained: {
             color: theme.palette.getContrastText(theme.palette.grey[300]),
             backgroundColor: theme.palette.grey[300],
-            boxShadow: theme.shadows[2],
             '&:hover': {
                 backgroundColor: theme.palette.grey.A100,
-                boxShadow: theme.shadows[4],
                 // Reset on touch devices, it doesn't add specificity
                 '@media (hover: none)': {
-                    boxShadow: theme.shadows[2],
                     backgroundColor: theme.palette.grey[300]
                 },
                 '&$disabled': {
                     backgroundColor: theme.palette.action.disabledBackground
-                }
+                },
+                textDecoration: 'none'
             },
             '&$focusVisible': {
                 boxShadow: theme.shadows[6]
-            },
-            '&:active': {
-                boxShadow: theme.shadows[8]
             },
             '&$disabled': {
                 color: theme.palette.action.disabled,
                 boxShadow: theme.shadows[0],
                 backgroundColor: theme.palette.action.disabledBackground
             }
+        }),
+        /* Styles applied to the span element that wraps the children. */ label: {
+            width: '100%',
+            // assure the correct width for iOS Safari
+            display: 'inherit',
+            alignItems: 'inherit',
+            justifyContent: 'inherit'
         },
-        /* Styles applied to the root element if `variant="contained"` and `color="primary"`. */ containedPrimary: {
+        /* Styles applied to the root element if `color="primary"`. */ primary: {
             color: theme.palette.primary.contrastText,
             backgroundColor: theme.palette.primary.main,
             '&:hover': {
@@ -72858,7 +73242,7 @@ var styles = function styles1(theme) {
                 }
             }
         },
-        /* Styles applied to the root element if `variant="contained"` and `color="secondary"`. */ containedSecondary: {
+        /* Styles applied to the root element if `color="secondary"`. */ secondary: {
             color: theme.palette.secondary.contrastText,
             backgroundColor: theme.palette.secondary.main,
             '&:hover': {
@@ -72869,19 +73253,26 @@ var styles = function styles1(theme) {
                 }
             }
         },
-        /* Styles applied to the root element if `disableElevation={true}`. */ disableElevation: {
-            boxShadow: 'none',
-            '&:hover': {
-                boxShadow: 'none'
+        /* Styles applied to the root element if `variant="extended"`. */ extended: {
+            borderRadius: 24,
+            padding: '0 16px',
+            width: 'auto',
+            minHeight: 'auto',
+            minWidth: 48,
+            height: 48,
+            '&$sizeSmall': {
+                width: 'auto',
+                padding: '0 8px',
+                borderRadius: 17,
+                minWidth: 34,
+                height: 34
             },
-            '&$focusVisible': {
-                boxShadow: 'none'
-            },
-            '&:active': {
-                boxShadow: 'none'
-            },
-            '&$disabled': {
-                boxShadow: 'none'
+            '&$sizeMedium': {
+                width: 'auto',
+                padding: '0 16px',
+                borderRadius: 20,
+                minWidth: 40,
+                height: 40
             }
         },
         /* Pseudo-class applied to the ButtonBase root element if the button is keyboard focused. */ focusVisible: {
@@ -72889,120 +73280,54 @@ var styles = function styles1(theme) {
         /* Pseudo-class applied to the root element if `disabled={true}`. */ disabled: {
         },
         /* Styles applied to the root element if `color="inherit"`. */ colorInherit: {
-            color: 'inherit',
-            borderColor: 'currentColor'
+            color: 'inherit'
         },
-        /* Styles applied to the root element if `size="small"` and `variant="text"`. */ textSizeSmall: {
-            padding: '4px 5px',
-            fontSize: theme.typography.pxToRem(13)
+        /* Styles applied to the root element if `size="small"``. */ sizeSmall: {
+            width: 40,
+            height: 40
         },
-        /* Styles applied to the root element if `size="large"` and `variant="text"`. */ textSizeLarge: {
-            padding: '8px 11px',
-            fontSize: theme.typography.pxToRem(15)
-        },
-        /* Styles applied to the root element if `size="small"` and `variant="outlined"`. */ outlinedSizeSmall: {
-            padding: '3px 9px',
-            fontSize: theme.typography.pxToRem(13)
-        },
-        /* Styles applied to the root element if `size="large"` and `variant="outlined"`. */ outlinedSizeLarge: {
-            padding: '7px 21px',
-            fontSize: theme.typography.pxToRem(15)
-        },
-        /* Styles applied to the root element if `size="small"` and `variant="contained"`. */ containedSizeSmall: {
-            padding: '4px 10px',
-            fontSize: theme.typography.pxToRem(13)
-        },
-        /* Styles applied to the root element if `size="large"` and `variant="contained"`. */ containedSizeLarge: {
-            padding: '8px 22px',
-            fontSize: theme.typography.pxToRem(15)
-        },
-        /* Styles applied to the root element if `size="small"`. */ sizeSmall: {
-        },
-        /* Styles applied to the root element if `size="large"`. */ sizeLarge: {
-        },
-        /* Styles applied to the root element if `fullWidth={true}`. */ fullWidth: {
-            width: '100%'
-        },
-        /* Styles applied to the startIcon element if supplied. */ startIcon: {
-            display: 'inherit',
-            marginRight: 8,
-            marginLeft: -4,
-            '&$iconSizeSmall': {
-                marginLeft: -2
-            }
-        },
-        /* Styles applied to the endIcon element if supplied. */ endIcon: {
-            display: 'inherit',
-            marginRight: -4,
-            marginLeft: 8,
-            '&$iconSizeSmall': {
-                marginRight: -2
-            }
-        },
-        /* Styles applied to the icon element if supplied and `size="small"`. */ iconSizeSmall: {
-            '& > *:first-child': {
-                fontSize: 18
-            }
-        },
-        /* Styles applied to the icon element if supplied and `size="medium"`. */ iconSizeMedium: {
-            '& > *:first-child': {
-                fontSize: 20
-            }
-        },
-        /* Styles applied to the icon element if supplied and `size="large"`. */ iconSizeLarge: {
-            '& > *:first-child': {
-                fontSize: 22
-            }
+        /* Styles applied to the root element if `size="medium"``. */ sizeMedium: {
+            width: 48,
+            height: 48
         }
     };
 };
-var Button = /*#__PURE__*/ _react.forwardRef(function Button1(props, ref) {
-    var children = props.children, classes = props.classes, className = props.className, _props$color = props.color, color = _props$color === void 0 ? 'default' : _props$color, _props$component = props.component, component = _props$component === void 0 ? 'button' : _props$component, _props$disabled = props.disabled, disabled = _props$disabled === void 0 ? false : _props$disabled, _props$disableElevati = props.disableElevation, disableElevation = _props$disableElevati === void 0 ? false : _props$disableElevati, _props$disableFocusRi = props.disableFocusRipple, disableFocusRipple = _props$disableFocusRi === void 0 ? false : _props$disableFocusRi, endIconProp = props.endIcon, focusVisibleClassName = props.focusVisibleClassName, _props$fullWidth = props.fullWidth, fullWidth = _props$fullWidth === void 0 ? false : _props$fullWidth, _props$size = props.size, size = _props$size === void 0 ? 'medium' : _props$size, startIconProp = props.startIcon, _props$type = props.type, type = _props$type === void 0 ? 'button' : _props$type, _props$variant = props.variant, variant = _props$variant === void 0 ? 'text' : _props$variant, other = _objectWithoutPropertiesDefault.default(props, [
+var Fab = /*#__PURE__*/ _react.forwardRef(function Fab1(props, ref) {
+    var children = props.children, classes = props.classes, className = props.className, _props$color = props.color, color = _props$color === void 0 ? 'default' : _props$color, _props$component = props.component, component = _props$component === void 0 ? 'button' : _props$component, _props$disabled = props.disabled, disabled = _props$disabled === void 0 ? false : _props$disabled, _props$disableFocusRi = props.disableFocusRipple, disableFocusRipple = _props$disableFocusRi === void 0 ? false : _props$disableFocusRi, focusVisibleClassName = props.focusVisibleClassName, _props$size = props.size, size = _props$size === void 0 ? 'large' : _props$size, _props$variant = props.variant, variant = _props$variant === void 0 ? 'round' : _props$variant, other = _objectWithoutPropertiesDefault.default(props, [
         "children",
         "classes",
         "className",
         "color",
         "component",
         "disabled",
-        "disableElevation",
         "disableFocusRipple",
-        "endIcon",
         "focusVisibleClassName",
-        "fullWidth",
         "size",
-        "startIcon",
-        "type",
         "variant"
     ]);
-    var startIcon = startIconProp && /*#__PURE__*/ _react.createElement("span", {
-        className: _clsxDefault.default(classes.startIcon, classes["iconSize".concat(_capitalizeDefault.default(size))])
-    }, startIconProp);
-    var endIcon = endIconProp && /*#__PURE__*/ _react.createElement("span", {
-        className: _clsxDefault.default(classes.endIcon, classes["iconSize".concat(_capitalizeDefault.default(size))])
-    }, endIconProp);
     return(/*#__PURE__*/ _react.createElement(_buttonBaseDefault.default, _extendsDefault.default({
-        className: _clsxDefault.default(classes.root, classes[variant], className, color === 'inherit' ? classes.colorInherit : color !== 'default' && classes["".concat(variant).concat(_capitalizeDefault.default(color))], size !== 'medium' && [
-            classes["".concat(variant, "Size").concat(_capitalizeDefault.default(size))],
-            classes["size".concat(_capitalizeDefault.default(size))]
-        ], disableElevation && classes.disableElevation, disabled && classes.disabled, fullWidth && classes.fullWidth),
+        className: _clsxDefault.default(classes.root, className, variant !== "round" && classes.extended, size !== 'large' && classes["size".concat(_capitalizeDefault.default(size))], disabled && classes.disabled, {
+            'primary': classes.primary,
+            'secondary': classes.secondary,
+            'inherit': classes.colorInherit
+        }[color]),
         component: component,
         disabled: disabled,
         focusRipple: !disableFocusRipple,
         focusVisibleClassName: _clsxDefault.default(classes.focusVisible, focusVisibleClassName),
-        ref: ref,
-        type: type
+        ref: ref
     }, other), /*#__PURE__*/ _react.createElement("span", {
         className: classes.label
-    }, startIcon, children, endIcon)));
+    }, children)));
 });
-Button.propTypes = {
+Fab.propTypes = {
     // ----------------------------- Warning --------------------------------
     // | These PropTypes are generated from the TypeScript type definitions |
     // |     To update them edit the d.ts file and run "yarn proptypes"     |
     // ----------------------------------------------------------------------
     /**
    * The content of the button.
-   */ children: _propTypesDefault.default.node,
+   */ children: _propTypesDefault.default/* @typescript-to-proptypes-ignore */ .node.isRequired,
     /**
    * Override or extend the styles applied to the component.
    * See [CSS API](#css) below for more details.
@@ -73026,26 +73351,14 @@ Button.propTypes = {
    * If `true`, the button will be disabled.
    */ disabled: _propTypesDefault.default.bool,
     /**
-   * If `true`, no elevation is used.
-   */ disableElevation: _propTypesDefault.default.bool,
-    /**
    * If `true`, the  keyboard focus ripple will be disabled.
    */ disableFocusRipple: _propTypesDefault.default.bool,
     /**
    * If `true`, the ripple effect will be disabled.
-   *
-   * ⚠️ Without a ripple there is no styling for :focus-visible by default. Be sure
-   * to highlight the element by applying separate styles with the `focusVisibleClassName`.
    */ disableRipple: _propTypesDefault.default.bool,
-    /**
-   * Element placed after the children.
-   */ endIcon: _propTypesDefault.default.node,
     /**
    * @ignore
    */ focusVisibleClassName: _propTypesDefault.default.string,
-    /**
-   * If `true`, the button will take up the full width of its container.
-   */ fullWidth: _propTypesDefault.default.bool,
     /**
    * The URL to link to when the button is clicked.
    * If defined, an `a` element will be used as the root node.
@@ -73059,31 +73372,17 @@ Button.propTypes = {
         'small'
     ]),
     /**
-   * Element placed before the children.
-   */ startIcon: _propTypesDefault.default.node,
-    /**
-   * @ignore
-   */ type: _propTypesDefault.default.oneOfType([
-        _propTypesDefault.default.oneOf([
-            'button',
-            'reset',
-            'submit'
-        ]),
-        _propTypesDefault.default.string
-    ]),
-    /**
    * The variant to use.
    */ variant: _propTypesDefault.default.oneOf([
-        'contained',
-        'outlined',
-        'text'
+        'extended',
+        'round'
     ])
 };
 exports.default = _withStylesDefault.default(styles, {
-    name: 'MuiButton'
-})(Button);
+    name: 'MuiFab'
+})(Fab);
 
-},{"@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../styles/withStyles":"c9Ztg","../styles/colorManipulator":"bgJOz","../ButtonBase":"cH9fJ","../utils/capitalize":"8zjhI","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"cH9fJ":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../styles/withStyles":"c9Ztg","../ButtonBase":"cH9fJ","../utils/capitalize":"8zjhI","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"cH9fJ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>_buttonBaseDefault.default
@@ -73952,7 +74251,7 @@ Ripple.propTypes = {
 };
 exports.default = Ripple;
 
-},{"react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../utils/useEventCallback":"eyR5l","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"ihYjC":[function(require,module,exports) {
+},{"react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../utils/useEventCallback":"eyR5l","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"kYHDG":[function(require,module,exports) {
 "use strict";
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -73963,8 +74262,8 @@ exports.default = void 0;
 var React = _interopRequireWildcard(require("react"));
 var _createSvgIcon = _interopRequireDefault(require("./utils/createSvgIcon"));
 var _default = _createSvgIcon.default(/*#__PURE__*/ React.createElement("path", {
-    d: "M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
-}), 'Send');
+    d: "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+}), 'Add');
 exports.default = _default;
 
 },{"@babel/runtime/helpers/interopRequireDefault":"eigyQ","@babel/runtime/helpers/interopRequireWildcard":"a2Hsp","react":"6TuXu","./utils/createSvgIcon":"iAWNY"}],"eigyQ":[function(require,module,exports) {
@@ -74165,6 +74464,455 @@ function useId(idOverride) {
 }
 exports.default = useId;
 
-},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["2rAXy","ghlMN","3hGib"], "3hGib", "parcelRequire9e19")
+},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"3dEVD":[function() {},{}],"i2oW6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_buttonDefault.default
+);
+var _button = require("./Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
+
+},{"./Button":"kIuQj","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"kIuQj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styles", ()=>styles
+);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _withStyles = require("../styles/withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var _colorManipulator = require("../styles/colorManipulator");
+var _buttonBase = require("../ButtonBase");
+var _buttonBaseDefault = parcelHelpers.interopDefault(_buttonBase);
+var _capitalize = require("../utils/capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+var styles = function styles1(theme) {
+    return {
+        /* Styles applied to the root element. */ root: _extendsDefault.default({
+        }, theme.typography.button, {
+            boxSizing: 'border-box',
+            minWidth: 64,
+            padding: '6px 16px',
+            borderRadius: theme.shape.borderRadius,
+            color: theme.palette.text.primary,
+            transition: theme.transitions.create([
+                'background-color',
+                'box-shadow',
+                'border'
+            ], {
+                duration: theme.transitions.duration.short
+            }),
+            '&:hover': {
+                textDecoration: 'none',
+                backgroundColor: _colorManipulator.fade(theme.palette.text.primary, theme.palette.action.hoverOpacity),
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    backgroundColor: 'transparent'
+                },
+                '&$disabled': {
+                    backgroundColor: 'transparent'
+                }
+            },
+            '&$disabled': {
+                color: theme.palette.action.disabled
+            }
+        }),
+        /* Styles applied to the span element that wraps the children. */ label: {
+            width: '100%',
+            // Ensure the correct width for iOS Safari
+            display: 'inherit',
+            alignItems: 'inherit',
+            justifyContent: 'inherit'
+        },
+        /* Styles applied to the root element if `variant="text"`. */ text: {
+            padding: '6px 8px'
+        },
+        /* Styles applied to the root element if `variant="text"` and `color="primary"`. */ textPrimary: {
+            color: theme.palette.primary.main,
+            '&:hover': {
+                backgroundColor: _colorManipulator.fade(theme.palette.primary.main, theme.palette.action.hoverOpacity),
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    backgroundColor: 'transparent'
+                }
+            }
+        },
+        /* Styles applied to the root element if `variant="text"` and `color="secondary"`. */ textSecondary: {
+            color: theme.palette.secondary.main,
+            '&:hover': {
+                backgroundColor: _colorManipulator.fade(theme.palette.secondary.main, theme.palette.action.hoverOpacity),
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    backgroundColor: 'transparent'
+                }
+            }
+        },
+        /* Styles applied to the root element if `variant="outlined"`. */ outlined: {
+            padding: '5px 15px',
+            border: "1px solid ".concat(theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)'),
+            '&$disabled': {
+                border: "1px solid ".concat(theme.palette.action.disabledBackground)
+            }
+        },
+        /* Styles applied to the root element if `variant="outlined"` and `color="primary"`. */ outlinedPrimary: {
+            color: theme.palette.primary.main,
+            border: "1px solid ".concat(_colorManipulator.fade(theme.palette.primary.main, 0.5)),
+            '&:hover': {
+                border: "1px solid ".concat(theme.palette.primary.main),
+                backgroundColor: _colorManipulator.fade(theme.palette.primary.main, theme.palette.action.hoverOpacity),
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    backgroundColor: 'transparent'
+                }
+            }
+        },
+        /* Styles applied to the root element if `variant="outlined"` and `color="secondary"`. */ outlinedSecondary: {
+            color: theme.palette.secondary.main,
+            border: "1px solid ".concat(_colorManipulator.fade(theme.palette.secondary.main, 0.5)),
+            '&:hover': {
+                border: "1px solid ".concat(theme.palette.secondary.main),
+                backgroundColor: _colorManipulator.fade(theme.palette.secondary.main, theme.palette.action.hoverOpacity),
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    backgroundColor: 'transparent'
+                }
+            },
+            '&$disabled': {
+                border: "1px solid ".concat(theme.palette.action.disabled)
+            }
+        },
+        /* Styles applied to the root element if `variant="contained"`. */ contained: {
+            color: theme.palette.getContrastText(theme.palette.grey[300]),
+            backgroundColor: theme.palette.grey[300],
+            boxShadow: theme.shadows[2],
+            '&:hover': {
+                backgroundColor: theme.palette.grey.A100,
+                boxShadow: theme.shadows[4],
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    boxShadow: theme.shadows[2],
+                    backgroundColor: theme.palette.grey[300]
+                },
+                '&$disabled': {
+                    backgroundColor: theme.palette.action.disabledBackground
+                }
+            },
+            '&$focusVisible': {
+                boxShadow: theme.shadows[6]
+            },
+            '&:active': {
+                boxShadow: theme.shadows[8]
+            },
+            '&$disabled': {
+                color: theme.palette.action.disabled,
+                boxShadow: theme.shadows[0],
+                backgroundColor: theme.palette.action.disabledBackground
+            }
+        },
+        /* Styles applied to the root element if `variant="contained"` and `color="primary"`. */ containedPrimary: {
+            color: theme.palette.primary.contrastText,
+            backgroundColor: theme.palette.primary.main,
+            '&:hover': {
+                backgroundColor: theme.palette.primary.dark,
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    backgroundColor: theme.palette.primary.main
+                }
+            }
+        },
+        /* Styles applied to the root element if `variant="contained"` and `color="secondary"`. */ containedSecondary: {
+            color: theme.palette.secondary.contrastText,
+            backgroundColor: theme.palette.secondary.main,
+            '&:hover': {
+                backgroundColor: theme.palette.secondary.dark,
+                // Reset on touch devices, it doesn't add specificity
+                '@media (hover: none)': {
+                    backgroundColor: theme.palette.secondary.main
+                }
+            }
+        },
+        /* Styles applied to the root element if `disableElevation={true}`. */ disableElevation: {
+            boxShadow: 'none',
+            '&:hover': {
+                boxShadow: 'none'
+            },
+            '&$focusVisible': {
+                boxShadow: 'none'
+            },
+            '&:active': {
+                boxShadow: 'none'
+            },
+            '&$disabled': {
+                boxShadow: 'none'
+            }
+        },
+        /* Pseudo-class applied to the ButtonBase root element if the button is keyboard focused. */ focusVisible: {
+        },
+        /* Pseudo-class applied to the root element if `disabled={true}`. */ disabled: {
+        },
+        /* Styles applied to the root element if `color="inherit"`. */ colorInherit: {
+            color: 'inherit',
+            borderColor: 'currentColor'
+        },
+        /* Styles applied to the root element if `size="small"` and `variant="text"`. */ textSizeSmall: {
+            padding: '4px 5px',
+            fontSize: theme.typography.pxToRem(13)
+        },
+        /* Styles applied to the root element if `size="large"` and `variant="text"`. */ textSizeLarge: {
+            padding: '8px 11px',
+            fontSize: theme.typography.pxToRem(15)
+        },
+        /* Styles applied to the root element if `size="small"` and `variant="outlined"`. */ outlinedSizeSmall: {
+            padding: '3px 9px',
+            fontSize: theme.typography.pxToRem(13)
+        },
+        /* Styles applied to the root element if `size="large"` and `variant="outlined"`. */ outlinedSizeLarge: {
+            padding: '7px 21px',
+            fontSize: theme.typography.pxToRem(15)
+        },
+        /* Styles applied to the root element if `size="small"` and `variant="contained"`. */ containedSizeSmall: {
+            padding: '4px 10px',
+            fontSize: theme.typography.pxToRem(13)
+        },
+        /* Styles applied to the root element if `size="large"` and `variant="contained"`. */ containedSizeLarge: {
+            padding: '8px 22px',
+            fontSize: theme.typography.pxToRem(15)
+        },
+        /* Styles applied to the root element if `size="small"`. */ sizeSmall: {
+        },
+        /* Styles applied to the root element if `size="large"`. */ sizeLarge: {
+        },
+        /* Styles applied to the root element if `fullWidth={true}`. */ fullWidth: {
+            width: '100%'
+        },
+        /* Styles applied to the startIcon element if supplied. */ startIcon: {
+            display: 'inherit',
+            marginRight: 8,
+            marginLeft: -4,
+            '&$iconSizeSmall': {
+                marginLeft: -2
+            }
+        },
+        /* Styles applied to the endIcon element if supplied. */ endIcon: {
+            display: 'inherit',
+            marginRight: -4,
+            marginLeft: 8,
+            '&$iconSizeSmall': {
+                marginRight: -2
+            }
+        },
+        /* Styles applied to the icon element if supplied and `size="small"`. */ iconSizeSmall: {
+            '& > *:first-child': {
+                fontSize: 18
+            }
+        },
+        /* Styles applied to the icon element if supplied and `size="medium"`. */ iconSizeMedium: {
+            '& > *:first-child': {
+                fontSize: 20
+            }
+        },
+        /* Styles applied to the icon element if supplied and `size="large"`. */ iconSizeLarge: {
+            '& > *:first-child': {
+                fontSize: 22
+            }
+        }
+    };
+};
+var Button = /*#__PURE__*/ _react.forwardRef(function Button1(props, ref) {
+    var children = props.children, classes = props.classes, className = props.className, _props$color = props.color, color = _props$color === void 0 ? 'default' : _props$color, _props$component = props.component, component = _props$component === void 0 ? 'button' : _props$component, _props$disabled = props.disabled, disabled = _props$disabled === void 0 ? false : _props$disabled, _props$disableElevati = props.disableElevation, disableElevation = _props$disableElevati === void 0 ? false : _props$disableElevati, _props$disableFocusRi = props.disableFocusRipple, disableFocusRipple = _props$disableFocusRi === void 0 ? false : _props$disableFocusRi, endIconProp = props.endIcon, focusVisibleClassName = props.focusVisibleClassName, _props$fullWidth = props.fullWidth, fullWidth = _props$fullWidth === void 0 ? false : _props$fullWidth, _props$size = props.size, size = _props$size === void 0 ? 'medium' : _props$size, startIconProp = props.startIcon, _props$type = props.type, type = _props$type === void 0 ? 'button' : _props$type, _props$variant = props.variant, variant = _props$variant === void 0 ? 'text' : _props$variant, other = _objectWithoutPropertiesDefault.default(props, [
+        "children",
+        "classes",
+        "className",
+        "color",
+        "component",
+        "disabled",
+        "disableElevation",
+        "disableFocusRipple",
+        "endIcon",
+        "focusVisibleClassName",
+        "fullWidth",
+        "size",
+        "startIcon",
+        "type",
+        "variant"
+    ]);
+    var startIcon = startIconProp && /*#__PURE__*/ _react.createElement("span", {
+        className: _clsxDefault.default(classes.startIcon, classes["iconSize".concat(_capitalizeDefault.default(size))])
+    }, startIconProp);
+    var endIcon = endIconProp && /*#__PURE__*/ _react.createElement("span", {
+        className: _clsxDefault.default(classes.endIcon, classes["iconSize".concat(_capitalizeDefault.default(size))])
+    }, endIconProp);
+    return(/*#__PURE__*/ _react.createElement(_buttonBaseDefault.default, _extendsDefault.default({
+        className: _clsxDefault.default(classes.root, classes[variant], className, color === 'inherit' ? classes.colorInherit : color !== 'default' && classes["".concat(variant).concat(_capitalizeDefault.default(color))], size !== 'medium' && [
+            classes["".concat(variant, "Size").concat(_capitalizeDefault.default(size))],
+            classes["size".concat(_capitalizeDefault.default(size))]
+        ], disableElevation && classes.disableElevation, disabled && classes.disabled, fullWidth && classes.fullWidth),
+        component: component,
+        disabled: disabled,
+        focusRipple: !disableFocusRipple,
+        focusVisibleClassName: _clsxDefault.default(classes.focusVisible, focusVisibleClassName),
+        ref: ref,
+        type: type
+    }, other), /*#__PURE__*/ _react.createElement("span", {
+        className: classes.label
+    }, startIcon, children, endIcon)));
+});
+Button.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+   * The content of the button.
+   */ children: _propTypesDefault.default.node,
+    /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */ classes: _propTypesDefault.default.object,
+    /**
+   * @ignore
+   */ className: _propTypesDefault.default.string,
+    /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */ color: _propTypesDefault.default.oneOf([
+        'default',
+        'inherit',
+        'primary',
+        'secondary'
+    ]),
+    /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */ component: _propTypesDefault.default/* @typescript-to-proptypes-ignore */ .elementType,
+    /**
+   * If `true`, the button will be disabled.
+   */ disabled: _propTypesDefault.default.bool,
+    /**
+   * If `true`, no elevation is used.
+   */ disableElevation: _propTypesDefault.default.bool,
+    /**
+   * If `true`, the  keyboard focus ripple will be disabled.
+   */ disableFocusRipple: _propTypesDefault.default.bool,
+    /**
+   * If `true`, the ripple effect will be disabled.
+   *
+   * ⚠️ Without a ripple there is no styling for :focus-visible by default. Be sure
+   * to highlight the element by applying separate styles with the `focusVisibleClassName`.
+   */ disableRipple: _propTypesDefault.default.bool,
+    /**
+   * Element placed after the children.
+   */ endIcon: _propTypesDefault.default.node,
+    /**
+   * @ignore
+   */ focusVisibleClassName: _propTypesDefault.default.string,
+    /**
+   * If `true`, the button will take up the full width of its container.
+   */ fullWidth: _propTypesDefault.default.bool,
+    /**
+   * The URL to link to when the button is clicked.
+   * If defined, an `a` element will be used as the root node.
+   */ href: _propTypesDefault.default.string,
+    /**
+   * The size of the button.
+   * `small` is equivalent to the dense button styling.
+   */ size: _propTypesDefault.default.oneOf([
+        'large',
+        'medium',
+        'small'
+    ]),
+    /**
+   * Element placed before the children.
+   */ startIcon: _propTypesDefault.default.node,
+    /**
+   * @ignore
+   */ type: _propTypesDefault.default.oneOfType([
+        _propTypesDefault.default.oneOf([
+            'button',
+            'reset',
+            'submit'
+        ]),
+        _propTypesDefault.default.string
+    ]),
+    /**
+   * The variant to use.
+   */ variant: _propTypesDefault.default.oneOf([
+        'contained',
+        'outlined',
+        'text'
+    ])
+};
+exports.default = _withStylesDefault.default(styles, {
+    name: 'MuiButton'
+})(Button);
+
+},{"@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../styles/withStyles":"c9Ztg","../styles/colorManipulator":"bgJOz","../ButtonBase":"cH9fJ","../utils/capitalize":"8zjhI","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"ihYjC":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = void 0;
+var React = _interopRequireWildcard(require("react"));
+var _createSvgIcon = _interopRequireDefault(require("./utils/createSvgIcon"));
+var _default = _createSvgIcon.default(/*#__PURE__*/ React.createElement("path", {
+    d: "M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+}), 'Send');
+exports.default = _default;
+
+},{"@babel/runtime/helpers/interopRequireDefault":"eigyQ","@babel/runtime/helpers/interopRequireWildcard":"a2Hsp","react":"6TuXu","./utils/createSvgIcon":"iAWNY"}],"jvgYN":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxRuntime = require("react/jsx-runtime");
+function CloseModalButton({ onClick  }) {
+    return(/*#__PURE__*/ _jsxRuntime.jsx("button", {
+        type: "button",
+        className: "close float-right",
+        "aria-label": "Close",
+        onClick: onClick,
+        style: {
+            float: "right",
+            display: "inline-block"
+        },
+        __source: {
+            fileName: "resources/js/components/CloseModalButton.tsx",
+            lineNumber: 9
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsx("span", {
+            "aria-hidden": "true",
+            __source: {
+                fileName: "resources/js/components/CloseModalButton.tsx",
+                lineNumber: 17
+            },
+            __self: this,
+            children: "\xd7"
+        })
+    }));
+}
+exports.default = CloseModalButton;
+_c = CloseModalButton;
+var _c;
+$RefreshReg$(_c, "CloseModalButton");
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}]},["2rAXy","ghlMN","3hGib"], "3hGib", "parcelRequire9e19")
 
 //# sourceMappingURL=dashboard.js.map

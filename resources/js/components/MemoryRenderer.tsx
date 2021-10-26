@@ -21,7 +21,7 @@ function toggleBodyOverflow(){
  * @returns 
  */
 
-export default function MemoryRender({memories}: Props){
+export default function MemoryRenderer({memories}: Props){
     const [selectedMemoryIndex, setSelectedMemoryIndex] = useState(-1);
     const [modalOpen, setModalOpen] = useState(false);
 

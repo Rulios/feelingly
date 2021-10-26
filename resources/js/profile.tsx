@@ -73,7 +73,7 @@ import MemoryRenderer from "./components/MemoryRenderer";
                     </div>
 
                     {(profileNavigationOption === 0 && (targetAlias !== "" || selfAlias !== "")) &&
-                        <div>
+                        <div className="">
                             <WrittenMemoriesFeed />
                         </div>
                     }
@@ -99,8 +99,6 @@ function toggleBodyOverflow(){
 }
 
 function WrittenMemoriesFeed(){
-    
- 
 
      return (
         <ProfileContext.Consumer>

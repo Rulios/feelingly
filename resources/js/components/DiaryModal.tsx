@@ -18,27 +18,27 @@ export default function DiaryModal({
     
 
     return (
-        <div className={`${shouldOpen ? "show" : "hide"}`}>
+        <div className={`${shouldOpen ? "show" : "d-none"}`}>
       
 
-            <div className="diary-modal ">     
+            <div className="c-modal">     
           
                 <div className="content p-3">
                 
-                    <div className="diary-modal-static-header">
+                    <div className="sticky-top">
                         <CloseModalButton onClick={handleClose}/>
                     </div>
 
-                    <div className="diary-modal-dynamic-header inline">
+                    <div className="inline">
 
                         <div>
-                            <h4 className="memory-modal-title modal-title">
+                            <h4 className="title">
                                 {diary?.name}
                             </h4>
 
                             <br />
 
-                            <div className="memory-modal-details">
+                            <div className="details">
 
                                 <div className="">
                                     Description

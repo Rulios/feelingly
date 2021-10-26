@@ -1,4 +1,4 @@
-.memory-modal {
+.c-modal {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -9,7 +9,11 @@
   overflow: hidden;
 }
 
-.memory-modal .content {
+.c-modal-index-3 {
+  z-index: 3;
+}
+
+.c-modal .content {
   width: 100%;
   position: fixed;
   overflow-y: auto;
@@ -21,46 +25,30 @@
   box-shadow: -7px -7px 10px grey;
 }
 
-.memory-modal-content img {
-  width: 100%;
-  height: auto;
-}
-
-.memory-modal-static-header {
-  position: sticky;
-}
-
-.memory-modal-dynamic-header {
-  display: block;
-}
-
-.memory-modal-title {
-  font-size: large;
-  display: inline;
-  word-break: break-all;
-}
-
-.memory-modal-details {
-  font-size: small;
-}
-
-.memory-modal-content {
-  max-height: 80vh;
-  font-size: 1em;
-}
-
-.memory-modal .modal-dialog {
-  max-width: 100%;
-}
-
-.memory-modal-actions {
+/*
+    Class for floating button actions  (like, reply)
+*/
+.c-modal .c-actions {
   position: fixed;
   right: 0;
   bottom: 0;
 }
 
-.hide {
-  display: none;
+.c-modal .title {
+  font-size: large;
+  display: inline;
+  word-break: break-all;
+}
+
+/* The modal's details are like the metadata section for the modal. (owner, date, etc)
+*/
+.c-modal .details {
+  font-size: small;
+}
+
+.c-modal .memory-content {
+  max-height: 80vh;
+  font-size: 1em;
 }
 
 .colorRed {

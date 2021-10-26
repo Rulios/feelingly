@@ -7,7 +7,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
-use App\Models\diary_memories;
+use App\Models\Diary;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -25,12 +25,18 @@ trait RegisterSecondChoresTrait
         $diary_memories->name = "My memories";
         $diary_memories->user_id = $userID;
         $diary_memories->visibility = "public";
+        $diary_memories->description = "
+            All my memories, here.
+        ";
 
 
         $diary_replies = new Diary();
         $diary_replies->name = "Replies";
         $diary_replies->user_id = $userID;
         $diary_replies->visibility = "public";
+        $diary_replies->description = "
+            Hmmm. Just my heartly replies.
+        ";
 
         $diary_memories->save();
         $diary_replies->save();

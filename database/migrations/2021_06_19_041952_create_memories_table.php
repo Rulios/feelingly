@@ -14,7 +14,7 @@ class CreateMemoriesTable extends Migration
     public function up()
     {
         Schema::create('memories', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->integer("user_id");
             $table->integer("diary_id");
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
@@ -27,13 +27,21 @@ class CreateMemoriesTable extends Migration
                 ->comment("Content of the memory");
             $table->string("visibility", 10)
                 ->comment("Memory's visibility: public | private");
-            $table->string("reply_to")
+
+            $table->timestamps();
+
+            /* this is a field that is added after with a migration. 
+                This operation needs to be done after since it's a foreign key constraint
+                to this same table. If written here, the migration will pop an error because
+                the table isn't created yet. 
+
+            table->foreignUuid("reply_to")
                 ->comment("If a memory is meant to reply another memory, 
                     this field will contain the ID of that replied meemory");
 
-
-            $table->foreign("reply_to")->references("id")->on("memories")->onUpdate("cascade");
-            $table->timestamps();
+            $table->foreign("reply_to")->references("id")->on("memories")->onUpdate("cascade"); 
+            */
+            
         });
     }
 

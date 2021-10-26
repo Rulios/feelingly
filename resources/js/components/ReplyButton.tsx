@@ -2,6 +2,10 @@ import BorderColorIcon from '@material-ui/icons/BorderColor';
 import Fab from '@material-ui/core/Fab';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
+type Props = {
+  _onClick(): void;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     extendedIcon: {
@@ -10,12 +14,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ReplyButton(){
-
+export default function ReplyButton({_onClick}: Props){
+ 
     const classes = useStyles();
 
     return (
-        <Fab  variant="extended" aria-label="like">
+        <Fab  variant="extended" aria-label="like" onClick={_onClick}>
             <BorderColorIcon className={`${classes.extendedIcon} m-3`}/> Reply
         </Fab>
     )

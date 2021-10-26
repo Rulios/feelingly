@@ -1,17 +1,18 @@
+import { useEffect, useState } from "react";
 import Memory from "../types/Memory";
-import Diary from "../types/Diary";
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import Input from "@material-ui/core/Input";
 import TOOLBAR from "../quill-editor-configs/toolbar";
 import TextField from "@material-ui/core/TextField";
-import { withWidth } from "@material-ui/core";
+import useAlias from "../hooks/useAlias";
+import useDiaries from "../hooks/useDiaries";
 
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 type Props = {
     memory: Memory;
     setMemory(updatedMemory: Memory): void;
-    diaries: Diary[] | undefined;
+    isAReply?: boolean;
 };
 
 const VISIBILITY:any = {
@@ -24,30 +25,46 @@ const VISIBILITY:any = {
  * TO DO LIST
  * 
  * - Change the style of the TitleInput. 
- *      This needs to be wider as the parent container.
  *      Meet the roboto-slab font requirements
  *      Change Font Size to 2em
  * 
  */
 
 
-export default function WriteMemoryModal({memory, setMemory, diaries}: Props){
+export default function WriteMemoryModal({memory, setMemory, isAReply}: Props){
+
+    const alias = useAlias("self");
+
+    /**Get self user alias priority to be the sessionStorage, 
+    * if not, use the DOM tag one passed through props */
+     const [statusDiaries, diaries, errorDiaries] = useDiaries(alias);
+
+    useEffect(() => {
+        /**Performs a validation to set default memory's diary id. If memory's diary id is 
+         * empty, it should be filled with a default value.
+         */
+        if(!memory.diary_id && diaries){
+            setMemory({...memory, diary_id: diaries![0].id});
+        }
+    }, [diaries]);
+
     return (
         <div>
             <div >
-                <Input id="memoryTitle" 
+                <TextField id="memoryTitle" 
                     placeholder="This memory's title"
                     className="mb-3"
                     value={memory.title}
+                    fullWidth
+                    InputProps={{
+                        startAdornment: (isAReply ? <InputAdornment position="start">Reply |</InputAdornment> : null) 
+                    }}
                     onChange={(e:React.ChangeEvent<HTMLInputElement>) => setMemory({...memory, title: e.target.value})}
-                    style={{
-                        width: "100%"
-                    }
-                    }
                 />
             </div>
 
             <ReactQuill theme="snow" 
+               
                 value={memory.content}
                 onChange={(text) => setMemory({...memory, content: text})}
                 modules={{
@@ -62,6 +79,7 @@ export default function WriteMemoryModal({memory, setMemory, diaries}: Props){
                         helperText="Select the visibility for this memory"
                         SelectProps={{
                             native: true,
+                            children: []
                         }}
                         value={memory.visibility}
                         onChange={(e:React.ChangeEvent<HTMLInputElement>) => setMemory({...memory, visibility: e.target.value})}

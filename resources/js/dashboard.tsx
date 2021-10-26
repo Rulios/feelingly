@@ -3,7 +3,7 @@ import $ from "jquery";
 import ReactDOM from "react-dom";
 import React, {FC, useState, useEffect, memo} from "react";
 
-import AddNewMmoryModal from "./components/AddNewMemoryModal";
+import AddNewMemoryModal from "./components/AddNewMemoryModal";
 
 import axios from "axios";
 import useAlias from "./hooks/useAlias";
@@ -24,12 +24,10 @@ window.onload = () =>{
 function App(): JSX.Element{
     /**TOGGLER */
 
-    const selfUserAlias = useAlias("self");
-
     
     
     return (
-        <AddNewMmoryModal/>
+        <AddNewMemoryModal/>
     );
 }
 

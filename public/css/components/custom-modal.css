@@ -1,0 +1,49 @@
+.c-modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.c-modal-index-3 {
+  z-index: 3;
+}
+
+.c-modal .content {
+  width: 100%;
+  position: fixed;
+  overflow-y: auto;
+  overflow-x: hidden;
+  top: 5%;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  box-shadow: -7px -7px 10px grey;
+}
+
+/*
+    Class for floating button actions  (like, reply)
+*/
+.c-modal .c-actions {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+
+.c-modal .title {
+  font-size: large;
+  display: inline;
+  word-break: break-all;
+}
+
+/* The modal's details are like the metadata section for the modal. (owner, date, etc)
+*/
+.c-modal .details {
+  font-size: small;
+}
+
+/*# sourceMappingURL=custom-modal.css.map */

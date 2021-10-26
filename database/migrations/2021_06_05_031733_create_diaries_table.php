@@ -19,7 +19,7 @@ class CreateDiariesTable extends Migration
                 ->onUpdate("cascade")->onDelete("cascade");
             
             $table->string("name", 50);
-            $table->string("description", 300);
+            $table->string("description", 300)->nullable();
             $table->string("visibility", 10);
             
             $table->timestamps();
