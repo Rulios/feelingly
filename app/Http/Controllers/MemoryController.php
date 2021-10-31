@@ -36,6 +36,7 @@ class MemoryController extends Controller
             $memory->title = $request->title;
             $memory->content = $request->content;
             $memory->visibility = $request->visibility;
+            $memory->reply_to = null;
 
             $memory->save();
 
@@ -61,7 +62,6 @@ class MemoryController extends Controller
             "content" => "required",
             "reply_to_memory_id" => "required | exists:memories,id",
             "diary_id" => "required| exists:diaries,id",
-            "visibility" => ["required", new ValidVisibilityType]
         ]);
 
         try{
@@ -78,7 +78,7 @@ class MemoryController extends Controller
             //Set this new reply memory's visibility to be the same visibility
             //as the replied memory.
             $memory->visibility = Memory::where("id", $request->reply_to_memory_id)
-                                    ->first()->get()->visibility;   
+                                    ->first()->visibility;   
                                     
             $memory->reply_to = $request->reply_to_memory_id;
 
@@ -140,7 +140,7 @@ class MemoryController extends Controller
     private function queryMemoriesWithJoins(){
         return DB::table("memories")    
                 ->join("users", "users.id", "=", "memories.user_id")
-                ->join("diaries", "diaries.user_id", "=", "memories.user_id")
+                ->join("diaries", "diaries.id", "=", "memories.diary_id")
                 ->select("memories.*", "users.alias AS user_alias","users.name AS user_name", "diaries.name AS diary_name")
                 ->orderBy("memories.created_at", "DESC");
                 

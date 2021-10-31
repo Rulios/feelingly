@@ -19,13 +19,15 @@ export default function ProfileMemoryBox({
     memory: {id, title, content, visibility, created_at, diary_name},
     onClick
 }: Props){
+
+
     return (
         <button className="col-md-6 noDecorationButton" onClick={onClick}>
             <div className="box memory-box p-2">
                 <div id="titleAndInformation">
 
                     <div className="date">
-                        {dayjs(created_at).utc().fromNow()}
+                        {dayjs(created_at).utc(true).fromNow()}
                     </div>
 
                     <br/>

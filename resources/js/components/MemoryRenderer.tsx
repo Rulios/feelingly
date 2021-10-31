@@ -48,6 +48,8 @@ export default function MemoryRenderer({memories}: Props){
         toggleBodyOverflow();
     };
 
+    console.log(memories);
+
     return (
         <div>
             <div className="row pt-5">

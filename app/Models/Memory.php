@@ -15,9 +15,8 @@ class Memory extends Model
     public function user(){
         $this->belongsTo(User::class);
     }
-
-
-
+/* 
+    public $timestamps = true; */
     protected $dates = ['created_at', 'updated_at'];
 
    

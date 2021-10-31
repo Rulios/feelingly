@@ -16,7 +16,7 @@ class AddReplyToColumn extends Migration
         Schema::table('memories', function (Blueprint $table) {
             //
 
-            $table->foreignUuid("reply_to")
+            $table->foreignUuid("reply_to")->nullable()
                 ->comment("If a memory is meant to reply another memory, 
                     this field will contain the ID of that replied meemory");
 

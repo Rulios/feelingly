@@ -13,7 +13,7 @@ type Props = {
 
 };
 
-export default function AddNewMmoryModal(){
+export default function AddNewMemoryModal(){
 
     const [openWriteModal, setOpenWriteModal] = useState(false);
 
@@ -24,7 +24,6 @@ export default function AddNewMmoryModal(){
         diary_id: ""
     } as Memory);
 
-    
 
     const submitMemory = ():void => {
         console.log(memory);
@@ -73,25 +72,24 @@ export default function AddNewMmoryModal(){
                             />
                             
 
+
+                            <div className="mt-3 p-3 row">
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    endIcon={<SendIcon/>}
+                                    onClick= {submitMemory}
+                                >
+                                    Share memory
+                                </Button>
+                            </div>
+
+
                         </div>  
                     </div>
-
-
-                    <div className="mt-3 row">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            endIcon={<SendIcon/>}
-                            onClick= {submitMemory}
-                        >
-                            Share memory
-                        </Button>
-                    </div>
+                    
                 </div>
             }
-
-            
-
         </div>
     );
 }

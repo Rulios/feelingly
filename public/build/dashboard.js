@@ -34884,7 +34884,7 @@ var _closeModalButtonDefault = parcelHelpers.interopDefault(_closeModalButton);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _s = $RefreshSig$();
-function AddNewMmoryModal() {
+function AddNewMemoryModal() {
     _s();
     const [openWriteModal, setOpenWriteModal] = _react.useState(false);
     const [memory, setMemory] = _react.useState({
@@ -34913,14 +34913,14 @@ function AddNewMmoryModal() {
         className: "mt-5",
         __source: {
             fileName: "resources/js/components/AddNewMemoryModal.tsx",
-            lineNumber: 51
+            lineNumber: 50
         },
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsx("div", {
                 __source: {
                     fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                    lineNumber: 53
+                    lineNumber: 52
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_addFloatButtonDefault.default, {
@@ -34928,94 +34928,92 @@ function AddNewMmoryModal() {
                     ,
                     __source: {
                         fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                        lineNumber: 54
+                        lineNumber: 53
                     },
                     __self: this
                 })
             }),
-            openWriteModal && /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+            openWriteModal && /*#__PURE__*/ _jsxRuntime.jsx("div", {
                 className: `${openWriteModal ? "show" : "d-none"}`,
                 __source: {
                     fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                    lineNumber: 59
+                    lineNumber: 58
                 },
                 __self: this,
-                children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                        className: "c-modal c-modal-index-3",
+                children: /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                    className: "c-modal c-modal-index-3",
+                    __source: {
+                        fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                        lineNumber: 61
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                        className: "content p-3",
                         __source: {
                             fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                            lineNumber: 62
+                            lineNumber: 63
                         },
                         __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                            className: "content p-3",
-                            __source: {
-                                fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                                lineNumber: 64
-                            },
-                            __self: this,
-                            children: [
-                                /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                                    className: "sticky-top",
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                className: "sticky-top",
+                                __source: {
+                                    fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                                    lineNumber: 65
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_closeModalButtonDefault.default, {
+                                    onClick: ()=>setOpenWriteModal(false)
+                                    ,
                                     __source: {
                                         fileName: "resources/js/components/AddNewMemoryModal.tsx",
                                         lineNumber: 66
                                     },
-                                    __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_closeModalButtonDefault.default, {
-                                        onClick: ()=>setOpenWriteModal(false)
-                                        ,
-                                        __source: {
-                                            fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                                            lineNumber: 67
-                                        },
-                                        __self: this
-                                    })
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx(_writeMemoryModalDefault.default, {
-                                    memory: memory,
-                                    setMemory: setMemory,
-                                    __source: {
-                                        fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                                        lineNumber: 70
-                                    },
                                     __self: this
                                 })
-                            ]
-                        })
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                        className: "mt-3 row",
-                        __source: {
-                            fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                            lineNumber: 80
-                        },
-                        __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                            variant: "contained",
-                            color: "primary",
-                            endIcon: /*#__PURE__*/ _jsxRuntime.jsx(_sendDefault.default, {
                             }),
-                            onClick: submitMemory,
-                            __source: {
-                                fileName: "resources/js/components/AddNewMemoryModal.tsx",
-                                lineNumber: 81
-                            },
-                            __self: this,
-                            children: "Share memory"
-                        })
+                            /*#__PURE__*/ _jsxRuntime.jsx(_writeMemoryModalDefault.default, {
+                                memory: memory,
+                                setMemory: setMemory,
+                                __source: {
+                                    fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                                    lineNumber: 69
+                                },
+                                __self: this
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                className: "mt-3 p-3 row",
+                                __source: {
+                                    fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                                    lineNumber: 76
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                    variant: "contained",
+                                    color: "primary",
+                                    endIcon: /*#__PURE__*/ _jsxRuntime.jsx(_sendDefault.default, {
+                                    }),
+                                    onClick: submitMemory,
+                                    __source: {
+                                        fileName: "resources/js/components/AddNewMemoryModal.tsx",
+                                        lineNumber: 77
+                                    },
+                                    __self: this,
+                                    children: "Share memory"
+                                })
+                            })
+                        ]
                     })
-                ]
+                })
             })
         ]
     }));
 }
-exports.default = AddNewMmoryModal;
-_s(AddNewMmoryModal, "GAvtispR5hRUIE7V+xzgQdL9CZw=");
-_c = AddNewMmoryModal;
+exports.default = AddNewMemoryModal;
+_s(AddNewMemoryModal, "GAvtispR5hRUIE7V+xzgQdL9CZw=");
+_c = AddNewMemoryModal;
 var _c;
-$RefreshReg$(_c, "AddNewMmoryModal");
+$RefreshReg$(_c, "AddNewMemoryModal");
 
   helpers.postlude(module);
 } finally {
@@ -35230,7 +35228,7 @@ $RefreshReg$(_c, "WriteMemoryModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-quill":"g38A3","../quill-editor-configs/toolbar":"8ynFp","@material-ui/core/TextField":"9U8zv","../hooks/useAlias":"buklO","../hooks/useDiaries":"g4K51","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","@material-ui/core/InputAdornment":"fiUE1"}],"g38A3":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-quill":"g38A3","../quill-editor-configs/toolbar":"8ynFp","@material-ui/core/TextField":"9U8zv","../hooks/useAlias":"buklO","../hooks/useDiaries":"g4K51","@material-ui/core/InputAdornment":"fiUE1","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"g38A3":[function(require,module,exports) {
 /*
 React-Quill v1.0.0
 https://github.com/zenoamaro/react-quill
@@ -71294,7 +71292,7 @@ _s(useDiaries, "b31lHLbOl4AzBKldRaOrZrUz6fA=", false, function() {
     return [_useFetchDefault.default];
 });
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./useFetch":"puCyy"}],"puCyy":[function(require,module,exports) {
+},{"./useFetch":"puCyy","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"puCyy":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

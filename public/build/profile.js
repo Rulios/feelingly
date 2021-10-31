@@ -47346,7 +47346,7 @@ _s(useDiaries, "b31lHLbOl4AzBKldRaOrZrUz6fA=", false, function() {
     return [_useFetchDefault.default];
 });
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./useFetch":"puCyy"}],"6gQdn":[function(require,module,exports) {
+},{"./useFetch":"puCyy","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"6gQdn":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -48248,10 +48248,11 @@ function MemoryRenderer({ memories  }) {
         setModalOpen(false);
         toggleBodyOverflow();
     };
+    console.log(memories);
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "resources/js/components/MemoryRenderer.tsx",
-            lineNumber: 52
+            lineNumber: 54
         },
         __self: this,
         children: [
@@ -48259,7 +48260,7 @@ function MemoryRenderer({ memories  }) {
                 className: "row pt-5",
                 __source: {
                     fileName: "resources/js/components/MemoryRenderer.tsx",
-                    lineNumber: 53
+                    lineNumber: 55
                 },
                 __self: this,
                 children: memories?.map((memory, index)=>{
@@ -48269,7 +48270,7 @@ function MemoryRenderer({ memories  }) {
                         ,
                         __source: {
                             fileName: "resources/js/components/MemoryRenderer.tsx",
-                            lineNumber: 56
+                            lineNumber: 58
                         },
                         __self: this
                     }, `Diary${memory.diary_id}-Memory${index}`));
@@ -48281,7 +48282,7 @@ function MemoryRenderer({ memories  }) {
                 handleClose: handleCloseMemory,
                 __source: {
                     fileName: "resources/js/components/MemoryRenderer.tsx",
-                    lineNumber: 67
+                    lineNumber: 69
                 },
                 __self: this
             })
@@ -48327,14 +48328,14 @@ function ProfileMemoryBox({ memory: { id , title , content , visibility , create
         onClick: onClick,
         __source: {
             fileName: "resources/js/components/ProfileMemoryBox.tsx",
-            lineNumber: 23
+            lineNumber: 25
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "box memory-box p-2",
             __source: {
                 fileName: "resources/js/components/ProfileMemoryBox.tsx",
-                lineNumber: 24
+                lineNumber: 26
             },
             __self: this,
             children: [
@@ -48342,7 +48343,7 @@ function ProfileMemoryBox({ memory: { id , title , content , visibility , create
                     id: "titleAndInformation",
                     __source: {
                         fileName: "resources/js/components/ProfileMemoryBox.tsx",
-                        lineNumber: 25
+                        lineNumber: 27
                     },
                     __self: this,
                     children: [
@@ -48350,15 +48351,15 @@ function ProfileMemoryBox({ memory: { id , title , content , visibility , create
                             className: "date",
                             __source: {
                                 fileName: "resources/js/components/ProfileMemoryBox.tsx",
-                                lineNumber: 27
+                                lineNumber: 29
                             },
                             __self: this,
-                            children: _dayjsDefault.default(created_at).utc().fromNow()
+                            children: _dayjsDefault.default(created_at).utc(true).fromNow()
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx("br", {
                             __source: {
                                 fileName: "resources/js/components/ProfileMemoryBox.tsx",
-                                lineNumber: 31
+                                lineNumber: 33
                             },
                             __self: this
                         }),
@@ -48367,13 +48368,13 @@ function ProfileMemoryBox({ memory: { id , title , content , visibility , create
                             className: "truncate lead",
                             __source: {
                                 fileName: "resources/js/components/ProfileMemoryBox.tsx",
-                                lineNumber: 33
+                                lineNumber: 35
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx("b", {
                                 __source: {
                                     fileName: "resources/js/components/ProfileMemoryBox.tsx",
-                                    lineNumber: 34
+                                    lineNumber: 36
                                 },
                                 __self: this,
                                 children: title
@@ -48384,7 +48385,7 @@ function ProfileMemoryBox({ memory: { id , title , content , visibility , create
                             className: "visibilityFont",
                             __source: {
                                 fileName: "resources/js/components/ProfileMemoryBox.tsx",
-                                lineNumber: 39
+                                lineNumber: 41
                             },
                             __self: this,
                             children: _visibilityTypesDefault.default[visibility]
@@ -48393,13 +48394,13 @@ function ProfileMemoryBox({ memory: { id , title , content , visibility , create
                             id: "diary_name",
                             __source: {
                                 fileName: "resources/js/components/ProfileMemoryBox.tsx",
-                                lineNumber: 43
+                                lineNumber: 45
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx("i", {
                                 __source: {
                                     fileName: "resources/js/components/ProfileMemoryBox.tsx",
-                                    lineNumber: 44
+                                    lineNumber: 46
                                 },
                                 __self: this,
                                 children: `in ${diary_name}`
@@ -48410,7 +48411,7 @@ function ProfileMemoryBox({ memory: { id , title , content , visibility , create
                 /*#__PURE__*/ _jsxRuntime.jsx("hr", {
                     __source: {
                         fileName: "resources/js/components/ProfileMemoryBox.tsx",
-                        lineNumber: 50
+                        lineNumber: 52
                     },
                     __self: this
                 }),
@@ -48419,7 +48420,7 @@ function ProfileMemoryBox({ memory: { id , title , content , visibility , create
                     className: "truncate",
                     __source: {
                         fileName: "resources/js/components/ProfileMemoryBox.tsx",
-                        lineNumber: 52
+                        lineNumber: 54
                     },
                     __self: this,
                     children: _htmlReactParserDefault.default(content)
@@ -51484,13 +51485,13 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
     const [memory, setMemory] = _react.useState({
         title: "",
         content: "",
-        visibility: "public",
         diary_id: "",
         reply_to_memory_id: reply_to
     });
     /**
      * TO DOOO FINISH THIS COMPONENET
      */ const submitReplyMemory = ()=>{
+        console.log(memory);
         _axiosDefault.default.post("/memories/reply", {
             ...memory
         }).then(({ data: { status_message  } , status  })=>{
@@ -51509,14 +51510,14 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
         className: "c-modal c-modal-index-3",
         __source: {
             fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-            lineNumber: 55
+            lineNumber: 56
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "content p-3",
             __source: {
                 fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                lineNumber: 57
+                lineNumber: 58
             },
             __self: this,
             children: [
@@ -51524,14 +51525,14 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
                     className: "sticky-top",
                     __source: {
                         fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                        lineNumber: 59
+                        lineNumber: 60
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_closeModalButtonDefault.default, {
                         onClick: handleClose,
                         __source: {
                             fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                            lineNumber: 60
+                            lineNumber: 61
                         },
                         __self: this
                     })
@@ -51542,7 +51543,7 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
                     isAReply: true,
                     __source: {
                         fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                        lineNumber: 63
+                        lineNumber: 64
                     },
                     __self: this
                 }),
@@ -51550,7 +51551,7 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
                     className: "mt-3 p-3 row",
                     __source: {
                         fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                        lineNumber: 69
+                        lineNumber: 70
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
@@ -51561,7 +51562,7 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
                         onClick: submitReplyMemory,
                         __source: {
                             fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                            lineNumber: 70
+                            lineNumber: 71
                         },
                         __self: this,
                         children: "Share reply"
@@ -51572,7 +51573,7 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
     }));
 }
 exports.default = AddNewReplyMemoryModal;
-_s(AddNewReplyMemoryModal, "qwYIAJSpSxyFHC8h564aJTo+TmY=", false, function() {
+_s(AddNewReplyMemoryModal, "RqKzXBvHIRJMFveSIQ/KwP2k81E=", false, function() {
     return [_useAliasDefault.default];
 });
 _c = AddNewReplyMemoryModal;
@@ -51584,7 +51585,7 @@ $RefreshReg$(_c, "AddNewReplyMemoryModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","../hooks/useAlias":"buklO","./WriteMemoryModal":"dnHBf","./CloseModalButton":"jvgYN","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","@material-ui/core/Button":"i2oW6","@material-ui/icons/Send":"ihYjC","axios":"iYoWk"}],"dnHBf":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","../hooks/useAlias":"buklO","./WriteMemoryModal":"dnHBf","@material-ui/core/Button":"i2oW6","@material-ui/icons/Send":"ihYjC","./CloseModalButton":"jvgYN","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"dnHBf":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -51792,7 +51793,7 @@ $RefreshReg$(_c, "WriteMemoryModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-quill":"g38A3","../quill-editor-configs/toolbar":"8ynFp","@material-ui/core/TextField":"9U8zv","../hooks/useAlias":"buklO","../hooks/useDiaries":"g4K51","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","@material-ui/core/InputAdornment":"fiUE1"}],"g38A3":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-quill":"g38A3","../quill-editor-configs/toolbar":"8ynFp","@material-ui/core/TextField":"9U8zv","../hooks/useAlias":"buklO","../hooks/useDiaries":"g4K51","@material-ui/core/InputAdornment":"fiUE1","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"g38A3":[function(require,module,exports) {
 /*
 React-Quill v1.0.0
 https://github.com/zenoamaro/react-quill

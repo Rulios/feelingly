@@ -22,7 +22,6 @@ export default function AddNewReplyMemoryModal({handleClose, reply_to}: Props){
     const [memory, setMemory] = useState<Memory>({
         title: "",
         content: "",
-        visibility: "public",
         diary_id: "",
         reply_to_memory_id: reply_to
     } as Memory);
@@ -32,6 +31,8 @@ export default function AddNewReplyMemoryModal({handleClose, reply_to}: Props){
      */
 
     const submitReplyMemory = ():void => {
+
+        console.log(memory);
         axios.post("/memories/reply", {...memory})
         .then(({data : {status_message}, status}) => {
 
