@@ -55,41 +55,43 @@ export default function AddNewMemoryModal(){
 
             {openWriteModal && 
 
-                <div className={`${openWriteModal ? "show" : "d-none"}`}>
-                    
+                <div className="c-modal c-modal-index-3">     
 
-                    <div className="c-modal c-modal-index-3">     
+                    <div className="content p-3">
 
-                        <div className="content p-3">
+                        <div className="sticky-top">
+                            <CloseModalButton onClick={() => setOpenWriteModal(false)}/>
+                        </div>
+
+                        <WriteMemoryModal
+                            memory={memory}
+                            setMemory={setMemory}
+                        />
                         
-                            <div className="sticky-top">
-                                <CloseModalButton onClick={() => setOpenWriteModal(false)}/>
-                            </div>
-
-                            <WriteMemoryModal
-                                memory={memory}
-                                setMemory={setMemory}
-                            />
-                            
 
 
-                            <div className="mt-3 p-3 row">
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    endIcon={<SendIcon/>}
-                                    onClick= {submitMemory}
-                                >
-                                    Share memory
-                                </Button>
-                            </div>
+                        <div className="mt-3 p-3 row">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                endIcon={<SendIcon/>}
+                                onClick= {submitMemory}
+                            >
+                                Share memory
+                            </Button>
+                        </div>
 
 
-                        </div>  
-                    </div>
-                    
+                    </div>  
                 </div>
             }
         </div>
     );
 }
+/* 
+<div className={`${openWriteModal ? "show" : "d-none"}`}>
+                    
+
+                    
+                    
+                </div> */

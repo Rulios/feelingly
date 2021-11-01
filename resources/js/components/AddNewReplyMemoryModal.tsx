@@ -1,6 +1,5 @@
 import Memory from "../types/Memory";
 import {useState, useEffect} from "react";
-import useDiaries from "../hooks/useDiaries";
 import useAlias from "../hooks/useAlias";
 
 import WriteMemoryModal from "./WriteMemoryModal";

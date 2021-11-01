@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Memory from "../types/Memory";
 import ReactQuill from 'react-quill';
-import Input from "@material-ui/core/Input";
 import TOOLBAR from "../quill-editor-configs/toolbar";
 import TextField from "@material-ui/core/TextField";
 import useAlias from "../hooks/useAlias";
@@ -20,15 +19,6 @@ const VISIBILITY:any = {
     private: "Private"
 };
 
-
-/**
- * TO DO LIST
- * 
- * - Change the style of the TitleInput. 
- *      Meet the roboto-slab font requirements
- *      Change Font Size to 2em
- * 
- */
 
 
 export default function WriteMemoryModal({memory, setMemory, isAReply}: Props){
@@ -53,10 +43,13 @@ export default function WriteMemoryModal({memory, setMemory, isAReply}: Props){
             <div >
                 <TextField id="memoryTitle" 
                     placeholder="This memory's title"
-                    className="mb-3"
+                    className="mb-3 roboto-slab-font"
                     value={memory.title}
                     fullWidth
                     InputProps={{
+                        classes: {
+                            input: "roboto-slab-font h2"
+                        },
                         startAdornment: (isAReply ? <InputAdornment position="start">Reply |</InputAdornment> : null) 
                     }}
                     onChange={(e:React.ChangeEvent<HTMLInputElement>) => setMemory({...memory, title: e.target.value})}
@@ -97,6 +90,7 @@ export default function WriteMemoryModal({memory, setMemory, isAReply}: Props){
                         helperText="Select the diarie to store this memory"
                         SelectProps={{
                             native: true,
+                            children: []
                         }}
                         value={memory.diary_id ?? diaries![0].id ?? ""}
                         onChange={(e:React.ChangeEvent<HTMLInputElement>) => {

@@ -47418,7 +47418,7 @@ var _utc = require("dayjs/plugin/utc");
 var _utcDefault = parcelHelpers.interopDefault(_utc);
 _dayjsDefault.default.extend(_relativeTimeDefault.default);
 _dayjsDefault.default.extend(_utcDefault.default);
-function ProfileDiaryBox({ diary: { id , name , visibility , created_at  } , onClick  }) {
+function ProfileDiaryBox({ diary: { id , name , description , visibility , created_at  } , onClick  }) {
     return(/*#__PURE__*/ _jsxRuntime.jsx("button", {
         className: "col-md-6 noDecorationButton",
         onClick: onClick,
@@ -47449,7 +47449,7 @@ function ProfileDiaryBox({ diary: { id , name , visibility , created_at  } , onC
                             lineNumber: 28
                         },
                         __self: this,
-                        children: _dayjsDefault.default(created_at).utc().fromNow()
+                        children: _dayjsDefault.default(created_at).utc(true).fromNow()
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx("br", {
                         __source: {
@@ -47499,7 +47499,7 @@ function ProfileDiaryBox({ diary: { id , name , visibility , created_at  } , onC
                             lineNumber: 47
                         },
                         __self: this,
-                        children: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                        children: description
                     })
                 ]
             })
@@ -51510,14 +51510,14 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
         className: "c-modal c-modal-index-3",
         __source: {
             fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-            lineNumber: 56
+            lineNumber: 55
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "content p-3",
             __source: {
                 fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                lineNumber: 58
+                lineNumber: 57
             },
             __self: this,
             children: [
@@ -51525,14 +51525,14 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
                     className: "sticky-top",
                     __source: {
                         fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                        lineNumber: 60
+                        lineNumber: 59
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_closeModalButtonDefault.default, {
                         onClick: handleClose,
                         __source: {
                             fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                            lineNumber: 61
+                            lineNumber: 60
                         },
                         __self: this
                     })
@@ -51543,7 +51543,7 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
                     isAReply: true,
                     __source: {
                         fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                        lineNumber: 64
+                        lineNumber: 63
                     },
                     __self: this
                 }),
@@ -51551,7 +51551,7 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
                     className: "mt-3 p-3 row",
                     __source: {
                         fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                        lineNumber: 70
+                        lineNumber: 69
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
@@ -51562,7 +51562,7 @@ function AddNewReplyMemoryModal({ handleClose , reply_to  }) {
                         onClick: submitReplyMemory,
                         __source: {
                             fileName: "resources/js/components/AddNewReplyMemoryModal.tsx",
-                            lineNumber: 71
+                            lineNumber: 70
                         },
                         __self: this,
                         children: "Share reply"
@@ -51631,23 +51631,26 @@ function WriteMemoryModal({ memory , setMemory , isAReply  }) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "resources/js/components/WriteMemoryModal.tsx",
-            lineNumber: 52
+            lineNumber: 42
         },
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsx("div", {
                 __source: {
                     fileName: "resources/js/components/WriteMemoryModal.tsx",
-                    lineNumber: 53
+                    lineNumber: 43
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_textFieldDefault.default, {
                     id: "memoryTitle",
                     placeholder: "This memory's title",
-                    className: "mb-3",
+                    className: "mb-3 roboto-slab-font",
                     value: memory.title,
                     fullWidth: true,
                     InputProps: {
+                        classes: {
+                            input: "roboto-slab-font h2"
+                        },
                         startAdornment: isAReply ? /*#__PURE__*/ _jsxRuntime.jsx(_inputAdornmentDefault.default, {
                             position: "start",
                             children: "Reply |"
@@ -51660,7 +51663,7 @@ function WriteMemoryModal({ memory , setMemory , isAReply  }) {
                     ,
                     __source: {
                         fileName: "resources/js/components/WriteMemoryModal.tsx",
-                        lineNumber: 54
+                        lineNumber: 44
                     },
                     __self: this
                 })
@@ -51678,7 +51681,7 @@ function WriteMemoryModal({ memory , setMemory , isAReply  }) {
                 },
                 __source: {
                     fileName: "resources/js/components/WriteMemoryModal.tsx",
-                    lineNumber: 66
+                    lineNumber: 59
                 },
                 __self: this
             }),
@@ -51686,7 +51689,7 @@ function WriteMemoryModal({ memory , setMemory , isAReply  }) {
                 className: "mt-2 row p-2",
                 __source: {
                     fileName: "resources/js/components/WriteMemoryModal.tsx",
-                    lineNumber: 75
+                    lineNumber: 68
                 },
                 __self: this,
                 children: [
@@ -51694,7 +51697,7 @@ function WriteMemoryModal({ memory , setMemory , isAReply  }) {
                         className: "col-lg-2",
                         __source: {
                             fileName: "resources/js/components/WriteMemoryModal.tsx",
-                            lineNumber: 77
+                            lineNumber: 70
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_textFieldDefault.default, {
@@ -51714,7 +51717,7 @@ function WriteMemoryModal({ memory , setMemory , isAReply  }) {
                             ,
                             __source: {
                                 fileName: "resources/js/components/WriteMemoryModal.tsx",
-                                lineNumber: 78
+                                lineNumber: 71
                             },
                             __self: this,
                             children: Object.keys(VISIBILITY).map((visibility)=>{
@@ -51722,7 +51725,7 @@ function WriteMemoryModal({ memory , setMemory , isAReply  }) {
                                     value: visibility,
                                     __source: {
                                         fileName: "resources/js/components/WriteMemoryModal.tsx",
-                                        lineNumber: 88
+                                        lineNumber: 81
                                     },
                                     __self: this,
                                     children: VISIBILITY[visibility]
@@ -51734,7 +51737,7 @@ function WriteMemoryModal({ memory , setMemory , isAReply  }) {
                         className: "col-lg-2",
                         __source: {
                             fileName: "resources/js/components/WriteMemoryModal.tsx",
-                            lineNumber: 95
+                            lineNumber: 88
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_textFieldDefault.default, {
@@ -51743,7 +51746,8 @@ function WriteMemoryModal({ memory , setMemory , isAReply  }) {
                             id: "diarieGroup",
                             helperText: "Select the diarie to store this memory",
                             SelectProps: {
-                                native: true
+                                native: true,
+                                children: []
                             },
                             value: (memory.diary_id ?? diaries[0].id) ?? "",
                             onChange: (e)=>{
@@ -51759,7 +51763,7 @@ function WriteMemoryModal({ memory , setMemory , isAReply  }) {
                             },
                             __source: {
                                 fileName: "resources/js/components/WriteMemoryModal.tsx",
-                                lineNumber: 96
+                                lineNumber: 89
                             },
                             __self: this,
                             children: diaries && diaries.map(({ id , name  }, i)=>{
@@ -51767,7 +51771,7 @@ function WriteMemoryModal({ memory , setMemory , isAReply  }) {
                                     value: id,
                                     __source: {
                                         fileName: "resources/js/components/WriteMemoryModal.tsx",
-                                        lineNumber: 118
+                                        lineNumber: 112
                                     },
                                     __self: this,
                                     children: name
@@ -72134,14 +72138,7 @@ exports.default = [
     [
         'blockquote'
     ],
-    [
-        {
-            'header': 1
-        },
-        {
-            'header': 2
-        }
-    ],
+    /*  [{ 'header': 1 }, { 'header': 2 }],      */ // custom button values
     [
         {
             'list': 'ordered'
@@ -72163,41 +72160,11 @@ exports.default = [
             'direction': 'rtl'
         }
     ],
-    [
-        {
-            'size': [
-                'small',
-                false,
-                'large',
-                'huge'
-            ]
-        }
-    ],
-    [
-        {
-            'header': [
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                false
-            ]
-        }
-    ],
-    [
-        {
-            'font': []
-        }
-    ],
-    [
+    /* [{ 'size': ['small', false, 'large', 'huge'] }],   */ // custom dropdown
+    /* [{ 'header': [1, 2, 3, 4, 5, 6, false] }], */ /* [{ 'font': [] }], */ [
         {
             'align': []
         }
-    ],
-    [
-        'clean'
     ]
 ];
 

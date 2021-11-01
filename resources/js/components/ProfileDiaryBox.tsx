@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function ProfileDiaryBox({
-    diary : {id, name, visibility, created_at},
+    diary : {id, name, description, visibility, created_at},
     onClick
 }: Props){
 
@@ -26,7 +26,7 @@ export default function ProfileDiaryBox({
                 <div id="titleAndInformation">
 
                     <div className="date">
-                        {dayjs(created_at).utc().fromNow()}
+                        {dayjs(created_at).utc(true).fromNow()}
                     </div>
 
                     <br/>
@@ -45,7 +45,7 @@ export default function ProfileDiaryBox({
                     <hr/>
 
                     <div id="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        {description}
                     </div>
 
                 </div>

@@ -122,6 +122,12 @@
   font-size: small;
 }
 
+.close {
+  border: 1px solid black;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
 .c-modal .memory-content {
   max-height: 80vh;
   font-size: 1em;
@@ -162,12 +168,6 @@
 
 .activeSection {
   border-bottom: solid 2px black !important;
-}
-
-.close {
-  background-color: transparent;
-  border: 1px solid black;
-  border-radius: 5px;
 }
 
 .box {
