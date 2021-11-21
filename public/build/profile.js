@@ -48257,7 +48257,7 @@ function MemoryRenderer({ memories  }) {
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                className: "row pt-5",
+                className: "row pt-2",
                 __source: {
                     fileName: "resources/js/components/MemoryRenderer.tsx",
                     lineNumber: 55

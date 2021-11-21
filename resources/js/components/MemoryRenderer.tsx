@@ -52,7 +52,7 @@ export default function MemoryRenderer({memories}: Props){
 
     return (
         <div>
-            <div className="row pt-5">
+            <div className="row pt-2">
                 {memories?.map((memory, index) => {
                     return (
                         <ProfileMemoryBox

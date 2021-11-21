@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Memory;
+use App\Models\Diary;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\ProfileController;
@@ -35,6 +36,7 @@ Route::get("/profile/{alias}", function($alias){
             "description" => $user->description,
             "isOwnProfile" => $isOwnProfile,
             "numberOfMemoriesWritten" => count(Memory::where([["user_id", $user->id], ["visibility", "public"]])->get()),
+            "numberOfDiaries" =>  count(Diary::where([["user_id", $user->id], ["visibility", "public"]])->get()),
             "t_user_alias" => $user->alias //sets hidden alias on current profile page
         ]);
 

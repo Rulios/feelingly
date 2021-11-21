@@ -74,6 +74,12 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col">
+                {{$numberOfDiaries}} Diaries
+            </div>
+        </div>
+
 
     </div>
 
