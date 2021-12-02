@@ -15,8 +15,8 @@ class CreateMemoriesTable extends Migration
     {
         Schema::create('memories', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->integer("user_id");
-            $table->integer("diary_id");
+            $table->uuid("user_id");
+            $table->uuid("diary_id");
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign("diary_id")->references("id")->on("diaries")->onDelete("cascade")->onUpdate("cascade");
             

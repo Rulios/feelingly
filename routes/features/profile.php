@@ -5,10 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Memory;
 use App\Models\Diary;
+use App\Models\Follow;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\FollowController;
 /**
  * Profile Routes
  * 
@@ -16,15 +17,12 @@ use App\Http\Controllers\ProfileController;
  * Like changing profile pic, changing profile values, viewing a profile, etc. 
  */
 
-//serving a profile
+//serving a profiles
 Route::get("/profile/{alias}", function($alias){
-
-    $isOwnProfile = false;
 
     try{
 
         if(Auth::check() && Auth::user()->alias == $alias){
-            $isOwnProfile = true;
             $user = Auth::user();
         }else{
             $user = User::where("alias", $alias)->first();
@@ -34,9 +32,9 @@ Route::get("/profile/{alias}", function($alias){
             "alias" => $user->alias,
             "name" => $user->name,
             "description" => $user->description,
-            "isOwnProfile" => $isOwnProfile,
             "numberOfMemoriesWritten" => count(Memory::where([["user_id", $user->id], ["visibility", "public"]])->get()),
             "numberOfDiaries" =>  count(Diary::where([["user_id", $user->id], ["visibility", "public"]])->get()),
+            "isOwnProfile" => Auth::check() && Auth::user()->alias == $alias,
             "t_user_alias" => $user->alias //sets hidden alias on current profile page
         ]);
 
@@ -88,6 +86,22 @@ Route::put("/profile/account/change_password", [ProfileController::class, "chang
 Route::put("/profile/account/change_email", [ProfileController::class, "changeEmail"])
     ->name("profile.change.email")
     ->middleware("auth");
+
+
+
+
+
+
+/**FOLLOW FEATURE ROUTES */
+
+Route::post("/profile/actions/follow", [FollowController::class, "followUser"])
+    ->name("profile.follow")
+    ->middleware("auth");
+
+Route::post("/profile/actions/unfollow", [FollowController::class, "unfollowUser"])
+    ->name("profile.unfollow")
+    ->middleware("auth");
+
 
 
 ?>

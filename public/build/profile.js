@@ -900,7 +900,7 @@ window.onload = function() {
     _reactDomDefault.default.render(/*#__PURE__*/ _jsxRuntime.jsx(App, {
         __source: {
             fileName: "resources/js/profile.tsx",
-            lineNumber: 32
+            lineNumber: 29
         },
         __self: this
     }), document.getElementById("root"));
@@ -920,7 +920,7 @@ function App() {
         },
         __source: {
             fileName: "resources/js/profile.tsx",
-            lineNumber: 52
+            lineNumber: 49
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx(_profileContextDefault.default.Provider, {
@@ -938,13 +938,13 @@ function App() {
             },
             __source: {
                 fileName: "resources/js/profile.tsx",
-                lineNumber: 56
+                lineNumber: 53
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
                 __source: {
                     fileName: "resources/js/profile.tsx",
-                    lineNumber: 69
+                    lineNumber: 66
                 },
                 __self: this,
                 children: [
@@ -952,7 +952,7 @@ function App() {
                         className: "row mt-5",
                         __source: {
                             fileName: "resources/js/profile.tsx",
-                            lineNumber: 70
+                            lineNumber: 67
                         },
                         __self: this,
                         children: [
@@ -961,7 +961,7 @@ function App() {
                                 newValue: setProfileNavigationOption,
                                 __source: {
                                     fileName: "resources/js/profile.tsx",
-                                    lineNumber: 71
+                                    lineNumber: 68
                                 },
                                 __self: this
                             }),
@@ -969,7 +969,7 @@ function App() {
                                 className: "mt-2",
                                 __source: {
                                     fileName: "resources/js/profile.tsx",
-                                    lineNumber: 72
+                                    lineNumber: 69
                                 },
                                 __self: this
                             })
@@ -979,13 +979,13 @@ function App() {
                         className: "",
                         __source: {
                             fileName: "resources/js/profile.tsx",
-                            lineNumber: 76
+                            lineNumber: 73
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(WrittenMemoriesFeed, {
                             __source: {
                                 fileName: "resources/js/profile.tsx",
-                                lineNumber: 77
+                                lineNumber: 74
                             },
                             __self: this
                         })
@@ -993,13 +993,13 @@ function App() {
                     profileNavigationOption === 1 && /*#__PURE__*/ _jsxRuntime.jsx("div", {
                         __source: {
                             fileName: "resources/js/profile.tsx",
-                            lineNumber: 82
+                            lineNumber: 79
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(DiariesFeed, {
                             __source: {
                                 fileName: "resources/js/profile.tsx",
-                                lineNumber: 83
+                                lineNumber: 80
                             },
                             __self: this
                         })
@@ -1020,14 +1020,14 @@ function WrittenMemoriesFeed() {
     return(/*#__PURE__*/ _jsxRuntime.jsx(_profileContextDefault.default.Consumer, {
         __source: {
             fileName: "resources/js/profile.tsx",
-            lineNumber: 104
+            lineNumber: 101
         },
         __self: this,
         children: ({ memoriesFetch: { memories  }  })=>/*#__PURE__*/ _jsxRuntime.jsx(_memoryRendererDefault.default, {
                 memories: memories,
                 __source: {
                     fileName: "resources/js/profile.tsx",
-                    lineNumber: 107
+                    lineNumber: 104
                 },
                 __self: this
             })
@@ -1057,7 +1057,7 @@ function DiariesFeed() {
     return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "resources/js/profile.tsx",
-            lineNumber: 147
+            lineNumber: 144
         },
         __self: this,
         children: [
@@ -1068,7 +1068,7 @@ function DiariesFeed() {
                     ,
                     __source: {
                         fileName: "resources/js/profile.tsx",
-                        lineNumber: 152
+                        lineNumber: 149
                     },
                     __self: this
                 }, `ProfileDiaryBox-${diary?.index}`));
@@ -1080,7 +1080,7 @@ function DiariesFeed() {
                 handleClose: handleCloseDiaryModal,
                 __source: {
                     fileName: "resources/js/profile.tsx",
-                    lineNumber: 162
+                    lineNumber: 159
                 },
                 __self: this
             })
@@ -47346,7 +47346,7 @@ _s(useDiaries, "b31lHLbOl4AzBKldRaOrZrUz6fA=", false, function() {
     return [_useFetchDefault.default];
 });
 
-},{"./useFetch":"puCyy","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"6gQdn":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./useFetch":"puCyy"}],"6gQdn":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

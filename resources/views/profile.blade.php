@@ -24,27 +24,17 @@
             </div>
         </div>
 
-        @if (!$isOwnProfile)
+        <x-follow-button :t-user-alias="$t_user_alias" />
+
+        {{-- own profile --}}
+        @if ($isOwnProfile)
             <div class="row mt-2">
                 <div class="col-lg-12">
-                    <form action="">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Follow</button>                        
-                    </form>
+                    <a href="{{route("profile.config")}}" class="btn btn-primary">
+                        Config profile
+                    </a>
                 </div>
             </div>
-
-        {{-- @elseif ($isFollowing) TODO--}}
-
-        @else
-
-        <div class="row mt-2">
-            <div class="col-lg-12">
-                <a href="{{route("profile.config")}}" class="btn btn-primary">
-                    Config profile
-                </a>
-            </div>
-        </div>
 
         @endif
     

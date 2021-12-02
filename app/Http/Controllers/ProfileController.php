@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Follow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,6 +16,9 @@ use App\Rules\EnablesURLEncoding;
 use Illuminate\Validation\Rules\Password;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Events\EmailChanged;
+
+
+use Illuminate\Support\Facades\Config;
 
 //FOLDER path
 define("FOLDER", "/uploads/profile_images/");
@@ -183,6 +187,14 @@ class ProfileController extends Controller
             $this->deleteOne(FOLDER, "public", $fileName);
         }
     }
+
+
+
+
+
+
+
+    
 
 
 }

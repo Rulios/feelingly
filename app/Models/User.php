@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use Illuminate\Contracts\Auth\CanResetPassword;
+use App\Traits\UUIDS;
 
 
 class User extends Authenticatable 
@@ -17,6 +18,7 @@ implements MustVerifyEmail, CanResetPassword
 {
     use HasFactory;
     use Notifiable;
+    use UUIDS;
     
     public function diaries(){
         return $this->hasMany(Diary::class);
@@ -26,14 +28,6 @@ implements MustVerifyEmail, CanResetPassword
         return $this->hasMany(Memory::class);
     }
 
-    public function followers(){
-        return $this->belongsToMany(User::class, 'follows', 'user_id', 'follower_id')
-                ->as('followers');
-    }
 
-    public function followings(){
-        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'user_id')
-                ->as('followings');
-    }
 
 }

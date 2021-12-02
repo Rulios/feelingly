@@ -35,7 +35,7 @@ class HiddenValues extends Component
     public function __construct($tUserAlias = null)
     {
         $this->tUserAlias = $tUserAlias ?? "";
-        $this->sUserAlias = Auth::user()->alias;
+        $this->sUserAlias = Auth::user()->alias ?? null;
     }   
 
     /**

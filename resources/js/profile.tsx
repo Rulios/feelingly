@@ -6,12 +6,8 @@ import useDiaries from "./hooks/useDiaries";
 import ProfileButtonNavigation from "./components/ProfileButtonNavigation";
 import React, {useEffect, useState, useRef, useContext} from "react";
 import ReactDOM from "react-dom";
-import ProfileMemoryBox from "./components/ProfileMemoryBox";
-import { keyBy } from "lodash";
-import Diary from "./types/Diary";
 import Memory from "./types/Memory";
 
-import MemoryModal from "./components/MemoryModal";
 import ProfileContext from "./contexts/ProfileContext";
 import HiddenContext from "./contexts/HiddenContext";
 import ProfileDiaryBox from "./components/ProfileDiaryBox";
@@ -27,6 +23,7 @@ import MemoryRenderer from "./components/MemoryRenderer";
  console.log(bootstrap);
 
  window.onload = function(){
+
 
     ReactDOM.render(
         <App/>,

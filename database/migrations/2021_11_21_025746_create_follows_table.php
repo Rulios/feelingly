@@ -17,15 +17,17 @@ class CreateFollowsTable extends Migration
 
             //migration of a followers table
 
-            $table->uuid('id')->primary();
-            $table->unsignedBigInteger('user_id')
+            $table->id();
+            $table->uuid('user_id')
                     ->comment("ID of the user that emmits the follow action");
-            $table->unsignedBigInteger('follower_id')
-                    ->comment("ID of the user that is being followed");
+            $table->uuid("followed_element_id")
+                    ->comment("ID of the element that is being followed");
+            $table->string("type", 50)
+                    ->comment("Type of the element that is being followed");
+
             $table->timestamps();
 
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
-            $table->foreign("follower_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
 
 
         });
