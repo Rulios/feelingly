@@ -71257,7 +71257,7 @@ _s(useDiaries, "b31lHLbOl4AzBKldRaOrZrUz6fA=", false, function() {
     return [_useFetchDefault.default];
 });
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./useFetch":"puCyy"}],"puCyy":[function(require,module,exports) {
+},{"./useFetch":"puCyy","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"puCyy":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

@@ -24,8 +24,10 @@
             </div>
         </div>
 
-        <x-follow-button :t-user-alias="$t_user_alias" />
+        <div id="followBtn" class="m-3"></div>
 
+    {{--     <x-follow-button :t-user-alias="$t_user_alias" />
+ --}}
         {{-- own profile --}}
         @if ($isOwnProfile)
             <div class="row mt-2">

@@ -102,6 +102,10 @@ Route::post("/profile/actions/unfollow", [FollowController::class, "unfollowUser
     ->name("profile.unfollow")
     ->middleware("auth");
 
+Route::get("/profile/actions/is_following", [FollowController::class, "isFollowing"])
+    ->name("profile.is_following")
+    ->middleware("auth");
+
 
 
 ?>

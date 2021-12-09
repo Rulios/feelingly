@@ -14,6 +14,8 @@ import ProfileDiaryBox from "./components/ProfileDiaryBox";
 import DiaryModal from "./components/DiaryModal";
 import MemoryRenderer from "./components/MemoryRenderer";
 
+import FollowButton from "./components/FollowButton";
+
 /**
  * This line performs a bug fixer. I don't know why, but it seems
  * the need to call once bootstrap to be working on the page. 
@@ -24,11 +26,17 @@ import MemoryRenderer from "./components/MemoryRenderer";
 
  window.onload = function(){
 
+    //this react render should probably change in the future
+    ReactDOM.render(
+        <FollowButton/>,
+        document.getElementById("followBtn")
+    );
 
     ReactDOM.render(
         <App/>,
         document.getElementById("root")
     );
+
 
  };
 

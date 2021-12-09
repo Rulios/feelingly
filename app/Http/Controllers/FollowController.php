@@ -13,6 +13,35 @@ class FollowController extends Controller
 {
     //
 
+    public function isFollowing(Request $request){
+        try{
+
+            $request->validate([
+                "followed_user_alias" => "required|string|exists:users,alias",
+            ]);
+
+
+            $user = Auth::user();
+            $followedUser = User::where('alias', $request->followed_user_alias)->first();
+
+            //the follow already exists
+            $followExists = Follow::where([
+                "user_id" => $user->id,
+                "followed_element_id" => $followedUser->id,
+                "type" => Config::get("constants.USER_FOLLOW_TYPE")
+            ])->exists();
+
+
+            if($followExists){
+                return response()->json(["followed" => true]);
+            }else{
+                return response()->json(["followed" => false]);
+            }
+
+        }catch(\Exception $e){
+            return response()->json(['message' => "Ooops, there has been an error in this operation"], 500);
+        }
+    }
 
     public function followUser(Request $request){
         try{

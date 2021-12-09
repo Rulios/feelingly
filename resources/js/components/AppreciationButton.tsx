@@ -4,7 +4,6 @@ import Fab from '@material-ui/core/Fab';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import HiddenContext from "../contexts/HiddenContext";
 import axios from "axios";
-import useFetch from "../hooks/useFetch";
 
 type Props = {
  memory_id: string | number | undefined | null;
