@@ -19,13 +19,6 @@ Route::get('/', function () {
     return view('index');
 })->name("index");
 
-Route::get("/test", function(){
-    return User::find(1)->diaries[0];
-});
-
-Route::get('/dashboard', function (Request $request) {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -34,4 +27,8 @@ require __DIR__.'/features/profile.php';
 require __DIR__.'/features/diary.php';
 
 require __DIR__."/features/memory.php";
+
+require __DIR__."/features/dashboard.php";
+
+
 
