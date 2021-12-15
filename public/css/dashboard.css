@@ -112,4 +112,9 @@
   border-radius: 5px;
 }
 
+.tab {
+  background-color: transparent;
+  border: none;
+}
+
 /*# sourceMappingURL=dashboard.css.map */

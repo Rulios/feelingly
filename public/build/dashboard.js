@@ -869,36 +869,230 @@ var _jsxRuntime = require("react/jsx-runtime");
 var _bootstrap = require("bootstrap");
 var _reactDom = require("react-dom");
 var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
+var _react = require("react");
 var _addNewMemoryModal = require("./components/AddNewMemoryModal");
 var _addNewMemoryModalDefault = parcelHelpers.interopDefault(_addNewMemoryModal);
+var _appBar = require("@material-ui/core/AppBar");
+var _appBarDefault = parcelHelpers.interopDefault(_appBar);
+var _tabs = require("@material-ui/core/Tabs");
+var _tabsDefault = parcelHelpers.interopDefault(_tabs);
+var _tab = require("@material-ui/core/Tab");
+var _tabDefault = parcelHelpers.interopDefault(_tab);
+var _reactSwipeableViews = require("react-swipeable-views");
+var _reactSwipeableViewsDefault = parcelHelpers.interopDefault(_reactSwipeableViews);
+var _box = require("@material-ui/core/Box");
+var _boxDefault = parcelHelpers.interopDefault(_box);
+var _typography = require("@material-ui/core/Typography");
+var _typographyDefault = parcelHelpers.interopDefault(_typography);
+var _styles = require("@material-ui/core/styles");
+var _s = $RefreshSig$(), _s1 = $RefreshSig$();
 window.onload = ()=>{
     _reactDomDefault.default.render(/*#__PURE__*/ _jsxRuntime.jsx(App, {
         __source: {
             fileName: "resources/js/dashboard.tsx",
-            lineNumber: 17
+            lineNumber: 26
         },
         __self: undefined
     }), document.getElementById("root"));
 };
+const theme = _styles.createMuiTheme({
+    palette: {
+        primary: {
+            main: "#ffffff" //white
+        },
+        secondary: {
+            main: "#00baff"
+        }
+    },
+    typography: {
+        fontFamily: "Roboto Slab"
+    }
+});
+const useStyles = _styles.makeStyles({
+    tab: {
+        boxShadow: "none",
+        marginBottom: "1em"
+    }
+});
 function App() {
-    /**TOGGLER */ return(/*#__PURE__*/ _jsxRuntime.jsx(_addNewMemoryModalDefault.default, {
+    _s();
+    /**TOGGLER */ //TO DOOOOO, IMPLEMENT THE DASHBOARD FETCHING AND MEMORY BOX HEERE
+    const [tabIndex, setTabIndex] = _react.useState(0);
+    const classes = useStyles();
+    //for the tabs
+    const handleChange = (event, newValue)=>{
+        setTabIndex(newValue);
+    };
+    //for the swipeable views
+    const handleChangeIndex = (index)=>{
+        setTabIndex(index);
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "resources/js/dashboard.tsx",
-            lineNumber: 30
+            lineNumber: 74
         },
-        __self: this
+        __self: this,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                __source: {
+                    fileName: "resources/js/dashboard.tsx",
+                    lineNumber: 76
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx(_styles.ThemeProvider, {
+                        theme: theme,
+                        __source: {
+                            fileName: "resources/js/dashboard.tsx",
+                            lineNumber: 77
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_appBarDefault.default, {
+                            position: "static",
+                            className: classes.tab,
+                            __source: {
+                                fileName: "resources/js/dashboard.tsx",
+                                lineNumber: 78
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsxs(_tabsDefault.default, {
+                                value: tabIndex,
+                                onChange: handleChange,
+                                indicatorColor: "secondary",
+                                textColor: "inherit",
+                                variant: "fullWidth",
+                                "aria-label": "full width tabs example",
+                                centered: true,
+                                __source: {
+                                    fileName: "resources/js/dashboard.tsx",
+                                    lineNumber: 79
+                                },
+                                __self: this,
+                                children: [
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_tabDefault.default, {
+                                        label: "Following",
+                                        __source: {
+                                            fileName: "resources/js/dashboard.tsx",
+                                            lineNumber: 88
+                                        },
+                                        __self: this
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_tabDefault.default, {
+                                        label: "Global",
+                                        __source: {
+                                            fileName: "resources/js/dashboard.tsx",
+                                            lineNumber: 89
+                                        },
+                                        __self: this
+                                    })
+                                ]
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactSwipeableViewsDefault.default, {
+                        axis: theme.direction === 'rtl' ? 'x-reverse' : 'x',
+                        index: tabIndex,
+                        onChangeIndex: handleChangeIndex,
+                        __source: {
+                            fileName: "resources/js/dashboard.tsx",
+                            lineNumber: 95
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx(TabPanel, {
+                                value: tabIndex,
+                                index: 0,
+                                dir: theme.direction,
+                                __source: {
+                                    fileName: "resources/js/dashboard.tsx",
+                                    lineNumber: 100
+                                },
+                                __self: this,
+                                children: "Item One"
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx(TabPanel, {
+                                value: tabIndex,
+                                index: 1,
+                                dir: theme.direction,
+                                __source: {
+                                    fileName: "resources/js/dashboard.tsx",
+                                    lineNumber: 103
+                                },
+                                __self: this,
+                                children: "Item Two"
+                            })
+                        ]
+                    })
+                ]
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_addNewMemoryModalDefault.default, {
+                __source: {
+                    fileName: "resources/js/dashboard.tsx",
+                    lineNumber: 109
+                },
+                __self: this
+            })
+        ]
     }));
 }
+_s(App, "Llhmu8b8i0yoHWHFMpHXEScvstY=", false, function() {
+    return [
+        useStyles
+    ];
+});
 _c = App;
-var _c;
+function TabPanel(props) {
+    const { children , value , index , ...other } = props;
+    return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+        role: "tabpanel",
+        hidden: value !== index,
+        id: `full-width-tabpanel-${index}`,
+        "aria-labelledby": `full-width-tab-${index}`,
+        ...other,
+        __source: {
+            fileName: "resources/js/dashboard.tsx",
+            lineNumber: 118
+        },
+        __self: this,
+        children: value === index && /*#__PURE__*/ _jsxRuntime.jsx(_boxDefault.default, {
+            __source: {
+                fileName: "resources/js/dashboard.tsx",
+                lineNumber: 126
+            },
+            __self: this,
+            children: /*#__PURE__*/ _jsxRuntime.jsx(_typographyDefault.default, {
+                __source: {
+                    fileName: "resources/js/dashboard.tsx",
+                    lineNumber: 127
+                },
+                __self: this,
+                children: children
+            })
+        })
+    }));
+}
+_c1 = TabPanel;
+function FollowersFeed() {
+    _s1();
+    const [memories, setMemories] = _react.useState([]);
+    const [amountFetched, setAmountFetched] = _react.useState(0);
+    //FINISH THIS FEED
+    return null;
+}
+_s1(FollowersFeed, "Y4lyIN8kpt53vDu4hqAHcL1dMaM=");
+_c2 = FollowersFeed;
+var _c, _c1, _c2;
 $RefreshReg$(_c, "App");
+$RefreshReg$(_c1, "TabPanel");
+$RefreshReg$(_c2, "FollowersFeed");
 
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","bootstrap":"2G2th","react-dom":"gkWJK","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","./components/AddNewMemoryModal":"aLfQL"}],"8xIwr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","bootstrap":"2G2th","react-dom":"gkWJK","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","./components/AddNewMemoryModal":"aLfQL","@material-ui/core/AppBar":"7ig7z","@material-ui/core/Tabs":"iaZdU","@material-ui/core/Tab":"9C6qC","react-swipeable-views":"a9YWv","@material-ui/core/Box":"gZprP","@material-ui/core/Typography":"d1wir","@material-ui/core/styles":"4ziUd"}],"8xIwr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -71257,7 +71451,7 @@ _s(useDiaries, "b31lHLbOl4AzBKldRaOrZrUz6fA=", false, function() {
     return [_useFetchDefault.default];
 });
 
-},{"./useFetch":"puCyy","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"puCyy":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./useFetch":"puCyy"}],"puCyy":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -71399,7 +71593,7 @@ module.exports.default = axios;
 },{"./utils":"hOPY0","./helpers/bind":"4bHkG","./core/Axios":"KVzea","./core/mergeConfig":"8vb7m","./defaults":"g96L2","./cancel/Cancel":"iGO1D","./cancel/CancelToken":"6kJtU","./cancel/isCancel":"6KzET","./helpers/spread":"3fmMu","./helpers/isAxiosError":"1NqDP"}],"hOPY0":[function(require,module,exports) {
 'use strict';
 var bind = require('./helpers/bind');
-/*global toString:true*/ // utils is a library of generic helper functions non-specific to axios
+// utils is a library of generic helper functions non-specific to axios
 var toString = Object.prototype.toString;
 /**
  * Determine if a value is an Array
@@ -71540,7 +71734,7 @@ var toString = Object.prototype.toString;
  * @param {String} str The String to trim
  * @returns {String} The String freed of excess whitespace
  */ function trim(str) {
-    return str.replace(/^\s*/, '').replace(/\s*$/, '');
+    return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '');
 }
 /**
  * Determine if we're running in a standard browser environment
@@ -71679,6 +71873,8 @@ var buildURL = require('../helpers/buildURL');
 var InterceptorManager = require('./InterceptorManager');
 var dispatchRequest = require('./dispatchRequest');
 var mergeConfig = require('./mergeConfig');
+var validator = require('../helpers/validator');
+var validators = validator.validators;
 /**
  * Create a new instance of Axios
  *
@@ -71707,19 +71903,53 @@ var mergeConfig = require('./mergeConfig');
     if (config.method) config.method = config.method.toLowerCase();
     else if (this.defaults.method) config.method = this.defaults.method.toLowerCase();
     else config.method = 'get';
-    // Hook up interceptors middleware
-    var chain = [
-        dispatchRequest,
-        undefined
-    ];
-    var promise = Promise.resolve(config);
+    var transitional = config.transitional;
+    if (transitional !== undefined) validator.assertOptions(transitional, {
+        silentJSONParsing: validators.transitional(validators.boolean, '1.0.0'),
+        forcedJSONParsing: validators.transitional(validators.boolean, '1.0.0'),
+        clarifyTimeoutError: validators.transitional(validators.boolean, '1.0.0')
+    }, false);
+    // filter out skipped interceptors
+    var requestInterceptorChain = [];
+    var synchronousRequestInterceptors = true;
     this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-        chain.unshift(interceptor.fulfilled, interceptor.rejected);
+        if (typeof interceptor.runWhen === 'function' && interceptor.runWhen(config) === false) return;
+        synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
+        requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
     });
+    var responseInterceptorChain = [];
     this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-        chain.push(interceptor.fulfilled, interceptor.rejected);
+        responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
     });
-    while(chain.length)promise = promise.then(chain.shift(), chain.shift());
+    var promise;
+    if (!synchronousRequestInterceptors) {
+        var chain = [
+            dispatchRequest,
+            undefined
+        ];
+        Array.prototype.unshift.apply(chain, requestInterceptorChain);
+        chain = chain.concat(responseInterceptorChain);
+        promise = Promise.resolve(config);
+        while(chain.length)promise = promise.then(chain.shift(), chain.shift());
+        return promise;
+    }
+    var newConfig = config;
+    while(requestInterceptorChain.length){
+        var onFulfilled = requestInterceptorChain.shift();
+        var onRejected = requestInterceptorChain.shift();
+        try {
+            newConfig = onFulfilled(newConfig);
+        } catch (error) {
+            onRejected(error);
+            break;
+        }
+    }
+    try {
+        promise = dispatchRequest(newConfig);
+    } catch (error) {
+        return Promise.reject(error);
+    }
+    while(responseInterceptorChain.length)promise = promise.then(responseInterceptorChain.shift(), responseInterceptorChain.shift());
     return promise;
 };
 Axios.prototype.getUri = function getUri(config) {
@@ -71759,7 +71989,7 @@ utils.forEach([
 });
 module.exports = Axios;
 
-},{"./../utils":"hOPY0","../helpers/buildURL":"3Jodf","./InterceptorManager":"9kkIC","./dispatchRequest":"dmFav","./mergeConfig":"8vb7m"}],"3Jodf":[function(require,module,exports) {
+},{"./../utils":"hOPY0","../helpers/buildURL":"3Jodf","./InterceptorManager":"9kkIC","./dispatchRequest":"dmFav","./mergeConfig":"8vb7m","../helpers/validator":"4sigL"}],"3Jodf":[function(require,module,exports) {
 'use strict';
 var utils = require('./../utils');
 function encode(val) {
@@ -71813,10 +72043,12 @@ function InterceptorManager() {
  * @param {Function} rejected The function to handle `reject` for a `Promise`
  *
  * @return {Number} An ID used to remove interceptor later
- */ InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+ */ InterceptorManager.prototype.use = function use(fulfilled, rejected, options) {
     this.handlers.push({
         fulfilled: fulfilled,
-        rejected: rejected
+        rejected: rejected,
+        synchronous: options ? options.synchronous : false,
+        runWhen: options ? options.runWhen : null
     });
     return this.handlers.length - 1;
 };
@@ -71863,7 +72095,7 @@ var defaults = require('../defaults');
     config.headers = config.headers || {
     };
     // Transform request data
-    config.data = transformData(config.data, config.headers, config.transformRequest);
+    config.data = transformData.call(config, config.data, config.headers, config.transformRequest);
     // Flatten headers
     config.headers = utils.merge(config.headers.common || {
     }, config.headers[config.method] || {
@@ -71883,13 +72115,13 @@ var defaults = require('../defaults');
     return adapter(config).then(function onAdapterResolution(response) {
         throwIfCancellationRequested(config);
         // Transform response data
-        response.data = transformData(response.data, response.headers, config.transformResponse);
+        response.data = transformData.call(config, response.data, response.headers, config.transformResponse);
         return response;
     }, function onAdapterRejection(reason) {
         if (!isCancel(reason)) {
             throwIfCancellationRequested(config);
             // Transform response data
-            if (reason && reason.response) reason.response.data = transformData(reason.response.data, reason.response.headers, config.transformResponse);
+            if (reason && reason.response) reason.response.data = transformData.call(config, reason.response.data, reason.response.headers, config.transformResponse);
         }
         return Promise.reject(reason);
     });
@@ -71898,6 +72130,7 @@ var defaults = require('../defaults');
 },{"./../utils":"hOPY0","./transformData":"57wgh","../cancel/isCancel":"6KzET","../defaults":"g96L2"}],"57wgh":[function(require,module,exports) {
 'use strict';
 var utils = require('./../utils');
+var defaults = require('./../defaults');
 /**
  * Transform the data for a request or a response
  *
@@ -71906,23 +72139,19 @@ var utils = require('./../utils');
  * @param {Array|Function} fns A single function or Array of functions
  * @returns {*} The resulting transformed data
  */ module.exports = function transformData(data, headers, fns) {
+    var context = this || defaults;
     /*eslint no-param-reassign:0*/ utils.forEach(fns, function transform(fn) {
-        data = fn(data, headers);
+        data = fn.call(context, data, headers);
     });
     return data;
 };
 
-},{"./../utils":"hOPY0"}],"6KzET":[function(require,module,exports) {
-'use strict';
-module.exports = function isCancel(value) {
-    return !!(value && value.__CANCEL__);
-};
-
-},{}],"g96L2":[function(require,module,exports) {
+},{"./../utils":"hOPY0","./../defaults":"g96L2"}],"g96L2":[function(require,module,exports) {
 var process = require("process");
 'use strict';
 var utils = require('./utils');
 var normalizeHeaderName = require('./helpers/normalizeHeaderName');
+var enhanceError = require('./core/enhanceError');
 var DEFAULT_CONTENT_TYPE = {
     'Content-Type': 'application/x-www-form-urlencoded'
 };
@@ -71937,7 +72166,21 @@ function getDefaultAdapter() {
     adapter = require('./adapters/http');
     return adapter;
 }
+function stringifySafely(rawValue, parser, encoder) {
+    if (utils.isString(rawValue)) try {
+        (parser || JSON.parse)(rawValue);
+        return utils.trim(rawValue);
+    } catch (e) {
+        if (e.name !== 'SyntaxError') throw e;
+    }
+    return (encoder || JSON.stringify)(rawValue);
+}
 var defaults = {
+    transitional: {
+        silentJSONParsing: true,
+        forcedJSONParsing: true,
+        clarifyTimeoutError: false
+    },
     adapter: getDefaultAdapter(),
     transformRequest: [
         function transformRequest(data, headers) {
@@ -71949,18 +72192,26 @@ var defaults = {
                 setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
                 return data.toString();
             }
-            if (utils.isObject(data)) {
-                setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-                return JSON.stringify(data);
+            if (utils.isObject(data) || headers && headers['Content-Type'] === 'application/json') {
+                setContentTypeIfUnset(headers, 'application/json');
+                return stringifySafely(data);
             }
             return data;
         }
     ],
     transformResponse: [
         function transformResponse(data) {
-            /*eslint no-param-reassign:0*/ if (typeof data === 'string') try {
-                data = JSON.parse(data);
+            var transitional = this.transitional;
+            var silentJSONParsing = transitional && transitional.silentJSONParsing;
+            var forcedJSONParsing = transitional && transitional.forcedJSONParsing;
+            var strictJSONParsing = !silentJSONParsing && this.responseType === 'json';
+            if (strictJSONParsing || forcedJSONParsing && utils.isString(data) && data.length) try {
+                return JSON.parse(data);
             } catch (e) {
+                if (strictJSONParsing) {
+                    if (e.name === 'SyntaxError') throw enhanceError(e, this, 'E_JSON_PARSE');
+                    throw e;
+                }
             }
             return data;
         }
@@ -71999,7 +72250,7 @@ utils.forEach([
 });
 module.exports = defaults;
 
-},{"process":"6Upk8","./utils":"hOPY0","./helpers/normalizeHeaderName":"6GUF5","./adapters/xhr":"4uZQD","./adapters/http":"4uZQD"}],"6Upk8":[function(require,module,exports) {
+},{"process":"6Upk8","./utils":"hOPY0","./helpers/normalizeHeaderName":"6GUF5","./adapters/xhr":"4uZQD","./adapters/http":"4uZQD","./core/enhanceError":"3f4N4"}],"6Upk8":[function(require,module,exports) {
 // shim for using process in browser
 var process = module.exports = {
 };
@@ -72174,6 +72425,7 @@ module.exports = function xhrAdapter(config) {
     return new Promise(function dispatchXhrRequest(resolve, reject) {
         var requestData = config.data;
         var requestHeaders = config.headers;
+        var responseType = config.responseType;
         if (utils.isFormData(requestData)) delete requestHeaders['Content-Type']; // Let the browser set it
         var request = new XMLHttpRequest();
         // HTTP basic authentication
@@ -72186,17 +72438,11 @@ module.exports = function xhrAdapter(config) {
         request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
         // Set the request timeout in MS
         request.timeout = config.timeout;
-        // Listen for ready state
-        request.onreadystatechange = function handleLoad() {
-            if (!request || request.readyState !== 4) return;
-            // The request errored out and we didn't get a response, this will be
-            // handled by onerror instead
-            // With one exception: request that using file: protocol, most browsers
-            // will return status as 0 even though it's a successful request
-            if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) return;
+        function onloadend() {
+            if (!request) return;
             // Prepare the response
             var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-            var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+            var responseData = !responseType || responseType === 'text' || responseType === 'json' ? request.responseText : request.response;
             var response = {
                 data: responseData,
                 status: request.status,
@@ -72208,6 +72454,20 @@ module.exports = function xhrAdapter(config) {
             settle(resolve, reject, response);
             // Clean up request
             request = null;
+        }
+        if ('onloadend' in request) // Use onloadend if available
+        request.onloadend = onloadend;
+        else // Listen for ready state to emulate onloadend
+        request.onreadystatechange = function handleLoad() {
+            if (!request || request.readyState !== 4) return;
+            // The request errored out and we didn't get a response, this will be
+            // handled by onerror instead
+            // With one exception: request that using file: protocol, most browsers
+            // will return status as 0 even though it's a successful request
+            if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) return;
+            // readystate handler is calling before onerror or ontimeout handlers,
+            // so we should call onloadend on the next 'tick'
+            setTimeout(onloadend);
         };
         // Handle browser request cancellation (as opposed to a manual cancellation)
         request.onabort = function handleAbort() {
@@ -72228,7 +72488,7 @@ module.exports = function xhrAdapter(config) {
         request.ontimeout = function handleTimeout() {
             var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
             if (config.timeoutErrorMessage) timeoutErrorMessage = config.timeoutErrorMessage;
-            reject(createError(timeoutErrorMessage, config, 'ECONNABORTED', request));
+            reject(createError(timeoutErrorMessage, config, config.transitional && config.transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED', request));
             // Clean up request
             request = null;
         };
@@ -72250,13 +72510,7 @@ module.exports = function xhrAdapter(config) {
         // Add withCredentials to request if needed
         if (!utils.isUndefined(config.withCredentials)) request.withCredentials = !!config.withCredentials;
         // Add responseType to request if needed
-        if (config.responseType) try {
-            request.responseType = config.responseType;
-        } catch (e) {
-            // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
-            // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
-            if (config.responseType !== 'json') throw e;
-        }
+        if (responseType && responseType !== 'json') request.responseType = config.responseType;
         // Handle progress if needed
         if (typeof config.onDownloadProgress === 'function') request.addEventListener('progress', config.onDownloadProgress);
         // Not all browsers support upload events
@@ -72533,7 +72787,13 @@ module.exports = utils.isStandardBrowserEnv() ? // Standard browser envs have fu
     };
 })();
 
-},{"./../utils":"hOPY0"}],"8vb7m":[function(require,module,exports) {
+},{"./../utils":"hOPY0"}],"6KzET":[function(require,module,exports) {
+'use strict';
+module.exports = function isCancel(value) {
+    return !!(value && value.__CANCEL__);
+};
+
+},{}],"8vb7m":[function(require,module,exports) {
 'use strict';
 var utils = require('../utils');
 /**
@@ -72619,7 +72879,94 @@ var utils = require('../utils');
     return config;
 };
 
-},{"../utils":"hOPY0"}],"iGO1D":[function(require,module,exports) {
+},{"../utils":"hOPY0"}],"4sigL":[function(require,module,exports) {
+'use strict';
+var pkg = require('./../../package.json');
+var validators = {
+};
+// eslint-disable-next-line func-names
+[
+    'object',
+    'boolean',
+    'number',
+    'function',
+    'string',
+    'symbol'
+].forEach(function(type, i) {
+    validators[type] = function validator(thing) {
+        return typeof thing === type || 'a' + (i < 1 ? 'n ' : ' ') + type;
+    };
+});
+var deprecatedWarnings = {
+};
+var currentVerArr = pkg.version.split('.');
+/**
+ * Compare package versions
+ * @param {string} version
+ * @param {string?} thanVersion
+ * @returns {boolean}
+ */ function isOlderVersion(version, thanVersion) {
+    var pkgVersionArr = thanVersion ? thanVersion.split('.') : currentVerArr;
+    var destVer = version.split('.');
+    for(var i = 0; i < 3; i++){
+        if (pkgVersionArr[i] > destVer[i]) return true;
+        else if (pkgVersionArr[i] < destVer[i]) return false;
+    }
+    return false;
+}
+/**
+ * Transitional option validator
+ * @param {function|boolean?} validator
+ * @param {string?} version
+ * @param {string} message
+ * @returns {function}
+ */ validators.transitional = function transitional(validator, version, message) {
+    var isDeprecated = version && isOlderVersion(version);
+    function formatMessage(opt, desc) {
+        return '[Axios v' + pkg.version + '] Transitional option \'' + opt + '\'' + desc + (message ? '. ' + message : '');
+    }
+    // eslint-disable-next-line func-names
+    return function(value, opt, opts) {
+        if (validator === false) throw new Error(formatMessage(opt, ' has been removed in ' + version));
+        if (isDeprecated && !deprecatedWarnings[opt]) {
+            deprecatedWarnings[opt] = true;
+            // eslint-disable-next-line no-console
+            console.warn(formatMessage(opt, ' has been deprecated since v' + version + ' and will be removed in the near future'));
+        }
+        return validator ? validator(value, opt, opts) : true;
+    };
+};
+/**
+ * Assert object's properties type
+ * @param {object} options
+ * @param {object} schema
+ * @param {boolean?} allowUnknown
+ */ function assertOptions(options, schema, allowUnknown) {
+    if (typeof options !== 'object') throw new TypeError('options must be an object');
+    var keys = Object.keys(options);
+    var i = keys.length;
+    while((i--) > 0){
+        var opt = keys[i];
+        var validator = schema[opt];
+        if (validator) {
+            var value = options[opt];
+            var result = value === undefined || validator(value, opt, options);
+            if (result !== true) throw new TypeError('option ' + opt + ' must be ' + result);
+            continue;
+        }
+        if (allowUnknown !== true) throw Error('Unknown option ' + opt);
+    }
+}
+module.exports = {
+    isOlderVersion: isOlderVersion,
+    assertOptions: assertOptions,
+    validators: validators
+};
+
+},{"./../../package.json":"5vay1"}],"5vay1":[function(require,module,exports) {
+module.exports = JSON.parse("{\"_from\":\"axios@0.21.4\",\"_id\":\"axios@0.21.4\",\"_inBundle\":false,\"_integrity\":\"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==\",\"_location\":\"/axios\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"axios@0.21.4\",\"name\":\"axios\",\"escapedName\":\"axios\",\"rawSpec\":\"0.21.4\",\"saveSpec\":null,\"fetchSpec\":\"0.21.4\"},\"_requiredBy\":[\"#DEV:/\",\"#USER\"],\"_resolved\":\"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz\",\"_shasum\":\"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575\",\"_spec\":\"axios@0.21.4\",\"_where\":\"E:\\\\Documents\\\\123-MVP PROCESSES\\\\Feelingly\\\\code\\\\feelingly\",\"author\":{\"name\":\"Matt Zabriskie\"},\"browser\":{\"./lib/adapters/http.js\":\"./lib/adapters/xhr.js\"},\"bugs\":{\"url\":\"https://github.com/axios/axios/issues\"},\"bundleDependencies\":false,\"bundlesize\":[{\"path\":\"./dist/axios.min.js\",\"threshold\":\"5kB\"}],\"dependencies\":{\"follow-redirects\":\"^1.14.0\"},\"deprecated\":false,\"description\":\"Promise based HTTP client for the browser and node.js\",\"devDependencies\":{\"coveralls\":\"^3.0.0\",\"es6-promise\":\"^4.2.4\",\"grunt\":\"^1.3.0\",\"grunt-banner\":\"^0.6.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-clean\":\"^1.1.0\",\"grunt-contrib-watch\":\"^1.0.0\",\"grunt-eslint\":\"^23.0.0\",\"grunt-karma\":\"^4.0.0\",\"grunt-mocha-test\":\"^0.13.3\",\"grunt-ts\":\"^6.0.0-beta.19\",\"grunt-webpack\":\"^4.0.2\",\"istanbul-instrumenter-loader\":\"^1.0.0\",\"jasmine-core\":\"^2.4.1\",\"karma\":\"^6.3.2\",\"karma-chrome-launcher\":\"^3.1.0\",\"karma-firefox-launcher\":\"^2.1.0\",\"karma-jasmine\":\"^1.1.1\",\"karma-jasmine-ajax\":\"^0.1.13\",\"karma-safari-launcher\":\"^1.0.0\",\"karma-sauce-launcher\":\"^4.3.6\",\"karma-sinon\":\"^1.0.5\",\"karma-sourcemap-loader\":\"^0.3.8\",\"karma-webpack\":\"^4.0.2\",\"load-grunt-tasks\":\"^3.5.2\",\"minimist\":\"^1.2.0\",\"mocha\":\"^8.2.1\",\"sinon\":\"^4.5.0\",\"terser-webpack-plugin\":\"^4.2.3\",\"typescript\":\"^4.0.5\",\"url-search-params\":\"^0.10.0\",\"webpack\":\"^4.44.2\",\"webpack-dev-server\":\"^3.11.0\"},\"homepage\":\"https://axios-http.com\",\"jsdelivr\":\"dist/axios.min.js\",\"keywords\":[\"xhr\",\"http\",\"ajax\",\"promise\",\"node\"],\"license\":\"MIT\",\"main\":\"index.js\",\"name\":\"axios\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/axios/axios.git\"},\"scripts\":{\"build\":\"NODE_ENV=production grunt build\",\"coveralls\":\"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js\",\"examples\":\"node ./examples/server.js\",\"fix\":\"eslint --fix lib/**/*.js\",\"postversion\":\"git push && git push --tags\",\"preversion\":\"npm test\",\"start\":\"node ./sandbox/server.js\",\"test\":\"grunt test\",\"version\":\"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json\"},\"typings\":\"./index.d.ts\",\"unpkg\":\"dist/axios.min.js\",\"version\":\"0.21.4\"}");
+
+},{}],"iGO1D":[function(require,module,exports) {
 'use strict';
 /**
  * A `Cancel` is an object that is thrown when an operation is canceled.
@@ -74876,6 +75223,2773 @@ $RefreshReg$(_c, "CloseModalButton");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}]},["2rAXy","ghlMN","3hGib"], "3hGib", "parcelRequire9e19")
+},{"react/jsx-runtime":"8xIwr","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"7ig7z":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_appBarDefault.default
+);
+var _appBar = require("./AppBar");
+var _appBarDefault = parcelHelpers.interopDefault(_appBar);
+
+},{"./AppBar":"9hisz","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9hisz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styles", ()=>styles
+);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _withStyles = require("../styles/withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var _capitalize = require("../utils/capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+var _paper = require("../Paper");
+var _paperDefault = parcelHelpers.interopDefault(_paper);
+var styles = function styles1(theme) {
+    var backgroundColorDefault = theme.palette.type === 'light' ? theme.palette.grey[100] : theme.palette.grey[900];
+    return {
+        /* Styles applied to the root element. */ root: {
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            boxSizing: 'border-box',
+            // Prevent padding issue with the Modal and fixed positioned AppBar.
+            zIndex: theme.zIndex.appBar,
+            flexShrink: 0
+        },
+        /* Styles applied to the root element if `position="fixed"`. */ positionFixed: {
+            position: 'fixed',
+            top: 0,
+            left: 'auto',
+            right: 0,
+            '@media print': {
+                // Prevent the app bar to be visible on each printed page.
+                position: 'absolute'
+            }
+        },
+        /* Styles applied to the root element if `position="absolute"`. */ positionAbsolute: {
+            position: 'absolute',
+            top: 0,
+            left: 'auto',
+            right: 0
+        },
+        /* Styles applied to the root element if `position="sticky"`. */ positionSticky: {
+            // ⚠️ sticky is not supported by IE 11.
+            position: 'sticky',
+            top: 0,
+            left: 'auto',
+            right: 0
+        },
+        /* Styles applied to the root element if `position="static"`. */ positionStatic: {
+            position: 'static'
+        },
+        /* Styles applied to the root element if `position="relative"`. */ positionRelative: {
+            position: 'relative'
+        },
+        /* Styles applied to the root element if `color="default"`. */ colorDefault: {
+            backgroundColor: backgroundColorDefault,
+            color: theme.palette.getContrastText(backgroundColorDefault)
+        },
+        /* Styles applied to the root element if `color="primary"`. */ colorPrimary: {
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.contrastText
+        },
+        /* Styles applied to the root element if `color="secondary"`. */ colorSecondary: {
+            backgroundColor: theme.palette.secondary.main,
+            color: theme.palette.secondary.contrastText
+        },
+        /* Styles applied to the root element if `color="inherit"`. */ colorInherit: {
+            color: 'inherit'
+        },
+        /* Styles applied to the root element if `color="transparent"`. */ colorTransparent: {
+            backgroundColor: 'transparent',
+            color: 'inherit'
+        }
+    };
+};
+var AppBar = /*#__PURE__*/ _react.forwardRef(function AppBar1(props, ref) {
+    var classes = props.classes, className = props.className, _props$color = props.color, color = _props$color === void 0 ? 'primary' : _props$color, _props$position = props.position, position = _props$position === void 0 ? 'fixed' : _props$position, other = _objectWithoutPropertiesDefault.default(props, [
+        "classes",
+        "className",
+        "color",
+        "position"
+    ]);
+    return(/*#__PURE__*/ _react.createElement(_paperDefault.default, _extendsDefault.default({
+        square: true,
+        component: "header",
+        elevation: 4,
+        className: _clsxDefault.default(classes.root, classes["position".concat(_capitalizeDefault.default(position))], classes["color".concat(_capitalizeDefault.default(color))], className, position === 'fixed' && 'mui-fixed'),
+        ref: ref
+    }, other)));
+});
+AppBar.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+   * The content of the component.
+   */ children: _propTypesDefault.default.node,
+    /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */ classes: _propTypesDefault.default.object,
+    /**
+   * @ignore
+   */ className: _propTypesDefault.default.string,
+    /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */ color: _propTypesDefault.default.oneOf([
+        'default',
+        'inherit',
+        'primary',
+        'secondary',
+        'transparent'
+    ]),
+    /**
+   * The positioning type. The behavior of the different options is described
+   * [in the MDN web docs](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Positioning).
+   * Note: `sticky` is not universally supported and will fall back to `static` when unavailable.
+   */ position: _propTypesDefault.default.oneOf([
+        'absolute',
+        'fixed',
+        'relative',
+        'static',
+        'sticky'
+    ])
+};
+exports.default = _withStylesDefault.default(styles, {
+    name: 'MuiAppBar'
+})(AppBar);
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../styles/withStyles":"c9Ztg","../utils/capitalize":"8zjhI","../Paper":"bH9Wd","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"iaZdU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_tabsDefault.default
+);
+var _tabs = require("./Tabs");
+var _tabsDefault = parcelHelpers.interopDefault(_tabs);
+
+},{"./Tabs":"i8IeF","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"i8IeF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styles", ()=>styles
+);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
+var _defineProperty = require("@babel/runtime/helpers/esm/defineProperty");
+var _definePropertyDefault = parcelHelpers.interopDefault(_defineProperty);
+var _react = require("react");
+var _reactIs = require("react-is");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _utils = require("@material-ui/utils");
+var _debounce = require("../utils/debounce");
+var _debounceDefault = parcelHelpers.interopDefault(_debounce);
+var _ownerWindow = require("../utils/ownerWindow");
+var _ownerWindowDefault = parcelHelpers.interopDefault(_ownerWindow);
+var _scrollLeft = require("../utils/scrollLeft");
+var _animate = require("../internal/animate");
+var _animateDefault = parcelHelpers.interopDefault(_animate);
+var _scrollbarSize = require("./ScrollbarSize");
+var _scrollbarSizeDefault = parcelHelpers.interopDefault(_scrollbarSize);
+var _withStyles = require("../styles/withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var _tabIndicator = require("./TabIndicator");
+var _tabIndicatorDefault = parcelHelpers.interopDefault(_tabIndicator);
+var _tabScrollButton = require("../TabScrollButton");
+var _tabScrollButtonDefault = parcelHelpers.interopDefault(_tabScrollButton);
+var _useEventCallback = require("../utils/useEventCallback");
+var _useEventCallbackDefault = parcelHelpers.interopDefault(_useEventCallback);
+var _useTheme = require("../styles/useTheme");
+var _useThemeDefault = parcelHelpers.interopDefault(_useTheme);
+var styles = function styles1(theme) {
+    return {
+        /* Styles applied to the root element. */ root: {
+            overflow: 'hidden',
+            minHeight: 48,
+            WebkitOverflowScrolling: 'touch',
+            // Add iOS momentum scrolling.
+            display: 'flex'
+        },
+        /* Styles applied to the root element if `orientation="vertical"`. */ vertical: {
+            flexDirection: 'column'
+        },
+        /* Styles applied to the flex container element. */ flexContainer: {
+            display: 'flex'
+        },
+        /* Styles applied to the flex container element if `orientation="vertical"`. */ flexContainerVertical: {
+            flexDirection: 'column'
+        },
+        /* Styles applied to the flex container element if `centered={true}` & `!variant="scrollable"`. */ centered: {
+            justifyContent: 'center'
+        },
+        /* Styles applied to the tablist element. */ scroller: {
+            position: 'relative',
+            display: 'inline-block',
+            flex: '1 1 auto',
+            whiteSpace: 'nowrap'
+        },
+        /* Styles applied to the tablist element if `!variant="scrollable"`. */ fixed: {
+            overflowX: 'hidden',
+            width: '100%'
+        },
+        /* Styles applied to the tablist element if `variant="scrollable"`. */ scrollable: {
+            overflowX: 'scroll',
+            // Hide dimensionless scrollbar on MacOS
+            scrollbarWidth: 'none',
+            // Firefox
+            '&::-webkit-scrollbar': {
+                display: 'none' // Safari + Chrome
+            }
+        },
+        /* Styles applied to the `ScrollButtonComponent` component. */ scrollButtons: {
+        },
+        /* Styles applied to the `ScrollButtonComponent` component if `scrollButtons="auto"` or scrollButtons="desktop"`. */ scrollButtonsDesktop: _definePropertyDefault.default({
+        }, theme.breakpoints.down('xs'), {
+            display: 'none'
+        }),
+        /* Styles applied to the `TabIndicator` component. */ indicator: {
+        }
+    };
+};
+var Tabs = /*#__PURE__*/ _react.forwardRef(function Tabs1(props, ref) {
+    var ariaLabel = props['aria-label'], ariaLabelledBy = props['aria-labelledby'], action = props.action, _props$centered = props.centered, centered = _props$centered === void 0 ? false : _props$centered, childrenProp = props.children, classes = props.classes, className = props.className, _props$component = props.component, Component = _props$component === void 0 ? 'div' : _props$component, _props$indicatorColor = props.indicatorColor, indicatorColor = _props$indicatorColor === void 0 ? 'secondary' : _props$indicatorColor, onChange = props.onChange, _props$orientation = props.orientation, orientation = _props$orientation === void 0 ? 'horizontal' : _props$orientation, _props$ScrollButtonCo = props.ScrollButtonComponent, ScrollButtonComponent = _props$ScrollButtonCo === void 0 ? _tabScrollButtonDefault.default : _props$ScrollButtonCo, _props$scrollButtons = props.scrollButtons, scrollButtons = _props$scrollButtons === void 0 ? 'auto' : _props$scrollButtons, selectionFollowsFocus = props.selectionFollowsFocus, _props$TabIndicatorPr = props.TabIndicatorProps, TabIndicatorProps = _props$TabIndicatorPr === void 0 ? {
+    } : _props$TabIndicatorPr, TabScrollButtonProps = props.TabScrollButtonProps, _props$textColor = props.textColor, textColor = _props$textColor === void 0 ? 'inherit' : _props$textColor, value = props.value, _props$variant = props.variant, variant = _props$variant === void 0 ? 'standard' : _props$variant, other = _objectWithoutPropertiesDefault.default(props, [
+        "aria-label",
+        "aria-labelledby",
+        "action",
+        "centered",
+        "children",
+        "classes",
+        "className",
+        "component",
+        "indicatorColor",
+        "onChange",
+        "orientation",
+        "ScrollButtonComponent",
+        "scrollButtons",
+        "selectionFollowsFocus",
+        "TabIndicatorProps",
+        "TabScrollButtonProps",
+        "textColor",
+        "value",
+        "variant"
+    ]);
+    var theme = _useThemeDefault.default();
+    var scrollable = variant === 'scrollable';
+    var isRtl = theme.direction === 'rtl';
+    var vertical = orientation === 'vertical';
+    var scrollStart = vertical ? 'scrollTop' : 'scrollLeft';
+    var start = vertical ? 'top' : 'left';
+    var end = vertical ? 'bottom' : 'right';
+    var clientSize = vertical ? 'clientHeight' : 'clientWidth';
+    var size = vertical ? 'height' : 'width';
+    if (centered && scrollable) console.error("Material-UI: You can not use the `centered={true}` and `variant=\"scrollable\"` properties at the same time on a `Tabs` component.");
+    var _React$useState = _react.useState(false), mounted = _React$useState[0], setMounted = _React$useState[1];
+    var _React$useState2 = _react.useState({
+    }), indicatorStyle = _React$useState2[0], setIndicatorStyle = _React$useState2[1];
+    var _React$useState3 = _react.useState({
+        start: false,
+        end: false
+    }), displayScroll = _React$useState3[0], setDisplayScroll = _React$useState3[1];
+    var _React$useState4 = _react.useState({
+        overflow: 'hidden',
+        marginBottom: null
+    }), scrollerStyle = _React$useState4[0], setScrollerStyle = _React$useState4[1];
+    var valueToIndex = new Map();
+    var tabsRef = _react.useRef(null);
+    var tabListRef = _react.useRef(null);
+    var getTabsMeta = function getTabsMeta1() {
+        var tabsNode = tabsRef.current;
+        var tabsMeta;
+        if (tabsNode) {
+            var rect = tabsNode.getBoundingClientRect(); // create a new object with ClientRect class props + scrollLeft
+            tabsMeta = {
+                clientWidth: tabsNode.clientWidth,
+                scrollLeft: tabsNode.scrollLeft,
+                scrollTop: tabsNode.scrollTop,
+                scrollLeftNormalized: _scrollLeft.getNormalizedScrollLeft(tabsNode, theme.direction),
+                scrollWidth: tabsNode.scrollWidth,
+                top: rect.top,
+                bottom: rect.bottom,
+                left: rect.left,
+                right: rect.right
+            };
+        }
+        var tabMeta;
+        if (tabsNode && value !== false) {
+            var _children = tabListRef.current.children;
+            if (_children.length > 0) {
+                var tab = _children[valueToIndex.get(value)];
+                if (!tab) console.error([
+                    "Material-UI: The value provided to the Tabs component is invalid.",
+                    "None of the Tabs' children match with `".concat(value, "`."),
+                    valueToIndex.keys ? "You can provide one of the following values: ".concat(Array.from(valueToIndex.keys()).join(', '), ".") : null
+                ].join('\n'));
+                tabMeta = tab ? tab.getBoundingClientRect() : null;
+            }
+        }
+        return {
+            tabsMeta: tabsMeta,
+            tabMeta: tabMeta
+        };
+    };
+    var updateIndicatorState = _useEventCallbackDefault.default(function() {
+        var _newIndicatorStyle;
+        var _getTabsMeta = getTabsMeta(), tabsMeta = _getTabsMeta.tabsMeta, tabMeta = _getTabsMeta.tabMeta;
+        var startValue = 0;
+        if (tabMeta && tabsMeta) {
+            if (vertical) startValue = tabMeta.top - tabsMeta.top + tabsMeta.scrollTop;
+            else {
+                var correction = isRtl ? tabsMeta.scrollLeftNormalized + tabsMeta.clientWidth - tabsMeta.scrollWidth : tabsMeta.scrollLeft;
+                startValue = tabMeta.left - tabsMeta.left + correction;
+            }
+        }
+        var newIndicatorStyle = (_newIndicatorStyle = {
+        }, _definePropertyDefault.default(_newIndicatorStyle, start, startValue), _definePropertyDefault.default(_newIndicatorStyle, size, tabMeta ? tabMeta[size] : 0), _newIndicatorStyle);
+        if (isNaN(indicatorStyle[start]) || isNaN(indicatorStyle[size])) setIndicatorStyle(newIndicatorStyle);
+        else {
+            var dStart = Math.abs(indicatorStyle[start] - newIndicatorStyle[start]);
+            var dSize = Math.abs(indicatorStyle[size] - newIndicatorStyle[size]);
+            if (dStart >= 1 || dSize >= 1) setIndicatorStyle(newIndicatorStyle);
+        }
+    });
+    var scroll = function scroll1(scrollValue) {
+        _animateDefault.default(scrollStart, tabsRef.current, scrollValue);
+    };
+    var moveTabsScroll = function moveTabsScroll1(delta) {
+        var scrollValue = tabsRef.current[scrollStart];
+        if (vertical) scrollValue += delta;
+        else {
+            scrollValue += delta * (isRtl ? -1 : 1); // Fix for Edge
+            scrollValue *= isRtl && _scrollLeft.detectScrollType() === 'reverse' ? -1 : 1;
+        }
+        scroll(scrollValue);
+    };
+    var handleStartScrollClick = function handleStartScrollClick1() {
+        moveTabsScroll(-tabsRef.current[clientSize]);
+    };
+    var handleEndScrollClick = function handleEndScrollClick1() {
+        moveTabsScroll(tabsRef.current[clientSize]);
+    };
+    var handleScrollbarSizeChange = _react.useCallback(function(scrollbarHeight) {
+        setScrollerStyle({
+            overflow: null,
+            marginBottom: -scrollbarHeight
+        });
+    }, []);
+    var getConditionalElements = function getConditionalElements1() {
+        var conditionalElements = {
+        };
+        conditionalElements.scrollbarSizeListener = scrollable ? /*#__PURE__*/ _react.createElement(_scrollbarSizeDefault.default, {
+            className: classes.scrollable,
+            onChange: handleScrollbarSizeChange
+        }) : null;
+        var scrollButtonsActive = displayScroll.start || displayScroll.end;
+        var showScrollButtons = scrollable && (scrollButtons === 'auto' && scrollButtonsActive || scrollButtons === 'desktop' || scrollButtons === 'on');
+        conditionalElements.scrollButtonStart = showScrollButtons ? /*#__PURE__*/ _react.createElement(ScrollButtonComponent, _extendsDefault.default({
+            orientation: orientation,
+            direction: isRtl ? 'right' : 'left',
+            onClick: handleStartScrollClick,
+            disabled: !displayScroll.start,
+            className: _clsxDefault.default(classes.scrollButtons, scrollButtons !== 'on' && classes.scrollButtonsDesktop)
+        }, TabScrollButtonProps)) : null;
+        conditionalElements.scrollButtonEnd = showScrollButtons ? /*#__PURE__*/ _react.createElement(ScrollButtonComponent, _extendsDefault.default({
+            orientation: orientation,
+            direction: isRtl ? 'left' : 'right',
+            onClick: handleEndScrollClick,
+            disabled: !displayScroll.end,
+            className: _clsxDefault.default(classes.scrollButtons, scrollButtons !== 'on' && classes.scrollButtonsDesktop)
+        }, TabScrollButtonProps)) : null;
+        return conditionalElements;
+    };
+    var scrollSelectedIntoView = _useEventCallbackDefault.default(function() {
+        var _getTabsMeta2 = getTabsMeta(), tabsMeta = _getTabsMeta2.tabsMeta, tabMeta = _getTabsMeta2.tabMeta;
+        if (!tabMeta || !tabsMeta) return;
+        if (tabMeta[start] < tabsMeta[start]) {
+            // left side of button is out of view
+            var nextScrollStart = tabsMeta[scrollStart] + (tabMeta[start] - tabsMeta[start]);
+            scroll(nextScrollStart);
+        } else if (tabMeta[end] > tabsMeta[end]) {
+            // right side of button is out of view
+            var _nextScrollStart = tabsMeta[scrollStart] + (tabMeta[end] - tabsMeta[end]);
+            scroll(_nextScrollStart);
+        }
+    });
+    var updateScrollButtonState = _useEventCallbackDefault.default(function() {
+        if (scrollable && scrollButtons !== 'off') {
+            var _tabsRef$current = tabsRef.current, scrollTop = _tabsRef$current.scrollTop, scrollHeight = _tabsRef$current.scrollHeight, clientHeight = _tabsRef$current.clientHeight, scrollWidth = _tabsRef$current.scrollWidth, clientWidth = _tabsRef$current.clientWidth;
+            var showStartScroll;
+            var showEndScroll;
+            if (vertical) {
+                showStartScroll = scrollTop > 1;
+                showEndScroll = scrollTop < scrollHeight - clientHeight - 1;
+            } else {
+                var scrollLeft = _scrollLeft.getNormalizedScrollLeft(tabsRef.current, theme.direction); // use 1 for the potential rounding error with browser zooms.
+                showStartScroll = isRtl ? scrollLeft < scrollWidth - clientWidth - 1 : scrollLeft > 1;
+                showEndScroll = !isRtl ? scrollLeft < scrollWidth - clientWidth - 1 : scrollLeft > 1;
+            }
+            if (showStartScroll !== displayScroll.start || showEndScroll !== displayScroll.end) setDisplayScroll({
+                start: showStartScroll,
+                end: showEndScroll
+            });
+        }
+    });
+    _react.useEffect(function() {
+        var handleResize = _debounceDefault.default(function() {
+            updateIndicatorState();
+            updateScrollButtonState();
+        });
+        var win = _ownerWindowDefault.default(tabsRef.current);
+        win.addEventListener('resize', handleResize);
+        return function() {
+            handleResize.clear();
+            win.removeEventListener('resize', handleResize);
+        };
+    }, [
+        updateIndicatorState,
+        updateScrollButtonState
+    ]);
+    var handleTabsScroll = _react.useCallback(_debounceDefault.default(function() {
+        updateScrollButtonState();
+    }));
+    _react.useEffect(function() {
+        return function() {
+            handleTabsScroll.clear();
+        };
+    }, [
+        handleTabsScroll
+    ]);
+    _react.useEffect(function() {
+        setMounted(true);
+    }, []);
+    _react.useEffect(function() {
+        updateIndicatorState();
+        updateScrollButtonState();
+    });
+    _react.useEffect(function() {
+        scrollSelectedIntoView();
+    }, [
+        scrollSelectedIntoView,
+        indicatorStyle
+    ]);
+    _react.useImperativeHandle(action, function() {
+        return {
+            updateIndicator: updateIndicatorState,
+            updateScrollButtons: updateScrollButtonState
+        };
+    }, [
+        updateIndicatorState,
+        updateScrollButtonState
+    ]);
+    var indicator = /*#__PURE__*/ _react.createElement(_tabIndicatorDefault.default, _extendsDefault.default({
+        className: classes.indicator,
+        orientation: orientation,
+        color: indicatorColor
+    }, TabIndicatorProps, {
+        style: _extendsDefault.default({
+        }, indicatorStyle, TabIndicatorProps.style)
+    }));
+    var childIndex = 0;
+    var children = _react.Children.map(childrenProp, function(child) {
+        if (!/*#__PURE__*/ _react.isValidElement(child)) return null;
+        if (_reactIs.isFragment(child)) console.error([
+            "Material-UI: The Tabs component doesn't accept a Fragment as a child.",
+            'Consider providing an array instead.'
+        ].join('\n'));
+        var childValue = child.props.value === undefined ? childIndex : child.props.value;
+        valueToIndex.set(childValue, childIndex);
+        var selected = childValue === value;
+        childIndex += 1;
+        return(/*#__PURE__*/ _react.cloneElement(child, {
+            fullWidth: variant === 'fullWidth',
+            indicator: selected && !mounted && indicator,
+            selected: selected,
+            selectionFollowsFocus: selectionFollowsFocus,
+            onChange: onChange,
+            textColor: textColor,
+            value: childValue
+        }));
+    });
+    var handleKeyDown = function handleKeyDown1(event) {
+        var target = event.target; // Keyboard navigation assumes that [role="tab"] are siblings
+        // though we might warn in the future about nested, interactive elements
+        // as a a11y violation
+        var role = target.getAttribute('role');
+        if (role !== 'tab') return;
+        var newFocusTarget = null;
+        var previousItemKey = orientation !== "vertical" ? 'ArrowLeft' : 'ArrowUp';
+        var nextItemKey = orientation !== "vertical" ? 'ArrowRight' : 'ArrowDown';
+        if (orientation !== "vertical" && theme.direction === 'rtl') {
+            // swap previousItemKey with nextItemKey
+            previousItemKey = 'ArrowRight';
+            nextItemKey = 'ArrowLeft';
+        }
+        switch(event.key){
+            case previousItemKey:
+                newFocusTarget = target.previousElementSibling || tabListRef.current.lastChild;
+                break;
+            case nextItemKey:
+                newFocusTarget = target.nextElementSibling || tabListRef.current.firstChild;
+                break;
+            case 'Home':
+                newFocusTarget = tabListRef.current.firstChild;
+                break;
+            case 'End':
+                newFocusTarget = tabListRef.current.lastChild;
+                break;
+            default:
+                break;
+        }
+        if (newFocusTarget !== null) {
+            newFocusTarget.focus();
+            event.preventDefault();
+        }
+    };
+    var conditionalElements = getConditionalElements();
+    return(/*#__PURE__*/ _react.createElement(Component, _extendsDefault.default({
+        className: _clsxDefault.default(classes.root, className, vertical && classes.vertical),
+        ref: ref
+    }, other), conditionalElements.scrollButtonStart, conditionalElements.scrollbarSizeListener, /*#__PURE__*/ _react.createElement("div", {
+        className: _clsxDefault.default(classes.scroller, scrollable ? classes.scrollable : classes.fixed),
+        style: scrollerStyle,
+        ref: tabsRef,
+        onScroll: handleTabsScroll
+    }, /*#__PURE__*/ _react.createElement("div", {
+        "aria-label": ariaLabel,
+        "aria-labelledby": ariaLabelledBy,
+        className: _clsxDefault.default(classes.flexContainer, vertical && classes.flexContainerVertical, centered && !scrollable && classes.centered),
+        onKeyDown: handleKeyDown,
+        ref: tabListRef,
+        role: "tablist"
+    }, children), mounted && indicator), conditionalElements.scrollButtonEnd));
+});
+Tabs.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+   * Callback fired when the component mounts.
+   * This is useful when you want to trigger an action programmatically.
+   * It supports two actions: `updateIndicator()` and `updateScrollButtons()`
+   *
+   * @param {object} actions This object contains all possible actions
+   * that can be triggered programmatically.
+   */ action: _utils.refType,
+    /**
+   * The label for the Tabs as a string.
+   */ 'aria-label': _propTypesDefault.default.string,
+    /**
+   * An id or list of ids separated by a space that label the Tabs.
+   */ 'aria-labelledby': _propTypesDefault.default.string,
+    /**
+   * If `true`, the tabs will be centered.
+   * This property is intended for large views.
+   */ centered: _propTypesDefault.default.bool,
+    /**
+   * The content of the component.
+   */ children: _propTypesDefault.default.node,
+    /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */ classes: _propTypesDefault.default.object,
+    /**
+   * @ignore
+   */ className: _propTypesDefault.default.string,
+    /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */ component: _propTypesDefault.default/* @typescript-to-proptypes-ignore */ .elementType,
+    /**
+   * Determines the color of the indicator.
+   */ indicatorColor: _propTypesDefault.default.oneOf([
+        'primary',
+        'secondary'
+    ]),
+    /**
+   * Callback fired when the value changes.
+   *
+   * @param {object} event The event source of the callback
+   * @param {any} value We default to the index of the child (number)
+   */ onChange: _propTypesDefault.default.func,
+    /**
+   * The tabs orientation (layout flow direction).
+   */ orientation: _propTypesDefault.default.oneOf([
+        'horizontal',
+        'vertical'
+    ]),
+    /**
+   * The component used to render the scroll buttons.
+   */ ScrollButtonComponent: _propTypesDefault.default.elementType,
+    /**
+   * Determine behavior of scroll buttons when tabs are set to scroll:
+   *
+   * - `auto` will only present them when not all the items are visible.
+   * - `desktop` will only present them on medium and larger viewports.
+   * - `on` will always present them.
+   * - `off` will never present them.
+   */ scrollButtons: _propTypesDefault.default.oneOf([
+        'auto',
+        'desktop',
+        'off',
+        'on'
+    ]),
+    /**
+   * If `true` the selected tab changes on focus. Otherwise it only
+   * changes on activation.
+   */ selectionFollowsFocus: _propTypesDefault.default.bool,
+    /**
+   * Props applied to the tab indicator element.
+   */ TabIndicatorProps: _propTypesDefault.default.object,
+    /**
+   * Props applied to the [`TabScrollButton`](/api/tab-scroll-button/) element.
+   */ TabScrollButtonProps: _propTypesDefault.default.object,
+    /**
+   * Determines the color of the `Tab`.
+   */ textColor: _propTypesDefault.default.oneOf([
+        'inherit',
+        'primary',
+        'secondary'
+    ]),
+    /**
+   * The value of the currently selected `Tab`.
+   * If you don't want any selected `Tab`, you can set this property to `false`.
+   */ value: _propTypesDefault.default.any,
+    /**
+   * Determines additional display behavior of the tabs:
+   *
+   *  - `scrollable` will invoke scrolling properties and allow for horizontally
+   *  scrolling (or swiping) of the tab bar.
+   *  -`fullWidth` will make the tabs grow to use all the available space,
+   *  which should be used for small views, like on mobile.
+   *  - `standard` will render the default state.
+   */ variant: _propTypesDefault.default.oneOf([
+        'fullWidth',
+        'scrollable',
+        'standard'
+    ])
+};
+exports.default = _withStylesDefault.default(styles, {
+    name: 'MuiTabs'
+})(Tabs);
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","@babel/runtime/helpers/esm/defineProperty":"7s3FO","react":"6TuXu","react-is":"5wFcP","prop-types":"1tgq3","clsx":"eg1He","@material-ui/utils":"jyhfw","../utils/debounce":"jv3Qv","../utils/ownerWindow":"7nXt0","../utils/scrollLeft":"kwyVx","../internal/animate":"lSqxO","./ScrollbarSize":"4wLJ6","../styles/withStyles":"c9Ztg","./TabIndicator":"jjwsM","../TabScrollButton":"lVABl","../utils/useEventCallback":"eyR5l","../styles/useTheme":"1HWZd","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"kwyVx":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * Based on the jquery plugin https://github.com/othree/jquery.rtl-scroll-type
+ *
+ * Types of scrollLeft, assuming scrollWidth=100 and direction is rtl.
+ *
+ * Type             | <- Most Left | Most Right -> | Initial
+ * ---------------- | ------------ | ------------- | -------
+ * default          | 0            | 100           | 100
+ * negative (spec*) | -100         | 0             | 0
+ * reverse          | 100          | 0             | 0
+ *
+ * Edge 85: default
+ * Safari 14: negative
+ * Chrome 85: negative
+ * Firefox 81: negative
+ * IE 11: reverse
+ *
+ * spec* https://drafts.csswg.org/cssom-view/#dom-window-scroll
+ */ parcelHelpers.export(exports, "detectScrollType", ()=>detectScrollType
+) // Based on https://stackoverflow.com/a/24394376
+;
+parcelHelpers.export(exports, "getNormalizedScrollLeft", ()=>getNormalizedScrollLeft
+);
+// Source from https://github.com/alitaheri/normalize-scroll-left
+var cachedType;
+function detectScrollType() {
+    if (cachedType) return cachedType;
+    var dummy = document.createElement('div');
+    var container = document.createElement('div');
+    container.style.width = '10px';
+    container.style.height = '1px';
+    dummy.appendChild(container);
+    dummy.dir = 'rtl';
+    dummy.style.fontSize = '14px';
+    dummy.style.width = '4px';
+    dummy.style.height = '1px';
+    dummy.style.position = 'absolute';
+    dummy.style.top = '-1000px';
+    dummy.style.overflow = 'scroll';
+    document.body.appendChild(dummy);
+    cachedType = 'reverse';
+    if (dummy.scrollLeft > 0) cachedType = 'default';
+    else {
+        dummy.scrollLeft = 1;
+        if (dummy.scrollLeft === 0) cachedType = 'negative';
+    }
+    document.body.removeChild(dummy);
+    return cachedType;
+}
+function getNormalizedScrollLeft(element, direction) {
+    var scrollLeft = element.scrollLeft; // Perform the calculations only when direction is rtl to avoid messing up the ltr bahavior
+    if (direction !== 'rtl') return scrollLeft;
+    var type = detectScrollType();
+    switch(type){
+        case 'negative':
+            return element.scrollWidth - element.clientWidth + scrollLeft;
+        case 'reverse':
+            return element.scrollWidth - element.clientWidth - scrollLeft;
+        default:
+            return scrollLeft;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"lSqxO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function easeInOutSin(time) {
+    return (1 + Math.sin(Math.PI * time - Math.PI / 2)) / 2;
+}
+function animate(property, element, to) {
+    var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {
+    };
+    var cb = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : function() {
+    };
+    var _options$ease = options.ease, ease = _options$ease === void 0 ? easeInOutSin : _options$ease, _options$duration = options.duration, duration = _options$duration === void 0 ? 300 : _options$duration;
+    var start = null;
+    var from = element[property];
+    var cancelled = false;
+    var cancel = function cancel1() {
+        cancelled = true;
+    };
+    var step = function step1(timestamp) {
+        if (cancelled) {
+            cb(new Error('Animation cancelled'));
+            return;
+        }
+        if (start === null) start = timestamp;
+        var time = Math.min(1, (timestamp - start) / duration);
+        element[property] = ease(time) * (to - from) + from;
+        if (time >= 1) {
+            requestAnimationFrame(function() {
+                cb(null);
+            });
+            return;
+        }
+        requestAnimationFrame(step1);
+    };
+    if (from === to) {
+        cb(new Error('Element already at target position'));
+        return cancel;
+    }
+    requestAnimationFrame(step);
+    return cancel;
+}
+exports.default = animate;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"4wLJ6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _debounce = require("../utils/debounce");
+var _debounceDefault = parcelHelpers.interopDefault(_debounce);
+var styles = {
+    width: 99,
+    height: 99,
+    position: 'absolute',
+    top: -9999,
+    overflow: 'scroll'
+};
+function ScrollbarSize(props) {
+    var onChange = props.onChange, other = _objectWithoutPropertiesDefault.default(props, [
+        "onChange"
+    ]);
+    var scrollbarHeight = _react.useRef();
+    var nodeRef = _react.useRef(null);
+    var setMeasurements = function setMeasurements1() {
+        scrollbarHeight.current = nodeRef.current.offsetHeight - nodeRef.current.clientHeight;
+    };
+    _react.useEffect(function() {
+        var handleResize = _debounceDefault.default(function() {
+            var prevHeight = scrollbarHeight.current;
+            setMeasurements();
+            if (prevHeight !== scrollbarHeight.current) onChange(scrollbarHeight.current);
+        });
+        window.addEventListener('resize', handleResize);
+        return function() {
+            handleResize.clear();
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [
+        onChange
+    ]);
+    _react.useEffect(function() {
+        setMeasurements();
+        onChange(scrollbarHeight.current);
+    }, [
+        onChange
+    ]);
+    return(/*#__PURE__*/ _react.createElement("div", _extendsDefault.default({
+        style: styles,
+        ref: nodeRef
+    }, other)));
+}
+exports.default = ScrollbarSize;
+ScrollbarSize.propTypes = {
+    onChange: _propTypesDefault.default.func.isRequired
+};
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","../utils/debounce":"jv3Qv","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"jjwsM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styles", ()=>styles
+);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _withStyles = require("../styles/withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var _capitalize = require("../utils/capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+var styles = function styles1(theme) {
+    return {
+        root: {
+            position: 'absolute',
+            height: 2,
+            bottom: 0,
+            width: '100%',
+            transition: theme.transitions.create()
+        },
+        colorPrimary: {
+            backgroundColor: theme.palette.primary.main
+        },
+        colorSecondary: {
+            backgroundColor: theme.palette.secondary.main
+        },
+        vertical: {
+            height: '100%',
+            width: 2,
+            right: 0
+        }
+    };
+};
+/**
+ * @ignore - internal component.
+ */ var TabIndicator = /*#__PURE__*/ _react.forwardRef(function TabIndicator1(props, ref) {
+    var classes = props.classes, className = props.className, color = props.color, orientation = props.orientation, other = _objectWithoutPropertiesDefault.default(props, [
+        "classes",
+        "className",
+        "color",
+        "orientation"
+    ]);
+    return(/*#__PURE__*/ _react.createElement("span", _extendsDefault.default({
+        className: _clsxDefault.default(classes.root, classes["color".concat(_capitalizeDefault.default(color))], className, orientation === 'vertical' && classes.vertical),
+        ref: ref
+    }, other)));
+});
+TabIndicator.propTypes = {
+    /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */ classes: _propTypesDefault.default.object.isRequired,
+    /**
+   * @ignore
+   */ className: _propTypesDefault.default.string,
+    /**
+   * @ignore
+   * The color of the tab indicator.
+   */ color: _propTypesDefault.default.oneOf([
+        'primary',
+        'secondary'
+    ]).isRequired,
+    /**
+   * The tabs orientation (layout flow direction).
+   */ orientation: _propTypesDefault.default.oneOf([
+        'horizontal',
+        'vertical'
+    ]).isRequired
+};
+exports.default = _withStylesDefault.default(styles, {
+    name: 'PrivateTabIndicator'
+})(TabIndicator);
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../styles/withStyles":"c9Ztg","../utils/capitalize":"8zjhI","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"lVABl":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_tabScrollButtonDefault.default
+);
+var _tabScrollButton = require("./TabScrollButton");
+var _tabScrollButtonDefault = parcelHelpers.interopDefault(_tabScrollButton);
+
+},{"./TabScrollButton":"jNSWG","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"jNSWG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styles", ()=>styles
+);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
+/* eslint-disable jsx-a11y/aria-role */ var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _keyboardArrowLeft = require("../internal/svg-icons/KeyboardArrowLeft");
+var _keyboardArrowLeftDefault = parcelHelpers.interopDefault(_keyboardArrowLeft);
+var _keyboardArrowRight = require("../internal/svg-icons/KeyboardArrowRight");
+var _keyboardArrowRightDefault = parcelHelpers.interopDefault(_keyboardArrowRight);
+var _withStyles = require("../styles/withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var _buttonBase = require("../ButtonBase");
+var _buttonBaseDefault = parcelHelpers.interopDefault(_buttonBase);
+var styles = {
+    /* Styles applied to the root element. */ root: {
+        width: 40,
+        flexShrink: 0,
+        opacity: 0.8,
+        '&$disabled': {
+            opacity: 0
+        }
+    },
+    /* Styles applied to the root element if `orientation="vertical"`. */ vertical: {
+        width: '100%',
+        height: 40,
+        '& svg': {
+            transform: 'rotate(90deg)'
+        }
+    },
+    /* Pseudo-class applied to the root element if `disabled={true}`. */ disabled: {
+    }
+};
+var _ref = /*#__PURE__*/ _react.createElement(_keyboardArrowLeftDefault.default, {
+    fontSize: "small"
+});
+var _ref2 = /*#__PURE__*/ _react.createElement(_keyboardArrowRightDefault.default, {
+    fontSize: "small"
+});
+var TabScrollButton = /*#__PURE__*/ _react.forwardRef(function TabScrollButton1(props, ref) {
+    var classes = props.classes, classNameProp = props.className, direction = props.direction, orientation = props.orientation, disabled = props.disabled, other = _objectWithoutPropertiesDefault.default(props, [
+        "classes",
+        "className",
+        "direction",
+        "orientation",
+        "disabled"
+    ]);
+    return(/*#__PURE__*/ _react.createElement(_buttonBaseDefault.default, _extendsDefault.default({
+        component: "div",
+        className: _clsxDefault.default(classes.root, classNameProp, disabled && classes.disabled, orientation === 'vertical' && classes.vertical),
+        ref: ref,
+        role: null,
+        tabIndex: null
+    }, other), direction === 'left' ? _ref : _ref2));
+});
+TabScrollButton.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+   * The content of the component.
+   */ children: _propTypesDefault.default.node,
+    /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */ classes: _propTypesDefault.default.object,
+    /**
+   * @ignore
+   */ className: _propTypesDefault.default.string,
+    /**
+   * Which direction should the button indicate?
+   */ direction: _propTypesDefault.default.oneOf([
+        'left',
+        'right'
+    ]).isRequired,
+    /**
+   * If `true`, the element will be disabled.
+   */ disabled: _propTypesDefault.default.bool,
+    /**
+   * The tabs orientation (layout flow direction).
+   */ orientation: _propTypesDefault.default.oneOf([
+        'horizontal',
+        'vertical'
+    ]).isRequired
+};
+exports.default = _withStylesDefault.default(styles, {
+    name: 'MuiTabScrollButton'
+})(TabScrollButton);
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../internal/svg-icons/KeyboardArrowLeft":"9EWvk","../internal/svg-icons/KeyboardArrowRight":"fyiLJ","../styles/withStyles":"c9Ztg","../ButtonBase":"cH9fJ","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9EWvk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+var _createSvgIcon = require("../../utils/createSvgIcon");
+var _createSvgIconDefault = parcelHelpers.interopDefault(_createSvgIcon);
+exports.default = _createSvgIconDefault.default(/*#__PURE__*/ _react.createElement("path", {
+    d: "M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"
+}), 'KeyboardArrowLeft');
+
+},{"react":"6TuXu","../../utils/createSvgIcon":"fmUVo","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"fyiLJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _react = require("react");
+var _createSvgIcon = require("../../utils/createSvgIcon");
+var _createSvgIconDefault = parcelHelpers.interopDefault(_createSvgIcon);
+exports.default = _createSvgIconDefault.default(/*#__PURE__*/ _react.createElement("path", {
+    d: "M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"
+}), 'KeyboardArrowRight');
+
+},{"react":"6TuXu","../../utils/createSvgIcon":"fmUVo","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9C6qC":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_tabDefault.default
+);
+var _tab = require("./Tab");
+var _tabDefault = parcelHelpers.interopDefault(_tab);
+
+},{"./Tab":"jGzWN","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"jGzWN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styles", ()=>styles
+);
+var _objectWithoutProperties = require("@babel/runtime/helpers/esm/objectWithoutProperties");
+var _objectWithoutPropertiesDefault = parcelHelpers.interopDefault(_objectWithoutProperties);
+var _defineProperty = require("@babel/runtime/helpers/esm/defineProperty");
+var _definePropertyDefault = parcelHelpers.interopDefault(_defineProperty);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _react = require("react");
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _clsx = require("clsx");
+var _clsxDefault = parcelHelpers.interopDefault(_clsx);
+var _withStyles = require("../styles/withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var _buttonBase = require("../ButtonBase");
+var _buttonBaseDefault = parcelHelpers.interopDefault(_buttonBase);
+var _capitalize = require("../utils/capitalize");
+var _capitalizeDefault = parcelHelpers.interopDefault(_capitalize);
+var _unsupportedProp = require("../utils/unsupportedProp");
+var _unsupportedPropDefault = parcelHelpers.interopDefault(_unsupportedProp);
+var styles = function styles1(theme) {
+    var _extends2;
+    return {
+        /* Styles applied to the root element. */ root: _extendsDefault.default({
+        }, theme.typography.button, (_extends2 = {
+            maxWidth: 264,
+            minWidth: 72,
+            position: 'relative',
+            boxSizing: 'border-box',
+            minHeight: 48,
+            flexShrink: 0,
+            padding: '6px 12px'
+        }, _definePropertyDefault.default(_extends2, theme.breakpoints.up('sm'), {
+            padding: '6px 24px'
+        }), _definePropertyDefault.default(_extends2, "overflow", 'hidden'), _definePropertyDefault.default(_extends2, "whiteSpace", 'normal'), _definePropertyDefault.default(_extends2, "textAlign", 'center'), _definePropertyDefault.default(_extends2, theme.breakpoints.up('sm'), {
+            minWidth: 160
+        }), _extends2)),
+        /* Styles applied to the root element if both `icon` and `label` are provided. */ labelIcon: {
+            minHeight: 72,
+            paddingTop: 9,
+            '& $wrapper > *:first-child': {
+                marginBottom: 6
+            }
+        },
+        /* Styles applied to the root element if the parent [`Tabs`](/api/tabs/) has `textColor="inherit"`. */ textColorInherit: {
+            color: 'inherit',
+            opacity: 0.7,
+            '&$selected': {
+                opacity: 1
+            },
+            '&$disabled': {
+                opacity: 0.5
+            }
+        },
+        /* Styles applied to the root element if the parent [`Tabs`](/api/tabs/) has `textColor="primary"`. */ textColorPrimary: {
+            color: theme.palette.text.secondary,
+            '&$selected': {
+                color: theme.palette.primary.main
+            },
+            '&$disabled': {
+                color: theme.palette.text.disabled
+            }
+        },
+        /* Styles applied to the root element if the parent [`Tabs`](/api/tabs/) has `textColor="secondary"`. */ textColorSecondary: {
+            color: theme.palette.text.secondary,
+            '&$selected': {
+                color: theme.palette.secondary.main
+            },
+            '&$disabled': {
+                color: theme.palette.text.disabled
+            }
+        },
+        /* Pseudo-class applied to the root element if `selected={true}` (controlled by the Tabs component). */ selected: {
+        },
+        /* Pseudo-class applied to the root element if `disabled={true}` (controlled by the Tabs component). */ disabled: {
+        },
+        /* Styles applied to the root element if `fullWidth={true}` (controlled by the Tabs component). */ fullWidth: {
+            flexShrink: 1,
+            flexGrow: 1,
+            flexBasis: 0,
+            maxWidth: 'none'
+        },
+        /* Styles applied to the root element if `wrapped={true}`. */ wrapped: {
+            fontSize: theme.typography.pxToRem(12),
+            lineHeight: 1.5
+        },
+        /* Styles applied to the `icon` and `label`'s wrapper element. */ wrapper: {
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            flexDirection: 'column'
+        }
+    };
+};
+var Tab = /*#__PURE__*/ _react.forwardRef(function Tab1(props, ref) {
+    var classes = props.classes, className = props.className, _props$disabled = props.disabled, disabled = _props$disabled === void 0 ? false : _props$disabled, _props$disableFocusRi = props.disableFocusRipple, disableFocusRipple = _props$disableFocusRi === void 0 ? false : _props$disableFocusRi, fullWidth = props.fullWidth, icon = props.icon, indicator = props.indicator, label = props.label, onChange = props.onChange, onClick = props.onClick, onFocus = props.onFocus, selected = props.selected, selectionFollowsFocus = props.selectionFollowsFocus, _props$textColor = props.textColor, textColor = _props$textColor === void 0 ? 'inherit' : _props$textColor, value = props.value, _props$wrapped = props.wrapped, wrapped = _props$wrapped === void 0 ? false : _props$wrapped, other = _objectWithoutPropertiesDefault.default(props, [
+        "classes",
+        "className",
+        "disabled",
+        "disableFocusRipple",
+        "fullWidth",
+        "icon",
+        "indicator",
+        "label",
+        "onChange",
+        "onClick",
+        "onFocus",
+        "selected",
+        "selectionFollowsFocus",
+        "textColor",
+        "value",
+        "wrapped"
+    ]);
+    var handleClick = function handleClick1(event) {
+        if (onChange) onChange(event, value);
+        if (onClick) onClick(event);
+    };
+    var handleFocus = function handleFocus1(event) {
+        if (selectionFollowsFocus && !selected && onChange) onChange(event, value);
+        if (onFocus) onFocus(event);
+    };
+    return(/*#__PURE__*/ _react.createElement(_buttonBaseDefault.default, _extendsDefault.default({
+        focusRipple: !disableFocusRipple,
+        className: _clsxDefault.default(classes.root, classes["textColor".concat(_capitalizeDefault.default(textColor))], className, disabled && classes.disabled, selected && classes.selected, label && icon && classes.labelIcon, fullWidth && classes.fullWidth, wrapped && classes.wrapped),
+        ref: ref,
+        role: "tab",
+        "aria-selected": selected,
+        disabled: disabled,
+        onClick: handleClick,
+        onFocus: handleFocus,
+        tabIndex: selected ? 0 : -1
+    }, other), /*#__PURE__*/ _react.createElement("span", {
+        className: classes.wrapper
+    }, icon, label), indicator));
+});
+Tab.propTypes = {
+    /**
+   * This prop isn't supported.
+   * Use the `component` prop if you need to change the children structure.
+   */ children: _unsupportedPropDefault.default,
+    /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */ classes: _propTypesDefault.default.object.isRequired,
+    /**
+   * @ignore
+   */ className: _propTypesDefault.default.string,
+    /**
+   * If `true`, the tab will be disabled.
+   */ disabled: _propTypesDefault.default.bool,
+    /**
+   * If `true`, the  keyboard focus ripple will be disabled.
+   */ disableFocusRipple: _propTypesDefault.default.bool,
+    /**
+   * If `true`, the ripple effect will be disabled.
+   */ disableRipple: _propTypesDefault.default.bool,
+    /**
+   * @ignore
+   */ fullWidth: _propTypesDefault.default.bool,
+    /**
+   * The icon element.
+   */ icon: _propTypesDefault.default.node,
+    /**
+   * @ignore
+   * For server-side rendering consideration, we let the selected tab
+   * render the indicator.
+   */ indicator: _propTypesDefault.default.node,
+    /**
+   * The label element.
+   */ label: _propTypesDefault.default.node,
+    /**
+   * @ignore
+   */ onChange: _propTypesDefault.default.func,
+    /**
+   * @ignore
+   */ onClick: _propTypesDefault.default.func,
+    /**
+   * @ignore
+   */ onFocus: _propTypesDefault.default.func,
+    /**
+   * @ignore
+   */ selected: _propTypesDefault.default.bool,
+    /**
+   * @ignore
+   */ selectionFollowsFocus: _propTypesDefault.default.bool,
+    /**
+   * @ignore
+   */ textColor: _propTypesDefault.default.oneOf([
+        'secondary',
+        'primary',
+        'inherit'
+    ]),
+    /**
+   * You can provide your own value. Otherwise, we fallback to the child position index.
+   */ value: _propTypesDefault.default.any,
+    /**
+   * Tab labels appear in a single row.
+   * They can use a second line if needed.
+   */ wrapped: _propTypesDefault.default.bool
+};
+exports.default = _withStylesDefault.default(styles, {
+    name: 'MuiTab'
+})(Tab);
+
+},{"@babel/runtime/helpers/esm/objectWithoutProperties":"9JCQM","@babel/runtime/helpers/esm/defineProperty":"7s3FO","@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","prop-types":"1tgq3","clsx":"eg1He","../styles/withStyles":"c9Ztg","../ButtonBase":"cH9fJ","../utils/capitalize":"8zjhI","../utils/unsupportedProp":"kf1l9","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"a9YWv":[function(require,module,exports) {
+"use strict";
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function get() {
+        return _SwipeableViews.default;
+    }
+});
+Object.defineProperty(exports, "SwipeableViewsContext", {
+    enumerable: true,
+    get: function get() {
+        return _SwipeableViews.SwipeableViewsContext;
+    }
+});
+var _SwipeableViews = _interopRequireWildcard(require("./SwipeableViews"));
+
+},{"@babel/runtime/helpers/interopRequireWildcard":"cMXMM","./SwipeableViews":"ijXgp"}],"cMXMM":[function(require,module,exports) {
+function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) return obj;
+    else {
+        var newObj = {
+        };
+        if (obj != null) {
+            for(var key in obj)if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {
+                };
+                if (desc.get || desc.set) Object.defineProperty(newObj, key, desc);
+                else newObj[key] = obj[key];
+            }
+        }
+        newObj.default = obj;
+        return newObj;
+    }
+}
+module.exports = _interopRequireWildcard;
+
+},{}],"ijXgp":[function(require,module,exports) {
+"use strict";
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getDomTreeShapes = getDomTreeShapes;
+exports.findNativeHandler = findNativeHandler;
+exports.default = exports.SwipeableViewsContext = void 0;
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+var React = _interopRequireWildcard(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _warning = _interopRequireDefault(require("warning"));
+var _reactSwipeableViewsCore = require("react-swipeable-views-core");
+function addEventListener(node, event, handler, options) {
+    node.addEventListener(event, handler, options);
+    return {
+        remove: function remove() {
+            node.removeEventListener(event, handler, options);
+        }
+    };
+}
+var styles = {
+    container: {
+        direction: 'ltr',
+        display: 'flex',
+        willChange: 'transform'
+    },
+    slide: {
+        width: '100%',
+        WebkitFlexShrink: 0,
+        flexShrink: 0,
+        overflow: 'auto'
+    }
+};
+var axisProperties = {
+    root: {
+        x: {
+            overflowX: 'hidden'
+        },
+        'x-reverse': {
+            overflowX: 'hidden'
+        },
+        y: {
+            overflowY: 'hidden'
+        },
+        'y-reverse': {
+            overflowY: 'hidden'
+        }
+    },
+    flexDirection: {
+        x: 'row',
+        'x-reverse': 'row-reverse',
+        y: 'column',
+        'y-reverse': 'column-reverse'
+    },
+    transform: {
+        x: function x(translate) {
+            return "translate(".concat(-translate, "%, 0)");
+        },
+        'x-reverse': function xReverse(translate) {
+            return "translate(".concat(translate, "%, 0)");
+        },
+        y: function y(translate) {
+            return "translate(0, ".concat(-translate, "%)");
+        },
+        'y-reverse': function yReverse(translate) {
+            return "translate(0, ".concat(translate, "%)");
+        }
+    },
+    length: {
+        x: 'width',
+        'x-reverse': 'width',
+        y: 'height',
+        'y-reverse': 'height'
+    },
+    rotationMatrix: {
+        x: {
+            x: [
+                1,
+                0
+            ],
+            y: [
+                0,
+                1
+            ]
+        },
+        'x-reverse': {
+            x: [
+                -1,
+                0
+            ],
+            y: [
+                0,
+                1
+            ]
+        },
+        y: {
+            x: [
+                0,
+                1
+            ],
+            y: [
+                1,
+                0
+            ]
+        },
+        'y-reverse': {
+            x: [
+                0,
+                -1
+            ],
+            y: [
+                1,
+                0
+            ]
+        }
+    },
+    scrollPosition: {
+        x: 'scrollLeft',
+        'x-reverse': 'scrollLeft',
+        y: 'scrollTop',
+        'y-reverse': 'scrollTop'
+    },
+    scrollLength: {
+        x: 'scrollWidth',
+        'x-reverse': 'scrollWidth',
+        y: 'scrollHeight',
+        'y-reverse': 'scrollHeight'
+    },
+    clientLength: {
+        x: 'clientWidth',
+        'x-reverse': 'clientWidth',
+        y: 'clientHeight',
+        'y-reverse': 'clientHeight'
+    }
+};
+function createTransition(property, options) {
+    var duration = options.duration, easeFunction = options.easeFunction, delay = options.delay;
+    return "".concat(property, " ").concat(duration, " ").concat(easeFunction, " ").concat(delay);
+} // We are using a 2x2 rotation matrix.
+function applyRotationMatrix(touch, axis) {
+    var rotationMatrix = axisProperties.rotationMatrix[axis];
+    return {
+        pageX: rotationMatrix.x[0] * touch.pageX + rotationMatrix.x[1] * touch.pageY,
+        pageY: rotationMatrix.y[0] * touch.pageX + rotationMatrix.y[1] * touch.pageY
+    };
+}
+function adaptMouse(event) {
+    event.touches = [
+        {
+            pageX: event.pageX,
+            pageY: event.pageY
+        }
+    ];
+    return event;
+}
+function getDomTreeShapes(element, rootNode) {
+    var domTreeShapes = [];
+    while(element && element !== rootNode && element !== document.body){
+        // We reach a Swipeable View, no need to look higher in the dom tree.
+        if (element.hasAttribute('data-swipeable')) break;
+        var style = window.getComputedStyle(element);
+        if (style.getPropertyValue('position') === 'absolute' || style.getPropertyValue('overflow-x') === 'hidden') domTreeShapes = [];
+        else if (element.clientWidth > 0 && element.scrollWidth > element.clientWidth || element.clientHeight > 0 && element.scrollHeight > element.clientHeight) // Ignore the nodes that have no width.
+        // Keep elements with a scroll
+        domTreeShapes.push({
+            element: element,
+            scrollWidth: element.scrollWidth,
+            scrollHeight: element.scrollHeight,
+            clientWidth: element.clientWidth,
+            clientHeight: element.clientHeight,
+            scrollLeft: element.scrollLeft,
+            scrollTop: element.scrollTop
+        });
+        element = element.parentNode;
+    }
+    return domTreeShapes;
+} // We can only have one node at the time claiming ownership for handling the swipe.
+// Otherwise, the UX would be confusing.
+// That's why we use a singleton here.
+var nodeWhoClaimedTheScroll = null;
+function findNativeHandler(params) {
+    var domTreeShapes = params.domTreeShapes, pageX = params.pageX, startX = params.startX, axis = params.axis;
+    return domTreeShapes.some(function(shape) {
+        // Determine if we are going backward or forward.
+        var goingForward = pageX >= startX;
+        if (axis === 'x' || axis === 'y') goingForward = !goingForward;
+         // scrollTop is not always be an integer.
+        // https://github.com/jquery/api.jquery.com/issues/608
+        var scrollPosition = Math.round(shape[axisProperties.scrollPosition[axis]]);
+        var areNotAtStart = scrollPosition > 0;
+        var areNotAtEnd = scrollPosition + shape[axisProperties.clientLength[axis]] < shape[axisProperties.scrollLength[axis]];
+        if (goingForward && areNotAtEnd || !goingForward && areNotAtStart) {
+            nodeWhoClaimedTheScroll = shape.element;
+            return true;
+        }
+        return false;
+    });
+}
+var SwipeableViewsContext = React.createContext();
+exports.SwipeableViewsContext = SwipeableViewsContext;
+SwipeableViewsContext.displayName = 'SwipeableViewsContext';
+var SwipeableViews1 = /*#__PURE__*/ function(_React$Component) {
+    _inherits2.default(SwipeableViews2, _React$Component);
+    function SwipeableViews2(props) {
+        var _this;
+        _classCallCheck2.default(this, SwipeableViews2);
+        _this = _possibleConstructorReturn2.default(this, _getPrototypeOf2.default(SwipeableViews2).call(this, props));
+        _this.rootNode = null;
+        _this.containerNode = null;
+        _this.ignoreNextScrollEvents = false;
+        _this.viewLength = 0;
+        _this.startX = 0;
+        _this.lastX = 0;
+        _this.vx = 0;
+        _this.startY = 0;
+        _this.isSwiping = undefined;
+        _this.started = false;
+        _this.startIndex = 0;
+        _this.transitionListener = null;
+        _this.touchMoveListener = null;
+        _this.activeSlide = null;
+        _this.indexCurrent = null;
+        _this.firstRenderTimeout = null;
+        _this.setRootNode = function(node) {
+            _this.rootNode = node;
+        };
+        _this.setContainerNode = function(node) {
+            _this.containerNode = node;
+        };
+        _this.setActiveSlide = function(node) {
+            _this.activeSlide = node;
+            _this.updateHeight();
+        };
+        _this.handleSwipeStart = function(event) {
+            var axis = _this.props.axis;
+            var touch = applyRotationMatrix(event.touches[0], axis);
+            _this.viewLength = _this.rootNode.getBoundingClientRect()[axisProperties.length[axis]];
+            _this.startX = touch.pageX;
+            _this.lastX = touch.pageX;
+            _this.vx = 0;
+            _this.startY = touch.pageY;
+            _this.isSwiping = undefined;
+            _this.started = true;
+            var computedStyle = window.getComputedStyle(_this.containerNode);
+            var transform = computedStyle.getPropertyValue('-webkit-transform') || computedStyle.getPropertyValue('transform');
+            if (transform && transform !== 'none') {
+                var transformValues = transform.split('(')[1].split(')')[0].split(',');
+                var rootStyle = window.getComputedStyle(_this.rootNode);
+                var tranformNormalized = applyRotationMatrix({
+                    pageX: parseInt(transformValues[4], 10),
+                    pageY: parseInt(transformValues[5], 10)
+                }, axis);
+                _this.startIndex = -tranformNormalized.pageX / (_this.viewLength - parseInt(rootStyle.paddingLeft, 10) - parseInt(rootStyle.paddingRight, 10)) || 0;
+            }
+        };
+        _this.handleSwipeMove = function(event) {
+            // The touch start event can be cancel.
+            // Makes sure we set a starting point.
+            if (!_this.started) {
+                _this.handleTouchStart(event);
+                return;
+            } // We are not supposed to hanlde this touch move.
+            if (nodeWhoClaimedTheScroll !== null && nodeWhoClaimedTheScroll !== _this.rootNode) return;
+            var _this$props = _this.props, axis = _this$props.axis, children = _this$props.children, ignoreNativeScroll = _this$props.ignoreNativeScroll, onSwitching = _this$props.onSwitching, resistance = _this$props.resistance;
+            var touch = applyRotationMatrix(event.touches[0], axis); // We don't know yet.
+            if (_this.isSwiping === undefined) {
+                var dx = Math.abs(touch.pageX - _this.startX);
+                var dy = Math.abs(touch.pageY - _this.startY);
+                var isSwiping = dx > dy && dx > _reactSwipeableViewsCore.constant.UNCERTAINTY_THRESHOLD; // We let the parent handle the scroll.
+                if (!resistance && (axis === 'y' || axis === 'y-reverse') && (_this.indexCurrent === 0 && _this.startX < touch.pageX || _this.indexCurrent === React.Children.count(_this.props.children) - 1 && _this.startX > touch.pageX)) {
+                    _this.isSwiping = false;
+                    return;
+                } // We are likely to be swiping, let's prevent the scroll event.
+                if (dx > dy) event.preventDefault();
+                if (isSwiping === true || dy > _reactSwipeableViewsCore.constant.UNCERTAINTY_THRESHOLD) {
+                    _this.isSwiping = isSwiping;
+                    _this.startX = touch.pageX; // Shift the starting point.
+                    return; // Let's wait the next touch event to move something.
+                }
+            }
+            if (_this.isSwiping !== true) return;
+             // We are swiping, let's prevent the scroll event.
+            event.preventDefault(); // Low Pass filter.
+            _this.vx = _this.vx * 0.5 + (touch.pageX - _this.lastX) * 0.5;
+            _this.lastX = touch.pageX;
+            var _computeIndex = _reactSwipeableViewsCore.computeIndex({
+                children: children,
+                resistance: resistance,
+                pageX: touch.pageX,
+                startIndex: _this.startIndex,
+                startX: _this.startX,
+                viewLength: _this.viewLength
+            }), index = _computeIndex.index, startX = _computeIndex.startX; // Add support for native scroll elements.
+            if (nodeWhoClaimedTheScroll === null && !ignoreNativeScroll) {
+                var domTreeShapes = getDomTreeShapes(event.target, _this.rootNode);
+                var hasFoundNativeHandler = findNativeHandler({
+                    domTreeShapes: domTreeShapes,
+                    startX: _this.startX,
+                    pageX: touch.pageX,
+                    axis: axis
+                }); // We abort the touch move handler.
+                if (hasFoundNativeHandler) return;
+            } // We are moving toward the edges.
+            if (startX) _this.startX = startX;
+            else if (nodeWhoClaimedTheScroll === null) nodeWhoClaimedTheScroll = _this.rootNode;
+            _this.setIndexCurrent(index);
+            var callback = function callback1() {
+                if (onSwitching) onSwitching(index, 'move');
+            };
+            if (_this.state.displaySameSlide || !_this.state.isDragging) _this.setState({
+                displaySameSlide: false,
+                isDragging: true
+            }, callback);
+            callback();
+        };
+        _this.handleSwipeEnd = function() {
+            nodeWhoClaimedTheScroll = null; // The touch start event can be cancel.
+            // Makes sure that a starting point is set.
+            if (!_this.started) return;
+            _this.started = false;
+            if (_this.isSwiping !== true) return;
+            var indexLatest = _this.state.indexLatest;
+            var indexCurrent = _this.indexCurrent;
+            var delta = indexLatest - indexCurrent;
+            var indexNew; // Quick movement
+            if (Math.abs(_this.vx) > _this.props.threshold) {
+                if (_this.vx > 0) indexNew = Math.floor(indexCurrent);
+                else indexNew = Math.ceil(indexCurrent);
+            } else if (Math.abs(delta) > _this.props.hysteresis) // Some hysteresis with indexLatest.
+            indexNew = delta > 0 ? Math.floor(indexCurrent) : Math.ceil(indexCurrent);
+            else indexNew = indexLatest;
+            var indexMax = React.Children.count(_this.props.children) - 1;
+            if (indexNew < 0) indexNew = 0;
+            else if (indexNew > indexMax) indexNew = indexMax;
+            _this.setIndexCurrent(indexNew);
+            _this.setState({
+                indexLatest: indexNew,
+                isDragging: false
+            }, function() {
+                if (_this.props.onSwitching) _this.props.onSwitching(indexNew, 'end');
+                if (_this.props.onChangeIndex && indexNew !== indexLatest) _this.props.onChangeIndex(indexNew, indexLatest, {
+                    reason: 'swipe'
+                });
+                 // Manually calling handleTransitionEnd in that case as isn't otherwise.
+                if (indexCurrent === indexLatest) _this.handleTransitionEnd();
+            });
+        };
+        _this.handleTouchStart = function(event) {
+            if (_this.props.onTouchStart) _this.props.onTouchStart(event);
+            _this.handleSwipeStart(event);
+        };
+        _this.handleTouchEnd = function(event) {
+            if (_this.props.onTouchEnd) _this.props.onTouchEnd(event);
+            _this.handleSwipeEnd(event);
+        };
+        _this.handleMouseDown = function(event) {
+            if (_this.props.onMouseDown) _this.props.onMouseDown(event);
+            event.persist();
+            _this.handleSwipeStart(adaptMouse(event));
+        };
+        _this.handleMouseUp = function(event) {
+            if (_this.props.onMouseUp) _this.props.onMouseUp(event);
+            _this.handleSwipeEnd(adaptMouse(event));
+        };
+        _this.handleMouseLeave = function(event) {
+            if (_this.props.onMouseLeave) _this.props.onMouseLeave(event);
+             // Filter out events
+            if (_this.started) _this.handleSwipeEnd(adaptMouse(event));
+        };
+        _this.handleMouseMove = function(event) {
+            if (_this.props.onMouseMove) _this.props.onMouseMove(event);
+             // Filter out events
+            if (_this.started) _this.handleSwipeMove(adaptMouse(event));
+        };
+        _this.handleScroll = function(event) {
+            if (_this.props.onScroll) _this.props.onScroll(event);
+             // Ignore events bubbling up.
+            if (event.target !== _this.rootNode) return;
+            if (_this.ignoreNextScrollEvents) {
+                _this.ignoreNextScrollEvents = false;
+                return;
+            }
+            var indexLatest = _this.state.indexLatest;
+            var indexNew = Math.ceil(event.target.scrollLeft / event.target.clientWidth) + indexLatest;
+            _this.ignoreNextScrollEvents = true; // Reset the scroll position.
+            event.target.scrollLeft = 0;
+            if (_this.props.onChangeIndex && indexNew !== indexLatest) _this.props.onChangeIndex(indexNew, indexLatest, {
+                reason: 'focus'
+            });
+        };
+        _this.updateHeight = function() {
+            if (_this.activeSlide !== null) {
+                var child = _this.activeSlide.children[0];
+                if (child !== undefined && child.offsetHeight !== undefined && _this.state.heightLatest !== child.offsetHeight) _this.setState({
+                    heightLatest: child.offsetHeight
+                });
+            }
+        };
+        _reactSwipeableViewsCore.checkIndexBounds(props);
+        _this.state = {
+            indexLatest: props.index,
+            // Set to true as soon as the component is swiping.
+            // It's the state counter part of this.isSwiping.
+            isDragging: false,
+            // Help with SSR logic and lazy loading logic.
+            renderOnlyActive: !props.disableLazyLoading,
+            heightLatest: 0,
+            // Let the render method that we are going to display the same slide than previously.
+            displaySameSlide: true
+        };
+        _this.setIndexCurrent(props.index);
+        return _this;
+    }
+    _createClass2.default(SwipeableViews2, [
+        {
+            key: "componentDidMount",
+            value: function componentDidMount() {
+                var _this2 = this;
+                // Subscribe to transition end events.
+                this.transitionListener = addEventListener(this.containerNode, 'transitionend', function(event) {
+                    if (event.target !== _this2.containerNode) return;
+                    _this2.handleTransitionEnd();
+                }); // Block the thread to handle that event.
+                this.touchMoveListener = addEventListener(this.rootNode, 'touchmove', function(event) {
+                    // Handling touch events is disabled.
+                    if (_this2.props.disabled) return;
+                    _this2.handleSwipeMove(event);
+                }, {
+                    passive: false
+                });
+                if (!this.props.disableLazyLoading) this.firstRenderTimeout = setTimeout(function() {
+                    _this2.setState({
+                        renderOnlyActive: false
+                    });
+                }, 0);
+                 // Send all functions in an object if action param is set.
+                if (this.props.action) this.props.action({
+                    updateHeight: this.updateHeight
+                });
+            } // eslint-disable-next-line camelcase,react/sort-comp
+        },
+        {
+            key: "UNSAFE_componentWillReceiveProps",
+            value: function UNSAFE_componentWillReceiveProps(nextProps) {
+                var index = nextProps.index;
+                if (typeof index === 'number' && index !== this.props.index) {
+                    _reactSwipeableViewsCore.checkIndexBounds(nextProps);
+                    this.setIndexCurrent(index);
+                    this.setState({
+                        // If true, we are going to change the children. We shoudn't animate it.
+                        displaySameSlide: _reactSwipeableViewsCore.getDisplaySameSlide(this.props, nextProps),
+                        indexLatest: index
+                    });
+                }
+            }
+        },
+        {
+            key: "componentWillUnmount",
+            value: function componentWillUnmount() {
+                this.transitionListener.remove();
+                this.touchMoveListener.remove();
+                clearTimeout(this.firstRenderTimeout);
+            }
+        },
+        {
+            key: "getSwipeableViewsContext",
+            value: function getSwipeableViewsContext() {
+                var _this3 = this;
+                return {
+                    slideUpdateHeight: function slideUpdateHeight() {
+                        _this3.updateHeight();
+                    }
+                };
+            }
+        },
+        {
+            key: "setIndexCurrent",
+            value: function setIndexCurrent(indexCurrent) {
+                if (!this.props.animateTransitions && this.indexCurrent !== indexCurrent) this.handleTransitionEnd();
+                this.indexCurrent = indexCurrent;
+                if (this.containerNode) {
+                    var axis = this.props.axis;
+                    var transform = axisProperties.transform[axis](indexCurrent * 100);
+                    this.containerNode.style.WebkitTransform = transform;
+                    this.containerNode.style.transform = transform;
+                }
+            }
+        },
+        {
+            key: "handleTransitionEnd",
+            value: function handleTransitionEnd() {
+                if (!this.props.onTransitionEnd) return;
+                 // Filters out when changing the children
+                if (this.state.displaySameSlide) return;
+                 // The rest callback is triggered when swiping. It's just noise.
+                // We filter it out.
+                if (!this.state.isDragging) this.props.onTransitionEnd();
+            }
+        },
+        {
+            key: "render",
+            value: function render() {
+                var _this4 = this;
+                var _this$props2 = this.props, action = _this$props2.action, animateHeight = _this$props2.animateHeight, animateTransitions = _this$props2.animateTransitions, axis = _this$props2.axis, children = _this$props2.children, containerStyleProp = _this$props2.containerStyle, disabled = _this$props2.disabled, disableLazyLoading = _this$props2.disableLazyLoading, enableMouseEvents = _this$props2.enableMouseEvents, hysteresis = _this$props2.hysteresis, ignoreNativeScroll = _this$props2.ignoreNativeScroll, index = _this$props2.index, onChangeIndex = _this$props2.onChangeIndex, onSwitching = _this$props2.onSwitching, onTransitionEnd = _this$props2.onTransitionEnd, resistance = _this$props2.resistance, slideStyleProp = _this$props2.slideStyle, slideClassName = _this$props2.slideClassName, springConfig = _this$props2.springConfig, style = _this$props2.style, threshold = _this$props2.threshold, other = _objectWithoutProperties2.default(_this$props2, [
+                    "action",
+                    "animateHeight",
+                    "animateTransitions",
+                    "axis",
+                    "children",
+                    "containerStyle",
+                    "disabled",
+                    "disableLazyLoading",
+                    "enableMouseEvents",
+                    "hysteresis",
+                    "ignoreNativeScroll",
+                    "index",
+                    "onChangeIndex",
+                    "onSwitching",
+                    "onTransitionEnd",
+                    "resistance",
+                    "slideStyle",
+                    "slideClassName",
+                    "springConfig",
+                    "style",
+                    "threshold"
+                ]);
+                var _this$state = this.state, displaySameSlide = _this$state.displaySameSlide, heightLatest = _this$state.heightLatest, indexLatest = _this$state.indexLatest, isDragging = _this$state.isDragging, renderOnlyActive = _this$state.renderOnlyActive;
+                var touchEvents = !disabled ? {
+                    onTouchStart: this.handleTouchStart,
+                    onTouchEnd: this.handleTouchEnd
+                } : {
+                };
+                var mouseEvents = !disabled && enableMouseEvents ? {
+                    onMouseDown: this.handleMouseDown,
+                    onMouseUp: this.handleMouseUp,
+                    onMouseLeave: this.handleMouseLeave,
+                    onMouseMove: this.handleMouseMove
+                } : {
+                }; // There is no point to animate if we are already providing a height.
+                _warning.default(!animateHeight || !containerStyleProp || !containerStyleProp.height, "react-swipeable-view: You are setting animateHeight to true but you are\nalso providing a custom height.\nThe custom height has a higher priority than the animateHeight property.\nSo animateHeight is most likely having no effect at all.");
+                var slideStyle = _extends2.default({
+                }, styles.slide, slideStyleProp);
+                var transition;
+                var WebkitTransition;
+                if (isDragging || !animateTransitions || displaySameSlide) {
+                    transition = 'all 0s ease 0s';
+                    WebkitTransition = 'all 0s ease 0s';
+                } else {
+                    transition = createTransition('transform', springConfig);
+                    WebkitTransition = createTransition('-webkit-transform', springConfig);
+                    if (heightLatest !== 0) {
+                        var additionalTranstion = ", ".concat(createTransition('height', springConfig));
+                        transition += additionalTranstion;
+                        WebkitTransition += additionalTranstion;
+                    }
+                }
+                var containerStyle = {
+                    height: null,
+                    WebkitFlexDirection: axisProperties.flexDirection[axis],
+                    flexDirection: axisProperties.flexDirection[axis],
+                    WebkitTransition: WebkitTransition,
+                    transition: transition
+                }; // Apply the styles for SSR considerations
+                if (!renderOnlyActive) {
+                    var transform = axisProperties.transform[axis](this.indexCurrent * 100);
+                    containerStyle.WebkitTransform = transform;
+                    containerStyle.transform = transform;
+                }
+                if (animateHeight) containerStyle.height = heightLatest;
+                return React.createElement(SwipeableViewsContext.Provider, {
+                    value: this.getSwipeableViewsContext()
+                }, React.createElement("div", _extends2.default({
+                    ref: this.setRootNode,
+                    style: _extends2.default({
+                    }, axisProperties.root[axis], style)
+                }, other, touchEvents, mouseEvents, {
+                    onScroll: this.handleScroll
+                }), React.createElement("div", {
+                    ref: this.setContainerNode,
+                    style: _extends2.default({
+                    }, containerStyle, styles.container, containerStyleProp),
+                    className: "react-swipeable-view-container"
+                }, React.Children.map(children, function(child, indexChild) {
+                    if (renderOnlyActive && indexChild !== indexLatest) return null;
+                    _warning.default(React.isValidElement(child), "react-swipeable-view: one of the children provided is invalid: ".concat(child, ".\n  We are expecting a valid React Element"));
+                    var ref;
+                    var hidden = true;
+                    if (indexChild === indexLatest) {
+                        hidden = false;
+                        if (animateHeight) {
+                            ref = _this4.setActiveSlide;
+                            slideStyle.overflowY = 'hidden';
+                        }
+                    }
+                    return React.createElement("div", {
+                        ref: ref,
+                        style: slideStyle,
+                        className: slideClassName,
+                        "aria-hidden": hidden,
+                        "data-swipeable": "true"
+                    }, child);
+                }))));
+            }
+        }
+    ]);
+    return SwipeableViews2;
+}(React.Component); // Added as an ads for people using the React dev tools in production.
+// So they know, the tool used to build the awesome UI they
+// are looking at/retro engineering.
+SwipeableViews1.displayName = 'ReactSwipableView';
+SwipeableViews1.propTypes = {
+    /**
+   * This is callback property. It's called by the component on mount.
+   * This is useful when you want to trigger an action programmatically.
+   * It currently only supports updateHeight() action.
+   *
+   * @param {object} actions This object contains all posible actions
+   * that can be triggered programmatically.
+   */ action: _propTypes.default.func,
+    /**
+   * If `true`, the height of the container will be animated to match the current slide height.
+   * Animating another style property has a negative impact regarding performance.
+   */ animateHeight: _propTypes.default.bool,
+    /**
+   * If `false`, changes to the index prop will not cause an animated transition.
+   */ animateTransitions: _propTypes.default.bool,
+    /**
+   * The axis on which the slides will slide.
+   */ axis: _propTypes.default.oneOf([
+        'x',
+        'x-reverse',
+        'y',
+        'y-reverse'
+    ]),
+    /**
+   * Use this property to provide your slides.
+   */ children: _propTypes.default.node.isRequired,
+    /**
+   * This is the inlined style that will be applied
+   * to each slide container.
+   */ containerStyle: _propTypes.default.object,
+    /**
+   * If `true`, it will disable touch events.
+   * This is useful when you want to prohibit the user from changing slides.
+   */ disabled: _propTypes.default.bool,
+    /**
+   * This is the config used to disable lazyloding,
+   * if `true` will render all the views in first rendering.
+   */ disableLazyLoading: _propTypes.default.bool,
+    /**
+   * If `true`, it will enable mouse events.
+   * This will allow the user to perform the relevant swipe actions with a mouse.
+   */ enableMouseEvents: _propTypes.default.bool,
+    /**
+   * Configure hysteresis between slides. This value determines how far
+   * should user swipe to switch slide.
+   */ hysteresis: _propTypes.default.number,
+    /**
+   * If `true`, it will ignore native scroll container.
+   * It can be used to filter out false positive that blocks the swipe.
+   */ ignoreNativeScroll: _propTypes.default.bool,
+    /**
+   * This is the index of the slide to show.
+   * This is useful when you want to change the default slide shown.
+   * Or when you have tabs linked to each slide.
+   */ index: _propTypes.default.number,
+    /**
+   * This is callback prop. It's call by the
+   * component when the shown slide change after a swipe made by the user.
+   * This is useful when you have tabs linked to each slide.
+   *
+   * @param {integer} index This is the current index of the slide.
+   * @param {integer} indexLatest This is the oldest index of the slide.
+   * @param {object} meta Meta data containing more information about the event.
+   */ onChangeIndex: _propTypes.default.func,
+    /**
+   * @ignore
+   */ onMouseDown: _propTypes.default.func,
+    /**
+   * @ignore
+   */ onMouseLeave: _propTypes.default.func,
+    /**
+   * @ignore
+   */ onMouseMove: _propTypes.default.func,
+    /**
+   * @ignore
+   */ onMouseUp: _propTypes.default.func,
+    /**
+   * @ignore
+   */ onScroll: _propTypes.default.func,
+    /**
+   * This is callback prop. It's called by the
+   * component when the slide switching.
+   * This is useful when you want to implement something corresponding
+   * to the current slide position.
+   *
+   * @param {integer} index This is the current index of the slide.
+   * @param {string} type Can be either `move` or `end`.
+   */ onSwitching: _propTypes.default.func,
+    /**
+   * @ignore
+   */ onTouchEnd: _propTypes.default.func,
+    /**
+   * @ignore
+   */ onTouchMove: _propTypes.default.func,
+    /**
+   * @ignore
+   */ onTouchStart: _propTypes.default.func,
+    /**
+   * The callback that fires when the animation comes to a rest.
+   * This is useful to defer CPU intensive task.
+   */ onTransitionEnd: _propTypes.default.func,
+    /**
+   * If `true`, it will add bounds effect on the edges.
+   */ resistance: _propTypes.default.bool,
+    /**
+   * This is the className that will be applied
+   * on the slide component.
+   */ slideClassName: _propTypes.default.string,
+    /**
+   * This is the inlined style that will be applied
+   * on the slide component.
+   */ slideStyle: _propTypes.default.object,
+    /**
+   * This is the config used to create CSS transitions.
+   * This is useful to change the dynamic of the transition.
+   */ springConfig: _propTypes.default.shape({
+        delay: _propTypes.default.string,
+        duration: _propTypes.default.string,
+        easeFunction: _propTypes.default.string
+    }),
+    /**
+   * This is the inlined style that will be applied
+   * on the root component.
+   */ style: _propTypes.default.object,
+    /**
+   * This is the threshold used for detecting a quick swipe.
+   * If the computed speed is above this value, the index change.
+   */ threshold: _propTypes.default.number
+};
+SwipeableViews1.defaultProps = {
+    animateHeight: false,
+    animateTransitions: true,
+    axis: 'x',
+    disabled: false,
+    disableLazyLoading: false,
+    enableMouseEvents: false,
+    hysteresis: 0.6,
+    ignoreNativeScroll: false,
+    index: 0,
+    threshold: 5,
+    springConfig: {
+        duration: '0.35s',
+        easeFunction: 'cubic-bezier(0.15, 0.3, 0.25, 1)',
+        delay: '0s'
+    },
+    resistance: false
+};
+var _default = SwipeableViews1;
+exports.default = _default;
+
+},{"@babel/runtime/helpers/interopRequireWildcard":"cMXMM","@babel/runtime/helpers/interopRequireDefault":"3Y4hn","@babel/runtime/helpers/extends":"iX2eY","@babel/runtime/helpers/objectWithoutProperties":"7nNst","@babel/runtime/helpers/classCallCheck":"amj4v","@babel/runtime/helpers/createClass":"e0zaV","@babel/runtime/helpers/possibleConstructorReturn":"6NriR","@babel/runtime/helpers/getPrototypeOf":"evQV3","@babel/runtime/helpers/inherits":"7p7pZ","react":"6TuXu","prop-types":"1tgq3","warning":"dbfUS","react-swipeable-views-core":"8hYay"}],"3Y4hn":[function(require,module,exports) {
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+module.exports = _interopRequireDefault;
+
+},{}],"iX2eY":[function(require,module,exports) {
+function _extends() {
+    module.exports = _extends = Object.assign || function(target) {
+        for(var i = 1; i < arguments.length; i++){
+            var source = arguments[i];
+            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+        }
+        return target;
+    };
+    return _extends.apply(this, arguments);
+}
+module.exports = _extends;
+
+},{}],"7nNst":[function(require,module,exports) {
+var objectWithoutPropertiesLoose = require("./objectWithoutPropertiesLoose");
+function _objectWithoutProperties(source, excluded) {
+    if (source == null) return {
+    };
+    var target = objectWithoutPropertiesLoose(source, excluded);
+    var key, i;
+    if (Object.getOwnPropertySymbols) {
+        var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+        for(i = 0; i < sourceSymbolKeys.length; i++){
+            key = sourceSymbolKeys[i];
+            if (excluded.indexOf(key) >= 0) continue;
+            if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+            target[key] = source[key];
+        }
+    }
+    return target;
+}
+module.exports = _objectWithoutProperties;
+
+},{"./objectWithoutPropertiesLoose":"zM3LY"}],"zM3LY":[function(require,module,exports) {
+function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {
+    };
+    var target = {
+    };
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for(i = 0; i < sourceKeys.length; i++){
+        key = sourceKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+    }
+    return target;
+}
+module.exports = _objectWithoutPropertiesLoose;
+
+},{}],"amj4v":[function(require,module,exports) {
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
+}
+module.exports = _classCallCheck;
+
+},{}],"e0zaV":[function(require,module,exports) {
+function _defineProperties(target, props) {
+    for(var i = 0; i < props.length; i++){
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+    }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+}
+module.exports = _createClass;
+
+},{}],"6NriR":[function(require,module,exports) {
+var _typeof = require("../helpers/typeof");
+var assertThisInitialized = require("./assertThisInitialized");
+function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
+    return assertThisInitialized(self);
+}
+module.exports = _possibleConstructorReturn;
+
+},{"../helpers/typeof":"dl0Uh","./assertThisInitialized":"3SkyO"}],"dl0Uh":[function(require,module,exports) {
+function _typeof2(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") _typeof2 = function _typeof21(obj1) {
+        return typeof obj1;
+    };
+    else _typeof2 = function _typeof22(obj1) {
+        return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : typeof obj1;
+    };
+    return _typeof2(obj);
+}
+function _typeof(obj) {
+    if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") module.exports = _typeof = function _typeof1(obj1) {
+        return _typeof2(obj1);
+    };
+    else module.exports = _typeof = function _typeof3(obj1) {
+        return obj1 && typeof Symbol === "function" && obj1.constructor === Symbol && obj1 !== Symbol.prototype ? "symbol" : _typeof2(obj1);
+    };
+    return _typeof(obj);
+}
+module.exports = _typeof;
+
+},{}],"3SkyO":[function(require,module,exports) {
+function _assertThisInitialized(self) {
+    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    return self;
+}
+module.exports = _assertThisInitialized;
+
+},{}],"evQV3":[function(require,module,exports) {
+function _getPrototypeOf(o) {
+    module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf1(o1) {
+        return o1.__proto__ || Object.getPrototypeOf(o1);
+    };
+    return _getPrototypeOf(o);
+}
+module.exports = _getPrototypeOf;
+
+},{}],"7p7pZ":[function(require,module,exports) {
+var setPrototypeOf = require("./setPrototypeOf");
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+            value: subClass,
+            writable: true,
+            configurable: true
+        }
+    });
+    if (superClass) setPrototypeOf(subClass, superClass);
+}
+module.exports = _inherits;
+
+},{"./setPrototypeOf":"4Pu6g"}],"4Pu6g":[function(require,module,exports) {
+function _setPrototypeOf(o, p) {
+    module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf1(o1, p1) {
+        o1.__proto__ = p1;
+        return o1;
+    };
+    return _setPrototypeOf(o, p);
+}
+module.exports = _setPrototypeOf;
+
+},{}],"dbfUS":[function(require,module,exports) {
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */ 'use strict';
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */ var __DEV__ = true;
+var warning = function() {
+};
+if (__DEV__) {
+    var printWarning = function printWarning1(format, args) {
+        var len = arguments.length;
+        args = new Array(len > 1 ? len - 1 : 0);
+        for(var key = 1; key < len; key++)args[key - 1] = arguments[key];
+        var argIndex = 0;
+        var message = 'Warning: ' + format.replace(/%s/g, function() {
+            return args[argIndex++];
+        });
+        if (typeof console !== 'undefined') console.error(message);
+        try {
+            // --- Welcome to debugging React ---
+            // This error was thrown as a convenience so that you can use this stack
+            // to find the callsite that caused this warning to fire.
+            throw new Error(message);
+        } catch (x) {
+        }
+    };
+    warning = function(condition, format, args) {
+        var len = arguments.length;
+        args = new Array(len > 2 ? len - 2 : 0);
+        for(var key = 2; key < len; key++)args[key - 2] = arguments[key];
+        if (format === undefined) throw new Error("`warning(condition, format, ...args)` requires a warning message argument");
+        if (!condition) printWarning.apply(null, [
+            format
+        ].concat(args));
+    };
+}
+module.exports = warning;
+
+},{}],"8hYay":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "checkIndexBounds", {
+    enumerable: true,
+    get: function get() {
+        return _checkIndexBounds.default;
+    }
+});
+Object.defineProperty(exports, "computeIndex", {
+    enumerable: true,
+    get: function get() {
+        return _computeIndex.default;
+    }
+});
+Object.defineProperty(exports, "constant", {
+    enumerable: true,
+    get: function get() {
+        return _constant.default;
+    }
+});
+Object.defineProperty(exports, "getDisplaySameSlide", {
+    enumerable: true,
+    get: function get() {
+        return _getDisplaySameSlide.default;
+    }
+});
+Object.defineProperty(exports, "mod", {
+    enumerable: true,
+    get: function get() {
+        return _mod.default;
+    }
+});
+var _checkIndexBounds = _interopRequireDefault(require("./checkIndexBounds"));
+var _computeIndex = _interopRequireDefault(require("./computeIndex"));
+var _constant = _interopRequireDefault(require("./constant"));
+var _getDisplaySameSlide = _interopRequireDefault(require("./getDisplaySameSlide"));
+var _mod = _interopRequireDefault(require("./mod"));
+
+},{"@babel/runtime/helpers/interopRequireDefault":"eFLvc","./checkIndexBounds":"2LMMV","./computeIndex":"jng1p","./constant":"jL7Jv","./getDisplaySameSlide":"hUqAv","./mod":"hcmD9"}],"eFLvc":[function(require,module,exports) {
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+module.exports = _interopRequireDefault;
+
+},{}],"2LMMV":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _warning = _interopRequireDefault(require("warning"));
+var checkIndexBounds = function checkIndexBounds1(props) {
+    var index = props.index, children = props.children;
+    var childrenCount = _react.default.Children.count(children);
+    _warning.default(index >= 0 && index <= childrenCount, "react-swipeable-view: the new index: ".concat(index, " is out of bounds: [0-").concat(childrenCount, "]."));
+};
+var _default = checkIndexBounds;
+exports.default = _default;
+
+},{"@babel/runtime/helpers/interopRequireDefault":"eFLvc","react":"6TuXu","warning":"dbfUS"}],"jng1p":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = computeIndex;
+var _react = _interopRequireDefault(require("react"));
+var _constant = _interopRequireDefault(require("./constant"));
+function computeIndex(params) {
+    var children = params.children, startIndex = params.startIndex, startX = params.startX, pageX = params.pageX, viewLength = params.viewLength, resistance = params.resistance;
+    var indexMax = _react.default.Children.count(children) - 1;
+    var index = startIndex + (startX - pageX) / viewLength;
+    var newStartX;
+    if (!resistance) {
+        // Reset the starting point
+        if (index < 0) {
+            index = 0;
+            newStartX = (index - startIndex) * viewLength + pageX;
+        } else if (index > indexMax) {
+            index = indexMax;
+            newStartX = (index - startIndex) * viewLength + pageX;
+        }
+    } else if (index < 0) index = Math.exp(index * _constant.default.RESISTANCE_COEF) - 1;
+    else if (index > indexMax) index = indexMax + 1 - Math.exp((indexMax - index) * _constant.default.RESISTANCE_COEF);
+    return {
+        index: index,
+        startX: newStartX
+    };
+}
+
+},{"@babel/runtime/helpers/interopRequireDefault":"eFLvc","react":"6TuXu","./constant":"jL7Jv"}],"jL7Jv":[function(require,module,exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = void 0;
+var _default = {
+    RESISTANCE_COEF: 0.6,
+    // This value is closed to what browsers are using internally to
+    // trigger a native scroll.
+    UNCERTAINTY_THRESHOLD: 3 // px
+};
+exports.default = _default;
+
+},{}],"hUqAv":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = void 0;
+var _react = _interopRequireDefault(require("react"));
+var getDisplaySameSlide = function getDisplaySameSlide1(props, nextProps) {
+    var displaySameSlide = false;
+    var getChildrenKey = function getChildrenKey1(child) {
+        return child ? child.key : 'empty';
+    };
+    if (props.children.length && nextProps.children.length) {
+        var oldKeys = _react.default.Children.map(props.children, getChildrenKey);
+        var oldKey = oldKeys[props.index];
+        if (oldKey !== null && oldKey !== undefined) {
+            var newKeys = _react.default.Children.map(nextProps.children, getChildrenKey);
+            var newKey = newKeys[nextProps.index];
+            if (oldKey === newKey) displaySameSlide = true;
+        }
+    }
+    return displaySameSlide;
+};
+var _default = getDisplaySameSlide;
+exports.default = _default;
+
+},{"@babel/runtime/helpers/interopRequireDefault":"eFLvc","react":"6TuXu"}],"hcmD9":[function(require,module,exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = void 0;
+// Extended version of % with negative integer support.
+function mod(n, m) {
+    var q = n % m;
+    return q < 0 ? q + m : q;
+}
+var _default = mod;
+exports.default = _default;
+
+},{}],"gZprP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>_boxDefault.default
+);
+parcelHelpers.export(exports, "styleFunction", ()=>_box.styleFunction
+);
+var _box = require("./Box");
+var _boxDefault = parcelHelpers.interopDefault(_box);
+
+},{"./Box":"gs42k","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"gs42k":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "styleFunction", ()=>styleFunction
+);
+var _system = require("@material-ui/system");
+var _styled = require("../styles/styled");
+var _styledDefault = parcelHelpers.interopDefault(_styled);
+var styleFunction = _system.css(_system.compose(_system.borders, _system.display, _system.flexbox, _system.grid, _system.positions, _system.palette, _system.shadows, _system.sizing, _system.spacing, _system.typography));
+/**
+ * @ignore - do not document.
+ */ var Box = _styledDefault.default('div')(styleFunction, {
+    name: 'MuiBox'
+});
+exports.default = Box;
+
+},{"@material-ui/system":"9BiEt","../styles/styled":"4x1jq","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"4x1jq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _styles = require("@material-ui/styles");
+var _defaultTheme = require("./defaultTheme");
+var _defaultThemeDefault = parcelHelpers.interopDefault(_defaultTheme);
+var styled = function styled1(Component) {
+    var componentCreator = _styles.styled(Component);
+    return function(style, options) {
+        return componentCreator(style, _extendsDefault.default({
+            defaultTheme: _defaultThemeDefault.default
+        }, options));
+    };
+};
+exports.default = styled;
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@material-ui/styles":"5kpre","./defaultTheme":"3PisM","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"4ziUd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "createMuiTheme", ()=>_createMuiThemeDefault.default
+) // eslint-disable-next-line camelcase
+;
+parcelHelpers.export(exports, "unstable_createMuiStrictModeTheme", ()=>_createMuiStrictModeThemeDefault.default
+);
+parcelHelpers.export(exports, "createStyles", ()=>_createStylesDefault.default
+);
+parcelHelpers.export(exports, "makeStyles", ()=>_makeStylesDefault.default
+);
+parcelHelpers.export(exports, "responsiveFontSizes", ()=>_responsiveFontSizesDefault.default
+);
+parcelHelpers.export(exports, "styled", ()=>_styledDefault.default
+);
+parcelHelpers.export(exports, "useTheme", ()=>_useThemeDefault.default
+);
+parcelHelpers.export(exports, "withStyles", ()=>_withStylesDefault.default
+);
+parcelHelpers.export(exports, "withTheme", ()=>_withThemeDefault.default
+);
+parcelHelpers.export(exports, "createGenerateClassName", ()=>_styles.createGenerateClassName
+);
+parcelHelpers.export(exports, "jssPreset", ()=>_styles.jssPreset
+);
+parcelHelpers.export(exports, "ServerStyleSheets", ()=>_styles.ServerStyleSheets
+);
+parcelHelpers.export(exports, "StylesProvider", ()=>_styles.StylesProvider
+);
+parcelHelpers.export(exports, "MuiThemeProvider", ()=>_styles.ThemeProvider
+);
+parcelHelpers.export(exports, "ThemeProvider", ()=>_styles.ThemeProvider
+);
+var _colorManipulator = require("./colorManipulator");
+parcelHelpers.exportAll(_colorManipulator, exports);
+var _createMuiTheme = require("./createMuiTheme");
+var _createMuiThemeDefault = parcelHelpers.interopDefault(_createMuiTheme);
+var _createMuiStrictModeTheme = require("./createMuiStrictModeTheme");
+var _createMuiStrictModeThemeDefault = parcelHelpers.interopDefault(_createMuiStrictModeTheme);
+var _createStyles = require("./createStyles");
+var _createStylesDefault = parcelHelpers.interopDefault(_createStyles);
+var _makeStyles = require("./makeStyles");
+var _makeStylesDefault = parcelHelpers.interopDefault(_makeStyles);
+var _responsiveFontSizes = require("./responsiveFontSizes");
+var _responsiveFontSizesDefault = parcelHelpers.interopDefault(_responsiveFontSizes);
+var _styled = require("./styled");
+var _styledDefault = parcelHelpers.interopDefault(_styled);
+var _transitions = require("./transitions");
+parcelHelpers.exportAll(_transitions, exports);
+var _useTheme = require("./useTheme");
+var _useThemeDefault = parcelHelpers.interopDefault(_useTheme);
+var _withStyles = require("./withStyles");
+var _withStylesDefault = parcelHelpers.interopDefault(_withStyles);
+var _withTheme = require("./withTheme");
+var _withThemeDefault = parcelHelpers.interopDefault(_withTheme);
+var _styles = require("@material-ui/styles");
+
+},{"./colorManipulator":"bgJOz","./createMuiTheme":"fTX7H","./createMuiStrictModeTheme":"6SCNl","./createStyles":"boLiv","./makeStyles":"bpkct","./responsiveFontSizes":"k2eIn","./styled":"4x1jq","./transitions":"jKQGC","./useTheme":"1HWZd","./withStyles":"c9Ztg","./withTheme":"4sWY8","@material-ui/styles":"5kpre","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"6SCNl":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("@material-ui/utils");
+var _createMuiTheme = require("./createMuiTheme");
+var _createMuiThemeDefault = parcelHelpers.interopDefault(_createMuiTheme);
+function createMuiStrictModeTheme(options) {
+    for(var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++)args[_key - 1] = arguments[_key];
+    return _createMuiThemeDefault.default.apply(void 0, [
+        _utils.deepmerge({
+            unstable_strictMode: true
+        }, options)
+    ].concat(args));
+}
+exports.default = createMuiStrictModeTheme;
+
+},{"@material-ui/utils":"jyhfw","./createMuiTheme":"fTX7H","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"boLiv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _styles = require("@material-ui/styles"); // let warnOnce = false;
+function createStyles(styles) {
+    // warning(
+    //   warnOnce,
+    //   [
+    //     'Material-UI: createStyles from @material-ui/core/styles is deprecated.',
+    //     'Please use @material-ui/styles/createStyles',
+    //   ].join('\n'),
+    // );
+    // warnOnce = true;
+    return _styles.createStyles(styles);
+}
+exports.default = createStyles;
+
+},{"@material-ui/styles":"5kpre","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"bpkct":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _styles = require("@material-ui/styles");
+var _defaultTheme = require("./defaultTheme");
+var _defaultThemeDefault = parcelHelpers.interopDefault(_defaultTheme);
+function makeStyles(stylesOrCreator) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+    };
+    return _styles.makeStyles(stylesOrCreator, _extendsDefault.default({
+        defaultTheme: _defaultThemeDefault.default
+    }, options));
+}
+exports.default = makeStyles;
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@material-ui/styles":"5kpre","./defaultTheme":"3PisM","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"k2eIn":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _utils = require("@material-ui/utils");
+var _cssUtils = require("./cssUtils");
+function responsiveFontSizes(themeInput) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+    };
+    var _options$breakpoints = options.breakpoints, breakpoints = _options$breakpoints === void 0 ? [
+        'sm',
+        'md',
+        'lg'
+    ] : _options$breakpoints, _options$disableAlign = options.disableAlign, disableAlign = _options$disableAlign === void 0 ? false : _options$disableAlign, _options$factor = options.factor, factor = _options$factor === void 0 ? 2 : _options$factor, _options$variants = options.variants, variants = _options$variants === void 0 ? [
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'subtitle1',
+        'subtitle2',
+        'body1',
+        'body2',
+        'caption',
+        'button',
+        'overline'
+    ] : _options$variants;
+    var theme = _extendsDefault.default({
+    }, themeInput);
+    theme.typography = _extendsDefault.default({
+    }, theme.typography);
+    var typography = theme.typography; // Convert between css lengths e.g. em->px or px->rem
+    // Set the baseFontSize for your project. Defaults to 16px (also the browser default).
+    var convert = _cssUtils.convertLength(typography.htmlFontSize);
+    var breakpointValues = breakpoints.map(function(x) {
+        return theme.breakpoints.values[x];
+    });
+    variants.forEach(function(variant) {
+        var style = typography[variant];
+        var remFontSize = parseFloat(convert(style.fontSize, 'rem'));
+        if (remFontSize <= 1) return;
+        var maxFontSize = remFontSize;
+        var minFontSize = 1 + (maxFontSize - 1) / factor;
+        var lineHeight = style.lineHeight;
+        if (!_cssUtils.isUnitless(lineHeight) && !disableAlign) throw new Error("Material-UI: Unsupported non-unitless line height with grid alignment.\nUse unitless line heights instead.");
+        if (!_cssUtils.isUnitless(lineHeight)) // make it unitless
+        lineHeight = parseFloat(convert(lineHeight, 'rem')) / parseFloat(remFontSize);
+        var transform = null;
+        if (!disableAlign) transform = function transform1(value) {
+            return _cssUtils.alignProperty({
+                size: value,
+                grid: _cssUtils.fontGrid({
+                    pixels: 4,
+                    lineHeight: lineHeight,
+                    htmlFontSize: typography.htmlFontSize
+                })
+            });
+        };
+        typography[variant] = _extendsDefault.default({
+        }, style, _cssUtils.responsiveProperty({
+            cssProperty: 'fontSize',
+            min: minFontSize,
+            max: maxFontSize,
+            unit: 'rem',
+            breakpoints: breakpointValues,
+            transform: transform
+        }));
+    });
+    return theme;
+}
+exports.default = responsiveFontSizes;
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@material-ui/utils":"jyhfw","./cssUtils":"e7Cqu","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"e7Cqu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "isUnitless", ()=>isUnitless
+) // Ported from Compass
+;
+// https://github.com/Compass/compass/blob/master/core/stylesheets/compass/typography/_units.scss
+// Emulate the sass function "unit"
+parcelHelpers.export(exports, "getUnit", ()=>getUnit
+) // Emulate the sass function "unitless"
+;
+parcelHelpers.export(exports, "toUnitless", ()=>toUnitless
+) // Convert any CSS <length> or <percentage> value to any another.
+;
+// From https://github.com/KyleAMathews/convert-css-length
+parcelHelpers.export(exports, "convertLength", ()=>convertLength
+);
+parcelHelpers.export(exports, "alignProperty", ()=>alignProperty
+) // fontGrid finds a minimal grid (in rem) for the fontSize values so that the
+;
+// lineHeight falls under a x pixels grid, 4px in the case of Material Design,
+// without changing the relative line height
+parcelHelpers.export(exports, "fontGrid", ()=>fontGrid
+);
+/**
+ * generate a responsive version of a given CSS property
+ * @example
+ * responsiveProperty({
+ *   cssProperty: 'fontSize',
+ *   min: 15,
+ *   max: 20,
+ *   unit: 'px',
+ *   breakpoints: [300, 600],
+ * })
+ *
+ * // this returns
+ *
+ * {
+ *   fontSize: '15px',
+ *   '@media (min-width:300px)': {
+ *     fontSize: '17.5px',
+ *   },
+ *   '@media (min-width:600px)': {
+ *     fontSize: '20px',
+ *   },
+ * }
+ *
+ * @param {Object} params
+ * @param {string} params.cssProperty - The CSS property to be made responsive
+ * @param {number} params.min - The smallest value of the CSS property
+ * @param {number} params.max - The largest value of the CSS property
+ * @param {string} [params.unit] - The unit to be used for the CSS property
+ * @param {Array.number} [params.breakpoints]  - An array of breakpoints
+ * @param {number} [params.alignStep] - Round scaled value to fall under this grid
+ * @returns {Object} responsive styles for {params.cssProperty}
+ */ parcelHelpers.export(exports, "responsiveProperty", ()=>responsiveProperty
+);
+var _defineProperty = require("@babel/runtime/helpers/esm/defineProperty");
+var _definePropertyDefault = parcelHelpers.interopDefault(_defineProperty);
+function isUnitless(value) {
+    return String(parseFloat(value)).length === String(value).length;
+}
+function getUnit(input) {
+    return String(input).match(/[\d.\-+]*\s*(.*)/)[1] || '';
+}
+function toUnitless(length) {
+    return parseFloat(length);
+}
+function convertLength(baseFontSize) {
+    return function(length, toUnit) {
+        var fromUnit = getUnit(length); // Optimize for cases where `from` and `to` units are accidentally the same.
+        if (fromUnit === toUnit) return length;
+         // Convert input length to pixels.
+        var pxLength = toUnitless(length);
+        if (fromUnit !== 'px') {
+            if (fromUnit === 'em') pxLength = toUnitless(length) * toUnitless(baseFontSize);
+            else if (fromUnit === 'rem') {
+                pxLength = toUnitless(length) * toUnitless(baseFontSize);
+                return length;
+            }
+        } // Convert length in pixels to the output unit
+        var outputLength = pxLength;
+        if (toUnit !== 'px') {
+            if (toUnit === 'em') outputLength = pxLength / toUnitless(baseFontSize);
+            else if (toUnit === 'rem') outputLength = pxLength / toUnitless(baseFontSize);
+            else return length;
+        }
+        return parseFloat(outputLength.toFixed(5)) + toUnit;
+    };
+}
+function alignProperty(_ref) {
+    var size = _ref.size, grid = _ref.grid;
+    var sizeBelow = size - size % grid;
+    var sizeAbove = sizeBelow + grid;
+    return size - sizeBelow < sizeAbove - size ? sizeBelow : sizeAbove;
+}
+function fontGrid(_ref2) {
+    var lineHeight = _ref2.lineHeight, pixels = _ref2.pixels, htmlFontSize = _ref2.htmlFontSize;
+    return pixels / (lineHeight * htmlFontSize);
+}
+function responsiveProperty(_ref3) {
+    var cssProperty = _ref3.cssProperty, min = _ref3.min, max = _ref3.max, _ref3$unit = _ref3.unit, unit = _ref3$unit === void 0 ? 'rem' : _ref3$unit, _ref3$breakpoints = _ref3.breakpoints, breakpoints = _ref3$breakpoints === void 0 ? [
+        600,
+        960,
+        1280
+    ] : _ref3$breakpoints, _ref3$transform = _ref3.transform, transform = _ref3$transform === void 0 ? null : _ref3$transform;
+    var output = _definePropertyDefault.default({
+    }, cssProperty, "".concat(min).concat(unit));
+    var factor = (max - min) / breakpoints[breakpoints.length - 1];
+    breakpoints.forEach(function(breakpoint) {
+        var value = min + factor * breakpoint;
+        if (transform !== null) value = transform(value);
+        output["@media (min-width:".concat(breakpoint, "px)")] = _definePropertyDefault.default({
+        }, cssProperty, "".concat(Math.round(value * 10000) / 10000).concat(unit));
+    });
+    return output;
+}
+
+},{"@babel/runtime/helpers/esm/defineProperty":"7s3FO","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"4sWY8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _styles = require("@material-ui/styles");
+var _defaultTheme = require("./defaultTheme");
+var _defaultThemeDefault = parcelHelpers.interopDefault(_defaultTheme);
+var withTheme = _styles.withThemeCreator({
+    defaultTheme: _defaultThemeDefault.default
+});
+exports.default = withTheme;
+
+},{"@material-ui/styles":"5kpre","./defaultTheme":"3PisM","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["2rAXy","ghlMN","3hGib"], "3hGib", "parcelRequire9e19")
 
 //# sourceMappingURL=dashboard.js.map
