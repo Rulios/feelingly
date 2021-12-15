@@ -1105,7 +1105,7 @@
                 "symfony/error-handler": "^5.1.4",
                 "symfony/finder": "^5.1.4",
                 "symfony/http-foundation": "^5.1.4",
-                "symfony/http-kernel": "^5.1.4",
+                "symfony/http-kernel": "^5.3.12",
                 "symfony/mime": "^5.1.4",
                 "symfony/process": "^5.1.4",
                 "symfony/routing": "^5.1.4",
