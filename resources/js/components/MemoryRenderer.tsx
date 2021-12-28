@@ -1,10 +1,11 @@
 import Memory from "../types/Memory";
 import {useState} from "react";
-import ProfileMemoryBox from "./ProfileMemoryBox";
+import MemoryBox from "./MemoryBox";
 import MemoryModal from "./MemoryModal";
 
 type Props = {
     memories: Memory[] | null | undefined;    
+    columns: 1 | 2 ; //represents the amounts of columns that the memories will be displayed in
 };
 
 
@@ -21,7 +22,7 @@ function toggleBodyOverflow(){
  * @returns 
  */
 
-export default function MemoryRenderer({memories}: Props){
+export default function MemoryRenderer({memories, columns}: Props){
     const [selectedMemoryIndex, setSelectedMemoryIndex] = useState(-1);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -48,25 +49,29 @@ export default function MemoryRenderer({memories}: Props){
         toggleBodyOverflow();
     };
 
-    console.log(memories);
+
 
     return (
         <div>
             <div className="row pt-2">
                 {memories?.map((memory, index) => {
+
+
                     return (
-                        <ProfileMemoryBox
-                            key={`Diary${memory.diary_id}-Memory${index}`}
-                            memory={memory}
-                            onClick={() => handleClickMemory(index)}
-                        />
+                        <div className={`col-md-${12/columns as number}`} key={index}>
+                            <MemoryBox
+                                key={`Diary${memory.diary_id}-Memory${index}`}
+                                memory={memory}
+                                onClick={() => handleClickMemory(index)}
+                            />
+                        </div>
                     )
                 })}
             </div>
 
             {modalOpen && 
             
-                <MemoryModal
+                <MemoryModal    
                     memory={memories ? memories[selectedMemoryIndex] : null}
                     shouldOpen={modalOpen}
                     handleClose={handleCloseMemory}

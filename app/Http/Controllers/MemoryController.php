@@ -136,12 +136,14 @@ class MemoryController extends Controller
      *  - Diary's name
      *  - User's name
      *  - User's alias
+     *  - User's profile picture
      */
     private function queryMemoriesWithJoins(){
         return DB::table("memories")    
                 ->join("users", "users.id", "=", "memories.user_id")
                 ->join("diaries", "diaries.id", "=", "memories.diary_id")
-                ->select("memories.*", "users.alias AS user_alias","users.name AS user_name", "diaries.name AS diary_name")
+                ->select("memories.*", "users.alias AS user_alias","users.name AS user_name", 
+                "users.profile_image as user_profile_image", "diaries.name AS diary_name")
                 ->orderBy("memories.created_at", "DESC");
                 
     }

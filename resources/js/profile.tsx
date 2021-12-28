@@ -111,6 +111,7 @@ function WrittenMemoriesFeed(){
                 ({memoriesFetch : {memories}}) => (
                     <MemoryRenderer
                         memories={memories}
+                        columns={2}
                     />
                 )
             }
@@ -155,7 +156,7 @@ function WrittenMemoriesFeed(){
                
                 diaries.map((diary, index) => {
                     return (<ProfileDiaryBox
-                        key={`ProfileDiaryBox-${diary?.index}`}
+                        key={`ProfileDiaryBox-${diary.id}`}
                         diary={diary}
                         onClick={() => handleClickDiary(index)}
                     />);

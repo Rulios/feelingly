@@ -1,0 +1,25 @@
+.box{
+    width: 100%;
+    transition: 0.5s;
+    border: solid 1px #cecece;
+  }
+
+
+.box:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.611), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.box .visibilityFont{
+    font-size: 0.75em;
+}
+
+.box .date{
+    float:right;
+    color: grey;
+}
+
+.box .author{
+    float:left;
+}
+
+

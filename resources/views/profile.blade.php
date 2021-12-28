@@ -15,7 +15,7 @@
 <body class="container roboto-slab-font">
 
 
-    <x-navbar />    
+    <x-navbar />        
 
     <div class="text-center">
         <div class="row mt-5">

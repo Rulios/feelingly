@@ -14,6 +14,8 @@ import Tab from "@material-ui/core/Tab";
 import SwipeableViews from "react-swipeable-views";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import MemoryRenderer from "./components/MemoryRenderer";
+
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -98,7 +100,7 @@ function App(): JSX.Element{
                     onChangeIndex={handleChangeIndex}
                 >
                     <TabPanel value={tabIndex} index={0} dir={theme.direction}>
-                    Item One
+                        <FollowersFeed/>
                     </TabPanel>
                     <TabPanel value={tabIndex} index={1} dir={theme.direction}>
                     Item Two
@@ -138,7 +140,28 @@ function FollowersFeed(){
 
     //FINISH THIS FEED
 
-    return null;
+    useEffect(() => {
+
+        axios.get("/dashboard/feed-followers", {
+            params:{
+                amountFetched: amountFetched
+            }
+        })
+        .then(function(response){
+            setMemories(memories.concat(response.data));
+            setAmountFetched(amountFetched + response.data.length);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    }, []);
+
+
+    return (
+        <div>
+        </div>
+    );
 }
 
 

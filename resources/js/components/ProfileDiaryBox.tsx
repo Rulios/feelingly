@@ -37,7 +37,6 @@ export default function ProfileDiaryBox({
                         </b>
                     </div>
 
-
                     <div id="visibility" className="visibilityFont">
                         {VISIBILITY_TYPES[visibility]}
                     </div>
