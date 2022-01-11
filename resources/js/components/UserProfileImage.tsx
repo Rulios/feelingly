@@ -31,7 +31,6 @@ export default function UserProfileImage({image_url, size}: Props){
     }, [image_url]);
 
 
-    console.log(URL);
 
     return (
         <img src={URL} className="rounded-circle" 

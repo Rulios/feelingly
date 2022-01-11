@@ -2,6 +2,7 @@ import Memory from "../types/Memory";
 import {useState} from "react";
 import MemoryBox from "./MemoryBox";
 import MemoryModal from "./MemoryModal";
+import useModal from "../hooks/useModal";
 
 type Props = {
     memories: Memory[] | null | undefined;    
@@ -24,7 +25,7 @@ function toggleBodyOverflow(){
 
 export default function MemoryRenderer({memories, columns}: Props){
     const [selectedMemoryIndex, setSelectedMemoryIndex] = useState(-1);
-    const [modalOpen, setModalOpen] = useState(false);
+    const {open, openModal, closeModal} = useModal();
 
     /**
      * Gets the memory position and updates the state.
@@ -37,7 +38,8 @@ export default function MemoryRenderer({memories, columns}: Props){
 
     const handleClickMemory = (memoryPosition: number) => {
             setSelectedMemoryIndex(memoryPosition);
-            setModalOpen(true);
+            //setModalOpen(true);
+            openModal();
             toggleBodyOverflow();
     }
 
@@ -45,15 +47,17 @@ export default function MemoryRenderer({memories, columns}: Props){
      * Sets the modal open state to false to close it
      */
     const handleCloseMemory = () => {
-        setModalOpen(false);
+        //setModalOpen(false);
+        closeModal();
         toggleBodyOverflow();
+
     };
 
 
 
     return (
         <div>
-            <div className="row pt-2">
+            <div className="row pt-2 no-gutters">
                 {memories?.map((memory, index) => {
 
 
@@ -69,11 +73,11 @@ export default function MemoryRenderer({memories, columns}: Props){
                 })}
             </div>
 
-            {modalOpen && 
+            {open && 
             
                 <MemoryModal    
                     memory={memories ? memories[selectedMemoryIndex] : null}
-                    shouldOpen={modalOpen}
+                    shouldOpen={open}
                     handleClose={handleCloseMemory}
                 />
             }

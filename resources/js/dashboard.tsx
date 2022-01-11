@@ -1,21 +1,21 @@
 import "bootstrap";
 import $ from "jquery";
 import ReactDOM from "react-dom";
-import React, {FC, useState, useEffect, memo} from "react";
+import React, {FC, useState, useEffect, useRef} from "react";
 
-import AddNewMemoryModal from "./components/AddNewMemoryModal";
+import AddNewMemoryBundle from "./components/AddNewMemoryBundle";
 
 import axios from "axios";
-import useAlias from "./hooks/useAlias";
+import useModal from "./hooks/useModal";
 
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import SwipeableViews from "react-swipeable-views";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
+
 import MemoryRenderer from "./components/MemoryRenderer";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -62,6 +62,14 @@ function App(): JSX.Element{
 
     const classes = useStyles();
 
+    const sliderRef = useRef() as React.MutableRefObject<Slider>;
+
+
+
+    useEffect(() => {
+        sliderRef.current.slickGoTo(tabIndex);
+    }, [tabIndex]);
+
     //for the tabs
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
         setTabIndex(newValue);
@@ -71,6 +79,10 @@ function App(): JSX.Element{
     const handleChangeIndex = (index:number) => {
         setTabIndex(index);
     };
+
+
+
+    //TO DO: FIX THE FUCKING MODAL, MAKE IT SHOW FULL SCREEN. NOT ONLY THE DIV
     
     return (
         <div>
@@ -93,43 +105,30 @@ function App(): JSX.Element{
                     </AppBar>
                 </ThemeProvider>
                 
-
-                <SwipeableViews
-                    axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                    index={tabIndex}
-                    onChangeIndex={handleChangeIndex}
+                <Slider beforeChange={(oldIndex, newIndex) => handleChangeIndex(newIndex)} 
+                    ref={sliderRef}
+                    accessibility={false}
+                    arrows={false}
+                    dots={false}
+                    draggable={true}
+                    infinite={false}
+                    slidesToShow={1}
+                    slidesToScroll={1}
                 >
-                    <TabPanel value={tabIndex} index={0} dir={theme.direction}>
+                    <div >
                         <FollowersFeed/>
-                    </TabPanel>
-                    <TabPanel value={tabIndex} index={1} dir={theme.direction}>
-                    Item Two
-                    </TabPanel>
-                </SwipeableViews>
+                    </div>
+                    
+                    <div>
+                        dawdd
+                    </div>
+
+                </Slider>
+
             </div>
 
-            <AddNewMemoryModal/>
+            <AddNewMemoryBundle/>
         </div>
-    );
-}
-
-function TabPanel(props: any) {
-    const { children, value, index, ...other } = props;
-  
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`full-width-tabpanel-${index}`}
-        aria-labelledby={`full-width-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box /* sx={{ p: 3 }} */>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
     );
 }
 
@@ -138,7 +137,7 @@ function FollowersFeed(){
     const [memories, setMemories] = useState<Memory[]>([]);
     const [amountFetched, setAmountFetched] = useState(0);
 
-    //FINISH THIS FEED
+    console.log(memories)
 
     useEffect(() => {
 
@@ -157,12 +156,11 @@ function FollowersFeed(){
 
     }, []);
 
-
     return (
-        <div>
+        <div className="">
+            <MemoryRenderer memories={memories} columns={1}/>
         </div>
     );
 }
-
 
 

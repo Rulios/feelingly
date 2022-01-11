@@ -1,14 +1,17 @@
 import React, {useRef, useContext, useState} from "react";
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Memory from "../types/Memory";
 import CloseModalButton from "./CloseModalButton";
 import parseHTML from "html-react-parser";
+
 import ResponsiveLogo from "./ResponsiveLogo";
 import AppreciationButton from "./AppreciationButton";
 import ReplyButton from "./ReplyButton";
-import HiddenContext from "../contexts/HiddenContext";
 import AddNewReplyMemoryModal from "./AddNewReplyMemoryModal";
-import { MemoryOutlined } from "@material-ui/icons";
+
+import FixedModal from "./FixedModal";
+
+import useModal from "../hooks/useModal";
+
 
 type Props = {
     memory: Memory | undefined | null;
@@ -26,76 +29,76 @@ export default function MemoryModal({
     memory, shouldOpen, handleClose
 }: Props){
 
-
-    const [openReplyModal, setOpenReplyModal] = useState(false);
-
+    const {open, openModal: openReplyModal, closeModal: closeReplyModal} = useModal();
     
 
     return (
-
-        <div>
-            {openReplyModal && 
-
-                <AddNewReplyMemoryModal
-                    handleClose={() => setOpenReplyModal(false)}
-                    reply_to={memory?.id}
-                />
-            }
-
-            <div className={`${shouldOpen ? "show" : "d-none"}`}>
-                
-
-                <div className="c-modal ">     
+        <FixedModal>
             
-                    <div className="content p-3">
+            <div>
+                {open && 
 
-                        <div className="c-actions mb-5 mx-3">
-                            <AppreciationButton memory_id={memory?.id}/>
-                            <ReplyButton _onClick={() => setOpenReplyModal(true)}/>
-                        </div>
+                    <AddNewReplyMemoryModal
+                        handleClose={closeReplyModal}
+                        reply_to={memory?.id}
+                    />
+                }
+
+                <div className={`${shouldOpen ? "show" : "d-none"}`}>
                     
-                        <div className="sticky-top">
-                            <CloseModalButton onClick={handleClose}/>
-                        </div>
 
-                        <ResponsiveLogo/>
+                    <div className="c-modal ">     
+                
+                        <div className="content p-3">
 
-                        <div className="inline">
+                            <div className="c-actions mb-5 mx-3">
+                                <AppreciationButton memory_id={memory?.id}/>
+                                <ReplyButton _onClick={openReplyModal}/>
+                            </div>
+                        
+                            <div className="sticky-top">
+                                <CloseModalButton onClick={handleClose}/>
+                            </div>
 
-                            <div>
-                                <h4 className="title">
-                                    {memory?.title}
-                                </h4>
+                            <ResponsiveLogo/>
 
-                                <br />
+                            <div className="inline">
 
-                                <div className="details">
-                                    <div className="">
-                                        written by {memory?.user_name} (@{memory?.user_alias})
-                                    </div>
+                                <div>
+                                    <h4 className="title">
+                                        {memory?.title}
+                                    </h4>
 
-                                    <div className="">
-                                        in <i>{memory?.diary_name}</i>
+                                    <br />
+
+                                    <div className="details">
+                                        <div className="">
+                                            written by {memory?.user_name} (@{memory?.user_alias})
+                                        </div>
+
+                                        <div className="">
+                                            in <i>{memory?.diary_name}</i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <hr/>
+                            <hr/>
 
-                        <div className="mb-5">
-                            <div className="memory-content p-4">
-                                {parseHTML(memory ? memory.content : "")}
+                            <div className="mb-5">
+                                <div className="memory-content p-4">
+                                    {parseHTML(memory ? memory.content : "")}
+                                </div>
                             </div>
-                        </div>
 
-                    </div>  
+                        </div>  
 
-                        
+                            
+                    </div>
+                    
                 </div>
-                
             </div>
-        </div>
+        </FixedModal>
 
 
         

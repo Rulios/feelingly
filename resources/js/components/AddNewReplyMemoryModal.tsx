@@ -2,10 +2,11 @@ import Memory from "../types/Memory";
 import {useState, useEffect} from "react";
 import useAlias from "../hooks/useAlias";
 
-import WriteMemoryModal from "./WriteMemoryModal";
+import WriteMemoryFields from "./WriteMemoryFields";
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import CloseModalButton from "./CloseModalButton";
+import FixedModal from "./FixedModal";
 
 import axios from "axios";
 
@@ -16,7 +17,6 @@ type Props = {
 
 export default function AddNewReplyMemoryModal({handleClose, reply_to}: Props){
 
-    const alias = useAlias("self");
 
     const [memory, setMemory] = useState<Memory>({
         title: "",
@@ -52,32 +52,35 @@ export default function AddNewReplyMemoryModal({handleClose, reply_to}: Props){
     }
 
     return (
-        <div className="c-modal c-modal-index-3">     
-        
-            <div className="content p-3">
+        <FixedModal>
+
+            <div className="c-modal ">     
             
-                <div className="sticky-top">
-                    <CloseModalButton onClick={handleClose}/>
-                </div> 
-
-                <WriteMemoryModal
-                    memory={memory}
-                    setMemory={setMemory}
-                    isAReply={true}
-                />
+                <div className="content p-3">
                 
-                <div className="mt-3 p-3 row">
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        endIcon={<SendIcon/>}
-                        onClick= {submitReplyMemory}
-                    >
-                        Share reply
-                    </Button>
-                </div>
+                    <div className="sticky-top">
+                        <CloseModalButton onClick={handleClose}/>
+                    </div> 
 
-            </div>  
-        </div>
+                    <WriteMemoryFields
+                        memory={memory}
+                        setMemory={setMemory}
+                        isAReply={true}
+                    />
+                    
+                    <div className="mt-3 p-3 row">
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            endIcon={<SendIcon/>}
+                            onClick= {submitReplyMemory}
+                        >
+                            Share reply
+                        </Button>
+                    </div>
+
+                </div>  
+            </div>
+        </FixedModal>
     );
 }

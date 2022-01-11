@@ -78,15 +78,11 @@
   width: 100%;
   height: 100%;
   position: fixed;
-  z-index: 2;
+  z-index: 10;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
   overflow: hidden;
-}
-
-.c-modal-index-3 {
-  z-index: 3;
 }
 
 .c-modal .content {
@@ -144,7 +140,7 @@
 }
 
 .box:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.611), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.611), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
 .box .visibilityFont {

@@ -3,12 +3,32 @@
 @use "animations/BottomLineHover.scss";
 @use "images/images.scss";
 @use "buttons/utils.scss";
-@use "components/custom-modal.scss";
-
 
 @use "components/quill-editor.scss";
+
+@use "components/custom-modal.scss";
+@use "components/box.scss";
+
+/* THIS IMPORT SHOULDN'T BE OVERLOOKED
+
+As a consensus, any JS/TS file won't be importing CSS files.
+CSS files should be transpiled by Sass and imported by the
+appropiate HTML file.
+
+That's why this import of "slick.css" is here. As of writing this code, 
+there's no better way of importing .css files from node_modules.
+
+*/
+@use "../../node_modules/slick-carousel/slick/slick.css";
 
 .tab{
     background-color: transparent;
     border: none;
 }
+
+
+.no-gutters{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
