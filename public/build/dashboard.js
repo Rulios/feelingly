@@ -886,7 +886,7 @@ var _reactSlick = require("react-slick");
 var _reactSlickDefault = parcelHelpers.interopDefault(_reactSlick);
 var _slickCss = require("slick-carousel/slick/slick.css");
 var _styles = require("@material-ui/core/styles");
-var _s = $RefreshSig$(), _s1 = $RefreshSig$();
+var _s = $RefreshSig$(), _s1 = $RefreshSig$(), _s2 = $RefreshSig$();
 window.onload = ()=>{
     _reactDomDefault.default.render(/*#__PURE__*/ _jsxRuntime.jsx(App, {
         __source: {
@@ -1035,7 +1035,13 @@ function App() {
                                     lineNumber: 122
                                 },
                                 __self: this,
-                                children: "dawdd"
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(GlobalFeed, {
+                                    __source: {
+                                        fileName: "resources/js/dashboard.tsx",
+                                        lineNumber: 123
+                                    },
+                                    __self: this
+                                })
                             })
                         ]
                     })
@@ -1094,9 +1100,47 @@ function FollowersFeed() {
 }
 _s1(FollowersFeed, "MJ+LF8ruv24pbq/WYRV93KARZ4w=");
 _c1 = FollowersFeed;
-var _c, _c1;
+function GlobalFeed() {
+    _s2();
+    const [memories, setMemories] = _react.useState([]);
+    const [amountFetched, setAmountFetched] = _react.useState(0);
+    console.log(memories);
+    _react.useEffect(()=>{
+        _axiosDefault.default.get("/dashboard/feed-global", {
+            params: {
+                amountFetched: amountFetched
+            }
+        }).then(function(response) {
+            setMemories(memories.concat(response.data));
+            setAmountFetched(amountFetched + response.data.length);
+        }).catch((error)=>{
+            console.log(error);
+        });
+    }, []);
+    return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+        className: "",
+        __source: {
+            fileName: "resources/js/dashboard.tsx",
+            lineNumber: 192
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsx(_memoryRendererDefault.default, {
+            memories: memories,
+            columns: 1,
+            __source: {
+                fileName: "resources/js/dashboard.tsx",
+                lineNumber: 193
+            },
+            __self: this
+        })
+    }));
+}
+_s2(GlobalFeed, "MJ+LF8ruv24pbq/WYRV93KARZ4w=");
+_c2 = GlobalFeed;
+var _c, _c1, _c2;
 $RefreshReg$(_c, "App");
 $RefreshReg$(_c1, "FollowersFeed");
+$RefreshReg$(_c2, "GlobalFeed");
 
   helpers.postlude(module);
 } finally {

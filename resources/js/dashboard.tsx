@@ -120,7 +120,7 @@ function App(): JSX.Element{
                     </div>
                     
                     <div>
-                        dawdd
+                        <GlobalFeed/>
                     </div>
 
                 </Slider>
@@ -164,3 +164,33 @@ function FollowersFeed(){
 }
 
 
+function GlobalFeed(){
+
+    const [memories, setMemories] = useState<Memory[]>([]);
+    const [amountFetched, setAmountFetched] = useState(0);
+
+    console.log(memories)
+
+    useEffect(() => {
+
+        axios.get("/dashboard/feed-global", {
+            params:{
+                amountFetched: amountFetched
+            }
+        })
+        .then(function(response){
+            setMemories(memories.concat(response.data));
+            setAmountFetched(amountFetched + response.data.length);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    }, []);
+
+    return (
+        <div className="">
+            <MemoryRenderer memories={memories} columns={1}/>
+        </div>
+    );
+}
