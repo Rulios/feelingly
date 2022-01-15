@@ -1,3 +1,7 @@
+:export {
+  primaryColor: #00baff;
+  secondaryColor: #7cacff;
+}
 /* Slider */
 .slick-slider
 {
@@ -118,8 +122,4 @@
     display: none;
 }
 
-:export {
-  primaryColor: #00baff;
-  secondaryColor: #7cacff;
-}
 /*# sourceMappingURL=dashboard.css.map */

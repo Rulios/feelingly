@@ -6,14 +6,19 @@ import AddFloatButton from "./AddFloatButton";
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import CloseModalButton from "./CloseModalButton";
-import FixedModal from "./FixedModal";
+
 import useModal from "../hooks/useModal";
+
+import Modal from "react-modal";
 
 import axios from "axios";
 
 type Props = {
     closeModal(): void;
+    open: boolean;
 }
+
+Modal.setAppElement('#root');
 
 export default function AddNewMemoryBundle(){
 
@@ -27,18 +32,12 @@ export default function AddNewMemoryBundle(){
                 <AddFloatButton _onClick={openModal}/>
             </div>
 
-            {open && 
-
-                <NewMemoryModal closeModal={closeModal}/>
-            }
+            <NewMemoryModal closeModal={closeModal} open={open}/>
         </div>
     );
 }
 
-
-
-
-function NewMemoryModal({closeModal}: Props){
+function NewMemoryModal({open, closeModal}: Props){
     const [memory, setMemory] = useState<Memory>({
         title: "",
         content: "",
@@ -69,7 +68,7 @@ function NewMemoryModal({closeModal}: Props){
     }
 
     return(
-        <FixedModal>
+        <Modal isOpen={open}>
             <div className="c-modal">     
 
                 <div className="content p-3">
@@ -99,6 +98,6 @@ function NewMemoryModal({closeModal}: Props){
 
                 </div>  
             </div>
-        </FixedModal>
+        </Modal>
     );
 }

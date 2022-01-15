@@ -33,6 +33,7 @@ function useFetch<T = unknown>(
     data: undefined,
   }
 
+
   // Keep state logic separated
   const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
     switch (action.type) {

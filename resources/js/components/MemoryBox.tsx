@@ -7,7 +7,6 @@ import utc from "dayjs/plugin/utc";
 import parseHTML from "html-react-parser";
 
 import UserProfileImage from "./UserProfileImage";
-import { has } from "lodash";
 
 dayjs.extend(relativeTime);
 dayjs.extend(utc);

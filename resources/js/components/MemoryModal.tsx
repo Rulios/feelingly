@@ -8,7 +8,9 @@ import AppreciationButton from "./AppreciationButton";
 import ReplyButton from "./ReplyButton";
 import AddNewReplyMemoryModal from "./AddNewReplyMemoryModal";
 
-import FixedModal from "./FixedModal";
+
+
+import Modal from "react-modal";
 
 import useModal from "../hooks/useModal";
 
@@ -25,15 +27,16 @@ type Props = {
  * @returns 
  */
 
+Modal.setAppElement('#root');
+
 export default function MemoryModal({
     memory, shouldOpen, handleClose
 }: Props){
 
     const {open, openModal: openReplyModal, closeModal: closeReplyModal} = useModal();
-    
 
     return (
-        <FixedModal>
+        <Modal isOpen={shouldOpen}>
             
             <div>
                 {open && 
@@ -41,6 +44,7 @@ export default function MemoryModal({
                     <AddNewReplyMemoryModal
                         handleClose={closeReplyModal}
                         reply_to={memory?.id}
+                        open={open}
                     />
                 }
 
@@ -98,7 +102,7 @@ export default function MemoryModal({
                     
                 </div>
             </div>
-        </FixedModal>
+        </Modal>
 
 
         

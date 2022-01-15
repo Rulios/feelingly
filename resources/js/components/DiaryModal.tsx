@@ -4,7 +4,9 @@ import Memory from "../types/Memory";
 
 import CloseModalButton from "./CloseModalButton";
 import MemoryRenderer from "./MemoryRenderer";
-import FixedModal from "./FixedModal";
+
+
+import Modal from "react-modal";
 
 type Props = {
     diary?: Diary | null;
@@ -13,13 +15,15 @@ type Props = {
     handleClose: () => void; 
 };
 
+Modal.setAppElement('#root');
+
 export default function DiaryModal({
     diary, memories, shouldOpen, handleClose
 }: Props){
     
 
     return (
-        <FixedModal>
+        <Modal isOpen={shouldOpen}>
 
             <div className={`${shouldOpen ? "show" : "d-none"}`}>
 
@@ -68,7 +72,7 @@ export default function DiaryModal({
                 </div>
                 
             </div>
-        </FixedModal>
+        </Modal>
     );
 
 };

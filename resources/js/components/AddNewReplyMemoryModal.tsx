@@ -6,16 +6,21 @@ import WriteMemoryFields from "./WriteMemoryFields";
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import CloseModalButton from "./CloseModalButton";
-import FixedModal from "./FixedModal";
+
+
+import Modal from "react-modal";
 
 import axios from "axios";
 
 type Props = {
     handleClose: () => void;
     reply_to: string | number | undefined;
+    open: boolean;
 };
 
-export default function AddNewReplyMemoryModal({handleClose, reply_to}: Props){
+Modal.setAppElement('#root');
+
+export default function AddNewReplyMemoryModal({open, handleClose, reply_to}: Props){
 
 
     const [memory, setMemory] = useState<Memory>({
@@ -29,7 +34,7 @@ export default function AddNewReplyMemoryModal({handleClose, reply_to}: Props){
      * TO DOOO FINISH THIS COMPONENET
      */
 
-    const submitReplyMemory = ():void => {
+    const submitReplyMemory = function():void {
 
         console.log(memory);
         axios.post("/memories/reply", {...memory})
@@ -52,7 +57,7 @@ export default function AddNewReplyMemoryModal({handleClose, reply_to}: Props){
     }
 
     return (
-        <FixedModal>
+        <Modal isOpen={open}>
 
             <div className="c-modal ">     
             
@@ -81,6 +86,6 @@ export default function AddNewReplyMemoryModal({handleClose, reply_to}: Props){
 
                 </div>  
             </div>
-        </FixedModal>
+        </Modal>
     );
 }
