@@ -31,13 +31,17 @@ export default function MemoryBox({
         <button className="box noDecorationButton mb-3" onClick={() => {
             if(!hasClickedAuthor.current) onClick();
         }}>
-            <div className={` memory-box p-2`}>
+            <div className={`p-2`}>
                 <div id="titleAndInformation">
 
                     <div className="" onClick={() => hasClickedAuthor.current = true}>
                         <div className="author">
                             <a href={`/profile/${user_alias}`} className="text-decoration-none" >
-                                    <UserProfileImage image_url={user_profile_image} size={30}/>
+
+                                    <span style={{float:"left"}}>
+
+                                        <UserProfileImage image_url={user_profile_image} size={30}/>
+                                    </span>
 
                                     <span className="m-2">
                                         {`${user_alias}`}

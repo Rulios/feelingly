@@ -278,7 +278,9 @@
     </div>
     
 
-    
+    <div>
+        <x-additional-links/>
+    </div>
 
 </body>
 </html>

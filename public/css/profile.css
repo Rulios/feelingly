@@ -154,6 +154,23 @@
 
 .box .author {
   float: left;
+  vertical-align: middle;
+}
+
+/**
+
+    THIS STYLE SHEET IS FOR THE BLADE COMPONENT (additional-links.blade.php)
+
+*/
+.additionalLinks {
+  position: absolute;
+  bottom: 0;
+  font-size: small;
+}
+
+.additionalLinks a {
+  color: grey;
+  text-decoration: none;
 }
 
 .description {

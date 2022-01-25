@@ -1067,7 +1067,6 @@ function FollowersFeed() {
     _s1();
     const [memories, setMemories] = _react.useState([]);
     const [amountFetched, setAmountFetched] = _react.useState(0);
-    console.log(memories);
     _react.useEffect(()=>{
         _axiosDefault.default.get("/dashboard/feed-followers", {
             params: {
@@ -1084,7 +1083,7 @@ function FollowersFeed() {
         className: "",
         __source: {
             fileName: "resources/js/dashboard.tsx",
-            lineNumber: 160
+            lineNumber: 158
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx(_memoryRendererDefault.default, {
@@ -1092,7 +1091,7 @@ function FollowersFeed() {
             columns: 1,
             __source: {
                 fileName: "resources/js/dashboard.tsx",
-                lineNumber: 161
+                lineNumber: 159
             },
             __self: this
         })
@@ -1104,7 +1103,6 @@ function GlobalFeed() {
     _s2();
     const [memories, setMemories] = _react.useState([]);
     const [amountFetched, setAmountFetched] = _react.useState(0);
-    console.log(memories);
     _react.useEffect(()=>{
         _axiosDefault.default.get("/dashboard/feed-global", {
             params: {
@@ -1121,7 +1119,7 @@ function GlobalFeed() {
         className: "",
         __source: {
             fileName: "resources/js/dashboard.tsx",
-            lineNumber: 192
+            lineNumber: 188
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx(_memoryRendererDefault.default, {
@@ -1129,7 +1127,7 @@ function GlobalFeed() {
             columns: 1,
             __source: {
                 fileName: "resources/js/dashboard.tsx",
-                lineNumber: 193
+                lineNumber: 189
             },
             __self: this
         })
@@ -36808,7 +36806,7 @@ $RefreshReg$(_c1, "NewMemoryModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","./WriteMemoryFields":"gN7PT","react":"6TuXu","./AddFloatButton":"lT9bm","@material-ui/core/Button":"i2oW6","@material-ui/icons/Send":"ihYjC","./CloseModalButton":"jvgYN","../hooks/useModal":"2Xl10","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react-modal":"kzUwJ"}],"gN7PT":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","./WriteMemoryFields":"gN7PT","react":"6TuXu","./AddFloatButton":"lT9bm","@material-ui/core/Button":"i2oW6","@material-ui/icons/Send":"ihYjC","./CloseModalButton":"jvgYN","../hooks/useModal":"2Xl10","react-modal":"kzUwJ","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"gN7PT":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -74704,7 +74702,7 @@ _s(useDiaries, "Iu+q/aN7kgWs16+OJI0RxhMeAsU=");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","react":"6TuXu","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","axios":"iYoWk"}],"Uosf6":[function(require,module,exports) {
+},{"react":"6TuXu","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"Uosf6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "VISIBILITY_TYPES", ()=>VISIBILITY_TYPES
@@ -78554,7 +78552,7 @@ function MemoryBox({ memory: { id , title , content , visibility , created_at , 
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-            className: ` memory-box p-2`,
+            className: `p-2`,
             __source: {
                 fileName: "resources/js/components/MemoryBox.tsx",
                 lineNumber: 34
@@ -78595,20 +78593,30 @@ function MemoryBox({ memory: { id , title , content , visibility , created_at , 
                                         },
                                         __self: this,
                                         children: [
-                                            /*#__PURE__*/ _jsxRuntime.jsx(_userProfileImageDefault.default, {
-                                                image_url: user_profile_image,
-                                                size: 30,
+                                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                                style: {
+                                                    float: "left"
+                                                },
                                                 __source: {
                                                     fileName: "resources/js/components/MemoryBox.tsx",
-                                                    lineNumber: 40
+                                                    lineNumber: 41
                                                 },
-                                                __self: this
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_userProfileImageDefault.default, {
+                                                    image_url: user_profile_image,
+                                                    size: 30,
+                                                    __source: {
+                                                        fileName: "resources/js/components/MemoryBox.tsx",
+                                                        lineNumber: 43
+                                                    },
+                                                    __self: this
+                                                })
                                             }),
                                             /*#__PURE__*/ _jsxRuntime.jsx("span", {
                                                 className: "m-2",
                                                 __source: {
                                                     fileName: "resources/js/components/MemoryBox.tsx",
-                                                    lineNumber: 42
+                                                    lineNumber: 46
                                                 },
                                                 __self: this,
                                                 children: `${user_alias}`
@@ -78620,7 +78628,7 @@ function MemoryBox({ memory: { id , title , content , visibility , created_at , 
                                     className: "date",
                                     __source: {
                                         fileName: "resources/js/components/MemoryBox.tsx",
-                                        lineNumber: 48
+                                        lineNumber: 52
                                     },
                                     __self: this,
                                     children: _dayjsDefault.default(created_at).utc(true).fromNow()
@@ -78630,14 +78638,14 @@ function MemoryBox({ memory: { id , title , content , visibility , created_at , 
                         /*#__PURE__*/ _jsxRuntime.jsx("br", {
                             __source: {
                                 fileName: "resources/js/components/MemoryBox.tsx",
-                                lineNumber: 54
+                                lineNumber: 58
                             },
                             __self: this
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx("br", {
                             __source: {
                                 fileName: "resources/js/components/MemoryBox.tsx",
-                                lineNumber: 55
+                                lineNumber: 59
                             },
                             __self: this
                         }),
@@ -78646,13 +78654,13 @@ function MemoryBox({ memory: { id , title , content , visibility , created_at , 
                             className: "truncate lead",
                             __source: {
                                 fileName: "resources/js/components/MemoryBox.tsx",
-                                lineNumber: 57
+                                lineNumber: 61
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx("b", {
                                 __source: {
                                     fileName: "resources/js/components/MemoryBox.tsx",
-                                    lineNumber: 58
+                                    lineNumber: 62
                                 },
                                 __self: this,
                                 children: title
@@ -78663,7 +78671,7 @@ function MemoryBox({ memory: { id , title , content , visibility , created_at , 
                             className: "visibilityFont",
                             __source: {
                                 fileName: "resources/js/components/MemoryBox.tsx",
-                                lineNumber: 63
+                                lineNumber: 67
                             },
                             __self: this,
                             children: _visibilityTypesDefault.default[visibility]
@@ -78672,13 +78680,13 @@ function MemoryBox({ memory: { id , title , content , visibility , created_at , 
                             id: "diary_name",
                             __source: {
                                 fileName: "resources/js/components/MemoryBox.tsx",
-                                lineNumber: 67
+                                lineNumber: 71
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx("i", {
                                 __source: {
                                     fileName: "resources/js/components/MemoryBox.tsx",
-                                    lineNumber: 68
+                                    lineNumber: 72
                                 },
                                 __self: this,
                                 children: `in ${diary_name}`
@@ -78689,7 +78697,7 @@ function MemoryBox({ memory: { id , title , content , visibility , created_at , 
                 /*#__PURE__*/ _jsxRuntime.jsx("hr", {
                     __source: {
                         fileName: "resources/js/components/MemoryBox.tsx",
-                        lineNumber: 74
+                        lineNumber: 78
                     },
                     __self: this
                 }),
@@ -78698,7 +78706,7 @@ function MemoryBox({ memory: { id , title , content , visibility , created_at , 
                     className: "truncate",
                     __source: {
                         fileName: "resources/js/components/MemoryBox.tsx",
-                        lineNumber: 76
+                        lineNumber: 80
                     },
                     __self: this,
                     children: _htmlReactParserDefault.default(content)
@@ -81379,7 +81387,7 @@ $RefreshReg$(_c, "MemoryModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","./CloseModalButton":"jvgYN","html-react-parser":"9jxdQ","./ResponsiveLogo":"kujBX","./AppreciationButton":"ZM8Uh","./ReplyButton":"7e9XZ","./AddNewReplyMemoryModal":"nBSiO","../hooks/useModal":"2Xl10","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react-modal":"kzUwJ"}],"kujBX":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","./CloseModalButton":"jvgYN","html-react-parser":"9jxdQ","./ResponsiveLogo":"kujBX","./AppreciationButton":"ZM8Uh","./ReplyButton":"7e9XZ","./AddNewReplyMemoryModal":"nBSiO","react-modal":"kzUwJ","../hooks/useModal":"2Xl10","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"kujBX":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -82064,7 +82072,7 @@ $RefreshReg$(_c, "AddNewReplyMemoryModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./WriteMemoryFields":"gN7PT","@material-ui/core/Button":"i2oW6","@material-ui/icons/Send":"ihYjC","./CloseModalButton":"jvgYN","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react-modal":"kzUwJ"}],"kVkIB":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./WriteMemoryFields":"gN7PT","@material-ui/core/Button":"i2oW6","@material-ui/icons/Send":"ihYjC","./CloseModalButton":"jvgYN","react-modal":"kzUwJ","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"kVkIB":[function(require,module,exports) {
 "use strict";
 Object.defineProperty(exports, "__esModule", {
     value: true

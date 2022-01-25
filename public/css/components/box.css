@@ -19,6 +19,7 @@
 
 .box .author {
   float: left;
+  vertical-align: middle;
 }
 
 /*# sourceMappingURL=box.css.map */

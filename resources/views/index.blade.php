@@ -66,8 +66,14 @@
                     <div class="">
                         <button type="submit" class="btn btn-primary btn-block">Log in</button>
                     </div>
-                    
+
+
+                    <div>
+                        <x-additional-links/>
+                    </div>
                 </form>
+
+                
 
             </div>
 

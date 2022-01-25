@@ -137,8 +137,6 @@ function FollowersFeed(){
     const [memories, setMemories] = useState<Memory[]>([]);
     const [amountFetched, setAmountFetched] = useState(0);
 
-    console.log(memories)
-
     useEffect(() => {
 
         axios.get("/dashboard/feed-followers", {
@@ -168,8 +166,6 @@ function GlobalFeed(){
 
     const [memories, setMemories] = useState<Memory[]>([]);
     const [amountFetched, setAmountFetched] = useState(0);
-
-    console.log(memories)
 
     useEffect(() => {
 

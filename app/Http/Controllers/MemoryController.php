@@ -116,7 +116,7 @@ class MemoryController extends Controller
             }else{
                 $memories = $this->queryMemoriesWithJoins()
                             ->where("memories.user_id", $userID)
-                            ->where("memories.visibility", "public")
+                            ->where("memories.visibility", Config::get("constants.REFERENCE.VISIBILITY.PUBLIC"))
                             ->get();
             }
 
