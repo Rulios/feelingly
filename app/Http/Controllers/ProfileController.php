@@ -50,6 +50,7 @@ class ProfileController extends Controller
             $user->alias = $request->alias;
             $user->name = $request->name;
             $user->description = $request->description;
+            $user->date_of_birth = $request->date_of_birth;
 
             $user->save();
 

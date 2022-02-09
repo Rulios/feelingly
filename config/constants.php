@@ -36,5 +36,6 @@
 
 
      //sets the amount memories (posts) that should be returned when fetching the feed
-     "FEED_FETCH_LIMIT" => 10
+     "FEED_FETCH_LIMIT" => 10,
+   
  ];

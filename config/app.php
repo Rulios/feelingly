@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class
         
 
     ],
@@ -232,7 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Location' => Stevebauman\Location\Facades\Location::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class
     
     ],
 

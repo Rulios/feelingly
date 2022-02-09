@@ -64,7 +64,13 @@
                     </div>
                     
                     <div class="">
-                        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                        <button type="submit" class="btn btn-primary btn-block w-100">Log in</button>
+                    </div>
+
+                    <div>
+                        <a href="{{ route('google.login') }}" class="btn btn-google btn-user btn-block">
+                            <i class="fab fa-google fa-fw"></i> Login with Google
+                        </a>
                     </div>
 
 

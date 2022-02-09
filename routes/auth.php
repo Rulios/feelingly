@@ -8,6 +8,9 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\GoogleController;
+
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -67,3 +70,24 @@ Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
+
+
+Route::get("/request-alias", function(){
+    return view("auth.request-alias");
+})->name("request-alias");
+
+
+/**GOOGLE SIGN IN FEATURE OAUTH 2.0 */
+
+Route::get("/google/login", [GoogleController::class, "loginWithGoogle"])
+                ->name("google.login");
+
+Route::get("/google/callback", [GoogleController::class, "callbackFromGoogle"])
+                ->name("google.callback");
+
+Route::post("/google/process", [GoogleController::class, "createGoogleUser"])
+                ->name("google.process");
+
+//to do: should implement the logout method on the GoogleController
+Route::get("/google/logout", [GoogleController::class, "logout"])
+                ->name("google.logout");

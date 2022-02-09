@@ -19,8 +19,12 @@ class CreateUsersTable extends Migration
             $table->string("email")->unique();
             $table->string("name", 40);
             $table->string("alias", 30)->unique();
-            $table->text("password");
-            $table->date("date_of_birth");
+
+            //The password field is set to nullable because aside from
+            //traditional registration process. Users will be able to login using OAuth 2.0
+            $table->text("password")->nullable();
+            
+            $table->date("date_of_birth")->nullable();
             $table->string("description", 1000)->nullable();
             $table->string("profile_image")->nullable();
             $table->string("country", 10)->nullable();

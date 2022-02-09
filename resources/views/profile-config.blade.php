@@ -167,6 +167,17 @@
                             @enderror
                         </div>
 
+                        <div class="form-group mt-2">
+                            <label for="name">Date of birth</label>
+                            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth"  value="{{$date_of_birth}}">
+
+                            @error("date_of_birth")
+                                <div class="alert alert-danger">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                        </div>
+
                         <div class="form-group ">
                             <button type="submit" class="btn btn-outline-primary mt-5 ">Save profile</button>
                         </div>

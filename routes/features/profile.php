@@ -56,6 +56,7 @@ Route::get("/profile/account/config", function(){
             "alias" => $user->alias,
             "name" => $user->name,
             "description" => $user->description,
+            "date_of_birth" => $user->date_of_birth,
             "email" =>$user->email,
             "email_verified_at" => $user->email_verified_at
         ]);
