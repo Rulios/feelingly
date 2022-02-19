@@ -31,12 +31,16 @@
                     </h5>
 
                     <div class="mt-4 flex items-center justify-between">
-                        <form method="POST" action="{{ route('google.process') }}">
+                        <form method="POST" action="{{ route('google.create-user') }}">
                             @csrf
 
-                            <x-hidden-collection-props :collection="$userJSON"/>
+                            <x-prepopulated-user-hidden-field/>
 
-                            <input type="text" name="alias">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+
+                            <input type="text" name="alias" class="form-control">
                             @error("alias")
                                 <div class="alert alert-danger">
                                     {{$message}}
@@ -45,9 +49,7 @@
 
 
                             <div>
-                                <button class="btn btn-info mt-5">
-                                    Register!
-                                </button>
+                                <input type="submit" class="btn btn-info mt-5" value="Register!">
                         
                             </div>
                         </form>

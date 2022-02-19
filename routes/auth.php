@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\GoogleController;
 
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Route;
 
@@ -71,8 +72,11 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
 
+/**VIEW THAT CAN BE REUSED FOR FUTURE OAUTH PROVIDERS */
 
-Route::get("/request-alias", function(){
+Route::get("/request-alias", function(Request $request){
+
+
     return view("auth.request-alias");
 })->name("request-alias");
 
@@ -85,9 +89,12 @@ Route::get("/google/login", [GoogleController::class, "loginWithGoogle"])
 Route::get("/google/callback", [GoogleController::class, "callbackFromGoogle"])
                 ->name("google.callback");
 
-Route::post("/google/process", [GoogleController::class, "createGoogleUser"])
-                ->name("google.process");
+Route::post("/google/create-user", [GoogleController::class, "createGoogleUser"])
+                ->name("google.create-user");
 
 //to do: should implement the logout method on the GoogleController
 Route::get("/google/logout", [GoogleController::class, "logout"])
                 ->name("google.logout");
+
+
+

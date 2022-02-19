@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->uuid("id")->primary();
 
             $table->string("email")->unique();
-            $table->string("name", 40);
+            $table->string("name", 50);
             $table->string("alias", 30)->unique();
 
             //The password field is set to nullable because aside from

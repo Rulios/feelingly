@@ -34,8 +34,10 @@
      //The following constants are used to refer to the different types of follow
      "USER_FOLLOW_TYPE" => "user" ,
 
-
      //sets the amount memories (posts) that should be returned when fetching the feed
      "FEED_FETCH_LIMIT" => 10,
+
+     //SESSION VARIABLES NAMES 
+     "SESSION_PREPOPULATED_USER_JSON" => "prepopulatedUserJSON",
    
  ];

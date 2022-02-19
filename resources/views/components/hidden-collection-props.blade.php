@@ -6,7 +6,7 @@
     *  - The value is rendered as the value property of the input
  --}}
 
-    @foreach (json_decode($collection) as $key => $value)
+    @foreach ($collection as $key => $value)
         <input type="hidden" name="{{ $key }}" value="{{ $value }}">
     @endforeach 
 

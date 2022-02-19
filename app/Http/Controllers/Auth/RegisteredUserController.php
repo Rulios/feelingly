@@ -16,6 +16,8 @@ use App\Rules\EnablesURLEncoding;
 
 use App\Traits\RegisterSecondChoresTrait;
 
+use App\Http\Requests\TraditionalRegisterRequest;
+
 use Stevebauman\Location\Facades\Location;
 
 class RegisteredUserController extends Controller
@@ -41,28 +43,20 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(TraditionalRegisterRequest $request)
     {
         try{
 
-        
-            $request->validate([
-                "email" => "required|unique:users|email",
-                "alias" => ["required", "unique:users", "between:3,30", new EnablesURLEncoding],
-                "name" => "required|between:1,30",
-                "password" => "required|confirmed|min:8",
-                "password_confirmation" => "required|same:password",
-                "date_of_birth" => ["required", "before:today", "date", new ProjectDateFormat]
-            ]);
+            $validated = $request->validated();
 
             DB::beginTransaction();
     
             $user = new User;
-            $user->email = $request->email;
-            $user->alias = $request->alias;
-            $user->name = $request->name;
-            $user->password = Hash::make($request->password);
-            $user->date_of_birth = $request->date_of_birth;
+            $user->email = $validated->email;
+            $user->alias = $validated->alias;
+            $user->name = $validated->name;
+            $user->password = Hash::make($validated->password);
+            $user->date_of_birth = $validated->date_of_birth;
 
             if ($position = Location::get()) {
                 $user->country = $position->countryCode;

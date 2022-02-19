@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Carbon;
 
 use App\Models\User;
 
 use App\Providers\RouteServiceProvider;
 
-use App\Rules\EnablesURLEncoding;
 
 use App\Traits\RegisterSecondChoresTrait;
 
-use Illuminate\Support\Facades\Config;
+use App\Http\Requests\GoogleRegisterRequest;
 
 use Stevebauman\Location\Facades\Location;
 
@@ -58,8 +59,12 @@ class GoogleController extends Controller{
 
             if(!$existingUser){
 
+                //put prepopulated user data into session
+                //note: this is because it's redirecting and not rendering
+                Session::put(Config::get("constants.SESSION_PREPOPULATED_USER_JSON"), json_encode($googleUser->user));
 
-                return view("auth.request-alias")->with(["userJSON" => json_encode($googleUser->user)]);
+                return redirect()
+                            ->route('request-alias');
             }
 
             // log them in
@@ -68,37 +73,24 @@ class GoogleController extends Controller{
 
         } catch (\Exception $e) {
             dd($e);
-            dd("OOPS, THERE HAS BEEN AN ERROR LOGGING IN WITH GOOGLE");
+            dd("OOPS, THERE HAS BEEN AN ERROR LOGGINGs IN WITH GOOGLE");
         }        
         
     }
 
-    public function createGoogleUser(Request $request){
+    /**
+     * TO DO: FIX BUG OF NOT GETTING INTO THIS ROUTE
+     */
 
-        dd($request->all());
+    public function createGoogleUser(GoogleRegisterRequest $request){
 
-        //TO DO: SIMPLIFY THE CODE IN THE VALIDATION OF A NEW USER
-
-        $validator = Validator::make($request->all(), [
-            'alias' => ["required", "unique:users", "between:3,30", new EnablesURLEncoding],
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()
-                        ->route("google.callback", $_GET)
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        dd($request->all());
-
-
+        $validated = $request->validated();
 
 
         try{
 
             // check if they're an existing user
-            $existingUser = User::where('email', $user->email)->first();        
+            $existingUser = User::where('email', $validated["email"])->first();        
             
             if($existingUser){
                 // log them in
@@ -111,14 +103,15 @@ class GoogleController extends Controller{
 
                 // create a new user
                 $newUser                  = new User;
-                $newUser->name            = $user->name;
-                $newUser->email           = $user->email;
-                $newUser->google_id       = $user->id;
-                $newUser->alias           = $_GET["alias"];
-                $newUser->profile_image   = $user->avatar;
+                $newUser->name            = $validated["name"];
+                $newUser->email           = $validated["email"];
+                $newUser->google_id       = $validated["id"];
+                $newUser->alias           = $validated["alias"];
+                $newUser->profile_image   = $validated["picture"];
+                $newUser->email_verified_at = Carbon::now();
 
                 if ($position = Location::get()) {
-                    $user->country = $position->countryCode;
+                    $newUser->country = $position->countryCode;
                 }
 
                 $newUser->save();            
@@ -127,6 +120,9 @@ class GoogleController extends Controller{
                 DB::commit();
 
                 auth()->login($newUser, true);
+
+                //delete the session data to prepopulate the form
+                Session::forget(Config::get("constants.SESSION_PREPOPULATED_USER_JSON"));
 
             }
             
