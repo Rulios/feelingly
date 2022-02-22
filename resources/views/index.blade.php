@@ -52,7 +52,7 @@
 
                     <div class="mb-2">
                         <label for="password" class="form-label mt-2">Password:</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Your password" >
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Your password" >
                     </div>
 
                     <div class="mb-3">
@@ -67,14 +67,14 @@
                         <button type="submit" class="btn btn-primary btn-block w-100">Log in</button>
                     </div>
 
-                    <div>
-                        <a href="{{ route('google.login') }}" class="btn btn-google btn-user btn-block">
-                            <i class="fab fa-google fa-fw"></i> Login with Google
+                    <div class="mt-2">
+                        <a href="{{ route('google.login') }}" class="btn border border-dark w-100 changeContrast">
+                            <x-google-icon/> Login with Google
                         </a>
                     </div>
 
 
-                    <div>
+                    <div class="">
                         <x-additional-links/>
                     </div>
                 </form>
