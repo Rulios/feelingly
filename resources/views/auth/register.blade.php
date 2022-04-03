@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @extends('partials.headers')
 
     <link rel="stylesheet" href="{{ URL::asset('css/signup.css')}}">
+
+    <script defer src="{{ URL::asset("build/register.js")}}"></script>
 
     <title>Feelingly | Signup</title>
 </head>
@@ -38,6 +38,7 @@
 
                 </div>
             </div>
+
            
             @if(session()->has("signupSuccess") && session()->get("signupSuccess"))
 
@@ -50,7 +51,7 @@
 
                 @else
 
-                <form action="/register" method="POST">
+                <form action="/register" id="registerForm" method="POST">
 
                     {{csrf_field()}}
     
@@ -120,7 +121,7 @@
                         <a href="/">Already have an account? Log in</a>
                     </div>
     
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="registerBtn" class="btn btn-primary w-100">Submit</button>
                 </form>
 
             @endif

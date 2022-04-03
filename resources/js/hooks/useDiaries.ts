@@ -6,15 +6,9 @@ import axios from "axios";
 
 
 export default function useDiaries(alias: string): 
-    [status: string, data ?: Diary[], error?: string] {
+    [status: string, data : Diary[], error?: string] {
 
-        //TO DO, CHANGE THIS SHIT
-
-    //const {status, data, error}: any = {};
-
-
-
-    //const {status, data, error} = useFetch<Diary[]>(alias ? `/profile/${alias}/diaries`: null);
+   
     let [data, setData] = useState<Diary[]>([]);
     let [error, setError] = useState("");
     let [status, setStatus] = useState("");

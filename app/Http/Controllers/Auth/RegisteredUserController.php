@@ -52,11 +52,11 @@ class RegisteredUserController extends Controller
             DB::beginTransaction();
     
             $user = new User;
-            $user->email = $validated->email;
-            $user->alias = $validated->alias;
-            $user->name = $validated->name;
-            $user->password = Hash::make($validated->password);
-            $user->date_of_birth = $validated->date_of_birth;
+            $user->email = $validated["email"];
+            $user->alias = $validated["alias"];
+            $user->name = $validated["name"];
+            $user->password = Hash::make($validated["password"]);
+            $user->date_of_birth = $validated["date_of_birth"];
 
             if ($position = Location::get()) {
                 $user->country = $position->countryCode;

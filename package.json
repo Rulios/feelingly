@@ -23,6 +23,7 @@
         "@types/react-modal": "^3.13.1",
         "@types/react-slick": "^0.23.8",
         "@types/react-swipeable-views": "^0.13.1",
+        "@types/validator": "^13.7.2",
         "alpinejs": "^2.7.3",
         "autoprefixer": "^10.1.0",
         "axios": "^0.21.4",
@@ -63,6 +64,7 @@
         "bootstrap": "^4.6.0",
         "cropperjs": "^1.5.11",
         "dayjs": "^1.10.6",
+        "formik": "^2.2.9",
         "html-react-parser": "^1.2.8",
         "jquery": "^3.6.0",
         "react": "^17.0.1",
@@ -73,6 +75,7 @@
         "react-responsive-carousel": "^3.2.22",
         "react-slick": "^0.28.1",
         "react-swipeable-views": "^0.14.0",
-        "slick-carousel": "^1.8.1"
+        "slick-carousel": "^1.8.1",
+        "validator": "^13.7.0"
     }
 }

@@ -55,9 +55,11 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Your password" >
                     </div>
 
-                    <div class="mb-3">
-                        <a href="{{route("password.request")}}" class="text-secondary">Forgot password?</a>
-                    </div>
+                    @if ($errors->any())
+                        <div class="mb-2">
+                            <a href="{{route("password.request")}}" class="text-secondary">Forgot password?</a>
+                        </div>
+                    @endif 
                     
                     <div class="mb-3">
                         <a href="/register">Don't have a account yet? Sign up</a>

@@ -8,70 +8,43 @@ import TOOLBAR from "../quill-editor-configs/toolbar";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MenuItem from '@material-ui/core/MenuItem';
+import MemoryLengthCounter from "./MemoryLengthCounter";
 
 import useAlias from "../hooks/useAlias";
 import useDiaries from "../hooks/useDiaries";
+import { Formik, Form, useField, useFormik } from 'formik';
 
 
 import VISIBILITY from "../utils/VISIBILITY_TYPES";
 
-//to read and modification of the memory
-type MemoryUtils = {
-    memory: Memory;
-    setMemory(updatedMemory: Memory): void;
-}
 
-interface Props extends MemoryUtils{
-    isAReply?: boolean;
+
+interface Props{
+    diaries: Diary[]; //used to fill the dropdown
+    isAReply?: boolean ;
 };
 
-
-
-
-export default function WriteMemoryFields({memory, setMemory, isAReply}: Props){
-
-    const alias = useAlias("self");
-
-
-     const [statusDiaries, diaries, errorDiaries] = useDiaries(alias);
-     console.log(diaries);
-
-    useEffect(() => {
-        /**Performs a validation to set default memory's diary id. If memory's diary id is 
-         * empty, it should be filled with a default value.
-         */
-        if(!memory.diary_id && diaries?.length){
-            setMemory({...memory, diary_id: diaries![0].id});
-        }
-    }, [diaries]);
-
-    /**
-     * FIX THIS COMPONENT SELECTS FIELDS TO DOOOOOOOOOOOOOO
-     */
+export default function WriteMemoryFields({diaries, isAReply}: Props){
 
     return (
         <div>
             
-            <MemoryTitleField memory={memory} setMemory={setMemory} isAReply={isAReply}/>
+            <MemoryTitleField  isAReply={isAReply}/>
 
-            <ReactQuill theme="snow" 
-               
-                value={memory.content}
-                onChange={(text) => setMemory({...memory, content: text})}
-                modules={{
-                    toolbar: TOOLBAR
-                }}
-            />
+            <ContentField/>
+
+            {/* <MemoryLengthCounter html={memory.content}/> */}
+
 
             <div className="mt-2 row p-2">
 
                 <div className="col-lg-2">
-                    <MemoryVisibilityField memory={memory} setMemory={setMemory}/>                    
+                    <MemoryVisibilityField/>                    
                 </div>
 
                 <div className="col-lg-2">
                    {
-                        <MemoryDiarySelectorField memory={memory} setMemory={setMemory} diaries={diaries}/>
+                        <MemoryDiarySelectorField diaries={diaries}/>
                    } 
                 </div>
                 
@@ -83,18 +56,40 @@ export default function WriteMemoryFields({memory, setMemory, isAReply}: Props){
 }
 
 
+function ContentField(){
+    const [field, meta] = useField("content");
+
+    return (
+        <ReactQuill theme="snow" 
+            modules={{
+                toolbar: TOOLBAR
+            }}
+            value={field.value}
+            onChange={field.onChange(field.name)}
+        
+            
+        />
+    );
+}
+
+type MemoryTitleFieldProps = {
+    isAReply?: boolean;
+};
 
 /**
  * @param param0 
  * @returns 
  */
-function MemoryTitleField({memory, isAReply, setMemory}: Props){
+function MemoryTitleField({isAReply}: MemoryTitleFieldProps){
+
+    const [field, meta] = useField<string>("title"); 
+  
+
     return (
         <div >
             <TextField id="memoryTitle" 
                 placeholder="This memory's title"
                 className="mb-3 roboto-slab-font"
-                value={memory.title}
                 fullWidth
                 InputProps={{
                     classes: {
@@ -102,13 +97,22 @@ function MemoryTitleField({memory, isAReply, setMemory}: Props){
                     },
                     startAdornment: (isAReply ? <InputAdornment position="start">Reply |</InputAdornment> : null) 
                 }}
-                onChange={(e:React.ChangeEvent<HTMLInputElement>) => setMemory({...memory, title: e.target.value})}
+                error={meta.touched && meta.error ? true : false}
+                {...field}
+
+         
             />
+
+
+            
+
         </div>
     )
 }
 
-function MemoryVisibilityField({memory, setMemory}: MemoryUtils){
+function MemoryVisibilityField({...props}: any){
+
+    const [field, meta] = useField("visibility");
 
     const visibilityReferences: string[] = Object.keys(VISIBILITY);
     const DEFAULT_VISIBILITY = visibilityReferences[0];
@@ -116,47 +120,46 @@ function MemoryVisibilityField({memory, setMemory}: MemoryUtils){
     return (
         <TextField select label="Visibility" id="memoryVisibility" 
             helperText="Select the visibility for this memory"
-            value={(memory.visibility) ? memory.visibility : DEFAULT_VISIBILITY}
-            onChange={(e:React.ChangeEvent<HTMLInputElement>) => setMemory({...memory, visibility: e.target.value})}
+            {...field}
         >
+
             {visibilityReferences.map(visibility => {
                 return (<MenuItem value={visibility} key={visibility}>
                     {VISIBILITY[visibility]}
                 </MenuItem>)
             })}
+            
         </TextField>
     );
 }
 
-interface MemoryDiarySelectorFieldProps extends MemoryUtils{
-    diaries: Diary[] | undefined;
+
+interface MemoryDiarySelectorFieldProps {
+    diaries: Diary[] ;
 }
 
-function MemoryDiarySelectorField({memory, setMemory, diaries}: MemoryDiarySelectorFieldProps){
+function MemoryDiarySelectorField({diaries}: MemoryDiarySelectorFieldProps){
 
-    let defaultDiary: string = "";
-
-    if(diaries?.length){
-        //defaultDiary = diaries[0].id;
-        console.log("There're no diaries")
-    } 
+    const [field, meta] = useField("diary_id");
 
     return (
         <TextField select label="Diarie Group" id="diarieGroup" 
             helperText="Select the diarie to store this memory"
-            value={(memory.diary_id) ? memory.diary_id : defaultDiary }
-            onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
-                /**
-                 * Verifies that the diary id selected is available on diaries[]
-                 */
+            /* value={(memory.diary_id) ? memory.diary_id : defaultDiary } */
+            error={meta.touched && meta.error ? true : false}
+            {...field}
+            // onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+            //     /**
+            //      * Verifies that the diary id selected is available on diaries[]
+            //      */
 
-                for(let i = 0; i < diaries!.length; i++){
-                    if(diaries![i].id == e.target.value){
-                        setMemory({...memory, diary_id: diaries![i].id});
-                        break;
-                    }
-                }
-            }}
+            //     for(let i = 0; i < diaries!.length; i++){
+            //         if(diaries![i].id == e.target.value){
+            //             setMemory({...memory, diary_id: diaries![i].id});
+            //             break;
+            //         }
+            //     }
+            // }}
         >
             {   
                 diaries?.map(({id, name}, i) => {

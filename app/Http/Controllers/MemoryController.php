@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Rules\ValidVisibilityType;
+use App\Rules\MinimumMemoryContentCharacters;
 
 class MemoryController extends Controller
 {
@@ -20,7 +21,7 @@ class MemoryController extends Controller
 
         $request->validate([
             "title" => "required",
-            "content" => "required",
+            "content" => ["required", new MinimumMemoryContentCharacters],
             "diary_id" => "required| exists:diaries,id",
             "visibility" => ["required", new ValidVisibilityType]
         ]);

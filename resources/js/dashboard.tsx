@@ -3,7 +3,7 @@ import $ from "jquery";
 import ReactDOM from "react-dom";
 import React, {FC, useState, useEffect, useRef} from "react";
 
-import AddNewMemoryBundle from "./components/AddNewMemoryBundle";
+import AddNewMemoryForm from "./components/AddNewMemoryForm";
 
 import axios from "axios";
 import useModal from "./hooks/useModal";
@@ -80,10 +80,6 @@ function App(): JSX.Element{
         setTabIndex(index);
     };
 
-
-
-    //TO DO: FIX THE FUCKING MODAL, MAKE IT SHOW FULL SCREEN. NOT ONLY THE DIV
-    
     return (
         <div>
 
@@ -127,7 +123,7 @@ function App(): JSX.Element{
 
             </div>
 
-            <AddNewMemoryBundle/>
+            <AddNewMemoryForm/>
         </div>
     );
 }

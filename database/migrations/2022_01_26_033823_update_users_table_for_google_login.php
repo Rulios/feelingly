@@ -15,7 +15,7 @@ class UpdateUsersTableForGoogleLogin extends Migration
     {
         //
         Schema::table('users', function (Blueprint $table) {
-            $table->string('google_id');
+            $table->string('google_id')->nullable();
         });
     }
 
