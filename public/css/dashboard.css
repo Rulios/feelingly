@@ -108,6 +108,10 @@
   border-radius: 5px;
 }
 
+.c-modal .error-message {
+  font-size: small;
+}
+
 .box {
   width: 100%;
   transition: 0.5s;

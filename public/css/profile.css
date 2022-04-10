@@ -124,6 +124,10 @@
   border-radius: 5px;
 }
 
+.c-modal .error-message {
+  font-size: small;
+}
+
 .c-modal .memory-content {
   max-height: 80vh;
   font-size: 1em;

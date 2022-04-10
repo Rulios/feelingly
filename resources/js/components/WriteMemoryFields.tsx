@@ -26,14 +26,14 @@ interface Props{
 
 export default function WriteMemoryFields({diaries, isAReply}: Props){
 
+    
+
     return (
-        <div>
+        <>
             
             <MemoryTitleField  isAReply={isAReply}/>
 
             <ContentField/>
-
-            {/* <MemoryLengthCounter html={memory.content}/> */}
 
 
             <div className="mt-2 row p-2">
@@ -49,7 +49,7 @@ export default function WriteMemoryFields({diaries, isAReply}: Props){
                 </div>
                 
             </div>
-        </div>
+        </>
 
     
     );
@@ -60,17 +60,23 @@ function ContentField(){
     const [field, meta] = useField("content");
 
     return (
-        <ReactQuill theme="snow" 
-            modules={{
-                toolbar: TOOLBAR
-            }}
-            value={field.value}
-            onChange={field.onChange(field.name)}
-        
-            
-        />
+        <>
+            <ReactQuill theme="snow" 
+                modules={{
+                    toolbar: TOOLBAR
+                }}
+                value={field.value}
+                onChange={field.onChange(field.name)}
+                
+            />
+            <MemoryLengthCounter html={field.value}/>
+            {meta.touched && meta.error ? <div className="text-danger error-message">{meta.error}</div> : null}
+        </>
     );
 }
+
+
+
 
 type MemoryTitleFieldProps = {
     isAReply?: boolean;
@@ -82,9 +88,8 @@ type MemoryTitleFieldProps = {
  */
 function MemoryTitleField({isAReply}: MemoryTitleFieldProps){
 
-    const [field, meta] = useField<string>("title"); 
-  
-
+    const [field, meta, helpers] = useField<string>("title"); 
+    
     return (
         <div >
             <TextField id="memoryTitle" 
@@ -98,16 +103,13 @@ function MemoryTitleField({isAReply}: MemoryTitleFieldProps){
                     startAdornment: (isAReply ? <InputAdornment position="start">Reply |</InputAdornment> : null) 
                 }}
                 error={meta.touched && meta.error ? true : false}
+                helperText={meta.touched && meta.error ? meta.error : null}
+             
                 {...field}
-
-         
             />
-
-
-            
-
         </div>
-    )
+    );
+
 }
 
 function MemoryVisibilityField({...props}: any){
@@ -145,21 +147,9 @@ function MemoryDiarySelectorField({diaries}: MemoryDiarySelectorFieldProps){
     return (
         <TextField select label="Diarie Group" id="diarieGroup" 
             helperText="Select the diarie to store this memory"
-            /* value={(memory.diary_id) ? memory.diary_id : defaultDiary } */
             error={meta.touched && meta.error ? true : false}
             {...field}
-            // onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
-            //     /**
-            //      * Verifies that the diary id selected is available on diaries[]
-            //      */
-
-            //     for(let i = 0; i < diaries!.length; i++){
-            //         if(diaries![i].id == e.target.value){
-            //             setMemory({...memory, diary_id: diaries![i].id});
-            //             break;
-            //         }
-            //     }
-            // }}
+   
         >
             {   
                 diaries?.map(({id, name}, i) => {

@@ -48,4 +48,8 @@
   border-radius: 5px;
 }
 
+.c-modal .error-message {
+  font-size: small;
+}
+
 /*# sourceMappingURL=custom-modal.css.map */

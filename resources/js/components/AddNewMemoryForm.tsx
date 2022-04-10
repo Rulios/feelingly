@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import validator from "validator";
 
@@ -9,6 +9,8 @@ import AddFloatButton from "./AddFloatButton";
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import CloseModalButton from "./CloseModalButton";
+import { Snackbar } from "@material-ui/core";
+import {Portal} from "react-portal"
 
 import useModal from "../hooks/useModal";
 import useDiaries from "../hooks/useDiaries";
@@ -55,6 +57,7 @@ function NewMemoryModal({open, closeModal}: Props){
 
     const alias = useAlias("self");
     const [statusDiaries, diaries, errorDiaries] = useDiaries(alias);
+    const [openSnackbar, setOpenSnackbar] = useState({open: false, type: "", message: ""});
 
     const submitMemory = (memory: Memory):void => {
         console.log(memory);
@@ -63,7 +66,8 @@ function NewMemoryModal({open, closeModal}: Props){
 
             switch(status){
                 case 200:
-                    console.log(`${status_message}`);
+                    setOpenSnackbar({open: true, type: "success", message: status_message});
+                    closeModal();
                 break;
 
                 case 500:
@@ -81,7 +85,7 @@ function NewMemoryModal({open, closeModal}: Props){
 
         const errors: FormikErrors<Memory> = {};
 
-
+      
         if(!values.title){
             errors.title = "Title is required";
         }
@@ -92,30 +96,45 @@ function NewMemoryModal({open, closeModal}: Props){
             errors.content = "Content is too short";
         }
 
+        if(!values.diary_id){
+            errors.diary_id = "Diary is required";
+        }
+
+        return errors;
+
     }
 
     return(
         <Modal isOpen={open}>
             <div className="c-modal">     
+                
+                {/* TO DO, GENERALIZE THE COMPONENT, AND USE REACT PORTALS TO GET THIS NODE OUT
+                OF THIS FLOW  */}
 
-                <div className="sticky-top">
-                    <CloseModalButton onClick={closeModal}/>
-                </div>
+                <Snackbar
+                        open={openSnackbar.open && openSnackbar.type === "success"}
+                        autoHideDuration={6000}
+                        onClose={() => setOpenSnackbar({open: false, type: "", message:""})}
+                        message={openSnackbar.message}
+                />
 
                 <div className="content p-3">
+
+                    <div className="sticky-top">
+                        <CloseModalButton onClick={closeModal}/>
+                    </div>
 
                     <Formik 
                         initialValues={INITIAL_VALUES}
                         validate={validation}
 
                         onSubmit={(values, actions) => {
-                            //TO DO: should fix these statements. Because setMemory is async, submit memory won't work well. 
-                            console.log(values)
-                            /* setMemory(values);
+                            console.log(values);
                             submitMemory(values);
-                            closeModal(); */
+                            
                         }}
                     >
+
                         <Form>
                             <WriteMemoryFields
                                 diaries={diaries}
@@ -135,6 +154,7 @@ function NewMemoryModal({open, closeModal}: Props){
                             </div>
                         </Form>
                         
+                        
                     </Formik>
 
                 </div>  
@@ -142,3 +162,4 @@ function NewMemoryModal({open, closeModal}: Props){
         </Modal>
     );
 }
+

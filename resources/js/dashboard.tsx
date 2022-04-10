@@ -55,8 +55,6 @@ const useStyles = makeStyles({
     
     
 function App(): JSX.Element{
-        /**TOGGLER */
-        //TO DOOOOO, IMPLEMENT THE DASHBOARD FETCHING AND MEMORY BOX HEERE
         
     const [ tabIndex, setTabIndex ] = useState(0);
 
