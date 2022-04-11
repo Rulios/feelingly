@@ -1,0 +1,1 @@
+export default type OperationStates = "success" | "error" | "warning";

@@ -3,14 +3,14 @@ import axios from "axios";
 import validator from "validator";
 
 import Memory from "../types/Memory";
+import OperationStates from "../types/OperationStates";
 
 import WriteMemoryFields from "./WriteMemoryFields";
 import AddFloatButton from "./AddFloatButton";
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import CloseModalButton from "./CloseModalButton";
-import { Snackbar } from "@material-ui/core";
-import {Portal} from "react-portal"
+import SnackbarMessage from "./SnackbarMessage";
 
 import useModal from "../hooks/useModal";
 import useDiaries from "../hooks/useDiaries";
@@ -105,61 +105,70 @@ function NewMemoryModal({open, closeModal}: Props){
     }
 
     return(
-        <Modal isOpen={open}>
-            <div className="c-modal">     
-                
-                {/* TO DO, GENERALIZE THE COMPONENT, AND USE REACT PORTALS TO GET THIS NODE OUT
-                OF THIS FLOW  */}
 
-                <Snackbar
-                        open={openSnackbar.open && openSnackbar.type === "success"}
-                        autoHideDuration={6000}
-                        onClose={() => setOpenSnackbar({open: false, type: "", message:""})}
-                        message={openSnackbar.message}
+        <>
+
+            {openSnackbar && 
+                <SnackbarMessage 
+                    open={openSnackbar.open}  
+                    type={openSnackbar.type as OperationStates}
+                    message={openSnackbar.message}
+                    onClose={() => setOpenSnackbar({open: false, type: "", message: ""})}
                 />
+            }            
 
-                <div className="content p-3">
+            <Modal isOpen={open}>
+                <div className="c-modal">     
+                    
+                    {/* TO DO, GENERALIZE THE COMPONENT, AND USE REACT PORTALS TO GET THIS NODE OUT
+                    OF THIS FLOW  */}
 
-                    <div className="sticky-top">
-                        <CloseModalButton onClick={closeModal}/>
-                    </div>
+                    
 
-                    <Formik 
-                        initialValues={INITIAL_VALUES}
-                        validate={validation}
+                    <div className="content p-3">
 
-                        onSubmit={(values, actions) => {
-                            console.log(values);
-                            submitMemory(values);
+                        <div className="sticky-top">
+                            <CloseModalButton onClick={closeModal}/>
+                        </div>
+
+                        <Formik 
+                            initialValues={INITIAL_VALUES}
+                            validate={validation}
+
+                            onSubmit={(values, actions) => {
+                                console.log(values);
+                                submitMemory(values);
+                                
+                            }}
+                        >
+
+                            <Form>
+                                <WriteMemoryFields
+                                    diaries={diaries}
+                                />
+                                
+
+
+                                <div className="mt-3 p-3 row">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        type="submit"
+                                        endIcon={<SendIcon/>}
+                                    >
+                                        Share memory        
+                                    </Button>
+                                </div>
+                            </Form>
                             
-                        }}
-                    >
-
-                        <Form>
-                            <WriteMemoryFields
-                                diaries={diaries}
-                            />
                             
+                        </Formik>
 
+                    </div>  
+                </div>
+            </Modal>
 
-                            <div className="mt-3 p-3 row">
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    type="submit"
-                                    endIcon={<SendIcon/>}
-                                >
-                                    Share memory        
-                                </Button>
-                            </div>
-                        </Form>
-                        
-                        
-                    </Formik>
-
-                </div>  
-            </div>
-        </Modal>
+        </>
     );
 }
 
