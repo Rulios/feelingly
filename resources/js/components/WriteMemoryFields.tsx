@@ -33,8 +33,6 @@ export default function WriteMemoryFields({diaries, isAReply}: Props){
             
             <MemoryTitleField  isAReply={isAReply}/>
 
-            <ContentField/>
-
 
             <div className="mt-2 row p-2">
 
@@ -42,13 +40,16 @@ export default function WriteMemoryFields({diaries, isAReply}: Props){
                     <MemoryVisibilityField/>                    
                 </div>
 
-                <div className="col-lg-2">
+                <div className="col-lg-2 mt-1">
                    {
                         <MemoryDiarySelectorField diaries={diaries}/>
                    } 
                 </div>
                 
             </div>
+
+            <ContentField/>
+            
         </>
 
     
@@ -67,6 +68,7 @@ function ContentField(){
                 }}
                 value={field.value}
                 onChange={field.onChange(field.name)}
+                style={{height: "50vw"}}
                 
             />
             <MemoryLengthCounter html={field.value}/>

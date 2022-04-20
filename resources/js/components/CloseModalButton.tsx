@@ -1,4 +1,6 @@
 import React from "react";
+import Button from '@material-ui/core/Button';
+
 
 type Props = {
     onClick: () => void;
@@ -10,7 +12,7 @@ export default function CloseModalButton({onClick}: Props){
             
             onClick={onClick}
             style={{
-                float:"right",
+                float:"left",
                 display: "inline-block",
             }}
         >

@@ -27,6 +27,7 @@ export default function SnackbarMessage({open, type, message, onClose}: Props){
                         open={open}
                         autoHideDuration={6000}
                         onClose={onClose}
+                        anchorOrigin={{vertical: 'top', horizontal: 'center'}}
                 >
 
                     <Alert onClose={onClose} severity={type} sx={{ width: '100%' }}>

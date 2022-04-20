@@ -120,16 +120,7 @@ function NewMemoryModal({open, closeModal}: Props){
             <Modal isOpen={open}>
                 <div className="c-modal">     
                     
-                    {/* TO DO, GENERALIZE THE COMPONENT, AND USE REACT PORTALS TO GET THIS NODE OUT
-                    OF THIS FLOW  */}
-
-                    
-
-                    <div className="content p-3">
-
-                        <div className="sticky-top">
-                            <CloseModalButton onClick={closeModal}/>
-                        </div>
+                    <div className="content px-3">
 
                         <Formik 
                             initialValues={INITIAL_VALUES}
@@ -143,25 +134,42 @@ function NewMemoryModal({open, closeModal}: Props){
                         >
 
                             <Form>
-                                <WriteMemoryFields
-                                    diaries={diaries}
-                                />
-                                
 
 
-                                <div className="mt-3 p-3 row">
+                                <div className="sticky-top d-inline p-3 row">
+
+                                    <div className="">
+                                        <CloseModalButton onClick={closeModal}/>
+                                    </div>
+
                                     <Button
                                         variant="contained"
                                         color="primary"
                                         type="submit"
+                                        style={{
+                                            maxWidth: "140px",
+                                            maxHeight: "100px",
+                                            minWidth: "120px",
+                                            float: "right",
+                                            fontSize: "0.80rem",
+                                            backgroundColor: "#007ab3",
+                                        }}
                                         endIcon={<SendIcon/>}
                                     >
-                                        Share memory        
+                                        Share        
                                     </Button>
+
+                                    
+
                                 </div>
+
+                                <div className="mt-5">
+                                    <WriteMemoryFields
+                                        diaries={diaries}
+                                    />
+                                </div>
+
                             </Form>
-                            
-                            
                         </Formik>
 
                     </div>  
