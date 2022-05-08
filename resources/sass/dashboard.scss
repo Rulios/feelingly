@@ -32,3 +32,19 @@ there's no better way of importing .css files from node_modules.
     margin-left: 0 !important;
 }
 
+
+/*
+    TEXT AREA STYLING
+*/
+
+.textarea{
+    resize: vertical;
+    overflow: auto;
+    display:block;
+    height: 50vh; //temporary solution. The textarea should be of the height of the bottom of the modal
+
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+}
+

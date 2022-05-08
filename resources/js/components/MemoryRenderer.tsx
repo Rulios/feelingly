@@ -1,7 +1,9 @@
 import Memory from "../types/Memory";
 import {useState} from "react";
+
 import MemoryBox from "./MemoryBox";
 import MemoryModal from "./MemoryModal";
+
 import useModal from "../hooks/useModal";
 
 type Props = {
@@ -10,9 +12,6 @@ type Props = {
 };
 
 
-function toggleBodyOverflow(){
-    document.body.classList.toggle("overflow-hidden");
-}
 
 /**
  * This component serves as a bundler for joining two component types at a time. 
@@ -38,22 +37,8 @@ export default function MemoryRenderer({memories, columns}: Props){
 
     const handleClickMemory = (memoryPosition: number) => {
             setSelectedMemoryIndex(memoryPosition);
-            //setModalOpen(true);
             openModal();
-            toggleBodyOverflow();
     }
-
-    /**
-     * Sets the modal open state to false to close it
-     */
-    const handleCloseMemory = () => {
-        //setModalOpen(false);
-        closeModal();
-        toggleBodyOverflow();
-
-    };
-
-
 
     return (
         <div>
@@ -78,7 +63,7 @@ export default function MemoryRenderer({memories, columns}: Props){
                 <MemoryModal    
                     memory={memories ? memories[selectedMemoryIndex] : null}
                     shouldOpen={open}
-                    handleClose={handleCloseMemory}
+                    handleClose={closeModal}
                 />
             }
         </div>

@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import validator from "validator";
+import {Formik, useFormik, FormikErrors, Form} from "formik";
+import Modal from "react-modal";
 
 import Memory from "../types/Memory";
 import OperationStates from "../types/OperationStates";
@@ -16,9 +18,8 @@ import useModal from "../hooks/useModal";
 import useDiaries from "../hooks/useDiaries";
 import useAlias from "../hooks/useAlias";
 
-import {Formik, useFormik, FormikErrors, Form} from "formik";
+import toggleBodyOverflow from "../utils/toggleBodyOverflow";
 
-import Modal from "react-modal";
 
 
 type Props = {
@@ -71,6 +72,7 @@ function NewMemoryModal({open, closeModal}: Props){
                 break;
 
                 case 500:
+                    setOpenSnackbar({open: true, type: "error", message: "Oops, something went wrong. Please try again later."});
                     throw new (status_message);
                 break;
             }
@@ -120,7 +122,7 @@ function NewMemoryModal({open, closeModal}: Props){
             <Modal isOpen={open}>
                 <div className="c-modal">     
                     
-                    <div className="content px-3">
+                    <div className="content container-fluid px-3">
 
                         <Formik 
                             initialValues={INITIAL_VALUES}
@@ -133,10 +135,10 @@ function NewMemoryModal({open, closeModal}: Props){
                             }}
                         >
 
-                            <Form>
+                            <Form className="h-100">
 
 
-                                <div className="sticky-top d-inline p-3 row">
+                                <div className=" d-inline p-3 row">
 
                                     <div className="">
                                         <CloseModalButton onClick={closeModal}/>

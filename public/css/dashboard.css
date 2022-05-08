@@ -266,4 +266,17 @@ there's no better way of importing .css files from node_modules.
   margin-left: 0 !important;
 }
 
+/*
+    TEXT AREA STYLING
+*/
+.textarea {
+  resize: vertical;
+  overflow: auto;
+  display: block;
+  height: 50vh;
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+}
+
 /*# sourceMappingURL=dashboard.css.map */

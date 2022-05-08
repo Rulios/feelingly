@@ -1,23 +1,23 @@
 import $ from "jquery";
 import "bootstrap";
-import useMemories from "./hooks/useMemories";
-import useAlias from "./hooks/useAlias";
-import useDiaries from "./hooks/useDiaries";
-import ProfileButtonNavigation from "./components/ProfileButtonNavigation";
 import React, {useEffect, useState, useRef, useContext} from "react";
 import ReactDOM from "react-dom";
+
 import Memory from "./types/Memory";
 import Diary from "./types/Diary";
 
+import useMemories from "./hooks/useMemories";
+import useAlias from "./hooks/useAlias";
+import useDiaries from "./hooks/useDiaries";
+import useModal from "./hooks/useModal";
+
 import HiddenContext from "./contexts/HiddenContext";
 
+import ProfileButtonNavigation from "./components/ProfileButtonNavigation";
 import ProfileDiaryBox from "./components/ProfileDiaryBox";
 import DiaryModal from "./components/DiaryModal";
 import MemoryRenderer from "./components/MemoryRenderer";
-
 import FollowButton from "./components/FollowButton";
-
-
 
  window.onload = function(){
 
@@ -81,11 +81,6 @@ import FollowButton from "./components/FollowButton";
 
 
 
-function toggleBodyOverflow(){
-    document.body.classList.toggle("overflow-hidden");
-}
-
-
 interface WrittenMemoriesFeedProps{
     memories : Memory[] | undefined;
 }
@@ -105,21 +100,19 @@ interface DiariesFeedProps{
 }
  function DiariesFeed({memories, diaries}: DiariesFeedProps){
 
-    const [modalOpen, setModalOpen] = useState(false);
+    const {open, openModal, closeModal} = useModal();
     const [selectedDiaryIndex, setSelectedDiaryIndex] = useState(-1);
 
     const handleClickDiary = (diaryIndexPosition: number) => {
         setSelectedDiaryIndex(diaryIndexPosition);
-        setModalOpen(true);
-        toggleBodyOverflow();
+        openModal();
     }
 
     /**
      * Sets the modal open state to false to close it
      */
      const handleCloseDiaryModal = () => {
-        setModalOpen(false);
-        toggleBodyOverflow();
+        closeModal();
     };
 
     const filterMemoryByDiaryID = (memory: Memory) => {
@@ -144,12 +137,12 @@ interface DiariesFeedProps{
                 })
             }
 
-            {modalOpen && 
+            {open && 
                         
                 <DiaryModal
                     diary={diaries ? diaries[selectedDiaryIndex] : null}
                     memories={memories?.filter(filterMemoryByDiaryID)}
-                    shouldOpen={modalOpen}
+                    shouldOpen={open}
                     handleClose={handleCloseDiaryModal}
                 />
             }

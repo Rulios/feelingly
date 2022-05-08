@@ -9,6 +9,15 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MenuItem from '@material-ui/core/MenuItem';
 import MemoryLengthCounter from "./MemoryLengthCounter";
+import Tooltip from "@material-ui/core/Tooltip";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import ToggleButton from "@mui/material/ToggleButton";
+
+
+import PublicIcon from "@mui/icons-material/Public";
+import PublicOffIcon from "@mui/icons-material/PublicOff";
+
+import {makeStyles} from "@material-ui/core/styles";
 
 import useAlias from "../hooks/useAlias";
 import useDiaries from "../hooks/useDiaries";
@@ -26,30 +35,35 @@ interface Props{
 
 export default function WriteMemoryFields({diaries, isAReply}: Props){
 
-    
 
     return (
         <>
             
-            <MemoryTitleField  isAReply={isAReply}/>
 
+            <div className="row">
+                <div className="col-12">
+                    <MemoryTitleField  isAReply={isAReply}/>
+                </div>
+            </div>
 
             <div className="mt-2 row p-2">
 
-                <div className="col-lg-2">
-                    <MemoryVisibilityField/>                    
+                <div className="col-3">
+                    <MemoryVisibilityField/>     
                 </div>
 
-                <div className="col-lg-2 mt-1">
-                   {
+                <div className="col-6 mt-1">
                         <MemoryDiarySelectorField diaries={diaries}/>
-                   } 
                 </div>
+
                 
             </div>
-
-            <ContentField/>
             
+            <div className="mt-2 row position-relative">
+                <div className="col-12">
+                    <ContentField/>
+                </div>
+            </div>
         </>
 
     
@@ -57,24 +71,33 @@ export default function WriteMemoryFields({diaries, isAReply}: Props){
 }
 
 
+/**
+ * Memory's content field
+ * 
+ * This field will have a fixed height of 100px, and it will grow with the content
+ * until it reaches the end of the bottom of the screen. Then, scrollbar should appear. 
+ * @returns 
+ */
 function ContentField(){
     const [field, meta] = useField("content");
+    
+
 
     return (
         <>
-            <ReactQuill theme="snow" 
-                modules={{
-                    toolbar: TOOLBAR
-                }}
+            <textarea 
+                placeholder="Click here to start writing!" 
+                className="textarea w-100 "
                 value={field.value}
                 onChange={field.onChange(field.name)}
-                style={{height: "50vw"}}
-                
-            />
-            <MemoryLengthCounter html={field.value}/>
+                spellCheck={true}
+            >
+
+            </textarea>
+
             {meta.touched && meta.error ? <div className="text-danger error-message">{meta.error}</div> : null}
         </>
-    );
+    )
 }
 
 
@@ -114,26 +137,57 @@ function MemoryTitleField({isAReply}: MemoryTitleFieldProps){
 
 }
 
+
+
+const useStyles = makeStyles((theme) => ({
+    selected: {
+      "&&": {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.secondary.main
+      }
+    }
+}));
+
+/**
+ * 
+ * TO DO: Change the dropdown to a Icon Button select element
+ * 
+ * @param param0 
+ * @returns 
+ */
+
 function MemoryVisibilityField({...props}: any){
 
-    const [field, meta] = useField("visibility");
+    const [field, meta, helpers] = useField("visibility");
 
     const visibilityReferences: string[] = Object.keys(VISIBILITY);
-    const DEFAULT_VISIBILITY = visibilityReferences[0];
 
+    let {setValue} = helpers;
+
+    
+
+      const classes = useStyles();
     return (
-        <TextField select label="Visibility" id="memoryVisibility" 
-            helperText="Select the visibility for this memory"
-            {...field}
+        <ToggleButtonGroup
+            size="small"
+            exclusive
+            color="primary"
+            value={field.value}
+            aria-label="memory visibility"
+            onChange={(_, newValue) => setValue(newValue)}
         >
+            <Tooltip title="Public">
+                <ToggleButton value={visibilityReferences[0]} aria-label={visibilityReferences[0]}  classes={{ selected: classes.selected }} >
+                    <PublicIcon />
+                </ToggleButton>
+            </Tooltip>
 
-            {visibilityReferences.map(visibility => {
-                return (<MenuItem value={visibility} key={visibility}>
-                    {VISIBILITY[visibility]}
-                </MenuItem>)
-            })}
-            
-        </TextField>
+            <Tooltip title="Private">
+                <ToggleButton value={visibilityReferences[1]} aria-label={visibilityReferences[1]}  classes={{ selected: classes.selected }}>
+                    <PublicOffIcon/>
+                </ToggleButton>
+            </Tooltip>
+        </ToggleButtonGroup>
     );
 }
 
