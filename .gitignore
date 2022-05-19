@@ -2,7 +2,7 @@
 /public/hot
 /public/storage
 /public/uploads
-/public/build
+/public/build/
 /storage/*.key
 .parcel-cache/
 /vendor

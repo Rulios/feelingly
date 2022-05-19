@@ -19,9 +19,8 @@ import PublicOffIcon from "@mui/icons-material/PublicOff";
 
 import {makeStyles} from "@material-ui/core/styles";
 
-import useAlias from "../hooks/useAlias";
 import useDiaries from "../hooks/useDiaries";
-import { Formik, Form, useField, useFormik } from 'formik';
+import { Formik, Form, useField, useFormik, Field } from 'formik';
 
 
 import VISIBILITY from "../utils/VISIBILITY_TYPES";
@@ -74,14 +73,12 @@ export default function WriteMemoryFields({diaries, isAReply}: Props){
 /**
  * Memory's content field
  * 
- * This field will have a fixed height of 100px, and it will grow with the content
- * until it reaches the end of the bottom of the screen. Then, scrollbar should appear. 
+ * For visual considerations, see the file "dashboard.scss"
  * @returns 
  */
 function ContentField(){
     const [field, meta] = useField("content");
     
-
 
     return (
         <>
@@ -150,43 +147,59 @@ const useStyles = makeStyles((theme) => ({
 
 /**
  * 
- * TO DO: Change the dropdown to a Icon Button select element
+ * 
  * 
  * @param param0 
  * @returns 
  */
 
 function MemoryVisibilityField({...props}: any){
-
-    const [field, meta, helpers] = useField("visibility");
-
+    //constants
     const visibilityReferences: string[] = Object.keys(VISIBILITY);
+
+    /**
+     * Why using Formik's useField hook and a useState hook if useField helper methods
+     * should do the same as useState? Redundancy?
+     * 
+     *      - Well, I started to use useField hook first and after implementing the component, it happened
+     *          that the ToggleButtonGroup (Material UI) was not working properly. The state was changing
+     *          but visually, the component wasn't marking the change properly. 
+     * 
+     *          That's why I decided to combine the useState hook and the useField hook.
+     *          Not the best way to do things, but that fixes the bug I've spent hours trying to fix.
+     */
+    const [field, meta, helpers] = useField("visibility");
+    const [visibility, setVisibility] = useState(field.value);
 
     let {setValue} = helpers;
 
-    
 
-      const classes = useStyles();
+    const classes = useStyles();
+
+
+    const handleAlignment = (event:any, newVisibility: any) => {
+        //enforce value set, prevents the user from nulling the selection
+        if(newVisibility !== null){
+            setVisibility(newVisibility);
+            setValue(newVisibility);
+        }
+
+    };
+
     return (
         <ToggleButtonGroup
-            size="small"
-            exclusive
-            color="primary"
-            value={field.value}
-            aria-label="memory visibility"
-            onChange={(_, newValue) => setValue(newValue)}
+        value={visibility}
+        exclusive
+        onChange={handleAlignment}
+        aria-label="text alignment"
         >
-            <Tooltip title="Public">
-                <ToggleButton value={visibilityReferences[0]} aria-label={visibilityReferences[0]}  classes={{ selected: classes.selected }} >
-                    <PublicIcon />
-                </ToggleButton>
-            </Tooltip>
-
-            <Tooltip title="Private">
-                <ToggleButton value={visibilityReferences[1]} aria-label={visibilityReferences[1]}  classes={{ selected: classes.selected }}>
-                    <PublicOffIcon/>
-                </ToggleButton>
-            </Tooltip>
+            <ToggleButton value={visibilityReferences[0]}  
+                aria-label={visibilityReferences[0]}>
+                <PublicIcon />
+            </ToggleButton>
+            <ToggleButton value={visibilityReferences[1]} aria-label={visibilityReferences[1]}>
+                <PublicOffIcon/>
+            </ToggleButton>
         </ToggleButtonGroup>
     );
 }
