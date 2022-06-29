@@ -13,6 +13,7 @@ dayjs.extend(utc);
 
 type Props = {
     memory: Memory;
+    showProfileImage?: boolean;
     onClick(): void;
 }
 
@@ -20,6 +21,7 @@ type Props = {
 export default function MemoryBox({
     memory: {id, title, content, visibility, created_at, diary_name, 
         user_alias, user_profile_image},
+    showProfileImage = false,
     onClick
 }: Props){
 
@@ -38,10 +40,13 @@ export default function MemoryBox({
                         <div className="author">
                             <a href={`/profile/${user_alias}`} className="text-decoration-none" >
 
-                                    <span style={{float:"left"}}>
+                                    {showProfileImage && 
+                                        <span style={{float:"left"}}>
+                                            <UserProfileImage image_url={user_profile_image} size={30}/>
+                                        </span>
+                                    }
 
-                                        <UserProfileImage image_url={user_profile_image} size={30}/>
-                                    </span>
+                                    
 
                                     <span className="m-2">
                                         {`${user_alias}`}

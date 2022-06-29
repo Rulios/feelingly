@@ -12,7 +12,7 @@ import MemoryLengthCounter from "./MemoryLengthCounter";
 import Tooltip from "@material-ui/core/Tooltip";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
-
+import InputLabel from "@mui/material/InputLabel";
 
 import PublicIcon from "@mui/icons-material/Public";
 import PublicOffIcon from "@mui/icons-material/PublicOff";
@@ -47,11 +47,11 @@ export default function WriteMemoryFields({diaries, isAReply}: Props){
 
             <div className="mt-2 row p-2">
 
-                <div className="col-3">
+                <div className="col-3 ">
                     <MemoryVisibilityField/>     
                 </div>
 
-                <div className="col-6 mt-1">
+                <div className="col-12 col-md-6">
                         <MemoryDiarySelectorField diaries={diaries}/>
                 </div>
 
@@ -187,20 +187,27 @@ function MemoryVisibilityField({...props}: any){
     };
 
     return (
-        <ToggleButtonGroup
-        value={visibility}
-        exclusive
-        onChange={handleAlignment}
-        aria-label="text alignment"
-        >
-            <ToggleButton value={visibilityReferences[0]}  
-                aria-label={visibilityReferences[0]}>
-                <PublicIcon />
-            </ToggleButton>
-            <ToggleButton value={visibilityReferences[1]} aria-label={visibilityReferences[1]}>
-                <PublicOffIcon/>
-            </ToggleButton>
-        </ToggleButtonGroup>
+        <>
+            <InputLabel shrink htmlFor="memory-visibility">
+                Visibility
+            </InputLabel>
+
+            <ToggleButtonGroup
+            id="memory-visilibility"
+            value={visibility}
+            exclusive
+            onChange={handleAlignment}
+            aria-label="Memory's visibility"
+            >
+                <ToggleButton value={visibilityReferences[0]}  
+                    aria-label={visibilityReferences[0]}>
+                    <PublicIcon />
+                </ToggleButton>
+                <ToggleButton value={visibilityReferences[1]} aria-label={visibilityReferences[1]}>
+                    <PublicOffIcon/>
+                </ToggleButton>
+            </ToggleButtonGroup>
+        </>
     );
 }
 

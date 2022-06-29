@@ -1,6 +1,9 @@
 @use "_constants.scss" as *;
 @use "fonts/roboto-slab.scss";
+
 @use "animations/BottomLineHover.scss";
+@use "animations/Blink.scss";
+
 @use "images/images.scss";
 @use "buttons/utils.scss";
 
@@ -48,3 +51,9 @@ there's no better way of importing .css files from node_modules.
     outline: none;
 }
 
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .textarea{
+        height: 45vh; //temporary solution, see the original class for details
+    }
+  }

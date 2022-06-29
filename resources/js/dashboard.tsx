@@ -3,7 +3,6 @@ import $ from "jquery";
 import ReactDOM from "react-dom";
 import React, {FC, useState, useEffect, useRef} from "react";
 
-import AddNewMemoryForm from "./components/AddNewMemoryForm";
 
 import axios from "axios";
 import useModal from "./hooks/useModal";
@@ -12,7 +11,9 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
+import AddNewMemoryForm from "./components/AddNewMemoryForm";
 import MemoryRenderer from "./components/MemoryRenderer";
+import CenterMessageVisualizer from "./components/CenterMessageVisualizer";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -147,6 +148,15 @@ function FollowersFeed(){
         });
 
     }, []);
+
+
+    if(memories.length === 0){
+        return <CenterMessageVisualizer 
+            message="Ooops, you don't follow anyone. Start following someone to see their memories here."
+            media={<img alt="A person thinking" style={{width: "30%", margin: "auto"}} src="/assets/guy-thinking.png"/>}
+        />
+
+    }
 
     return (
         <div className="">
