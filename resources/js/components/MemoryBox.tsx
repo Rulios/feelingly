@@ -6,7 +6,18 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import parseHTML from "html-react-parser";
 
+
+import {makeStyles} from "@mui/styles";
+
+
 import UserProfileImage from "./UserProfileImage";
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import { Typography } from "@material-ui/core";
+import { CardActionArea } from '@mui/material';
 
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
@@ -17,6 +28,19 @@ type Props = {
     onClick(): void;
 }
 
+const LINES_TO_SHOW = 3;
+
+
+const useStyles = makeStyles({
+  multiLineEllipsis: {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    display: "-webkit-box",
+    "-webkit-line-clamp": LINES_TO_SHOW,
+    "-webkit-box-orient": "vertical"
+  }
+});
+
 
 export default function MemoryBox({
     memory: {id, title, content, visibility, created_at, diary_name, 
@@ -25,68 +49,36 @@ export default function MemoryBox({
     onClick
 }: Props){
 
-    //FIXES A BUG WHERE THE MEMORY MODAL POPPED UP WHEN THE USER
-    //CLICKED ON THE AUTHOR SECTION
+    const classes = useStyles();
+
+
     const hasClickedAuthor = useRef(false);
 
     return (
-        <button className="box noDecorationButton mb-3" onClick={() => {
-            if(!hasClickedAuthor.current) onClick();
-        }}>
-            <div className={`p-2`}>
-                <div id="titleAndInformation">
+        <Box sx={{ minWidth: 275 }} className="mb-3">    
+            <Card variant="outlined">
+                <CardActionArea onClick={onClick}>
+                    <CardHeader
+                        title={<b>{title}</b>}
+                        subheader={<i>{`in ${diary_name}`}</i>}
+                    />
 
-                    <div className="" onClick={() => hasClickedAuthor.current = true}>
-                        <div className="author">
-                            <a href={`/profile/${user_alias}`} className="text-decoration-none" >
+                    <CardContent>
+                        <Typography 
+                            className={classes.multiLineEllipsis}
+                        >
+                            {content}
+                        </Typography>
+                    </CardContent>
 
-                                    {showProfileImage && 
-                                        <span style={{float:"left"}}>
-                                            <UserProfileImage image_url={user_profile_image} size={30}/>
-                                        </span>
-                                    }
-
-                                    
-
-                                    <span className="m-2">
-                                        {`${user_alias}`}
-                                    </span>
-                            </a> 
-                        </div>
-
-                        <div className="date">
-                            {dayjs(created_at).utc(true).fromNow()}
-                        </div>
-                    </div>
-
-                    
-                    <br />
-                    <br/>
-
-                    <div id="title" className="truncate lead" >
-                        <b>
-                            {title}
-                        </b>
-                    </div>
-
-                    <div id="visibility" className="visibilityFont">
-                        {VISIBILITY_TYPES[visibility]}
-                    </div>
-
-                    <div id="diary_name">
-                        <i>
-                            {`in ${diary_name}`}
-                        </i>
-                    </div>
-                </div>
-
-                <hr/>
-
-                <div id="content" className="truncate">
-                    {parseHTML(content)}
-                </div>
-
-            </div>
-        </button>
+                    <CardHeader 
+                        title={<Typography>{user_alias}</Typography>}
+                        subheader={dayjs(created_at).utc(true).fromNow()}
+                        avatar={<UserProfileImage url={user_profile_image} user={user_alias}/>}
+                    />
+                </CardActionArea>
+            
+            </Card>
+        </Box>
     );
 }

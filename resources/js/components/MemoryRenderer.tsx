@@ -9,6 +9,7 @@ import useModal from "../hooks/useModal";
 type Props = {
     memories: Memory[] | null | undefined;    
     columns: 1 | 2 ; //represents the amounts of columns that the memories will be displayed in
+    showProfileImage?: boolean;
 };
 
 
@@ -22,7 +23,7 @@ type Props = {
  * @returns 
  */
 
-export default function MemoryRenderer({memories, columns}: Props){
+export default function MemoryRenderer({memories, columns, showProfileImage=false}: Props){
     const [selectedMemoryIndex, setSelectedMemoryIndex] = useState(-1);
     const {open, openModal, closeModal} = useModal();
 
@@ -34,6 +35,8 @@ export default function MemoryRenderer({memories, columns}: Props){
      * Also it sets the modal to be open
      * @param memoryPosition 
      */
+
+   
 
     const handleClickMemory = (memoryPosition: number) => {
             setSelectedMemoryIndex(memoryPosition);
@@ -52,6 +55,7 @@ export default function MemoryRenderer({memories, columns}: Props){
                                 key={`Diary${memory.diary_id}-Memory${index}`}
                                 memory={memory}
                                 onClick={() => handleClickMemory(index)}
+                                showProfileImage={showProfileImage}
                             />
                         </div>
                     )

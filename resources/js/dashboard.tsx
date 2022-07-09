@@ -160,7 +160,7 @@ function FollowersFeed(){
 
     return (
         <div className="">
-            <MemoryRenderer memories={memories} columns={1}/>
+            <MemoryRenderer memories={memories} columns={1} showProfileImage={true}/>
         </div>
     );
 }
@@ -190,7 +190,7 @@ function GlobalFeed(){
 
     return (
         <div className="">
-            <MemoryRenderer memories={memories} columns={1}/>
+            <MemoryRenderer memories={memories} columns={1} showProfileImage={true}/>
         </div>
     );
 }
