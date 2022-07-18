@@ -99,12 +99,6 @@
   bottom: 0;
 }
 
-.c-modal .title {
-  font-size: large;
-  display: inline;
-  word-break: break-all;
-}
-
 /* The modal's details are like the metadata section for the modal. (owner, date, etc)
 */
 .c-modal .details {
@@ -125,6 +119,13 @@
   font-size: small;
 }
 
+@media only screen and (max-width: 768px) {
+  /* .c-modal .content{
+      top: auto;
+      left:auto;
+      bottom: auto;
+  }    */
+}
 .box {
   width: 100%;
   transition: 0.5s;

@@ -23,7 +23,8 @@ class MemoryController extends Controller
             "title" => "required",
             "content" => ["required", new MinimumMemoryContentCharacters],
             "diary_id" => "required| exists:diaries,id",
-            "visibility" => ["required", new ValidVisibilityType]
+            "visibility" => ["required", new ValidVisibilityType],
+            "reply_to_memory_id" => "nullable| exists:memories,id",
         ]);
 
         try{
@@ -37,8 +38,18 @@ class MemoryController extends Controller
             $memory->title = $request->title;
             $memory->content = $request->content;
             $memory->visibility = $request->visibility;
-            $memory->reply_to = null;
 
+            if(!empty($request->reply_to_memory_id)){
+                //Set this new reply memory's visibility to be the same visibility
+                //as the replied memory.
+                $memory->visibility = Memory::where("id", $request->reply_to_memory_id)
+                ->first()->visibility;   
+
+                $memory->reply_to = $request->reply_to_memory_id;
+
+            }
+
+            
             $memory->save();
 
             return response()->json([
@@ -57,7 +68,7 @@ class MemoryController extends Controller
     /**
      * Reply Memory == Comment
      */
-    public function addReplyMemory(Request $request){
+   /*  public function addReplyMemory(Request $request){
         $request->validate([
             "title" => "required",
             "content" => "required",
@@ -95,7 +106,7 @@ class MemoryController extends Controller
             return back()->withErrors($e->getMessage())->withInput();
             dd($e);
         }
-    }
+    } */
 
 
     /**

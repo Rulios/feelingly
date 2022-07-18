@@ -14,6 +14,7 @@ export default function CloseModalButton({onClick}: Props){
             style={{
                 float:"left",
                 display: "inline-block",
+                fontSize: 30
             }}
         >
           <span aria-hidden="true">&times;</span>

@@ -10,18 +10,8 @@ type Props = {
 };
 
 
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    extendedIcon: {
-      marginRight: theme.spacing(1),
-    },
-  }),
-);
-
 export default function AppreciationButton({memory_id}: Props){
 
-    const classes = useStyles();
     const [appreciation, setAppreciation] = useState(false);
    
 
@@ -64,11 +54,10 @@ export default function AppreciationButton({memory_id}: Props){
     return (
         <Fab  variant="extended" aria-label="like" onClick={toggleAppreciation}>
             <FavoriteIcon 
-              className={`${classes.extendedIcon}`}
               style={{
                 color: appreciation ? "red" : "initial"
               }}
-            /> Love it!
+            />
         </Fab>
     )
 }

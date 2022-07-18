@@ -11,7 +11,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
-import AddNewMemoryForm from "./components/AddNewMemoryForm";
+import AddMemoryFloatingButton from "./components/AddMemoryFloatingButton";
 import MemoryRenderer from "./components/MemoryRenderer";
 import CenterMessageVisualizer from "./components/CenterMessageVisualizer";
 
@@ -122,7 +122,7 @@ function App(): JSX.Element{
 
             </div>
 
-            <AddNewMemoryForm/>
+            <AddMemoryFloatingButton/>
         </div>
     );
 }

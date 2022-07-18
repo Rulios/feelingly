@@ -6,8 +6,9 @@ import parseHTML from "html-react-parser";
 import ResponsiveLogo from "./ResponsiveLogo";
 import AppreciationButton from "./AppreciationButton";
 import ReplyButton from "./ReplyButton";
-import AddNewReplyMemoryModal from "./AddNewReplyMemoryModal";
+import NewMemoryModal from "./NewMemoryModal";
 
+import Typography from '@mui/material/Typography';
 
 
 import Modal from "react-modal";
@@ -41,8 +42,8 @@ export default function MemoryModal({
             <div>
                 {open && 
 
-                    <AddNewReplyMemoryModal
-                        handleClose={closeReplyModal}
+                    <NewMemoryModal
+                        closeModal={closeReplyModal}
                         reply_to={memory?.id}
                         open={open}
                     />
@@ -64,34 +65,32 @@ export default function MemoryModal({
                                 <CloseModalButton onClick={handleClose}/>
                             </div>
 
-                            <ResponsiveLogo/>
+                    
+                            <div className="text-center">
 
-                            <div className="inline">
 
-                                <div>
-                                    <h4 className="title">
-                                        {memory?.title}
-                                    </h4>
+                                <Typography  variant="h1" sx={{fontSize: 40}}>
+                                    <b>{memory?.title}</b>
+                                </Typography>
 
-                                    <br />
+                                <Typography  variant="h6" sx={{fontSize: 10}}>
+                                    in <i>{memory?.diary_name}</i>
+                                    
+                                </Typography>
 
-                                    <div className="details">
-                                        <div className="">
-                                            written by {memory?.user_name} (@{memory?.user_alias})
-                                        </div>
+                                <Typography  variant="h6" sx={{fontSize: 10}}>
+                                    written by {memory?.user_name} (@{memory?.user_alias})
+                                </Typography>
 
-                                        <div className="">
-                                            in <i>{memory?.diary_name}</i>
-                                        </div>
-                                    </div>
-                                </div>
+                            
                             </div>
 
-                            <hr/>
 
-                            <div className="mb-5">
-                                <div className="memory-content p-4">
-                                    {parseHTML(memory ? memory.content : "")}
+                            <div className="mt-5">
+                                <div className="text-break">
+                                    <Typography align="left" variant="h6" gutterBottom={true} sx={{fontSize: 16}}>
+                                        {parseHTML(memory ? memory.content : "")}
+                                    </Typography>
                                 </div>
                             </div>
 

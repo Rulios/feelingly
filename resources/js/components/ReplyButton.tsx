@@ -6,21 +6,12 @@ type Props = {
   _onClick(): void;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    extendedIcon: {
-      marginRight: theme.spacing(1),
-    },
-  }),
-);
-
 export default function ReplyButton({_onClick}: Props){
  
-    const classes = useStyles();
 
     return (
         <Fab  variant="extended" aria-label="like" onClick={_onClick}>
-            <BorderColorIcon className={`${classes.extendedIcon} m-3`}/> Reply
+            <BorderColorIcon className=""/>
         </Fab>
     )
 }
