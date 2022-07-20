@@ -7,6 +7,7 @@ import ResponsiveLogo from "./ResponsiveLogo";
 import AppreciationButton from "./AppreciationButton";
 import ReplyButton from "./ReplyButton";
 import NewMemoryModal from "./NewMemoryModal";
+import ShrinkableHeaderWhenScroll from "./ShrinkableHeaderWhenScroll";
 
 import Typography from '@mui/material/Typography';
 
@@ -36,6 +37,20 @@ export default function MemoryModal({
 
     const {open, openModal: openReplyModal, closeModal: closeReplyModal} = useModal();
 
+    const [headerSize, setHeaderSize] = useState(40)
+
+    const handleScroll = (e: React.SyntheticEvent<EventTarget>) => {
+
+        let scrollTop = (e.target as HTMLHeadingElement).scrollTop
+
+        if(scrollTop > 50){
+            setHeaderSize(20)
+        }else{
+            setHeaderSize(40);
+        }
+      };
+    
+
     return (
         <Modal isOpen={shouldOpen}>
             
@@ -54,31 +69,43 @@ export default function MemoryModal({
 
                     <div className="c-modal ">     
                 
-                        <div className="content p-3">
+                        <div className="content px-3 pb-5" onScroll={(e) => handleScroll(e)} >
+
+                            
+                        
+                            <div className="sticky-top bg-white">
+                                <CloseModalButton onClick={handleClose}/>
+
+                                <div className="text-center pt-5 pb-2">
+                                    {/* <Typography  variant="h1" sx={{fontSize: 40}}>
+                                        <b>{memory?.title}</b>
+                                    </Typography> */}
+
+                                    <Typography className="animation-smooth"  variant="h1" sx={{fontSize: headerSize}}>
+                                            <b>{memory?.title}</b>
+                                    </Typography>
+
+                                </div>
+                                
+                            </div>
 
                             <div className="c-actions mb-5 mx-3">
                                 <AppreciationButton memory_id={memory?.id}/>
                                 <ReplyButton _onClick={openReplyModal}/>
                             </div>
-                        
-                            <div className="sticky-top">
-                                <CloseModalButton onClick={handleClose}/>
-                            </div>
 
                     
-                            <div className="text-center">
+                            <div className="text-center ">
 
 
-                                <Typography  variant="h1" sx={{fontSize: 40}}>
-                                    <b>{memory?.title}</b>
-                                </Typography>
+                                
 
-                                <Typography  variant="h6" sx={{fontSize: 10}}>
+                                <Typography  variant="h6" sx={{fontSize: 12}}>
                                     in <i>{memory?.diary_name}</i>
                                     
                                 </Typography>
 
-                                <Typography  variant="h6" sx={{fontSize: 10}}>
+                                <Typography  variant="h6" sx={{fontSize: 12}}>
                                     written by {memory?.user_name} (@{memory?.user_alias})
                                 </Typography>
 
@@ -86,7 +113,7 @@ export default function MemoryModal({
                             </div>
 
 
-                            <div className="mt-5">
+                            <div className="mt-5" >
                                 <div className="text-break">
                                     <Typography align="left" variant="h6" gutterBottom={true} sx={{fontSize: 16}}>
                                         {parseHTML(memory ? memory.content : "")}
