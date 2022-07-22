@@ -104,7 +104,7 @@ export default function NewMemoryModal({open, closeModal, reply_to}: Props){
                 />
             }            
 
-            <Modal isOpen={open}>
+            <Modal isOpen={open} className="border-0">
                 <div className="c-modal">     
                     
                     <div className="content container-fluid px-3">

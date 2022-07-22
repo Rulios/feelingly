@@ -52,7 +52,7 @@ export default function MemoryModal({
     
 
     return (
-        <Modal isOpen={shouldOpen}>
+        <Modal isOpen={shouldOpen} className="border-0">
             
             <div>
                 {open && 
@@ -77,12 +77,9 @@ export default function MemoryModal({
                                 <CloseModalButton onClick={handleClose}/>
 
                                 <div className="text-center pt-5 pb-2">
-                                    {/* <Typography  variant="h1" sx={{fontSize: 40}}>
-                                        <b>{memory?.title}</b>
-                                    </Typography> */}
 
-                                    <Typography className="animation-smooth"  variant="h1" sx={{fontSize: headerSize}}>
-                                            <b>{memory?.title}</b>
+                                    <Typography className="animation-smooth"  variant="h1" sx={{fontSize: headerSize, fontWeight:"bold"}}>
+                                            {memory?.title}
                                     </Typography>
 
                                 </div>

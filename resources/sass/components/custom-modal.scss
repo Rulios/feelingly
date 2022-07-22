@@ -13,6 +13,7 @@
     left: 0;
 
     background-color: rgba(0, 0, 0, 0.4);
+    border:none;
 
     overflow: hidden;
 }
@@ -20,13 +21,15 @@
 
 //modal itself and its content
 .c-modal .content{
-    width: 100%;
+    width: 50%;
     position: fixed;
     overflow-y: auto;
     overflow-x:hidden;
-   
+
+    margin:auto;
+    left:25%;
     top:5%;
-    left: 0;
+    
     bottom: 0;
     background-color: white;
     box-shadow:-7px -7px 10px grey;
@@ -37,7 +40,7 @@
 */
 .c-modal .c-actions{
     position:fixed;
-    right: 0;
+    right: 10%;
     bottom: 0;    
 }
 
@@ -72,9 +75,8 @@
 
 
 @media only screen and (max-width: 768px){
-    /* .c-modal .content{
-        top: auto;
-        left:auto;
-        bottom: auto;
-    }    */
+    .c-modal .content{
+        width: 100%;
+        left:0;
+    }   
 }
