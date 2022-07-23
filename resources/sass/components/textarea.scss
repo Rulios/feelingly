@@ -1,0 +1,21 @@
+/*
+    TEXT AREA STYLING
+*/
+
+.textarea{
+    resize: vertical;
+    overflow: auto;
+    display:block;
+    height: 50vh; //temporary solution. The textarea should be of the height of the bottom of the modal
+
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .textarea{
+        height: 45vh; //temporary solution, see the original class for details
+    }
+  }

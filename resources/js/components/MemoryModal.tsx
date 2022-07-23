@@ -3,14 +3,12 @@ import Memory from "../types/Memory";
 import CloseModalButton from "./CloseModalButton";
 import parseHTML from "html-react-parser";
 
-import ResponsiveLogo from "./ResponsiveLogo";
 import AppreciationButton from "./AppreciationButton";
 import ReplyButton from "./ReplyButton";
 import NewMemoryModal from "./NewMemoryModal";
-import ShrinkableHeaderWhenScroll from "./ShrinkableHeaderWhenScroll";
+import UserProfileImage from "./UserProfileImage";
 
 import Typography from '@mui/material/Typography';
-
 
 import Modal from "react-modal";
 
@@ -73,10 +71,12 @@ export default function MemoryModal({
 
                             
                         
-                            <div className="sticky-top bg-white">
+                            <div className="sticky-top bg-white shadow-sx bg-white rounded">
                                 <CloseModalButton onClick={handleClose}/>
 
-                                <div className="text-center pt-5 pb-2">
+                                
+
+                                <div className="pt-5 pb-2">
 
                                     <Typography className="animation-smooth"  variant="h1" sx={{fontSize: headerSize, fontWeight:"bold"}}>
                                             {memory?.title}
@@ -92,10 +92,8 @@ export default function MemoryModal({
                             </div>
 
                     
-                            <div className="text-center ">
+                            <div className="display-inline">
 
-
-                                
 
                                 <Typography  variant="h6" sx={{fontSize: 12}}>
                                     in <i>{memory?.diary_name}</i>
@@ -105,7 +103,11 @@ export default function MemoryModal({
                                 <Typography  variant="h6" sx={{fontSize: 12}}>
                                     written by {memory?.user_name} (@{memory?.user_alias})
                                 </Typography>
+                                
+                                <UserProfileImage className=" m-2" url={memory?.user_profile_image} user={memory?.user_alias}/>
+                                <div className="float-right">
 
+                                </div>
                             
                             </div>
 

@@ -91,22 +91,35 @@ export default function NewMemoryModal({open, closeModal, reply_to}: Props){
 
     }
 
+    console.log(reply_to)
+
     return(
 
         <>
+             
+             {reply_to && 
+                    <SnackbarMessage 
+                        open={true}  
+                        type={"success"}
+                        message={"Testtttt"}
+                        onClose={() => setOpenSnackbar({open: false, type: "", message: ""})}
+                    />
+                }        
 
-            {openSnackbar && 
-                <SnackbarMessage 
-                    open={openSnackbar.open}  
-                    type={openSnackbar.type as OperationStates}
-                    message={openSnackbar.message}
-                    onClose={() => setOpenSnackbar({open: false, type: "", message: ""})}
-                />
-            }            
+                {openSnackbar && 
+                    <SnackbarMessage 
+                        open={openSnackbar.open}  
+                        type={openSnackbar.type as OperationStates}
+                        message={openSnackbar.message}
+                        onClose={() => setOpenSnackbar({open: false, type: "", message: ""})}
+                    />
+                }   
 
             <Modal isOpen={open} className="border-0">
                 <div className="c-modal">     
-                    
+
+                   
+                        
                     <div className="content container-fluid px-3">
 
                         <Formik 

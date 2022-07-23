@@ -155,6 +155,25 @@
   vertical-align: middle;
 }
 
+/*
+    TEXT AREA STYLING
+*/
+.textarea {
+  resize: vertical;
+  overflow: auto;
+  display: block;
+  height: 50vh;
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .textarea {
+    height: 45vh;
+  }
+}
 /* Slider */
 .slick-slider {
   position: relative;
@@ -279,26 +298,6 @@ there's no better way of importing .css files from node_modules.
 .no-gutters {
   margin-right: 0 !important;
   margin-left: 0 !important;
-}
-
-/*
-    TEXT AREA STYLING
-*/
-.textarea {
-  resize: vertical;
-  overflow: auto;
-  display: block;
-  height: 50vh;
-  border: none;
-  box-sizing: border-box;
-  outline: none;
-}
-
-@media only screen and (max-width: 768px) {
-  /* For mobile phones: */
-  .textarea {
-    height: 45vh;
-  }
 }
 
 /*# sourceMappingURL=dashboard.css.map */

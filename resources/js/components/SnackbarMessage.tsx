@@ -18,7 +18,7 @@ type Props = {
  * @param param0 
  * @returns 
  */
-export default function SnackbarMessage({open, type, message, onClose}: Props){
+/* export default function SnackbarMessage({open, type, message, onClose}: Props){
     
         return (
             <Portal>
@@ -27,7 +27,7 @@ export default function SnackbarMessage({open, type, message, onClose}: Props){
                         open={open}
                         autoHideDuration={6000}
                         onClose={onClose}
-                        anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                        anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
                 >
 
                     <Alert onClose={onClose} severity={type} sx={{ width: '100%' }}>
@@ -37,4 +37,23 @@ export default function SnackbarMessage({open, type, message, onClose}: Props){
                 </Snackbar>
             </Portal>
         );
+} */
+
+export default function SnackbarMessage({open, type, message, onClose}: Props){
+    
+    return (
+
+            <Snackbar
+                    open={open}
+                    autoHideDuration={6000}
+                    onClose={onClose}
+                    anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+            >
+
+                <Alert onClose={onClose} severity={type} sx={{ width: '100%' }}>
+                    {message}
+                </Alert>
+
+            </Snackbar>
+    );
 }

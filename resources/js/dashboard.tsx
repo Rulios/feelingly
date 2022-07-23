@@ -14,6 +14,7 @@ import Tab from "@material-ui/core/Tab";
 import AddMemoryFloatingButton from "./components/AddMemoryFloatingButton";
 import MemoryRenderer from "./components/MemoryRenderer";
 import CenterMessageVisualizer from "./components/CenterMessageVisualizer";
+import SnackbarMessage from "./components/SnackbarMessage";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -81,6 +82,7 @@ function App(): JSX.Element{
 
     return (
         <div>
+          
 
             <div>
                 <ThemeProvider theme={theme}>

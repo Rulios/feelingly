@@ -7,6 +7,7 @@ import Avatar from '@mui/material/Avatar';
 interface Props{
     user?: string;
     url: string | null | undefined;
+    className?: string;
 }
 
 /**
@@ -19,7 +20,7 @@ interface Props{
 
 const DEFAULT_AVATAR = `${PATHS.ROOT}/${PATHS.DEFAULT_PROFILE_IMAGE}`;
 
-export default function UserProfileImage({url, user}: Props){
+export default function UserProfileImage({url, user, className}: Props){
 
     const [URL, setURL] = useState(DEFAULT_AVATAR);
 
@@ -34,7 +35,7 @@ export default function UserProfileImage({url, user}: Props){
 
 
     return (
-        <Avatar src={URL} className="rounded-circle" 
+        <Avatar src={URL} className={`rounded-circle ${className}`} 
             alt={`${user} profile image`}
         />
     )
