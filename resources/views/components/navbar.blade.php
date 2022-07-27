@@ -1,7 +1,7 @@
 <div>
     <!-- Simplicity is the essence of happiness. - Cedric Bledsoe -->
 
-    <nav class="navbar navbar-expand-sm  navbar-light border-bottom ">
+    <nav class="navbar navbar-expand-sm  navbar-light shadow-sm ">
         <div class="container-fluid">
 
             <div class="mr-auto">

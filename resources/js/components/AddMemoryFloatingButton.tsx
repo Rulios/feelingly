@@ -22,7 +22,8 @@ export default function AddNewMemoryBundle(){
         <div className="mt-5">
 
             <div>
-                <AddFloatButton _onClick={openModal}/>
+               
+                <AddFloatButton _onClick={openModal} text="Write a new memory"/>
             </div>
 
             <NewMemoryModal closeModal={closeModal} open={open}/>

@@ -11,12 +11,11 @@ import WriteMemoryFields from "./WriteMemoryFields";
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import CloseModalButton from "./CloseModalButton";
-import SnackbarMessage from "./SnackbarMessage";
 
 import useDiaries from "../hooks/useDiaries";
 import useAlias from "../hooks/useAlias";
+import { useSnackbar } from "notistack";
 
-import toggleBodyOverflow from "../utils/toggleBodyOverflow";
 
 
 type Props = {
@@ -44,6 +43,7 @@ export default function NewMemoryModal({open, closeModal, reply_to}: Props){
     const alias = useAlias("self");
     const [statusDiaries, diaries, errorDiaries] = useDiaries(alias);
     const [openSnackbar, setOpenSnackbar] = useState({open: false, type: "", message: ""});
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const submitMemory = (memory: Memory):void => {
         console.log(memory);
@@ -52,13 +52,13 @@ export default function NewMemoryModal({open, closeModal, reply_to}: Props){
 
             switch(status){
                 case 200:
-                    setOpenSnackbar({open: true, type: "success", message: status_message});
+                    enqueueSnackbar(status_message, {variant: "success"})
                     closeModal();
                 break;
 
                 case 500:
-                    setOpenSnackbar({open: true, type: "error", message: "Oops, something went wrong. Please try again later."});
-                    throw new (status_message);
+                    enqueueSnackbar("Oops, something went wrong. Please try again later.", {variant: "error"})
+                    throw new Error(status_message);
                 break;
             }
 
@@ -91,30 +91,10 @@ export default function NewMemoryModal({open, closeModal, reply_to}: Props){
 
     }
 
-    console.log(reply_to)
-
     return(
 
         <>
              
-             {reply_to && 
-                    <SnackbarMessage 
-                        open={true}  
-                        type={"success"}
-                        message={"Testtttt"}
-                        onClose={() => setOpenSnackbar({open: false, type: "", message: ""})}
-                    />
-                }        
-
-                {openSnackbar && 
-                    <SnackbarMessage 
-                        open={openSnackbar.open}  
-                        type={openSnackbar.type as OperationStates}
-                        message={openSnackbar.message}
-                        onClose={() => setOpenSnackbar({open: false, type: "", message: ""})}
-                    />
-                }   
-
             <Modal isOpen={open} className="border-0">
                 <div className="c-modal">     
 
@@ -127,7 +107,6 @@ export default function NewMemoryModal({open, closeModal, reply_to}: Props){
                             validate={validation}
 
                             onSubmit={(values, actions) => {
-                                console.log(values);
                                 submitMemory(values);
                                 
                             }}

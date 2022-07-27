@@ -5,7 +5,6 @@ import React, {FC, useState, useEffect, useRef} from "react";
 
 
 import axios from "axios";
-import useModal from "./hooks/useModal";
 
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -14,7 +13,6 @@ import Tab from "@material-ui/core/Tab";
 import AddMemoryFloatingButton from "./components/AddMemoryFloatingButton";
 import MemoryRenderer from "./components/MemoryRenderer";
 import CenterMessageVisualizer from "./components/CenterMessageVisualizer";
-import SnackbarMessage from "./components/SnackbarMessage";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -22,12 +20,21 @@ import "slick-carousel/slick/slick.css";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
+import { SnackbarProvider } from 'notistack';
+
 import Memory from "./types/Memory";
 
 window.onload = () =>{
     
     ReactDOM.render(
-        <App/>,
+        (
+            <SnackbarProvider maxSnack={2} 
+                anchorOrigin={{vertical: "bottom", horizontal:"center"}}
+                autoHideDuration={4000}
+            >
+                <App/>
+            </SnackbarProvider>
+        ),
         document.getElementById("root")
         );
 }
